@@ -7,8 +7,8 @@ export default class MenuMiddleware {
   ) {
     if(!session.get('header')) {
       session.put('header', {
-        appName: 'Boilerplate',
-        appDescription: 'Boilerplate Adonis5 + Vuejs + Inertia + i18n + Modular',
+        appName: 'UMAPE',
+        appDescription: 'Portal de monitoramento dos organismos',
       })
     }
 
