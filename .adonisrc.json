@@ -1,0 +1,81 @@
+{
+  "typescript": true,
+  "commands": [
+    "./commands",
+    "@adonisjs/core/build/commands/index.js",
+    "@adonisjs/repl/build/commands",
+    "@adonisjs/lucid/build/commands",
+    "@eidellev/inertia-adonisjs/build/commands",
+    "@rocketseat/adonis-bull/build/commands"
+  ],
+  "exceptionHandlerNamespace": "app/infra/exceptions/handler",
+  "aliases": {
+    "app": "app",
+    "config": "config"
+  },
+  "preloads": [
+    {
+      "file": "./start/i18n",
+      "environment": [
+        "web"
+      ]
+    },
+    "./start/routes",
+    "./start/kernel",
+    {
+      "file": "./start/inertia",
+      "environment": [
+        "web"
+      ]
+    },
+    "./start/bull"
+  ],
+  "providers": [
+    "./providers/AppProvider",
+    "@adonisjs/core",
+    "@adonisjs/session",
+    "@adonisjs/view",
+    "@adonisjs/shield",
+    "@adonisjs/lucid",
+    "@adonisjs/i18n",
+    "@eidellev/inertia-adonisjs",
+    "@adonisjs/auth",
+    "@adonisjs/lucid-slugify",
+    "@rocketseat/adonis-bull"
+  ],
+  "metaFiles": [
+    {
+      "pattern": "public/**",
+      "reloadServer": false
+    },
+    {
+      "pattern": "resources/views/**/*.edge",
+      "reloadServer": false
+    },
+    {
+      "pattern": "app/modules/**/*.(json|yaml)",
+      "reloadServer": true
+    },
+    {
+      "pattern": "resources/lang/**/*.(json|yaml)",
+      "reloadServer": false
+    }
+  ],
+  "aceProviders": [
+    "@adonisjs/repl"
+  ],
+  "tests": {
+    "suites": [
+      {
+        "name": "functional",
+        "files": [
+          "app/modules/**/*.spec(.ts|.js)"
+        ],
+        "timeout": 60000
+      }
+    ]
+  },
+  "testProviders": [
+    "@japa/preset-adonis/TestsProvider"
+  ]
+}

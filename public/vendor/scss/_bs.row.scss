@@ -1,0 +1,75 @@
+/*
+Row 
+*/
+
+.padding{
+  padding: 2rem;
+}
+
+.row-md{
+  margin-left: -0.75rem;
+  margin-right: -0.75rem;
+  [class*="col-"],
+  .col{
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  .card,
+  .block{
+    margin-bottom: 1.5rem;
+  }
+}
+
+.row-sm{
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+  [class*="col-"],
+  .col{
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .card,
+  .block{
+    margin-bottom: 1rem;
+  }
+}
+
+.row-xs{
+  margin-left: -0.25rem;
+  margin-right: -0.25rem;
+  [class*="col-"],
+  .col{
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+  .card,
+  .block{
+    margin-bottom: 0.5rem;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  .col-lg-2-4{
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+}
+
+@include media-breakpoint-up(xl) {
+  .col-xl-1-8{
+    flex: 0 0 12.5%;
+    max-width: 12.5%;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .padding{
+    padding: 1.5rem;
+  }
+}
+
+@include media-breakpoint-down(sm) {
+  .padding{
+    padding: 1rem;
+  }
+}

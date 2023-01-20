@@ -1,0 +1,46 @@
+/*
+Modal animation 
+*/
+.modal{
+  .modal-dialog{
+    transform: translate(0, 0);
+  }
+
+  .fade-right {
+    animation: fadeInLeft 0.5s;
+    animation-direction: reverse;
+  }
+
+  .fade-left {
+    animation: fadeInRight 0.5s;
+    animation-direction: reverse;
+  }
+
+  .fade-up{
+    animation: fadeInDown 0.5s;
+    animation-direction: reverse;
+  }
+
+  .fade-down {
+    animation: fadeInUp 0.5s;
+    animation-direction: reverse;
+  }
+
+  &.show{
+    .fade-right {
+      animation: fadeInRight 0.5s;
+    }
+
+    .fade-left {
+      animation: fadeInLeft 0.5s;
+    }
+
+    .fade-up{
+      animation: fadeInUp 0.5s;
+    }
+
+    .fade-down {
+      animation: fadeInDown 0.5s;
+    }
+  }
+}

@@ -1,0 +1,99 @@
+/*
+Dropdown menu 
+*/
+.dropdown-menu{
+  border-radius: $border-radius-base;
+  border-color: $border-color;
+  box-shadow: $box-shadow;
+  color: $text-color;
+  > li:not(.dropdown-item) > a{
+    display: block;
+    padding: 3px 20px;
+    &:hover,
+    &:focus{
+      background-color: $min-black;
+    }
+  }
+  > .divider{
+    height: 1px;
+    margin: .5rem 0;
+    overflow: hidden;
+    background-color: $border-color;
+  }
+
+  .active{
+    background-color: $min-black;
+  }
+}
+
+.dropdown-menu-center{
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.dropdown-item{
+  color: inherit;
+  a{
+    color: inherit;
+  }
+  i,
+  svg{
+    margin-left: -0.5rem;
+    margin-right: .5rem;
+    text-align: center;
+  }
+}
+
+.dropdown-item,
+.dropdown-item.active{
+  color: inherit;
+  &:hover,
+  &:focus{
+    color: inherit;
+    background-color: $min-black;
+  }
+}
+
+.dropdown-header{
+  color: inherit;
+  opacity: 0.5;
+}
+
+.dropdown-toggle{
+  white-space: nowrap!important;
+}
+
+.dropdown-divider{
+  border-color: $border-color;
+}
+
+.dropdown-submenu{
+  position: relative;
+  &:hover,
+  &:focus{
+    > .dropdown-menu {
+      display: block;
+    }
+  }
+  .dropdown-menu{
+    left: 100%;
+    top: 0;
+    margin-top: -8px;
+    margin-left: -1px;
+    &.pull-left{
+      right: 100%;
+      left: auto;
+    }
+  }
+  .dropup & {
+    > .dropdown-menu{
+      top: auto;
+      bottom: 0;
+      margin-bottom: -6px;
+    }
+  }
+}
+
+.popover{
+  color: $text-color;
+}

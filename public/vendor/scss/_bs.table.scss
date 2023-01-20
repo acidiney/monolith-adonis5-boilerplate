@@ -1,0 +1,129 @@
+/*
+Table 
+*/
+.table{
+  > thead > tr > th{
+    border-width: 0;
+  }
+}
+
+.table-condensed{
+    thead>tr>th,
+    tbody>tr>th,
+    tfoot>tr>th,
+    thead>tr>td,
+    tbody>tr>td,
+    tfoot>tr>td{
+      padding: 5px;
+    }
+}
+
+.table-bordered{
+  border-color: $table-border-color;
+}
+
+.table-striped{
+  > tbody {
+    > tr{
+      &:nth-child(odd){
+        background-color: $table-striped-color;
+        background-clip: padding-box;
+      }
+    }
+  }
+  > thead {
+    > th{
+      background-color: $table-striped-color;
+      border-right: 1px solid $table-border-color;
+      &:last-child{
+        border-right: none
+      }
+    }
+  }
+}
+
+.table-hover tr:hover td{
+  background-color: $border-color-lt;
+}
+
+.table.v-middle{
+  th,
+  td{
+    vertical-align: middle;
+  }
+}
+
+.table-theme{
+  border-spacing: 0;
+  thead{
+    font-size: 0.7rem;
+  }
+  tbody td{
+    background-color: #fff;
+    border-width: 0;
+    box-shadow: 0 1px 0 $border-color-lt, 0 -1px 0 $border-color-lt;
+    &:first-child{
+      border-radius: .25rem 0 0 .25rem;
+    }
+    &:last-child{
+      border-radius: 0 .25rem .25rem 0;
+    }
+  }
+}
+
+.table-row{
+  border-collapse: separate !important;
+  border-spacing: 0 10px !important;
+  thead{
+    th{
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+    }
+  }
+  td{
+    border-color: transparent !important;
+  }
+}
+
+.sorting_asc,
+.sorting_desc,
+.sorting,
+.sortable{
+  position: relative;
+  cursor: pointer;
+  padding-right: 1rem !important;
+  &:before,
+  &:after{
+    opacity: 0.5;
+    content: '' !important;
+    position: absolute;
+    right: 5px !important;
+    top: 50%;
+    margin-top: 1px;
+    width: 0;
+    height: 0;
+    border-top: 3px solid;
+    border-right: 3px solid transparent;
+    border-bottom: 0;
+    border-left: 3px solid transparent;
+  }
+  &:after{
+    border-top: 0;
+    border-bottom: 3px solid;
+    margin-top: -4px;
+  }
+  &.desc:before{
+    opacity: 1;
+  }
+  &.asc:after{
+    opacity: 1;
+  }
+}
+.sorting_asc:after,
+.asc .sorting:after{
+    opacity: 1;
+}
+.sorting_desc:after,
+.desc .sorting:before{
+    opacity: 1;
+}

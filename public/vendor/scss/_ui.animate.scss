@@ -1,0 +1,179 @@
+/*
+animate
+*/
+
+.animate {
+  animation-fill-mode: both;
+  animation-duration: 0.5s;
+}
+
+.animate-reverse {
+  animation-direction: reverse;
+}
+
+.animate-fast {
+  animation-duration: 0.3s;
+}
+
+.animate-no-delay {
+  animation-delay: 0s !important;
+}
+
+.animate-delay-1 {
+  animation-delay: 0.5s;
+}
+
+.animate-delay-2 {
+  animation-delay: 1s;
+}
+
+.animate-delay-3 {
+  animation-delay: 1.5s;
+}
+
+.animate-delay-4 {
+  animation-delay: 2s;
+}
+
+.sr{
+  .card,
+  .list-item,
+  .sr-item,
+  .item{
+    visibility: hidden;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translate3d(-$animate-start, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideInLeft {
+  animation-name: slideInLeft;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translate3d($animate-start, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideInRight {
+  animation-name: slideInRight;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translate3d(0, $animate-start, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideInUp {
+  animation-name: slideInUp;
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translate3d(0, -$animate-start, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideInDown {
+  animation-name: slideInDown;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(-$animate-start, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fadeInLeft {
+  animation-name: fadeInLeft;
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translate3d($animate-start, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fadeInRight {
+  animation-name: fadeInRight;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, $animate-start, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fadeInUp {
+  animation-name: fadeInUp;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -$animate-start, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fadeInDown {
+  animation-name: fadeInDown;
+}

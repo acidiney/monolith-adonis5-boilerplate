@@ -1,0 +1,235 @@
+/*
+Nav
+*/
+.sidenav {
+	margin: 0;
+	pointer-events: inherit;
+	display: -ms-flexbox;
+    display: flex;
+	-ms-flex-direction: column;
+    flex-direction: column;
+	ul{
+		padding-left: 0;
+		padding-right: 0;
+  		list-style: none;
+  		a{
+  			color: inherit;
+  		}
+	}
+	.nav {
+		border: inherit;
+		display: block;
+		li {
+			border: inherit;
+			position: relative;
+			li {
+				a {
+					font-size: 0.8rem;
+					line-height: $aside-nav-sub-height;
+					padding-left: $aside-nav-height + $aside-nav-icon-margin;
+					.nav-text{
+						padding: ($aside-nav-sub-height - 1.125)/2 0;
+					}
+				}
+				li a{
+					padding-left: 1rem + $aside-nav-height + $aside-nav-icon-margin;
+				}
+				li li a{
+					padding-left: 2rem + $aside-nav-height + $aside-nav-icon-margin;
+				}
+			}
+			> a{
+				display: -ms-flexbox;
+    			display: flex;
+    			-ms-flex-wrap: nowrap;
+    			flex-wrap: nowrap;
+				padding: 0 0.5rem;
+				line-height: $aside-nav-height;
+				position: relative;
+			}
+			&.active{
+				> a {
+					background-color: transparent;
+					.nav-caret:after{
+						transform: rotate(225deg);
+						margin-bottom: 0px;
+					}
+				}
+			}
+		}
+	}
+	.nav-header{
+		padding: 1rem 1rem 0.5rem 1rem;
+		font-size: 85%;
+		&:after{
+			display: none;
+		}
+	}
+	.navbar-brand{
+		float: none;
+		margin-right: 0;
+	}
+  	.flex{
+  		overflow: auto;
+		-webkit-overflow-scrolling: touch;
+  	}
+}
+
+.nav-fold{
+	display: -ms-flexbox!important;
+    display: flex!important;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.nav-text{
+	margin: 0 .5rem;
+	-webkit-box-flex: 1;
+	-ms-flex: 1 1 auto;
+	flex: 1 1 auto;
+	line-height: 1.125rem;
+	transition: opacity .15s ease-in-out;
+	padding: ($aside-nav-height - 1.125)/2 0;
+	.navbar & {
+		line-height: 1;
+		display: inline-block;
+		padding: 0;
+		span.text-xs{
+			margin-top: 0.25rem;
+		}
+	}
+}
+
+.nav-icon {
+	font-size: $aside-nav-icon-size;
+	width: $aside-nav-height;
+	height: $aside-nav-height;
+	border-radius: 100%;
+	display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-negative: 0;
+  	flex-shrink: 0;
+    opacity: 0.65;
+	a:hover > &,
+	a:active > &,
+	.active > a > &{
+		opacity: 1;
+	}
+	&.no-fade{
+		opacity: 1;
+	}
+	i{
+		line-height: 1;
+		svg,
+		img{
+			display: none;
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+		}
+		max-width: 20px;
+		max-height: 20px;
+	}
+	.navbar & {
+		margin-right: 0.5rem;
+	}
+}
+
+.nav-badge{
+	font-style: normal;
+	z-index: 1;
+	margin: 0 .5rem;
+}
+
+.nav-caret{
+	width: 1rem;
+	opacity: 0.45;
+	position: relative;
+	&:after{
+		content: '';
+		width: 5px;
+		height: 5px;
+		display: inline-block;
+		border-width: 1px;
+		border-style: solid;
+		border-color: transparent currentColor currentColor transparent;
+		transform: rotate(-45deg);
+		margin-bottom: 1px;
+	}
+}
+
+.nav-sub{
+  max-height: 0;
+  overflow: hidden;
+  @include transition(max-height 0.4s ease 0s);
+  .active > &,
+  .open > &{
+    max-height: 50rem;
+  }
+}
+
+.nav-border{
+	.nav > li.active{
+		&:after{
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			border-color: inherit;
+			border-width: 3px;
+			border-left-style: solid;
+		}
+	}
+	&.right .nav > li.active:after{
+		right: 0;
+	}
+}
+
+.nav-stacked{
+	.nav{
+		> li {
+			&:not(.nav-header){
+				padding: $aside-nav-stacked-margin 0.75rem;
+			}
+			> a{
+				line-height: $aside-nav-stacked-height;
+				padding: 0 0.5rem;
+				.nav-icon{
+					width: $aside-nav-stacked-height;
+					height: $aside-nav-stacked-height;
+				}
+				.nav-text{
+					padding: ($aside-nav-stacked-height - 1.125)/2 0;
+				}
+				&:before{
+					left: 0.5rem;
+					border-radius: 3px;
+					width: $aside-nav-stacked-height;
+					border-width: $aside-nav-stacked-height/2;
+				}
+			}
+			li {
+				a {
+					padding-left: $aside-nav-stacked-height + $aside-nav-icon-margin;
+				}
+				li a{
+					padding-left: 1rem + $aside-nav-stacked-height + $aside-nav-icon-margin;
+				}
+				li li a{
+					padding-left: 2rem + $aside-nav-stacked-height + $aside-nav-icon-margin;
+				}
+			}
+		}
+		li{
+			a{
+				border-radius: 3px;
+			}
+		}
+	}
+}

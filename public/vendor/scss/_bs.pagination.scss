@@ -1,0 +1,45 @@
+/*
+pagination 
+*/
+.pagination{
+  a{
+    padding: .5rem .75rem;
+    border: 1px solid $border-color;
+  }
+  .page-link,
+  li a{
+    color: inherit !important;
+    background-color: transparent !important;
+    border-color: $border-color !important;
+    display: block;
+    &:hover,
+    &:focus{
+      border-color: $border-color;
+      background-color: $min-black;
+      color: inherit;
+    }
+  }
+  .active .page-link,
+  .active a {
+    color: $full-white !important;
+    background-color: $primary !important;
+    border-color: $primary !important;
+  }
+  li:first-child a{
+    border-top-left-radius: .2rem;
+    border-bottom-left-radius: .2rem;
+  }
+  li:last-child a{
+    border-top-right-radius: .2rem;
+    border-bottom-right-radius: .2rem;
+  }
+}
+
+.pagination-sm a{
+  padding: .2195rem .5rem;
+}
+
+.pagination-xs a{
+  padding: 0 .35rem;
+  line-height: 1.5;
+}

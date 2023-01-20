@@ -1,0 +1,24 @@
+/*
+Popover
+*/
+
+.popover{
+  border: none;
+  box-shadow: $box-shadow;
+}
+
+.popover-header{
+  border-color: $border-color-lt;
+  background-color: #fff;
+}
+
+.popover-body{
+  color: $text-color;
+  p:last-child{
+    margin: 0;
+  }
+}
+
+.popover .arrow:before{
+  opacity: 0.15;
+}

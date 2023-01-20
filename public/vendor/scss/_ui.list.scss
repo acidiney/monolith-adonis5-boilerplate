@@ -1,0 +1,278 @@
+/*
+List
+*/
+.list{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.list-item{
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  &.block {
+    .media{
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .list-content{
+      padding: $list-content-padding;
+    }
+  }
+}
+
+.list-content{
+  padding: $list-content-padding 0;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.list-body{
+  -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+}
+
+.list-footer{
+  margin-top: 0.5rem;
+}
+
+.list-title{
+  line-height: $line-height-base;
+  font-weight: 500;
+  display: block;
+  color: inherit;
+}
+
+.list-overlay,
+.list-hover-overlay{
+  .media{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: inherit;
+    &:after{
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0;
+      border-radius: inherit;
+      background-color: rgba(0,0,0,0.25);
+    }
+  }
+  .list-content{
+    position: relative;
+    padding: $list-content-padding;
+    z-index: 1;
+  }
+  .list-body{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    .list-title{
+      margin-top: auto;
+    }
+  }
+}
+
+.list-hover-overlay{
+  &:hover,
+  &:active,
+  &.active{
+    .media{
+      display: block;
+    }
+  }
+  .media{
+    display: none;
+  }
+}
+
+.list-overlay,
+.list-overlay-content,
+.list-hover-overlay:hover,
+.list-hover-overlay:active,
+.list-hover-overlay.active{
+  color: #fff !important;
+  a:hover,
+  a:active{
+    color: #fff;
+  }
+  .text-muted:not(i){
+    color: hsla(0,0,100%, 0.5) !important;
+  }
+}
+
+.list-hover{
+  .media{
+    color: color-yiq($list-hover-color);
+  }
+  .list-body{
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  &:hover,
+  &.active{
+    background-color: $list-hover-color !important;
+    a:not(.dropdown-item),
+    a:not(.dropdown-item):hover,
+    a:not(.dropdown-item):active{
+      color: color-yiq($list-hover-color);
+    }
+    .text-muted:not(i){
+      color: hsla(0,0,100%, 0.5) !important;
+    }
+    .media:after{
+      position: relative;
+      z-index: 1;
+      border-radius: inherit;
+      background-color: $list-hover-color;
+      background: linear-gradient(180deg, rgba($list-hover-color,0.5), $list-hover-color);
+    }
+  }
+  .media-action-overlay{
+    background-color: transparent !important;
+  }
+}
+
+.list-overlay-content{
+  color: #fff;
+  a:hover{
+    color: #fff;
+  }
+  .media:after{
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: inherit;
+    position: relative;
+    z-index: 1;
+  }
+  .list-content{
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: $list-content-padding;
+  }
+}
+
+.show-row{
+  display: none !important;
+}
+.list-row{
+  &.list-row-12{
+    > div:not(.list-item){
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+  .list-item{
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: $list-row-padding-y $list-row-padding-x;
+    > *{
+      padding-left: $list-row-padding-x;
+      padding-right: $list-row-padding-x;
+    }
+    .media{
+      min-width: 4rem;
+      border-radius: inherit;
+      padding: 0;
+    }
+    .list-content{
+      padding: 0 $list-row-padding-x*2;
+      text-align: inherit !important;
+    }
+  }
+  .show-row{
+    display: block !important;
+  }
+  .hide-row{
+    display: none !important;
+  }
+}
+
+.list-bordered{
+  .list-item{
+    border-top: 1px solid $border-color-lt;
+    &:first-child{
+      border-top: none;
+    }
+  }
+}
+
+.list-index{
+  counter-reset: li;
+  .list-item:before{
+    content: counter(li);
+    counter-increment: li;
+    width: 3rem;
+    padding: 0;
+    font-weight: 600;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  .list-grouped{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    > div{
+      display: -ms-flexbox;
+      display: flex;
+      >.list-item{
+        -ms-flex-item-align: stretch;
+        align-self: stretch;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        .list-content{
+          padding-left: $list-content-padding;
+          padding-right: $list-content-padding;
+        }
+      }
+    }
+    &.no-gutters{
+      > div{
+        &:not(:first-child):not(:last-child):not(:only-child){
+          border-radius: 0;
+        }
+        &:first-child{
+          border-radius: $border-radius 0 0 $border-radius;
+          .media{
+            border-radius: inherit;
+          }
+        }
+        &:last-child{
+          border-radius: 0 $border-radius $border-radius 0;
+          .media{
+            border-radius: inherit;
+          }
+        }
+        .list-item{
+          border-radius: inherit;
+        }
+      }
+    }
+  }
+}

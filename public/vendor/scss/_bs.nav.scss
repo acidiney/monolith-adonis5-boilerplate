@@ -1,0 +1,148 @@
+/*
+Nav 
+*/
+.nav{
+  border: inherit;
+  &.flex-column{
+    .nav{
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+    }
+  }
+}
+
+.nav-item{
+  position: relative;
+  border: inherit;
+}
+
+.nav-link{
+  color: inherit;
+  border: inherit;
+  position: relative;
+}
+
+.nav-md{
+  .nav-link{
+    padding: 0.75rem 1.25rem;
+  }
+}
+
+.nav-sm{
+  .nav-link{
+    padding: 0.25rem 0.75rem;
+  }
+}
+
+.nav-xs{
+  .nav-link{
+    padding: 0.125rem 0.375rem;
+  }
+}
+
+.nav-xxs{
+  .nav-link{
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0 0.5rem;
+  }
+}
+
+.nav-rounded{
+  .nav-link{
+    border-radius: 2rem;
+  }
+}
+
+.nav-tabs{
+  border-bottom-width: 0;
+  position: relative;
+  z-index: 1;
+  .nav-link{
+    background: transparent !important;
+    color: inherit !important;
+    &.active,
+    &.active:hover,
+    &.active:focus,
+    &:hover,
+    &:focus{
+      border-color: $border-color;
+      border-bottom-color: transparent;
+    }
+  }
+}
+
+.tab-content.tab-alt{
+  .tab-pane{
+    display:block;
+    height: 0;
+    overflow: hidden;
+    &.active{
+      height: auto;
+      overflow: visible;
+    }
+  }
+}
+
+.nav-justified{
+  .nav-item{
+    display: table-cell;
+    width: 1%;
+    float: none !important;
+    text-align: center;
+  }
+}
+
+.nav-lists{
+  .nav-item{
+    border-bottom:1px solid $border-color;
+    background-clip: padding-box;
+  }
+}
+
+.breadcrumb{
+  background-color: $min-black;
+  > li + li:before{
+    content: '/ ';
+  }
+}
+
+.nav-active-border{
+  li > a,
+  .nav-link{
+    &:before{
+      content: '';
+      position: absolute;
+      left: 50%;
+      right: 50%;
+      bottom: 0;
+      border-bottom-width: 2px;
+      border-bottom-style: solid;
+      border-bottom-color: transparent;
+      @include transition(all 0.2s ease-in-out);
+    }
+    &.active:before{
+      left: 0;
+      right: 0;
+      border-bottom-color: $primary;
+    }
+  }
+  li.active > a{
+    &:before{
+      left: 1rem;
+      right: 1rem;
+      border-bottom-color: $primary;
+    }
+  }
+  &.top{
+    li.active > a,
+    .nav-link{
+      &:before{
+        bottom: auto;
+        top: 0;
+      }
+    }
+  }
+}

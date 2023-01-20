@@ -1,0 +1,58 @@
+/*
+loading
+*/
+
+.loading{
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: 50%;
+  position:relative;
+  &:before,
+  &:after{
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border: 3px solid currentColor;
+    border-radius: 50%;
+  }
+  &:before{
+    opacity: 0.3;
+  }
+  &:after{
+    opacity: 0.75;
+    border-color: transparent;
+    border-left-color: currentColor;
+    animation: loading 1s linear infinite;
+  }
+}
+
+.js-Pjax-remove {
+  position: absolute;
+}
+
+.js-Pjax-onswitch{
+  position: relative;
+  overflow: hidden;
+}
+
+.page-loading {
+  pointer-events: none;
+  a,
+  &{
+    pointer-events: none;
+    cursor: wait;
+  }
+  .loading-spin{
+    animation: loading 1s linear infinite;
+  }
+}
+
+@keyframes loading {
+  0% {transform: rotate(0deg);}
+  50% {transform: rotate(180deg);}
+  100% {transform: rotate(360deg);}
+}

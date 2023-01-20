@@ -1,0 +1,74 @@
+/*
+Base 
+*/
+
+html{
+  background: $body-bg;
+}
+body {
+  width: 100%;
+  min-height: 100vh;
+  color: $text-color;
+  background: inherit;
+}
+
+*:focus {
+  outline: 0 !important;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  outline: 0;
+}
+a:hover,
+a:focus {
+  text-decoration: none;
+}
+
+button{
+  color: inherit;
+}
+
+pre{
+  color: $text-color;
+  background-color: $light;
+  border-color: $border-color;
+}
+
+hr{
+  border-color: $border-color;
+}
+
+blockquote{
+  border-color: $border-color;
+}
+
+small{
+  font-size: $font-size-sm;
+}
+
+sup{
+  vertical-align: text-top;
+  top: -.25em;
+}
+
+b,
+strong{
+  font-weight: 500;
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6{
+  color: $dark;
+}

@@ -1,0 +1,19 @@
+{
+  "assets/app.css": "http://localhost:8080/assets/app.css",
+  "assets/app.js": "http://localhost:8080/assets/app.js",
+  "assets/app_modules_admin_common_framework_views_dashboard_vue.js": "http://localhost:8080/assets/app_modules_admin_common_framework_views_dashboard_vue.js",
+  "assets/app_modules_admin_common_framework_views_errors_vue.js": "http://localhost:8080/assets/app_modules_admin_common_framework_views_errors_vue.js",
+  "assets/app_modules_admin_common_framework_views_profile_vue.js": "http://localhost:8080/assets/app_modules_admin_common_framework_views_profile_vue.js",
+  "assets/app_modules_admin_common_framework_views_settings_general_vue.js": "http://localhost:8080/assets/app_modules_admin_common_framework_views_settings_general_vue.js",
+  "assets/app_modules_auth_framework_views_layouts_authentication_vue.css": "http://localhost:8080/assets/app_modules_auth_framework_views_layouts_authentication_vue.css",
+  "assets/app_modules_auth_framework_views_layouts_authentication_vue.js": "http://localhost:8080/assets/app_modules_auth_framework_views_layouts_authentication_vue.js",
+  "assets/app_modules_auth_framework_views_login_vue-app_modules_auth_framework_views_layouts_authentic-a95c98.css": "http://localhost:8080/assets/app_modules_auth_framework_views_login_vue-app_modules_auth_framework_views_layouts_authentic-a95c98.css",
+  "assets/app_modules_auth_framework_views_login_vue-app_modules_auth_framework_views_layouts_authentic-a95c98.js": "http://localhost:8080/assets/app_modules_auth_framework_views_login_vue-app_modules_auth_framework_views_layouts_authentic-a95c98.js",
+  "assets/app_modules_auth_framework_views_reset-password_vue-app_modules_auth_framework_views_layouts_-79f6ef.css": "http://localhost:8080/assets/app_modules_auth_framework_views_reset-password_vue-app_modules_auth_framework_views_layouts_-79f6ef.css",
+  "assets/app_modules_auth_framework_views_reset-password_vue-app_modules_auth_framework_views_layouts_-79f6ef.js": "http://localhost:8080/assets/app_modules_auth_framework_views_reset-password_vue-app_modules_auth_framework_views_layouts_-79f6ef.js",
+  "assets/app_modules_auth_framework_views_send-reset-password-link_vue-app_modules_auth_framework_view-71acc4.css": "http://localhost:8080/assets/app_modules_auth_framework_views_send-reset-password-link_vue-app_modules_auth_framework_view-71acc4.css",
+  "assets/app_modules_auth_framework_views_send-reset-password-link_vue-app_modules_auth_framework_view-71acc4.js": "http://localhost:8080/assets/app_modules_auth_framework_views_send-reset-password-link_vue-app_modules_auth_framework_view-71acc4.js",
+  "assets/vendors-node_modules_vee-validate_dist_vee-validate_esm_js-node_modules_yup_es_index_js.js": "http://localhost:8080/assets/vendors-node_modules_vee-validate_dist_vee-validate_esm_js-node_modules_yup_es_index_js.js",
+  "assets/vendors-node_modules_inertiajs_inertia_dist_index_js-node_modules_mini-css-extract-plugin_dis-e9d5c6.js": "http://localhost:8080/assets/vendors-node_modules_inertiajs_inertia_dist_index_js-node_modules_mini-css-extract-plugin_dis-e9d5c6.js",
+  "assets/app_modules_auth_framework_views_layouts_authentication_vue-resources_js_core_components_AppB-a278a0.js": "http://localhost:8080/assets/app_modules_auth_framework_views_layouts_authentication_vue-resources_js_core_components_AppB-a278a0.js"
+}

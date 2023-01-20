@@ -1,0 +1,65 @@
+/*
+badge 
+*/
+
+.badge-up{
+  padding: 0 0.25rem;
+  position: absolute;
+  right: 0;
+  transform: translate(0%, -50%);
+  background-clip: padding-box;
+  min-width: 1rem;
+  min-height: 1rem;
+  line-height: 1rem;
+}
+
+.badge-outline{
+  border: 1px solid currentColor;
+  border-radius: 0;
+  background-color: transparent;
+  font-weight: 100;
+}
+
+.badge-circle{
+  padding: 0 !important;
+  width: 0.625rem;
+  height: 0.625rem;
+  border: 2px solid;
+  border-radius: 50%;
+  &:empty{
+    display: inline-block;
+  }
+  &.xs{
+    width: 0;
+    height: 0;
+    border-width: 3px;
+    vertical-align: 2px;
+  }
+  &.sm{
+    width: 0.5rem;
+    height: 0.5rem;
+    vertical-align: 1px;
+  }
+  &.md{
+    width: 1rem;
+    height: 1rem;
+    vertical-align: -3px;
+  }
+  &.lg{
+    width: 1.5rem;
+    height: 1.5rem;
+    vertical-align: -7px;
+  }
+}
+
+.badge-sm{
+  line-height: 0.8;
+}
+
+.badge-md{
+  padding: 0.5em 0.75em;
+}
+
+.badge-lg{
+  padding: 0.75em 1em;
+}

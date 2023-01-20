@@ -1,0 +1,52 @@
+/*
+chat
+*/
+
+.chat-list {
+
+}
+
+.chat-item{
+	display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 1.5rem;
+	> *{
+	    margin-left: 0.5rem;
+		margin-right: 0.5rem;
+    }
+}
+
+[data-class="alt"].chat-item,
+.chat-item.alt{
+	-ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+    .chat-body{
+    	-ms-flex-align: end;
+		align-items: flex-end;
+    }
+	.chat-date{
+		text-align: right;
+	}
+}
+
+.chat-body{
+	display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+
+.chat-content{
+	display: -ms-inline-flexbox;
+    display: inline-flex;
+	padding: .75rem 1rem;
+	margin-bottom: .25rem;
+}
+
+.chat-date{
+	opacity: 0.5;
+	font-size: 0.8em;
+	display: block;
+}

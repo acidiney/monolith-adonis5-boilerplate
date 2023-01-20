@@ -1,0 +1,17 @@
+/*
+Progress 
+*/
+.progress {
+	border-radius: .25rem;
+	overflow: visible;
+	background-color: $min-black;
+}
+
+.progress-bar {
+    height: 100%;
+    text-align: center;
+    font-size: 0.8em;
+    border-radius: .25rem;
+    -webkit-transition: width .6s ease;
+    transition: width .6s ease;
+}

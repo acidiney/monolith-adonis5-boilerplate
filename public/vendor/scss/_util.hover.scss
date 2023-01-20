@@ -1,0 +1,25 @@
+/*
+Hover
+*/
+.hover-show{
+  display: none;    
+}
+.hover-rotate{
+  @include transition(all .2s ease-in-out .1s)
+}
+
+.hover-anchor:hover,
+.hover-anchor:active{
+  .hover-show{
+    display: inherit;
+  }
+  .hover-rotate{
+    transform: rotate(45deg);
+  }
+}
+
+.hover-top:hover,
+.hover-top:active{
+  position: relative;
+  z-index: 1000;
+}

@@ -1,0 +1,10 @@
+node_modules
+build
+coverage
+.vscode
+.DS_STORE
+.env
+tmp
+docker/data
+app/modules/addons/**/*
+resources/lang/*.json

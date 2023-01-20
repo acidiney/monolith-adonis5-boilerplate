@@ -1,0 +1,35 @@
+/*
+Carousel 
+*/
+
+.carousel-indicators li{
+	width: 5px;
+	height: 5px;
+	border-radius: 5px;
+	transition: all .3s;
+}
+
+.carousel-indicators li.active{
+	width: 20px;
+}
+
+.carousel-fade{
+	.carousel-item{
+		transition: opacity 1s;
+	}
+	.carousel-item-next.carousel-item-left,
+	.carousel-item-prev.carousel-item-right {
+  		transform: translateX(0);
+  		opacity: 1;
+  	}
+
+	.carousel-item-next,
+	.active.carousel-item-right {
+	  opacity: 0;
+	}
+
+	.carousel-item-prev,
+	.active.carousel-item-left {
+	  opacity: 0;
+  	}
+}

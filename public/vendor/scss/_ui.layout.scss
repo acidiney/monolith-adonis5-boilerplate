@@ -1,0 +1,146 @@
+/*
+Layout
+*/
+
+.layout,
+.layout-row,
+.layout-column{
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.layout-row{
+    -ms-flex-direction: row;
+    flex-direction: row;
+    > .flex{
+      min-width: 0;
+    }
+}
+
+.layout-column{
+    -ms-flex-direction: column;
+    flex-direction: column;
+    > .flex{
+      min-height: 0;
+    }
+}
+
+.flex{
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+.no-shrink{
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.no-grow{
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+}
+
+.page-header{
+  z-index: 1035 !important;
+  transition: background-color 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  &.sticky ~ * .page-sidenav.sticky,
+  ~ * .fixed-content{
+    top: $navbar-height;
+    height: calc(100vh - #{$navbar-height} );
+  }
+  &.scroll-down{
+    
+  }
+  &:not(.sticky).scroll-up{
+    position: fixed;
+    left: 0;
+    right: 0;
+  }
+}
+
+.page-sidenav{
+  position: relative;
+  z-index: 1030 !important;
+  min-width: $aside-width;
+  opacity: 1 !important;
+  &.sticky{
+    height: 100vh;
+  }
+}
+
+.is-fullscreen{
+  &.layout-column,
+  &.layout-row #content{
+    display: block;
+    overflow: auto;
+    -webkit-overflow-scrolling:touch;
+  }
+}
+
+.fixed{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.sticky{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    &.sticky-bottom{
+      top: auto;
+      bottom: -1px;
+    }
+}
+
+@include media-breakpoint-up(lg) {
+  .page-container{
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+  .page-sidenav {
+    display: block !important;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  body.layout-row{
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  .page-sidenav {
+    width: 100% !important;
+    height: 100% !important;
+    top: 0 !important;
+    position: fixed;
+    z-index: 1050 !important;
+    display: none;
+    opactiy: 0;
+    .bg-dark &,
+    &{
+      background: transparent !important;
+    }
+    > *{
+      position: fixed;
+      height: 100%;
+      transition: 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transform: translate3d(-100%, 0, 0);
+      width: $aside-slide-width;
+    }
+    &.show{
+      > div{
+        transform: translate3d(0, 0, 0);
+      }
+    }
+  }
+}
+
+@media print {
+  .page-sidenav,
+  .page-header{
+    display: none !important;
+  }
+}

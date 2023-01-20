@@ -1,0 +1,103 @@
+/*
+Form 
+*/
+.form-control{
+  border-color: $input-border;
+  border-width: $input-border-width;
+  border-radius: $input-border-radius;
+  color: inherit;
+  &:focus{
+    color: inherit;
+    box-shadow: 0 0 0 0.2rem rgba($primary,.25);
+  }
+  &:not(.is-valid):not(.is-invalid):focus{
+    border-color: $input-border-focus;
+  }
+}
+
+.form-control-theme{
+  border-width: 0;
+  box-shadow: $box-shadow;
+}
+
+.col-form-label{
+  color: $text-muted;
+}
+
+.form-check-input{
+  margin-top: 0.2rem;
+}
+
+.custom-file-control,
+.custom-file-control:before,
+.custom-select{
+  border-color: $input-border;
+}
+
+.custom-select,
+.custom-range{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.custom-control-label{
+  line-height: 1.75;
+}
+
+.form-control::-webkit-input-placeholder{
+  color: inherit;
+  opacity: 0.3;
+}
+.form-control::-moz-placeholder{
+  color: inherit;
+  opacity: 0.3;
+}
+.form-control:-ms-input-placeholder{
+  color: inherit;
+  opacity: 0.3;
+}
+
+.form-control-spin{
+  position: absolute;
+  z-index: 2;
+  right: 10px;
+  top: 50%;
+  margin-top: -7px;
+}
+
+.custom-file-label,
+.custom-file-label:after,
+.input-group-text{
+  border-color: $input-border !important;
+  background-color: transparent;
+  color: inherit;
+}
+
+.input-group-text,
+.custom-file-label:after{
+  background-color: $border-color-lt;
+}
+
+.form-group-stack{
+  .form-control{
+    margin-top: -1px;
+    position: relative;
+    border-radius: 0;
+    &:focus,
+    &:active{
+      z-index: 1;
+    }
+  }
+}
+
+.input-group-sm > .form-control{
+  min-height: 1.95rem;
+}
+
+.active-checked{
+  opacity: 0;
+}
+
+input:checked + .active-checked{
+  opacity: 1;
+}

@@ -1,0 +1,124 @@
+/*
+Colors
+*/
+
+@mixin active-variant($bg, $color) {
+    .nav-link.active,
+    .nav-item.active > a,
+    .nav > li.active > a{
+      color: $color !important;
+      background-color: $bg !important;
+    }
+}
+
+@each $color, $value in $theme-colors {
+  .bg-#{$color}{
+    color: color-yiq($value) !important;
+  }
+  .bg-#{$color}-lt {
+    color: darken($value, 10%) !important;
+    background-color: theme-color-level($color, $color-level) !important;
+    &:hover,
+    &:focus,
+    &.active{
+      color: #fff !important;
+      background-color: $value !important;
+    }
+  }
+  .bg-#{$color}--lt {
+    color: $text-color !important;
+    background-color: theme-color-level($color, $color-level) !important;
+  }
+  .gd-#{$color}{
+    color: #fff;
+    border: none;
+    background: $value linear-gradient(45deg, $value, adjust-hue( $value, -30% ));
+  }
+  .active > .active-#{$color}{
+    color: $value !important;
+    opacity: 1 !important;
+    fill: currentColor;
+  }
+  .active > .active-bg-#{$color}{
+    color: color-yiq($value) !important;
+    background-color: $value !important;
+  }
+  .nav-active-text-#{$color} {
+    .nav-link.active,
+    .nav-item.active > a,
+    .nav > li.active > a,
+    .nav-sub > li.active > a{
+      color: $value !important;
+    }
+  }
+  .nav-active-#{$color} {
+    @if $color == "light" {
+      @include active-variant($value, $text-color);
+    } @else {
+      @include active-variant($value, $white);
+    }
+  }
+}
+
+.bg-light{
+  color: inherit !important;
+  background-color: $light;
+}
+
+.bg-white{
+  background-color: #fff;
+}
+
+.bg--white{
+  color: $text-color;
+  background-color: #fff;
+}
+
+.bg-warning{
+  color: #fff !important;
+}
+
+.bg-dark{
+  color: $dark-color !important;
+}
+
+.bg-black{
+  color: #fff;
+  background-color: $black;
+}
+
+.bg-white .fill{
+  fill: $primary;
+}
+
+.bg-white-overlay{
+  color: #fff;
+  background-color: $light-white;
+}
+
+.bg-dark-overlay{
+  color: #fff;
+  background-color: $light-black;
+}
+
+.bg-img{
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+.gd-overlay{
+  background-color: transparent !important;
+  @include gradient-y(rgba(0,0,0,0), rgba(0,0,0,0.5));
+}
+
+.bg-clip{
+  background-clip: padding-box;
+}
+
+.bg-body{
+  background-color: $body-bg;
+}
+
+.no-bg{
+  background: transparent !important; 
+}

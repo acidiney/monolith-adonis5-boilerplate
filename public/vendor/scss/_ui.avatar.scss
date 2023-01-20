@@ -1,0 +1,146 @@
+/*
+Avatar
+*/
+.avatar{
+  position: relative;
+  line-height: 1;
+  border-radius: 500px;
+  white-space: nowrap;
+  font-weight: bold;
+  border-radius: 100%;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  border-radius: 500px;
+  box-shadow: 0 5px 10px 0 rgba(50, 50, 50, 0.15);
+  img{
+    border-radius: inherit;
+    width: 100%;
+  }
+  &.w-32{
+    .avatar-status{
+      margin: 0px;
+    }
+  }
+  &.w-48{
+    .avatar-status{
+      margin: 2px;
+    }
+  }
+  &.w-56{
+    .avatar-status{
+      margin: 3px;
+    }
+  }
+  &.w-64{
+    .avatar-status{
+      margin: 4px;
+    }
+  }
+  &.w-96{
+    .avatar-status{
+      margin: 9px;
+    }
+  }
+  &.w-128{
+    .avatar-status{
+      margin: 14px;
+    }
+  }
+  .avatar-status{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+  }
+}
+
+.avatar-status{
+  display: inline-block;
+  width:  10px;
+  height: 10px;
+  margin: 1px;
+  border-width:  2px;
+  border-style:  solid;
+  border-radius: 100%;
+  border-color: #fff;
+  background-color: #fff;
+  .bg-dark &{
+    border-color: lighten( $dark, $color-percent ) !important;
+  }
+  &.no-border{
+    width:  8px;
+    height: 8px;
+    margin: 2px;
+    border-color: rgba(0,0,0,0.1);
+  }
+  &.avatar-center{
+    top:  50%;
+    margin: 0;
+    margin-top: -4px;
+    + img{
+      margin: 0 14px 0 24px;
+      width: auto;
+    }
+  }
+  &.avatar-top{
+    left: 0;
+    top: 0;
+  }
+  &.avatar-right{
+    left: auto;
+    top: 0;
+    right: 0;
+  }
+  &.avatar-bottom{
+    left: auto;
+    top: auto;
+    bottom: 0;
+    right: 0;
+  }
+  &.avatar-left{
+    left: auto;
+    top: auto;
+    bottom: 0;
+  }
+  &.on{
+    background-color: $success;
+  }
+  &.off{
+    background-color: $light;
+  }
+  &.away{
+    background-color: $warning;
+  }
+  &.busy{
+    background-color: $danger;
+  }
+}
+
+.avatar-group{
+  display: -ms-flex;
+  display: flex;
+  -ms-align-items: center;
+  align-items: center;
+  .avatar{
+    position: relative;
+    + .avatar{
+      margin-left: -0.5rem;
+    }
+    &:hover,
+    &:active,
+    &.active{
+      z-index: 1;
+    }
+  }
+  &.avatar-column{
+    .avatar{
+      margin: 0.25rem;
+    }
+  }
+}

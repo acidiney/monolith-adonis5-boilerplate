@@ -1,0 +1,10 @@
+{
+  "auth.login.success": "Conectado!",
+  "auth.login.failed": "Credênciais inválidas!",
+  "auth.logout.success": "Desconectado com sucesso!",
+  "auth.logout.failed": "Erro ao fazer logout!",
+  "auth.validation.username.required": "Username é obrigatório!",
+  "auth.validation.username.email": "Username precisa ser um e-mail valido",
+  "auth.validation.password.required": "Password é obrigatório!",
+  "auth.validation.password.minLength": "Password é menor que 8 caracteres!"
+}

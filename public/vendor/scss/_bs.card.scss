@@ -1,0 +1,65 @@
+/*
+Card
+*/
+.card,
+.block{
+  background: #fff;
+	border-width: 0;
+  border-radius: 0.25rem;
+	box-shadow: $card-box-shadow;
+	margin-bottom: 1.5rem;
+}
+
+.card-header,
+.card-footer{
+  background-color: transparent;
+  border-color: $border-color;
+  background-clip: padding-box;
+}
+.card-body{
+  p:last-child{
+    margin-bottom: 0;
+  }
+  .card-hide-body &{
+    display: none;
+  }
+}
+.card-title{
+  line-height: 1.5;
+}
+
+.block-fold,
+.card-fold{
+  &:before,
+  &:after{
+    content: '';
+    display: block;
+    background-color: inherit;
+    box-shadow: inherit;
+    border-radius: inherit;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    position: absolute;
+    width: 90%;
+    left: 5%;
+    height: 0.35rem;
+    bottom: -0.35rem;
+    opacity: 0.6;
+    transition: all .1s;
+  }
+  &:before{
+    width: 80%;
+    left: 10%;
+    bottom: -0.7rem;
+    opacity: 0.3;
+  }
+  &:hover,
+  &:active{
+    &:before{
+      opacity: 0.5;
+    }
+    &:after{
+      opacity: 0.8;
+    }
+  }
+}

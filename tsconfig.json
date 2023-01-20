@@ -1,0 +1,40 @@
+{
+  "extends": "adonis-preset-ts/tsconfig.json",
+  "include": [
+    "**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "build"
+  ],
+  "compilerOptions": {
+    "outDir": "build",
+    "rootDir": "./",
+    "sourceMap": true,
+    "paths": {
+      "app/*": [
+        "./app/*"
+      ],
+      "config/*": [
+        "./config/*"
+      ],
+      "@core/*": [
+        "./resources/js/core/*"
+      ]
+    },
+    "types": [
+      "@adonisjs/core",
+      "@adonisjs/repl",
+      "@adonisjs/session",
+      "@adonisjs/view",
+      "@adonisjs/shield",
+      "@japa/preset-adonis/build/adonis-typings",
+      "@adonisjs/lucid",
+      "@adonisjs/i18n",
+      "@eidellev/inertia-adonisjs",
+      "@adonisjs/auth",
+      "@adonisjs/lucid-slugify",
+      "@rocketseat/adonis-bull"
+    ]
+  }
+}

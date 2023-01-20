@@ -1,0 +1,74 @@
+/*
+Dark theme
+*/
+.bg-dark{
+  body{
+    color: $dark-color;
+  }
+  h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, .text-dark, .text-color{
+    color: inherit;
+  }
+  .btn-white,
+  .card,
+  .block,
+  .list-group,
+  .ui-switch i:before,
+  .table-theme tbody td{
+    color: $dark-color;
+    background-color: lighten( $dark, $color-percent );
+  }
+  .dropdown-menu{
+    color: inherit;
+    border-color: transparent;
+    background-color: lighten( $dark, $color-percent + 2% ) !important;
+  }
+  .bg-light{
+    color: $dark-color !important;
+    background-color: darken( $dark, $color-percent ) !important;
+  }
+  .btn:not([class*="btn-"]),
+  .btn.btn-icon.no-bg{
+    color: inherit;
+  }
+  .text-color{
+    color: $dark-color;
+  }
+  .text-muted,
+  .col-form-label{
+    color: $dark-muted !important;
+  }
+  .bg-white,
+  .bg-body{
+    background: $dark !important;
+  }
+  .form-control{
+    background-color: transparent;
+  }
+  .input-group-btn{
+    .btn{
+      background-color: $border-color-lt;
+    }
+  }
+  .table-theme tbody td{
+    box-shadow: none !important;
+  }
+  .list-item{
+    border-top: none !important;
+  }
+  .navbar-brand,
+  .text-highlight{
+    color: #fff !important;
+  }
+  .card-header,
+  .card-footer,
+  .b-a,
+  .b-l,
+  .b-r,
+  .b-t,
+  .b-b{
+    border-color: lighten( $dark, $color-percent + 1.5% );
+  }
+  .dropdown-divider{
+    border-color: lighten( $dark, $color-percent + 3% );
+  }
+}

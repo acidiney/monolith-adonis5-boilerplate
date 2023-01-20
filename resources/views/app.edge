@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <title> Órion </title>
+
+    <link rel="stylesheet" href="/vendor/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/css/style.css" type="text/css" />
+
+    @entryPointScripts('app')
+    @entryPointStyles('app')
+    @!section('styles')
+  </head>
+  <body>
+    @inertia
+
+    <script src="/vendor/libs/jquery/dist/jquery.min.js" defer></script>
+    <!-- Bootstrap -->
+    <script src="/vendor/libs/popper.js/dist/umd/popper.min.js" defer></script>
+    <script src="/vendor/libs/bootstrap/dist/js/bootstrap.min.js" defer></script>
+    <!-- ajax page -->
+    <script src="/vendor/libs/pjax/pjax.min.js" defer></script>
+    <script src="/vendor/js/ajax.js" defer></script>
+    <!-- lazyload plugin -->
+    <script src="/vendor/js/lazyload.config.js" defer></script>
+    <script src="/vendor/js/lazyload.js" defer></script>
+    <script src="/vendor/js/plugin.js" defer></script>
+    <!-- scrollreveal -->
+    <script src="/vendor/libs/scrollreveal/dist/scrollreveal.min.js" defer></script>
+    <!-- feathericon -->
+    <script src="/vendor/libs/feather-icons/dist/feather.min.js" defer></script>
+    <script src="/vendor/js/plugins/feathericon.js" defer></script>
+
+    <!-- theme -->
+    <script src="/vendor/js/theme.js" defer></script>
+    <script src="/vendor/js/utils.js" defer></script>
+    <!-- endbuild -->
+
+    @!section('scripts')
+  </body>
+</html>
+
