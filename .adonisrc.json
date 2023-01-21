@@ -15,18 +15,18 @@
   },
   "preloads": [
     {
+      "file": "./start/sentry",
+      "environment": ["web"]
+    },
+    {
       "file": "./start/i18n",
-      "environment": [
-        "web"
-      ]
+      "environment": ["web"]
     },
     "./start/routes",
     "./start/kernel",
     {
       "file": "./start/inertia",
-      "environment": [
-        "web"
-      ]
+      "environment": ["web"]
     },
     "./start/bull"
   ],

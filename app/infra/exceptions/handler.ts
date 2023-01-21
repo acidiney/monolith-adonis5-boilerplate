@@ -16,6 +16,7 @@
 import Logger from '@ioc:Adonis/Core/Logger'
 // import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import HttpExceptionHandler from '@ioc:Adonis/Core/HttpExceptionHandler'
+import * as Sentry from '@sentry/node'
 
 export default class ExceptionHandler extends HttpExceptionHandler {
   protected statusPages = {
@@ -31,4 +32,8 @@ export default class ExceptionHandler extends HttpExceptionHandler {
   // public async handle(error: any, ctx: HttpContextContract) {
   //   return super.handle(error, ctx)
   // }
+
+    public async report (error) {
+    Sentry.captureException(error)
+  }
 }

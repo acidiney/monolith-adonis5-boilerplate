@@ -51,6 +51,8 @@
     "@inertiajs/inertia": "^0.11.1",
     "@inertiajs/vue3": "^1.0.0",
     "@rocketseat/adonis-bull": "^1.0.4",
+    "@sentry/node": "^7.31.1",
+    "@sentry/tracing": "^7.31.1",
     "@vue/server-renderer": "^3.2.45",
     "luxon": "^3.2.1",
     "mysql2": "^3.0.1",
