@@ -26,10 +26,17 @@ function onSubmit(values) {
 }
 
 const { t } = useI18n()
-
 const schema = computed(() => ({
-  username: yup.string().required().email(t('username.required')),
-  password: yup.string().required().min(8),
+  username: yup.string().required(
+    t('auth.validation.username.required')
+  ).email(
+    t('auth.validation.username.email')
+  ),
+  password: yup.string().required(
+    t('auth.validation.password.required')
+  ).min(8,
+    t('auth.validation.password.minLength')
+  ),
 }));
 
 const errors = computed(() => usePage().props.errors)

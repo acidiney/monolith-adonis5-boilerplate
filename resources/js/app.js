@@ -1,8 +1,8 @@
-import { createInertiaApp } from '@inertiajs/vue3'
+import { createInertiaApp, Link } from '@inertiajs/vue3'
 
 import { createApp, h } from 'vue'
-import { Link } from '@inertiajs/vue3'
 import { createI18n } from 'vue-i18n'
+import { configure } from 'vee-validate'
 
 import LoadScript from 'vue-plugin-load-script'
 

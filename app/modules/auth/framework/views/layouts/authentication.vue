@@ -49,7 +49,6 @@ main {
           {{ headers.appDescription }}
         </h5>
         <main class="position-relative overflow-hidden">
-          {{ $page.props.errors }}
           <div
             class="alert alert-danger fade show"
             v-if="messages.errors && messages.errors.invalid_credentials"
