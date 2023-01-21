@@ -14,7 +14,8 @@ import I18n from '@ioc:Adonis/Addons/I18n'
 import { loadModulesInternationalization } from './utils/i18n-modules-loader'
 
 ;['../app/modules'].forEach(async (path) => {
-  await loadModulesInternationalization(resolve(__dirname, path))
+  await loadModulesInternationalization(resolve(__dirname, path), 'lang', /main\/i18n\/.*\.json$/)
+  await loadModulesInternationalization(resolve(__dirname, path), 'js/i18n', /views\/i18n\/.*\.json$/)
 })
 
 Event.on('i18n:missing:translation', I18n.prettyPrint)

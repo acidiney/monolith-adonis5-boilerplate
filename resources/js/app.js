@@ -17,6 +17,7 @@ import messages from './i18n'
 
 const i18n = createI18n({
   locale: 'pt',
+  legacy: false,
   messages,
 })
 

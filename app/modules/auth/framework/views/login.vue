@@ -3,6 +3,7 @@ import * as yup from "yup";
 import { reactive, computed } from "vue";
 import { router, usePage } from "@inertiajs/vue3";
 import { Field, Form, ErrorMessage } from "vee-validate";
+import { useI18n } from 'vue-i18n'
 
 import AuthLayout from "./layouts/authentication.vue";
 
@@ -24,8 +25,10 @@ function onSubmit(values) {
   });
 }
 
+const { t } = useI18n()
+
 const schema = computed(() => ({
-  username: yup.string().required().email(),
+  username: yup.string().required().email(t('username.required')),
   password: yup.string().required().min(8),
 }));
 

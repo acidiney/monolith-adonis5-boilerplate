@@ -206,6 +206,7 @@ config.resolve.alias = {
   '@core': resolve(__dirname, 'resources/js/core/'),
 }
 
+
 /*
 |--------------------------------------------------------------------------
 | Export config

@@ -4,8 +4,8 @@ import { loadContext as context } from '../../app/infra/utils/context'
 
 import { writeFile } from 'fs/promises'
 
-export const loadModulesInternationalization = async (path: string) => {
-  const req = context(path, true, /main\/i18n\/.*\.json$/)
+export const loadModulesInternationalization = async (path: string, destine: string, regex) => {
+  const req = context(path, true, regex)
 
   const languagues: string[] = []
   const languaguesData: { [key: string]: Object } = {}
@@ -31,7 +31,7 @@ export const loadModulesInternationalization = async (path: string) => {
   }
 
   for (const lang in languaguesData) {
-    const resource = Application.resourcesPath('lang')
+    const resource = Application.resourcesPath(destine)
     await writeFile(resolve(resource, `${lang}.json`), JSON.stringify(languaguesData[lang]))
   }
 }
