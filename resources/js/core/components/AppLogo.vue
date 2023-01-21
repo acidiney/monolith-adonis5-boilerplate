@@ -1,5 +1,5 @@
 <template>
-  <inertia-link href="/admin/account" :class="['navbar-brand', { 'd-lg-none': !isSidebar }]">
+  <router-link href="/admin/account" :class="['navbar-brand', { 'd-lg-none': !isSidebar }]">
     <svg
       width="32"
       height="32"
@@ -15,7 +15,7 @@
     </svg>
     <!-- <img src="/vendor/img/logo.png" alt="..."> -->
     <span :class="['hidden-folded d-inline l-s-n-1x', { 'd-lg-none': !isSidebar }]" >Órion</span>
-  </inertia-link>
+  </router-link>
 </template>
 
 <script>

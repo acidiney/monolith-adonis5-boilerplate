@@ -21,9 +21,9 @@
   </li>
 </template>
 <script setup>
-import { Inertia } from '@inertiajs/inertia'
+import { router } from '@inertiajs/vue3'
 
 const useLogout = () => {
-  Inertia.post('/auth/logout')
+  router.post('/auth/logout')
 }
 </script>
