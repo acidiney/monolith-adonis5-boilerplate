@@ -1,4 +1,4 @@
-import pt from './pt'
+import pt from '../../lang/pt'
 
 export default {
   pt,
