@@ -25,7 +25,7 @@ export default class ExceptionHandler extends HttpExceptionHandler {
     '500..599': 'errors/server-error',
   }
 
-  constructor() {
+  constructor () {
     super(Logger)
   }
 
@@ -33,7 +33,7 @@ export default class ExceptionHandler extends HttpExceptionHandler {
   //   return super.handle(error, ctx)
   // }
 
-    public async report (error) {
+  public async report (error) {
     Sentry.captureException(error)
   }
 }
