@@ -7,4 +7,5 @@ coverage
 tmp
 docker/data
 app/modules/addons/**/*.ts
+app/modules/addons/**/*.json
 resources/lang/*.json

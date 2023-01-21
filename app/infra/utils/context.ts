@@ -39,15 +39,15 @@ export const loadContext = (
   return Module
 }
 
+export function getDirectories (srcpath) {
+  return readdirSync(srcpath)
+    .map(file => join(srcpath, file))
+    .filter(path => statSync(path).isDirectory())
+}
+
 export const loadDirectories = (base = '.'):string[] => {
   function flatten (lists) {
     return lists.reduce((a, b) => a.concat(b), [])
-  }
-
-  function getDirectories (srcpath) {
-    return readdirSync(srcpath)
-      .map(file => join(srcpath, file))
-      .filter(path => statSync(path).isDirectory())
   }
 
   function getDirectoriesRecursive (srcpath) {
