@@ -9,7 +9,7 @@ Inertia.share({
   success: (ctx) => ctx.session.flashMessages.get('success'),
   user: (ctx) => ctx.auth.user,
   menu: (ctx) => ctx.session.get('menu'),
-  header: (ctx) => ctx.session.get('header'),
+  headers: (ctx) => ctx.session.get('header'),
   today: DateTime.now().setLocale('pt-PT').toFormat('dd, LLLL yyyy'),
   version: pkg.version,
   copyright: pkg.copyright,

@@ -13,8 +13,9 @@ export class SignInController {
       logger.info(username + ' - ' + i18n.formatMessage('auth.login.success'))
       return response.redirect('/admin/account/dashboard')
     } catch (e) {
-      console.log(e)
-      session.flash('errors.invalid_credentials', i18n.formatMessage('auth.login.failed'))
+      session.flash('errors', {
+        invalid_credentials: i18n.formatMessage('auth.login.failed'),
+      })
       return response.redirect().back()
     }
   }

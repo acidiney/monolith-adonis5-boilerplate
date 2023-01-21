@@ -20,7 +20,7 @@ export default class DetectUserLocale {
    * The user language must be part of the "supportedLocales", otherwise
    * this method should return null.
    */
-  protected getUserLanguage(ctx: HttpContextContract) {
+  protected getUserLanguage (ctx: HttpContextContract) {
     const availableLocales = I18n.supportedLocales()
     return ctx.request.language(availableLocales) || ctx.request.input('lang')
   }
@@ -29,7 +29,7 @@ export default class DetectUserLocale {
    * Handle method is called by AdonisJS automatically on every middleware
    * class.
    */
-  public async handle(ctx: HttpContextContract, next: () => Promise<void>) {
+  public async handle (ctx: HttpContextContract, next: () => Promise<void>) {
     const language = this.getUserLanguage(ctx)
 
     /**

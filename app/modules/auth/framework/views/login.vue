@@ -1,10 +1,44 @@
+<script setup>
+import * as yup from "yup";
+import { reactive, computed } from "vue";
+import { router, usePage } from "@inertiajs/vue3";
+import { Field, Form, ErrorMessage } from "vee-validate";
+
+import AuthLayout from "./layouts/authentication.vue";
+
+const state = reactive({
+  showPassword: false,
+  isLoading: false,
+});
+
+function toggleShowPassword() {
+  state.showPassword = !state.showPassword;
+}
+
+function onSubmit(values) {
+  state.isLoading = true;
+  router.post("/auth/login", values, {
+    onFinish: () => {
+      state.isLoading = false;
+    },
+  });
+}
+
+const schema = computed(() => ({
+  username: yup.string().required().email(),
+  password: yup.string().required().min(8),
+}));
+
+const errors = computed(() => usePage().props.errors)
+</script>
+
 <template>
   <auth-layout>
-    <v-form @submit="onSubmit" :validation-schema="schema">
-      <label for="username">{{ $t('auth.field_email') }}</label>
+    <Form @submit="onSubmit" :validation-schema="schema">
+      <label for="username">{{ $t("auth.field_email") }}</label>
 
       <div class="input-group flex bg-light rounded">
-        <v-field class="form-control" name="username" id="username" />
+        <Field class="form-control" name="username" id="username" />
 
         <span class="input-group-append">
           <button class="btn no-bg no-shadow" type="button">
@@ -13,95 +47,50 @@
         </span>
       </div>
       <div class="invalid-feedback d-block iva-feed">
-        <v-error-message name="username" />
+        <ErrorMessage name="username" />
         <template v-if="errors && errors.username">
           <span v-for="error in errors.username"> {{ error }} </span>
         </template>
       </div>
 
-      <label for="password" class="mt-3">{{ $t('auth.field_password') }}</label>
+      <label for="password" class="mt-3">{{ $t("auth.field_password") }}</label>
       <div class="input-group bg-light rounded flex w-100">
-        <v-field
+        <Field
           name="password"
           id="password"
           class="form-control"
-          :type="!showPassword ? 'password' : 'text'"
+          :type="!state.showPassword ? 'password' : 'text'"
         />
         <span @click="toggleShowPassword" class="input-group-append">
           <button class="btn no-bg no-shadow" type="button">
-            <app-icon :icon="!showPassword ? 'eye' : 'eye-off'" class="text-fade" />
+            <app-icon
+              :icon="!state.showPassword ? 'eye' : 'eye-off'"
+              class="text-fade"
+            />
           </button>
         </span>
       </div>
       <div class="invalid-feedback d-block iva-feed">
-        <v-error-message name="password" />
+        <ErrorMessage name="password" />
         <template v-if="errors && errors.password">
           <span v-for="error in errors.password"> {{ error }} </span>
         </template>
       </div>
 
       <div class="animate-slide-in-link mt-3" style="margin-bottom: 19px">
-        <inertia-link href="/auth/reset/password" class="cursor-pointer">{{
-          $t('auth.forgotPassword')
-        }}</inertia-link>
+        <router-link href="/auth/reset/password" class="cursor-pointer">{{
+          $t("auth.forgotPassword")
+        }}</router-link>
       </div>
 
       <app-button
         type="submit"
-        :isLoading="isLoading"
+        :isLoading="state.isLoading"
         customClasses="btn btn-primary btn-block px-4"
         :loadingText="$t('auth.loginEvent')"
       >
-        {{ $t('auth.login') }}
+        {{ $t("auth.login") }}
       </app-button>
-    </v-form>
+    </Form>
   </auth-layout>
 </template>
-
-<script>
-import AuthLayout from './layouts/authentication.vue'
-import AppButton from '@core/components/AppButton.vue'
-import { Field, Form, ErrorMessage } from 'vee-validate'
-import * as yup from 'yup'
-import { router } from '@inertiajs/vue3'
-
-export default {
-  props: ['errors'],
-  components: {
-    AuthLayout,
-    AppButton,
-    VField: Field,
-    VForm: Form,
-    VErrorMessage: ErrorMessage,
-  },
-  data() {
-    return {
-      showPassword: false,
-      isLoading: false,
-    }
-  },
-  methods: {
-    toggleShowPassword() {
-      this.showPassword = !this.showPassword
-    },
-
-    onSubmit(values) {
-      this.isLoading = true
-      router.post('/auth/login', values, {
-        onFinish: () => {
-          this.isLoading = false
-        },
-      })
-    },
-  },
-
-  computed: {
-    schema() {
-      return {
-        username: yup.string().required().email(),
-        password: yup.string().required().min(8),
-      }
-    },
-  },
-}
-</script>

@@ -1,49 +1,21 @@
-<template>
-  <div class="auth d-flex align-items-center justify-content-center">
-    <div class="card p-4">
-      <div class="card-body h-100">
-        <h1 class="titulo mb-1">{{ headers.appName }}</h1>
-        <h5 class="mt-1 text-center text-muted">
-          {{ headers.appDescription }}
-        </h5>
-        <main class="position-relative overflow-hidden">
-          <div class="alert alert-danger fade show" v-if="$page.props.errors && $page.props.errors.invalid_credentials" role="alert">
-            {{
-              $page.props.errors.invalid_credentials
-            }}
-          </div>
-          <div class="alert alert-success fade show" v-if="$page.props.success" role="alert">
-            {{ $page.props.success }}
-          </div>
-          <slot></slot>
-        </main>
-      </div>
-      <app-footer center-text />
-    </div>
-  </div>
-</template>
+<script setup>
+import { computed } from 'vue'
+import { usePage } from '@inertiajs/vue3'
 
-<script>
 import AppFooter from '@core/components/Footer.vue'
-export default {
-  components: {
-    AppFooter,
-  },
-  computed: {
-    headers() {
-      return {
-        appName: this.$page.props.header.appName,
-        appDescription: this.$page.props.header.appDescription,
-      }
-    },
-  },
-}
+
+const headers = computed(() => usePage().props.headers)
+const messages = computed(() => ({
+  errors: usePage().props.errors,
+  success: usePage().props.success
+}))
+
 </script>
 
 <style scoped>
-.titulo {
+.title {
   text-align: center;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 h5 {
@@ -68,9 +40,34 @@ main {
 }
 </style>
 
-<style>
-.input-login:focus {
-  box-shadow: none !important;
-  border-color: rgba(135, 150, 165, 0.15) !important;
-}
-</style>
+<template>
+  <div class="auth d-flex align-items-center justify-content-center">
+    <div class="card p-4">
+      <div class="card-body h-100">
+        <h1 class="title mb-1">{{ headers.appName }}</h1>
+        <h5 class="mt-1 text-center text-muted">
+          {{ headers.appDescription }}
+        </h5>
+        <main class="position-relative overflow-hidden">
+          {{ $page.props.errors }}
+          <div
+            class="alert alert-danger fade show"
+            v-if="messages.errors && messages.errors.invalid_credentials"
+            role="alert"
+          >
+            {{ messages.errors.invalid_credentials }}
+          </div>
+          <div
+            class="alert alert-success fade show"
+            v-if="messages.success"
+            role="alert"
+          >
+            {{ messages.success }}
+          </div>
+          <slot></slot>
+        </main>
+      </div>
+      <app-footer center-text />
+    </div>
+  </div>
+</template>

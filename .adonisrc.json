@@ -15,6 +15,10 @@
   },
   "preloads": [
     {
+      "file": "./start/inertia",
+      "environment": ["web"]
+    },
+    {
       "file": "./start/install-packages",
       "environment": ["web"]
     },
@@ -28,10 +32,7 @@
     },
     "./start/routes",
     "./start/kernel",
-    {
-      "file": "./start/inertia",
-      "environment": ["web"]
-    },
+
     "./start/bull"
   ],
   "providers": [

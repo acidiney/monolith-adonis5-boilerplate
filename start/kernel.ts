@@ -22,10 +22,10 @@ import Server from '@ioc:Adonis/Core/Server'
 */
 Server.middleware.register([
   () => import('@ioc:Adonis/Core/BodyParser'),
-  () => import('@ioc:EidelLev/Inertia/Middleware'),
   () => import('app/infra/middlewares/silent-auth'),
   () => import('app/infra/middlewares/detect-user-locale'),
   () => import('app/infra/middlewares/application-middleware'),
+  () => import('@ioc:EidelLev/Inertia/Middleware'),
 ])
 
 /*

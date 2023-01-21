@@ -11,16 +11,11 @@
     "outDir": "build",
     "rootDir": "./",
     "sourceMap": true,
+    "allowJs": true,
     "paths": {
-      "app/*": [
-        "./app/*"
-      ],
-      "config/*": [
-        "./config/*"
-      ],
-      "@core/*": [
-        "./resources/js/core/*"
-      ]
+      "app/*": ["./app/*"],
+      "config/*": ["./config/*"],
+      "@core/*": ["./resources/js/core/*"]
     },
     "types": [
       "@adonisjs/core",

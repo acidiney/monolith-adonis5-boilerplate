@@ -12,6 +12,6 @@ export default class MenuMiddleware {
       })
     }
 
-    next()
+    await next()
   }
 }
