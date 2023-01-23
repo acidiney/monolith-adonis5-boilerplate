@@ -1,5 +1,57 @@
 {
   "commands": {
+    "addon:install": {
+      "settings": {
+        "loadApp": true,
+        "stayAlive": false
+      },
+      "commandPath": "./commands/addon-Install",
+      "commandName": "addon:install",
+      "description": "Install a addon",
+      "args": [
+        {
+          "type": "string",
+          "propertyName": "packageName",
+          "name": "packageName",
+          "required": true,
+          "description": "package-name"
+        }
+      ],
+      "aliases": [],
+      "flags": []
+    },
+    "addon:install:deps": {
+      "settings": {
+        "loadApp": false,
+        "stayAlive": false
+      },
+      "commandPath": "./commands/addon-install-dependencies",
+      "commandName": "addon:install:deps",
+      "description": "Install all packages deps",
+      "args": [],
+      "aliases": [],
+      "flags": []
+    },
+    "addon:update": {
+      "settings": {
+        "loadApp": true,
+        "stayAlive": false
+      },
+      "commandPath": "./commands/addon-update",
+      "commandName": "addon:update",
+      "description": "Update a package",
+      "args": [
+        {
+          "type": "string",
+          "propertyName": "packageName",
+          "name": "packageName",
+          "required": true,
+          "description": "package-name"
+        }
+      ],
+      "aliases": [],
+      "flags": []
+    },
     "db:sync": {
       "settings": {
         "loadApp": true,

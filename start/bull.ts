@@ -8,14 +8,14 @@
 |
 */
 
+import getPort from 'get-port'
 import Bull from '@ioc:Rocketseat/Bull'
-import Env from '@ioc:Adonis/Core/Env'
+import Application from '@ioc:Adonis/Core/Application'
 
-const PORT = 9999
-const isDevelopment = Env.get('NODE_ENV') === 'development'
+getPort({ port: 9999 }).then((port) => {
+  Bull.process()
 
-Bull.process()
-
-if (isDevelopment) {
-  Bull.ui(PORT)
-}
+  if (Application.inDev) {
+    Bull.ui(port)
+  }
+})

@@ -19,10 +19,6 @@
       "environment": ["web"]
     },
     {
-      "file": "./start/install-packages",
-      "environment": ["web"]
-    },
-    {
       "file": "./start/sentry",
       "environment": ["web"]
     },

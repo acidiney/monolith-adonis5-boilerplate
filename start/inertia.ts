@@ -21,12 +21,12 @@ Inertia.share({
         ],
       },
       {
-        display: 'Common',
+        display: 'First-Package',
         isGroup: true,
         children: [
           {
-            display: 'Novo modulo',
-            url: '/admin/account/file/welcome',
+            display: 'Welcome',
+            url: '/admin/account/first-package',
           },
         ],
       },

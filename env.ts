@@ -32,4 +32,5 @@ export default Env.rules({
   BULL_REDIS_HOST: Env.schema.string({ format: 'host' }),
   BULL_REDIS_PORT: Env.schema.number.optional(),
   BULL_REDIS_PASSWORD: Env.schema.string.optional(),
+  BASE_PACKAGE_URL: Env.schema.string({ format: 'url' }),
 })

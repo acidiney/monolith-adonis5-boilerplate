@@ -1,7 +1,7 @@
 import Application from '@ioc:Adonis/Core/Application'
 import { BaseCommand } from '@adonisjs/core/build/standalone'
 import * as lodash from 'lodash'
-import { resolve, join } from 'path'
+import { resolve } from 'path'
 
 export default class SeedSyncCommand extends BaseCommand {
   /**
@@ -29,7 +29,7 @@ export default class SeedSyncCommand extends BaseCommand {
   }
 
   public async run () {
-    const { loadContext, execCommand } = await import('app/infra/utils')
+    const { loadContext, execCommand } = await import('../app/infra/utils')
     const { DbSyncModel } = await import('app/infra/models/db-sync-model')
 
     const executedSeeds = await (await DbSyncModel.all()).map((seed) => seed.seedName)
