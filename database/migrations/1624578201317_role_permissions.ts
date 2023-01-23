@@ -1,20 +1,15 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
-export default class Permissions extends BaseSchema {
-  protected tableName = 'permissions'
+export default class RolePermissions extends BaseSchema {
+  protected tableName = 'role_permissions'
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table.charset('utf8')
-      table.collate('utf8_general_ci')
-
       table.string('id').unique().primary()
-      table.string('slug').notNullable().unique()
-      table.string('name').notNullable()
-      table.text('description').nullable()
-      table.text('group_permissions').notNullable()
-      table.enum('source', ['all', 'support', 'operator']).defaultTo('support')
-
+      table.string('permission_id').index()
+      table.foreign('permission_id').references('id').inTable('permissions').onDelete('cascade')
+      table.string('role_id').index()
+      table.foreign('role_id').references('id').inTable('roles').onDelete('cascade')
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */

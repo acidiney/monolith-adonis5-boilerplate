@@ -47,6 +47,7 @@ const databaseConfig: DatabaseConfig = {
     mysql: {
       client: 'mysql2',
       connection: {
+        charset: 'utf8',
         host: Env.get('MYSQL_HOST'),
         port: Env.get('MYSQL_PORT'),
         user: Env.get('MYSQL_USER'),

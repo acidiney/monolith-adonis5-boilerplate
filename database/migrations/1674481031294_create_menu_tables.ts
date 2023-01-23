@@ -1,19 +1,21 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
-export default class Roles extends BaseSchema {
-  protected tableName = 'roles'
+export default class Menus extends BaseSchema {
+  protected tableName = 'menus'
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table.charset('utf8')
-      table.collate('utf8_general_ci')
-
       table.string('id').unique().primary()
-      table.string('slug').notNullable().unique()
       table.string('name').notNullable()
-      table.text('description').nullable()
-      table.boolean('system').defaultTo(false)
-      table.string('created_by_user').references('id').inTable('users')
+      table.string('url').notNullable()
+      table.string('icon').nullable()
+      table.string('permission_id').nullable()
+      table.string('belongs_to').nullable()
+      table.boolean('is_group').defaultTo(false)
+      table.string('group_name').nullable()
+      table.integer('order')
+
+      table.foreign('permission_id').references('id').inTable('permissions')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

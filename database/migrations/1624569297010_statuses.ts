@@ -5,9 +5,6 @@ export default class Roles extends BaseSchema {
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table.charset('utf8')
-      table.collate('utf8_general_ci')
-
       table.string('id').unique().primary()
       table.string('key').notNullable()
       /**

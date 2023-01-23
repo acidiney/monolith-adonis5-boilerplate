@@ -1,12 +1,16 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
-export default class AdonisSeeds extends BaseSchema {
-  protected tableName = 'internal_db_sync'
+export default class Roles extends BaseSchema {
+  protected tableName = 'roles'
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.string('id').unique().primary()
-      table.string('seed_name').unique().notNullable()
+      table.string('slug').notNullable().unique()
+      table.string('name').notNullable()
+      table.text('description').nullable()
+      table.boolean('system').defaultTo(false)
+      table.string('created_by_user').references('id').inTable('users')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
