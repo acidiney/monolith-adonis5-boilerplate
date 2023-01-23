@@ -6,7 +6,6 @@ coverage
 .env
 tmp
 docker/data
-app/modules/addons/**/*.ts
-app/modules/addons/**/*.json
+app/modules/addons/**/*
 resources/lang/*.json
 resources/js/i18n/*.json
