@@ -13,7 +13,7 @@ export default class UsersSchema extends BaseSchema {
       table.boolean('force_change_password').defaultTo(true)
       table.string('remember_me_token').nullable()
       table.string('status_id').index()
-      table.datetime('last_login').notNullable()
+      table.datetime('last_login').nullable()
       table.foreign('status_id').references('id').inTable('statuses').onDelete('cascade')
 
       table.unique(['id', 'status_id'])
