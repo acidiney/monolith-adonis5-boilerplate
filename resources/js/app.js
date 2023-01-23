@@ -23,7 +23,7 @@ const i18n = createI18n({
 
 createInertiaApp({
   progress: {
-    color: '##448bff',
+    color: '#448bff',
   },
   resolve: (name) => import(`../../app/modules/${name}.vue`),
   setup ({ el, App, props, plugin }) {

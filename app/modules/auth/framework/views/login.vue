@@ -45,7 +45,7 @@ const errors = computed(() => usePage().props.errors)
 <template>
   <auth-layout>
     <Form @submit="onSubmit" :validation-schema="schema">
-      <label for="username">{{ $t("auth.field_email") }}</label>
+      <label for="username">{{ $t("auth.frontend.field_email") }}</label>
 
       <div class="input-group flex bg-light rounded">
         <Field class="form-control" name="username" id="username" />
@@ -63,7 +63,7 @@ const errors = computed(() => usePage().props.errors)
         </template>
       </div>
 
-      <label for="password" class="mt-3">{{ $t("auth.field_password") }}</label>
+      <label for="password" class="mt-3">{{ $t("auth.frontend.field_password") }}</label>
       <div class="input-group bg-light rounded flex w-100">
         <Field
           name="password"
@@ -89,7 +89,7 @@ const errors = computed(() => usePage().props.errors)
 
       <div class="animate-slide-in-link mt-3" style="margin-bottom: 19px">
         <router-link href="/auth/reset/password" class="cursor-pointer">{{
-          $t("auth.forgotPassword")
+  $t("auth.frontend.forget_password_link")
         }}</router-link>
       </div>
 
@@ -97,9 +97,9 @@ const errors = computed(() => usePage().props.errors)
         type="submit"
         :isLoading="state.isLoading"
         customClasses="btn btn-primary btn-block px-4"
-        :loadingText="$t('auth.loginEvent')"
+        :loadingText="$t('auth.frontend.login_event')"
       >
-        {{ $t("auth.login") }}
+        {{ $t("auth.frontend.login") }}
       </app-button>
     </Form>
   </auth-layout>

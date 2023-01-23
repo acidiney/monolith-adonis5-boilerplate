@@ -37,7 +37,7 @@ const i18nConfig: I18nConfig = {
   | is not supported by the your app
   |
   */
-  defaultLocale: 'en',
+  defaultLocale: 'pt',
 
   /*
   |--------------------------------------------------------------------------

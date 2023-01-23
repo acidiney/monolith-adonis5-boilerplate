@@ -1,13 +1,13 @@
 <template>
   <li>
     <template v-if="!item.children">
-      <inertia-link
+      <router-link
         :href="item.url"
         :class="{ 'text-primary': $inertia.page.url === item.url  }"
       >
         <span class="nav-icon" v-if="item.icon"><i :data-feather="item.icon"></i></span>
         <span class="nav-text">{{ item.display }}</span>
-      </inertia-link>
+      </router-link>
     </template>
     <template v-else>
       <a class="active">

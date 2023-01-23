@@ -1,6 +1,7 @@
 {
   "assets/app.css": "http://localhost:8080/assets/app.css",
   "assets/app.js": "http://localhost:8080/assets/app.js",
+  "assets/app_modules_addons_file_framework_views_welcome_vue.js": "http://localhost:8080/assets/app_modules_addons_file_framework_views_welcome_vue.js",
   "assets/app_modules_admin_common_framework_views_dashboard_vue.js": "http://localhost:8080/assets/app_modules_admin_common_framework_views_dashboard_vue.js",
   "assets/app_modules_admin_common_framework_views_errors_vue.js": "http://localhost:8080/assets/app_modules_admin_common_framework_views_errors_vue.js",
   "assets/app_modules_admin_common_framework_views_profile_vue.js": "http://localhost:8080/assets/app_modules_admin_common_framework_views_profile_vue.js",
@@ -13,9 +14,7 @@
   "assets/app_modules_auth_framework_views_reset-password_vue.js": "http://localhost:8080/assets/app_modules_auth_framework_views_reset-password_vue.js",
   "assets/app_modules_auth_framework_views_send-reset-password-link_vue.css": "http://localhost:8080/assets/app_modules_auth_framework_views_send-reset-password-link_vue.css",
   "assets/app_modules_auth_framework_views_send-reset-password-link_vue.js": "http://localhost:8080/assets/app_modules_auth_framework_views_send-reset-password-link_vue.js",
-  "assets/vendors-node_modules_yup_es_index_js.js": "http://localhost:8080/assets/vendors-node_modules_yup_es_index_js.js",
-  "assets/vendors-node_modules_inertiajs_inertia_dist_index_js.js": "http://localhost:8080/assets/vendors-node_modules_inertiajs_inertia_dist_index_js.js",
-  "assets/vendors-node_modules_mini-css-extract-plugin_dist_hmr_hotModuleReplacement_js-node_modules_ve-efbfde.js": "http://localhost:8080/assets/vendors-node_modules_mini-css-extract-plugin_dist_hmr_hotModuleReplacement_js-node_modules_ve-efbfde.js",
   "assets/vendors-node_modules_vee-validate_dist_vee-validate_esm_js-node_modules_yup_es_index_js.js": "http://localhost:8080/assets/vendors-node_modules_vee-validate_dist_vee-validate_esm_js-node_modules_yup_es_index_js.js",
+  "assets/vendors-node_modules_inertiajs_inertia_dist_index_js.js": "http://localhost:8080/assets/vendors-node_modules_inertiajs_inertia_dist_index_js.js",
   "assets/vendors-node_modules_mini-css-extract-plugin_dist_hmr_hotModuleReplacement_js-node_modules_vu-28b4c1.js": "http://localhost:8080/assets/vendors-node_modules_mini-css-extract-plugin_dist_hmr_hotModuleReplacement_js-node_modules_vu-28b4c1.js"
 }

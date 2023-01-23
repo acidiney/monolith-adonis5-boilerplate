@@ -15,7 +15,7 @@
   },
   "preloads": [
     {
-      "file": "./start/inertia",
+      "file": "./start/i18n",
       "environment": ["web"]
     },
     {
@@ -27,7 +27,7 @@
       "environment": ["web"]
     },
     {
-      "file": "./start/i18n",
+      "file": "./start/inertia",
       "environment": ["web"]
     },
     "./start/routes",
