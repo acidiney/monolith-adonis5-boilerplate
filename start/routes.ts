@@ -25,5 +25,5 @@ Route.get('/', ({ auth, response }) => {
     return response.redirect('auth')
   }
 
-  return response.redirect('admin/account')
+  return response.redirect('account')
 })

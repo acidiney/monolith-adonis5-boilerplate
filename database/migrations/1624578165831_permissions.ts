@@ -6,10 +6,9 @@ export default class Permissions extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.string('id').unique().primary()
-      table.string('slug').notNullable().unique()
       table.string('name').notNullable()
       table.text('description').nullable()
-      table.text('group_permissions').notNullable()
+      table.text('group').notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

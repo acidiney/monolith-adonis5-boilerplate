@@ -11,7 +11,7 @@ export class SignInController {
       await auth.use('web').attempt(username, password)
 
       logger.info(username + ' - ' + i18n.formatMessage('auth.login.success'))
-      return response.redirect('/admin/account/dashboard')
+      return response.redirect('/account/dashboard')
     } catch (e) {
       session.flash('errors', {
         invalid_credentials: i18n.formatMessage('auth.login.failed'),

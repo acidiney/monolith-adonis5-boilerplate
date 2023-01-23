@@ -21,6 +21,9 @@ export class UserModel extends BaseModel {
   @column()
   public email: string
 
+  @column({ columnName: 'role_id' })
+  public roleId: string
+
   @column()
   public forceChangePassword?: boolean
 

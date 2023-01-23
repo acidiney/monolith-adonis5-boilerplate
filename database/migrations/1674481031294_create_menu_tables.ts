@@ -7,6 +7,7 @@ export default class Menus extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.string('id').unique().primary()
       table.string('name').notNullable()
+      table.string('slug').notNullable()
       table.string('url').notNullable()
       table.string('icon').nullable()
       table.string('permission_id').nullable()
