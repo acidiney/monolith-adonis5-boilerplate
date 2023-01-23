@@ -9,9 +9,14 @@ export default class AssociateRoleWithPermissionSeed extends BaseSeeder {
       throw new Error('Role "root" not found!')
     }
 
+    await RolePermissionModel
+      .query()
+      .where({ roleId: role.id })
+      .delete()
+
     const permissions = await PermissionModel.all()
 
-    await RolePermissionModel.fetchOrCreateMany(['permissionId', 'roleId'],
+    await RolePermissionModel.createMany(
       permissions.map(p => ({
         permissionId: p.id,
         roleId: role.id,
