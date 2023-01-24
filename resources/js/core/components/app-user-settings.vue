@@ -17,13 +17,15 @@
         <span>{{ $page.props.user.fullName }}</span>
       </a>
       <div class="dropdown-divider"></div>
-      <inertia-link class="dropdown-item" href="/admin/account/profile">
-        <span>Meu perfil</span>
-      </inertia-link>
-      <inertia-link class="dropdown-item" href="/admin/account/settings">
-        <span>Configurações da conta</span>
-      </inertia-link>
-      <a class="dropdown-item" @click="useLogout">Terminar sessão</a>
+      <router-link class="dropdown-item" href="/account/profile">
+        <span>{{ $t('menu.user.profile') }}</span>
+      </router-link>
+      <router-link class="dropdown-item" href="/account/settings">
+        <span>{{ $t('menu.user.settings') }}</span>
+      </router-link>
+      <a class="dropdown-item" @click="useLogout">
+      {{ $t('shared.logout') }}
+    </a>
     </div>
   </li>
 </template>

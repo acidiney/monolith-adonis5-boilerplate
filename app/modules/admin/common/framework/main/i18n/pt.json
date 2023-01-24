@@ -1,5 +1,8 @@
 {
   "menu.main": "Main",
   "menu.main.dashboard": "Menu Inicial",
-  "menu.settings": "Configurações"
+  "menu.settings": "Configurações",
+  "shared.logout": "Terminar sessão",
+  "menu.user.profile": "Meu perfil",
+  "menu.user.settings": "Configurações"
 }
