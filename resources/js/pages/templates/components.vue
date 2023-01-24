@@ -11,7 +11,7 @@
   </account-layout>
 </template>
 <script>
-import AppTable from '../../core/components/AppTable.vue'
+import AppTable from '../../core/components/app-table.vue'
 export default {
   components: {
     AppTable,

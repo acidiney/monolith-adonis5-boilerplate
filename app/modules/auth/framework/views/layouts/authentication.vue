@@ -1,8 +1,8 @@
 <script setup>
 import { computed } from 'vue'
 import { usePage } from '@inertiajs/vue3'
-
-import AppFooter from '@core/components/Footer.vue'
+import { Head } from '@inertiajs/vue3'
+import AppFooter from '@core/components/app-footer.vue'
 
 const headers = computed(() => usePage().props.headers)
 const messages = computed(() => ({
@@ -41,6 +41,7 @@ main {
 </style>
 
 <template>
+  <Head :title="$page.props.headers.appName"/>
   <div class="auth d-flex align-items-center justify-content-center">
     <div class="card p-4">
       <div class="card-body h-100">

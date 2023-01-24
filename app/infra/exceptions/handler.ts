@@ -34,6 +34,8 @@ export default class ExceptionHandler extends HttpExceptionHandler {
   // }
 
   public async report (error) {
-    Sentry.captureException(error)
+    if (!['E_ROUTE_NOT_FOUND', 'E_UNAUTHORIZED_ACCESS'].includes(error.code)) {
+      await Sentry.captureException(error)
+    }
   }
 }

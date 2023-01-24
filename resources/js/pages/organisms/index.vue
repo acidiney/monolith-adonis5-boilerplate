@@ -47,7 +47,7 @@
 </template>
 <script>
 import { ref, watch, inject } from 'vue'
-import AppFilter from '../../core/components/AppFilter.vue'
+import AppFilter from '../../core/components/app-filter.vue'
 import AppDropdown from './components/AppDropdown.vue'
 import { Inertia } from '@inertiajs/inertia'
 import { filter } from 'lodash'

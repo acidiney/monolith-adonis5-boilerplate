@@ -48,9 +48,9 @@
 </template>
 
 <script>
-import AppUserSettings from './AppUserSettings.vue'
-import AppNotifications from './AppNotification.vue'
-import AppCustomApplicationSettings from './AppCustomApplicationSettings.vue'
+import AppUserSettings from './app-user-settings.vue'
+import AppNotifications from './app-notification.vue'
+import AppCustomApplicationSettings from './app-custom-application-settings.vue'
 export default {
   props: ['user'],
   components: {

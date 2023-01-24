@@ -1,4 +1,5 @@
 <template>
+  <Head :title="$page.props.headers.appName" />
   <div class="alert alert-danger mb-0" v-if="$page.props.errors" role="alert">
     {{ $page.props.errors }}
   </div>
@@ -18,33 +19,23 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { onMounted, ref, nextTick } from "vue";
+import { Head } from "@inertiajs/vue3";
+import AppHeader from "../core/components/app-header.vue";
+import AppFooter from "../core/components/app-footer.vue";
+import AppSidebar from "../core/components/app-sidebar.vue";
 
-import AppHeader from '../core/components/Header.vue'
-import AppFooter from '../core/components/Footer.vue'
-import AppSidebar from '../core/components/Sidebar.vue'
+const animate = ref(false);
+onMounted(() => {
+  animate.value = true;
 
-export default {
-  components: {
-    AppHeader,
-    AppFooter,
-    AppSidebar,
-  },
-  data() {
-    return {
-      animate: false,
+  nextTick(() => {
+    if (window.initTheme) {
+      window.initTheme();
     }
-  },
-  mounted() {
-    this.animate = true
-
-    this.$nextTick(() => {
-      if (window.initTheme) {
-        window.initTheme()
-      }
-    })
-  },
-}
+  });
+});
 </script>
 
 <style scoped>

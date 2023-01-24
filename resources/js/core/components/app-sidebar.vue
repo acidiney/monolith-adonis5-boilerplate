@@ -20,5 +20,5 @@
 </template>
 
 <script setup>
-import AppSidebarGroup from './SidebarGroup.vue'
+import AppSidebarGroup from './app-sidebar-group.vue'
 </script>

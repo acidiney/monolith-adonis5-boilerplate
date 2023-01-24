@@ -11,7 +11,7 @@
 </template>
 <script>
 import Pagination from 'v-pagination-3'
-import CustomPagination from './CustomPagination.vue'
+import CustomPagination from './app-custom-pagination.vue'
 
 export default {
   props: {

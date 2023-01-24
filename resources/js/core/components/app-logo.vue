@@ -1,5 +1,5 @@
 <template>
-  <router-link href="/admin/account" :class="['navbar-brand', { 'd-lg-none': !isSidebar }]">
+  <router-link href="/account" :class="['navbar-brand', { 'd-lg-none': !isSidebar }]">
     <svg
       width="32"
       height="32"
@@ -13,8 +13,7 @@
         ></path>
       </g>
     </svg>
-    <!-- <img src="/vendor/img/logo.png" alt="..."> -->
-    <span :class="['hidden-folded d-inline l-s-n-1x', { 'd-lg-none': !isSidebar }]" >Órion</span>
+    <span :class="['hidden-folded d-inline l-s-n-1x', { 'd-lg-none': !isSidebar }]" >{{ $page.props.headers.appName }}</span>
   </router-link>
 </template>
 

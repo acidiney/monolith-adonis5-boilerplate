@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import AppAsideContent from '../../core/components/AppAsideContent.vue'
-import AppRightWorkstation from '../../core/components/AppRightWorkstation.vue'
+import AppAsideContent from '../../core/components/app-aside-content.vue'
+import AppRightWorkstation from '../../core/components/app-right-workstation.vue'
 
 export default {
   components: {

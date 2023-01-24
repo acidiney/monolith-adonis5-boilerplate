@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import AppAsideContentItem from './AppAsideContentItem.vue'
+import AppAsideContentItem from './app-aside-content-item.vue'
 
 export default {
   props: {

@@ -1,5 +1,5 @@
 <template>
-  <v-feather
+    <v-feather
     v-bind="{
       type: icon,
       size,

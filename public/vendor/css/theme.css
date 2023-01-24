@@ -6,10 +6,10 @@
 4. Material Design style
 -------------------------------------------------------------------*/
 /*---------------------------
-1. Bootstrap Extension 
+1. Bootstrap Extension
 ---------------------------*/
 /*
-Base 
+Base
 */
 html {
   background: #f9f9fa; }
@@ -81,7 +81,7 @@ Alert
     color: inherit; }
 
 /*
-badge 
+badge
 */
 .badge-up {
   padding: 0 0.25rem;
@@ -135,7 +135,7 @@ badge
   padding: 0.75em 1em; }
 
 /*
-Buttons 
+Buttons
 */
 .btn {
   font-weight: 500;
@@ -358,7 +358,7 @@ Card
   opacity: 0.8; }
 
 /*
-Carousel 
+Carousel
 */
 .carousel-indicators li {
   width: 5px;
@@ -386,7 +386,7 @@ Carousel
   opacity: 0; }
 
 /*
-Dropdown menu 
+Dropdown menu
 */
 .dropdown-menu {
   border-radius: 3px;
@@ -460,7 +460,7 @@ Dropdown menu
   color: #5e676f; }
 
 /*
-Form 
+Form
 */
 .form-control {
   border-color: rgba(135, 150, 165, 0.15);
@@ -544,7 +544,7 @@ input:checked + .active-checked {
   opacity: 1; }
 
 /*
-List Group 
+List Group
 */
 .list-group {
   border-radius: 3px;
@@ -616,7 +616,7 @@ a.list-group-item {
     background-color: rgba(135, 150, 165, 0.1); }
 
 /*
-Modal 
+Modal
 */
 .modal.fade .modal-left,
 .modal.fade .modal-right,
@@ -686,7 +686,7 @@ Modal
   float: none; }
 
 /*
-Modal animation 
+Modal animation
 */
 .modal .modal-dialog {
   transform: translate(0, 0); }
@@ -720,7 +720,7 @@ Modal animation
   animation: fadeInDown 0.5s; }
 
 /*
-Nav 
+Nav
 */
 .nav {
   border: inherit; }
@@ -823,7 +823,7 @@ Nav
   top: 0; }
 
 /*
-Navbar 
+Navbar
 */
 .navbar {
   min-height: 3.75rem;
@@ -889,7 +889,7 @@ Navbar
   align-items: center; }
 
 /*
-pagination 
+pagination
 */
 .pagination a {
   padding: .5rem .75rem;
@@ -949,7 +949,7 @@ Popover
   opacity: 0.15; }
 
 /*
-Progress 
+Progress
 */
 .progress {
   border-radius: .25rem;
@@ -965,7 +965,7 @@ Progress
   transition: width .6s ease; }
 
 /*
-Row 
+Row
 */
 .padding {
   padding: 2rem; }
@@ -1022,7 +1022,7 @@ Row
     padding: 1rem; } }
 
 /*
-Table 
+Table
 */
 .table > thead > tr > th {
   border-width: 0; }
@@ -1256,7 +1256,7 @@ animate
   animation-name: fadeInDown; }
 
 /*
-Aside 
+Aside
 */
 .aside {
   opacity: 1 !important;
@@ -2696,8 +2696,8 @@ Nav
     max-height: 20px; }
     .nav-icon i svg,
     .nav-icon i img {
-      display: none;
-      position: absolute;
+      /* display: none; */
+      /* position: absolute; */
       left: 0;
       top: 0;
       width: 100%;

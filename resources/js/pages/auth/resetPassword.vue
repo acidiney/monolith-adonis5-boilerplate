@@ -51,7 +51,7 @@
 
 <script>
 import AuthLayout from '../../layout/authentication.vue'
-import AppButton from '../../core/components/AppButton.vue'
+import AppButton from '../../core/components/app-button.vue'
 import { Field, Form, ErrorMessage } from 'vee-validate'
 import { Inertia } from '@inertiajs/inertia'
 

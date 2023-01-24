@@ -50,8 +50,8 @@
   </div>
 </template>
 <script>
-import AppStatus from './AppStatus.vue'
-import AppPaginate from './AppPaginate.vue'
+import AppStatus from './app-status.vue'
+import AppPaginate from './app-paginate.vue'
 export default {
   props: {
     columns: {

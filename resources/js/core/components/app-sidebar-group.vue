@@ -12,7 +12,7 @@
   </template>
 </template>
 <script>
-import AppSidebarItem from './SidebarItem.vue'
+import AppSidebarItem from './app-sidebar-item.vue'
 
 export default {
   props: ['menus'],

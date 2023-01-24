@@ -5,7 +5,9 @@
         :href="item.url"
         :class="{ 'text-primary': $inertia.page.url === item.url  }"
       >
-        <span class="nav-icon" v-if="item.icon"><i :data-feather="item.icon"></i></span>
+      <span class="nav-icon" v-if="item.icon">
+        <app-icon :icon="item.icon"/>
+      </span>
         <span class="nav-text">{{ $t(item.display) }}</span>
       </router-link>
     </template>
