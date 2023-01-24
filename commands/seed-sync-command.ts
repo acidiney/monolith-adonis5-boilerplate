@@ -46,11 +46,11 @@ export default class SeedSyncCommand extends BaseCommand {
 
           const seedNames = [...baseSeeders.keys()
             .map((k) => {
-              return `./database${k.split('database')[1]}`
+              return k.replace(Application.appRoot, '.')
             }),
           ...modulesSeeders.keys()
             .map((k) => {
-              return `./app${k.split('app')[1]}`
+              return k.replace(Application.appRoot, '.')
             })
             ,
           ]
