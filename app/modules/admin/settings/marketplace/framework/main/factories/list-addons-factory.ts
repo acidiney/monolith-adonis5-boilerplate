@@ -1,3 +1,4 @@
+import { CompareAddonsRepositoryImpl } from './../../infra/db/repositories/compare-addons-repository-impl'
 import { AddonServiceImpl } from 'app/infra/services/addon-service-impl'
 import { HttpClientAdapterImpl } from 'app/infra/adapters/http-client-adapter-impl'
 
@@ -12,7 +13,8 @@ export const makeListAddonsControllerFactory = (): ListAddonsController => {
         new AddonServiceImpl(
           new HttpClientAdapterImpl()
         )
-      )
+      ),
+      new CompareAddonsRepositoryImpl()
     )
   )
 }

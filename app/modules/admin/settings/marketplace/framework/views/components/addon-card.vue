@@ -5,8 +5,9 @@ import { router } from '@inertiajs/vue3'
 
 const props = defineProps({
   name: String,
-  version: String,
-  currentVersion: String,
+  version: Number,
+  canInstall: Boolean,
+  update: Boolean,
   description: String,
   url: String,
   image: String,
@@ -15,23 +16,24 @@ const props = defineProps({
 const { t } = useI18n()
 
 function loadInstallText () {
-  if (!props.currentVersion) {
+  if (props.canInstall) {
     return t('marketplace.addon.install')
   }
 
-  if (currentVersion === version) {
-    return $t('marketplace.addon.installed')
+  if (props.update) {
+    return t('markeplace.addon.update')
   }
 
-  return $t('markeplace.addon.update')
+  return t('marketplace.addon.installed')
 }
 
 const isLoading = ref(false)
 
-function installOrUpdatePackage (addonName) {
+function installOrUpdatePackage (addonName, version) {
   isLoading.value = true
   router.post('/admin/settings/marketplace/addon/install', {
-    addonName
+    addonName,
+    version
   }, {
     onFinish: () => {
       isLoading.value = false
@@ -65,13 +67,13 @@ function installOrUpdatePackage (addonName) {
     <div class="card-footer">
       <app-button
         type="button"
-        @click="installOrUpdatePackage(name)"
-        :disabled="version === currentVersion"
+        @click="installOrUpdatePackage(name, version)"
+        :disabled="!canInstall"
         :is-loading="isLoading"
         :class="{
-          'btn-warning': version > currentVersion,
-          'btn-primary': version,
-          'btn-success': version === currentVersion,
+          'btn-warning': update,
+          'btn-primary': canInstall,
+          'btn-success': !canInstall,
         }"
       >
         {{ loadInstallText() }}

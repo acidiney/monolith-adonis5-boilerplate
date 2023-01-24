@@ -4,5 +4,7 @@ export interface Addon {
   version: Number,
   url: string
   description: string
+  canInstall?: boolean
+  update?: boolean
   requirements?: Addon[]
 }
