@@ -28,10 +28,10 @@ function loadInstallText () {
 
 const isLoading = ref(false)
 
-function installOrUpdatePackage (url) {
+function installOrUpdatePackage (addonName) {
   isLoading.value = true
-  router.post('/admin/marketplace/addon/install', {
-    packageUrl: url
+  router.post('/admin/settings/marketplace/addon/install', {
+    addonName
   }, {
     onFinish: () => {
       isLoading.value = false
@@ -65,7 +65,7 @@ function installOrUpdatePackage (url) {
     <div class="card-footer">
       <app-button
         type="button"
-        @click="installOrUpdatePackage(url)"
+        @click="installOrUpdatePackage(name)"
         :disabled="version === currentVersion"
         :is-loading="isLoading"
         :class="{
