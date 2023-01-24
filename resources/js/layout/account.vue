@@ -1,24 +1,3 @@
-<template>
-  <Head :title="$page.props.headers.appName" />
-  <div class="alert alert-danger mb-0" v-if="$page.props.errors" role="alert">
-    {{ $page.props.errors }}
-  </div>
-  <div class="layout-row">
-    <app-sidebar />
-    <div id="main" class="layout-column flex">
-      <app-header />
-      <div id="content" class="flex">
-        <transition name="slide-fade">
-          <template v-if="animate">
-            <slot></slot>
-          </template>
-        </transition>
-      </div>
-      <app-footer />
-    </div>
-  </div>
-</template>
-
 <script setup>
 import { onMounted, ref, nextTick } from "vue";
 import { Head } from "@inertiajs/vue3";
@@ -43,3 +22,33 @@ onMounted(() => {
   position: relative;
 }
 </style>
+
+<template>
+  <Head :title="$page.props.headers.appName" />
+  <div class="alert alert-danger mb-0" v-if="$page.props.errors" role="alert">
+    {{ $page.props.errors }}
+  </div>
+  <div class="layout-row">
+    <app-sidebar />
+    <div id="main" class="layout-column flex">
+      <app-header />
+      <div id="content" class="flex">
+        <transition name="slide-fade">
+          <template v-if="animate">
+            <div>
+              <slot name="header"></slot>
+
+            <div class="page-content page-container">
+              <div class="padding">
+                <slot name="body"></slot>
+              </div>
+            </div>
+            </div>
+          </template>
+        </transition>
+      </div>
+      <app-footer />
+    </div>
+  </div>
+</template>
+
