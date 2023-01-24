@@ -40,10 +40,6 @@ export default class AssociateRoleWithPermissionSeed extends BaseSeeder {
       },
       {
         roleId: role.id,
-        permissionId: 'admin-acl-modify-user',
-      },
-      {
-        roleId: role.id,
         permissionId: 'admin-acl-delete-user',
       },
       {

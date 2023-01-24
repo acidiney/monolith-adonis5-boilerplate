@@ -5,12 +5,12 @@ export default class InsertMarketplaceMenuSeed extends BaseSeeder {
   public async run () {
     await MenuModel
       .create({
-        display: 'menu.admin.setting.setup.addons',
-        slug: 'setup_addons',
-        url: '/admin/settings/marketplace',
-        icon: 'database',
-        order: 4,
-        permissionId: 'admin-view-marketplace',
+        display: 'menu.admin.setting.setup.application',
+        slug: 'setup_application',
+        url: '/admin/settings/application',
+        icon: 'table',
+        order: 3,
+        permissionId: 'admin-setup-application',
         belongsTo: 'group_settings',
       })
   }

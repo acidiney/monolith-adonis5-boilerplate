@@ -5,12 +5,6 @@ export default class InsertBasePermissionsSeed extends BaseSeeder {
   public async run () {
     await PermissionModel.fetchOrCreateMany('id', [
       {
-        id: 'admin-setup-application',
-        group: 'permission.group.admin.setup.application',
-        display: 'permission.setup.application',
-        description: 'permission.setup.application.description',
-      },
-      {
         id: 'view-dashboard',
         group: 'permission.group.common.main',
         display: 'permission.common.view.dashboard',

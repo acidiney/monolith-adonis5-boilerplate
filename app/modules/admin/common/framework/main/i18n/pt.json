@@ -1,1 +1,5 @@
-{}
+{
+  "menu.main": "Main",
+  "menu.main.dashboard": "Menu Inicial",
+  "menu.settings": "Configurações"
+}
