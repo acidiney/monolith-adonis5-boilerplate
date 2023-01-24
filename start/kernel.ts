@@ -25,6 +25,7 @@ Server.middleware.register([
   () => import('app/infra/middlewares/silent-auth'),
   () => import('app/infra/middlewares/detect-user-locale'),
   () => import('app/infra/middlewares/application-middleware'),
+  () => import('app/infra/middlewares/menu-middleware'),
   () => import('@ioc:EidelLev/Inertia/Middleware'),
 ])
 

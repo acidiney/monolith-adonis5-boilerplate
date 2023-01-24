@@ -46,12 +46,11 @@ export class UserModel extends BaseModel {
   public updatedAt: DateTime
 
   @hasOne(() => RoleModel)
-  @column({ columnName: 'role_id' })
   public role: HasOne<typeof RoleModel>
 
   @computed()
   public get fullName () {
-    return `${this.firstName} ${this.lastName}`
+    return `${this.firstName} ${this.lastName ?? ''}`
   }
 
   @beforeSave()

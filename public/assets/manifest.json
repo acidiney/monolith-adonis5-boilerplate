@@ -1,7 +1,6 @@
 {
   "assets/app.css": "http://localhost:8080/assets/app.css",
   "assets/app.js": "http://localhost:8080/assets/app.js",
-  "assets/app_modules_addons_first-package_framework_views_welcome_vue.js": "http://localhost:8080/assets/app_modules_addons_first-package_framework_views_welcome_vue.js",
   "assets/app_modules_admin_common_framework_views_dashboard_vue.js": "http://localhost:8080/assets/app_modules_admin_common_framework_views_dashboard_vue.js",
   "assets/app_modules_admin_common_framework_views_errors_vue.js": "http://localhost:8080/assets/app_modules_admin_common_framework_views_errors_vue.js",
   "assets/app_modules_admin_common_framework_views_profile_vue.js": "http://localhost:8080/assets/app_modules_admin_common_framework_views_profile_vue.js",

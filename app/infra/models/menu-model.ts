@@ -1,6 +1,14 @@
 import { cuid } from '@ioc:Adonis/Core/Helpers'
 import { BaseModel, beforeCreate, beforeFetch, column } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
+import { capitalize } from 'vue'
+
+export interface Menu {
+  display: string
+  url: string,
+  icon?: string,
+  children?: Menu[]
+}
 
 export class MenuModel extends BaseModel {
   public static table = 'menus'
@@ -50,5 +58,60 @@ export class MenuModel extends BaseModel {
   @beforeFetch()
   public static applyOrderBy (query) {
     query.orderBy('order', 'asc')
+  }
+
+  public static loadMenuBaseadInUserPermissions (permissions: string[]) {
+    return MenuModel.query()
+      .whereNull('permissionId')
+      .orWhereIn('permission_id', permissions)
+      .orderBy('order', 'asc')
+      .then((menus) => {
+        const principalMenus = menus.filter((menu) => !menu.belongsTo)
+
+        return principalMenus.map((menu) => {
+          const menuMapped = this.constructMenuMapped({
+            display: menu.display,
+            icon: menu.icon,
+            url: menu.url,
+            children: this.createSubMenuStructure(menus, menu.slug),
+          })
+          return menuMapped
+        })
+      })
+  }
+
+  private static constructMenuMapped (menu: Menu): Menu {
+    return {
+      display: menu.display,
+      url: menu.url,
+      icon: menu.icon,
+      children: menu.children,
+    }
+  }
+
+  private static createSubMenuStructure (originalMenuArray, belongsTo) {
+    let onlyBelongsToArray = originalMenuArray.filter(
+      (menu) => menu.belongsTo === belongsTo
+    )
+    onlyBelongsToArray = onlyBelongsToArray.sort((a, b) => (a > b ? -1 : 1))
+
+    if (!onlyBelongsToArray.length) {
+      return
+    }
+
+    const three: Menu[] = []
+
+    for (let subMenu of onlyBelongsToArray) {
+      three.push(
+        this.constructMenuMapped({
+          display: subMenu.display,
+          url: subMenu.url,
+          icon: subMenu.icon,
+          children: this.createSubMenuStructure(originalMenuArray, subMenu.slug),
+        })
+      )
+    }
+
+    return three
   }
 }
