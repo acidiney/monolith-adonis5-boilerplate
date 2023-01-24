@@ -6,7 +6,7 @@ const useLogout = () => {
 };
 </script>
 <template>
-  <account-layout>
+  <account-layout :title="$t('menu.settings')">
     <template v-slot:header>
       <app-page-hero
         :title="$t('menu.settings')"

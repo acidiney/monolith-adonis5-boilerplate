@@ -15,6 +15,10 @@ onMounted(() => {
     }
   });
 });
+
+defineProps({
+  title: String
+})
 </script>
 
 <style scoped>
@@ -24,7 +28,7 @@ onMounted(() => {
 </style>
 
 <template>
-  <Head :title="$page.props.headers.appName" />
+  <app-head :title="title" />
   <div class="alert alert-danger mb-0" v-if="$page.props.errors" role="alert">
     {{ $page.props.errors }}
   </div>

@@ -1,28 +1,5 @@
-<template>
-  <button
-    @click="handleClick"
-    :class="['btn mr-1 btn-square', customClasses, { 'cursor-not-allowed': disabled }]"
-    :type="type"
-    :disabled="isLoading || disabled"
-  >
-    <template v-if="isLoading">
-      <span
-        class="spinner-border"
-        :style="{ color: loadingTextColor }"
-        role="status"
-        aria-hidden="true"
-      ></span>
-      {{ loadingText }}
-    </template>
-    <template v-else>
-      <slot></slot>
-    </template>
-  </button>
-</template>
-
-<script>
-export default {
-  props: {
+<script setup>
+defineProps({
     handleClick: {
       type: Function,
       default: () => {},
@@ -42,14 +19,12 @@ export default {
     },
     loadingText: {
       type: String,
-      default: 'A carregar ...',
     },
     loadingTextColor: {
       type: String,
       default: '#fff',
     },
-  },
-}
+})
 </script>
 
 <style scoped>
@@ -66,3 +41,25 @@ button {
   width: 1em !important;
 }
 </style>
+
+<template>
+  <button
+    @click="handleClick"
+    :class="['btn mr-1 btn-square', customClasses, { 'cursor-not-allowed': disabled }]"
+    :type="type"
+    :disabled="isLoading || disabled"
+  >
+    <template v-if="isLoading">
+      <span
+        class="spinner-border"
+        :style="{ color: loadingTextColor }"
+        role="status"
+        aria-hidden="true"
+      ></span>
+      {{ loadingText || $t('shared.loading') }}
+    </template>
+    <template v-else>
+      <slot></slot>
+    </template>
+  </button>
+</template>

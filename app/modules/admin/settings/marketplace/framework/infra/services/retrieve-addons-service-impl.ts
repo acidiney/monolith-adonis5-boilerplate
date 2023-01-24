@@ -1,16 +1,20 @@
+import { AddonService } from 'app/infra/ports/addon-service'
 import { Addon } from '../../../domain/entities/addon'
 import { RetrieveAddonsService } from '../../../usecases/list-addons/ports'
 
 export class RetrieveAddonsServiceImpl implements RetrieveAddonsService {
+  constructor (
+    private readonly addonService: AddonService
+  ) {}
+
   public async retrieveAll (): Promise<Addon[]> {
-    return [
-      {
-        name: 'Fake Package',
-        url: 'gitlab.itgest.co.ao/public-addons/general/fake-package',
-        description: 'A fake package only to mock.',
-        image: 'https://icons8.com/icon/Xcmu3SUiwTXm/package',
-        version: '1.0.1',
-      },
-    ]
+    return this.addonService.findAll()
+      .then((addons) => addons.map((addon) => ({
+        name: addon.name,
+        description: addon.description,
+        url: addon.url,
+        image: addon.image,
+        version: addon.version,
+      })))
   }
 }

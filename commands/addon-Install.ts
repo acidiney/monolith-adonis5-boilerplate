@@ -18,17 +18,26 @@ export default class InstallAddon extends BaseCommand {
   public packageName: string
 
   public async run () {
-    const { default: Env } = await import('@ioc:Adonis/Core/Env')
+    const { HttpClientAdapterImpl } = await import('app/infra/adapters/http-client-adapter-impl')
+    const { AddonServiceImpl } = await import('app/infra/services/addon-service-impl')
+
+    const addonServiceImpl = new AddonServiceImpl(new HttpClientAdapterImpl())
 
     const baseUrl = this.application.appRoot
     const modulePath = resolve(baseUrl, 'app/modules/addons', this.packageName)
 
-    const packageUrl = `${Env.get('BASE_PACKAGE_URL')}/${this.packageName}`
+    const addon = await addonServiceImpl.findPackage(this.packageName)
+
+    if (!addon) {
+      this.logger.fatal('Addon not found!')
+      return
+    }
+
     const taskManager = this.ui.tasks()
 
     await taskManager
       .add(`Clonnig package ${this.packageName}`, async (_, task) => {
-        await exec(`git clone ${packageUrl} ${modulePath}`)
+        await exec(`git clone ${addon.url} ${modulePath}`)
           .then(async () => {
             await task.complete('Package cloned!')
           })

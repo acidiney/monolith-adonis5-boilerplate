@@ -24,7 +24,7 @@ export default class UpdateAddon extends BaseCommand {
     const taskManager = this.ui.tasks()
 
     await taskManager
-      .add(`Clonnig package ${this.packageName}`, async (_, task) => {
+      .add(`Pulling package ${this.packageName}`, async (_, task) => {
         await exec(`cd ${modulePath} && git pull origin HEAD`)
           .then(async () => {
             await task.complete('Package pulled!')
