@@ -4,6 +4,8 @@
   "menu.settings": "Configurações",
   "shared.logout": "Terminar sessão",
   "menu.user.profile": "Meu perfil",
-  "menu.user.settings": "Configurações",
-  "admin.page_hero.common.dasboard.subtitle": "Bem vindo de volta, {name}!"
+  "menu.user.profile.subtitle": "Informações do utilizador",
+  "menu.settings.subtitle": "Configurações da conta",
+  "admin.page_hero.common.dasboard.subtitle": "Bem vindo de volta, {name}!",
+  "shared.account": "Conta"
 }

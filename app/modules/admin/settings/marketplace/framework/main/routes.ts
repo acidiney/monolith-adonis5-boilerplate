@@ -1,7 +1,8 @@
 import Route from '@ioc:Adonis/Core/Route'
+import { makeListAddonsControllerFactory } from './factories/list-addons-factory'
 
 Route.group(() => {
-  Route.inertia('/settings/marketplace', 'admin/settings/marketplace/framework/views/list-addons')
+  Route.get('/settings/marketplace', async (ctx) => makeListAddonsControllerFactory().index(ctx))
 })
   .middleware(['auth'])
   .prefix('/admin')

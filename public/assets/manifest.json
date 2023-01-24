@@ -18,5 +18,6 @@
   "assets/vendors-node_modules_mini-css-extract-plugin_dist_hmr_hotModuleReplacement_js-node_modules_vu-38f360.js": "http://localhost:8080/assets/vendors-node_modules_mini-css-extract-plugin_dist_hmr_hotModuleReplacement_js-node_modules_vu-38f360.js",
   "assets/app_modules_admin_settings_marketplace_framework_views_martketplace_vue.js": "http://localhost:8080/assets/app_modules_admin_settings_marketplace_framework_views_martketplace_vue.js",
   "assets/app_modules_admin_settings_marketplace_framework_views_marketplace_vue.js": "http://localhost:8080/assets/app_modules_admin_settings_marketplace_framework_views_marketplace_vue.js",
-  "assets/app_modules_admin_settings_marketplace_framework_views_list-addons_vue.js": "http://localhost:8080/assets/app_modules_admin_settings_marketplace_framework_views_list-addons_vue.js"
+  "assets/app_modules_admin_settings_marketplace_framework_views_list-addons_vue.js": "http://localhost:8080/assets/app_modules_admin_settings_marketplace_framework_views_list-addons_vue.js",
+  "assets/app_modules_admin_settings_marketplace_framework_views_components_addon-card_vue.js": "http://localhost:8080/assets/app_modules_admin_settings_marketplace_framework_views_components_addon-card_vue.js"
 }

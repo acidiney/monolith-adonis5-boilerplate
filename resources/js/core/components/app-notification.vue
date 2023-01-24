@@ -12,7 +12,7 @@
             <div>
               <a href="#">
                 <span class="w-32 avatar gd-danger">
-                  <img src="/vendor/img/a6.jpg" alt="." />
+                  <!-- <img src="/vendor/img/a6.jpg" alt="." /> -->
                 </span>
               </a>
             </div>

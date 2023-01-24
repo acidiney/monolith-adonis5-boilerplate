@@ -21,7 +21,7 @@
         <span>{{ $t('menu.user.profile') }}</span>
       </router-link>
       <router-link class="dropdown-item" href="/account/settings">
-        <span>{{ $t('menu.user.settings') }}</span>
+        <span>{{ $t('menu.settings') }}</span>
       </router-link>
       <a class="dropdown-item" @click="useLogout">
       {{ $t('shared.logout') }}
