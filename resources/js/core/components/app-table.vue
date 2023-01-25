@@ -1,3 +1,27 @@
+<script setup>
+import AppStatus from "./app-status.vue";
+import AppPaginate from "./app-paginate.vue";
+
+defineProps({
+  columns: {
+    type: Array,
+    required: true,
+  },
+  rows: {
+    type: Array,
+    required: true,
+  },
+  showOptions: {
+    type: Boolean,
+    default: true,
+  },
+  customOption: {
+    type: Boolean,
+    default: false,
+  },
+});
+</script>
+
 <template>
   <div class="">
     <table id="datatable" class="table table-theme table-row v-middle">
@@ -42,38 +66,14 @@
       <tfoot>
         <tr>
           <td :colspan="columns.length + 1" class="text-right">
-            <app-paginate :records="21" :per-page="10" @paginate="(page) => this.$emit('paginate', page)" />
+            <app-paginate
+              :records="21"
+              :per-page="10"
+              @paginate="(page) => this.$emit('paginate', page)"
+            />
           </td>
         </tr>
       </tfoot>
     </table>
   </div>
 </template>
-<script>
-import AppStatus from './app-status.vue'
-import AppPaginate from './app-paginate.vue'
-export default {
-  props: {
-    columns: {
-      type: Array,
-      required: true,
-    },
-    rows: {
-      type: Array,
-      required: true,
-    },
-    showOptions: {
-      type: Boolean,
-      default: true,
-    },
-    customOption: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  components: {
-    AppStatus,
-    AppPaginate
-  },
-}
-</script>

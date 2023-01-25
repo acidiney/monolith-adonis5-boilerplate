@@ -1,3 +1,11 @@
+<script setup>
+import { router } from "@inertiajs/vue3";
+
+const useLogout = () => {
+  router.post("/auth/logout");
+};
+</script>
+
 <template>
   <li class="nav-item dropdown">
     <a
@@ -29,10 +37,3 @@
     </div>
   </li>
 </template>
-<script setup>
-import { router } from "@inertiajs/vue3";
-
-const useLogout = () => {
-  router.post("/auth/logout");
-};
-</script>

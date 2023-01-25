@@ -1,3 +1,14 @@
+<script setup>
+defineProps({
+  workStationName: String,
+  workStationEmptyText: String,
+  isEmpty: {
+    type: Boolean,
+    default: true,
+  },
+});
+</script>
+
 <template>
   <div class="d-flex flex-column flex card m-0 mb-md-3">
     <template v-if="!isEmpty">
@@ -22,24 +33,18 @@
       </div>
     </template>
 
-    <div :class="['scrollable hover', { 'd-flex h-100 justify-content-center align-items-center': isEmpty }]" >
+    <div
+      :class="[
+        'scrollable hover',
+        { 'd-flex h-100 justify-content-center align-items-center': isEmpty },
+      ]"
+    >
       <template v-if="isEmpty">
-        <p class="text-muted">{{ workStationEmptyText || 'Workstation vazia' }}</p>
+        <p class="text-muted">
+          {{ workStationEmptyText || "Workstation vazia" }}
+        </p>
       </template>
       <slot v-else name="content"></slot>
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  props: {
-    workStationName: String,
-    workStationEmptyText: String,
-    isEmpty: {
-      type: Boolean,
-      default: true,
-    },
-  },
-}
-</script>

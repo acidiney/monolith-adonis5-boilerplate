@@ -3,13 +3,13 @@
   <div class="dropdown-menu dropdown-menu-center mt-3 w-md animate fadeIn">
     <div class="setting px-3">
       <div class="mb-2 text-muted">
-        <strong>Interface:</strong>
+        <strong>{{ $t('shared.interface') }}</strong>
       </div>
       <div class="mb-3" id="settingLayout">
         <label class="ui-check ui-check-rounded my-1 d-block">
           <input type="checkbox" name="foldedAside" />
           <i></i>
-          <small>Minimizar Menu</small>
+          <small>{{ $t('shared.minimaze.menu') }}</small>
         </label>
         <!-- <label class="ui-check ui-check-rounded my-1 d-block">
           <input type="checkbox" name="hideAside" />
@@ -18,7 +18,7 @@
         </label> -->
       </div>
       <div class="mb-2 text-muted">
-        <strong>Traduções:</strong>
+        <strong>{{ $t('shared.translations')}}</strong>
       </div>
       <div class="mb-3 d-flex" id="languageSettings">
         <!-- <label class="ui-check ui-check-rounded d-block">
@@ -38,7 +38,7 @@
         </label> -->
       </div>
       <div class="mb-2 text-muted">
-        <strong>Cores:</strong>
+        <strong>{{ $t('shared.background.color')}}</strong>
       </div>
       <div class="mb-2">
         <label class="radio radio-inline ui-check ui-check-md">

@@ -1,3 +1,7 @@
+<script setup>
+  import AppSidebarGroup from './app-sidebar-group.vue'
+</script>
+
 <template>
   <div id="aside" class="page-sidenav no-shrink bg-light nav-dropdown fade " aria-hidden="true">
     <div class="sidenav h-100 modal-dialog bg-light ">
@@ -18,7 +22,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import AppSidebarGroup from './app-sidebar-group.vue'
-</script>

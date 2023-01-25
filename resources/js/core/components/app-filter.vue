@@ -13,7 +13,7 @@
           type="text"
           class="form-control form-control-theme  search"
           placeholder="Search"
-          required=""
+          required
         />
         <span class="input-group-append">
           <button class="btn btn-white no-border btn-sm" type="button">

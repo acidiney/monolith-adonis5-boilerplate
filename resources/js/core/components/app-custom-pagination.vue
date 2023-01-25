@@ -1,3 +1,9 @@
+<script setup>
+  defineProps({
+    props: Object
+  })
+</script>
+
 <template>
   <div class="VuePagination w-100" :class="props.theme.wrapper">
     <nav :class="[props.theme.nav, 'd-flex align-items-center']">
@@ -24,10 +30,3 @@
     </nav>
   </div>
 </template>
-
-<script>
-export default {
-  name: 'CustomPaginaton',
-  props: ['props'],
-}
-</script>

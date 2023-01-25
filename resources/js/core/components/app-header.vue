@@ -1,3 +1,9 @@
+<script setup>
+import AppUserSettings from './app-user-settings.vue'
+import AppNotifications from './app-notification.vue'
+import AppCustomApplicationSettings from './app-custom-application-settings.vue'
+</script>
+
 <template>
   <div id="header" class="page-header">
     <div class="navbar navbar-expand-lg">
@@ -46,17 +52,3 @@
     </div>
   </div>
 </template>
-
-<script>
-import AppUserSettings from './app-user-settings.vue'
-import AppNotifications from './app-notification.vue'
-import AppCustomApplicationSettings from './app-custom-application-settings.vue'
-export default {
-  props: ['user'],
-  components: {
-    AppUserSettings,
-    AppNotifications,
-    AppCustomApplicationSettings
-  }
-}
-</script>

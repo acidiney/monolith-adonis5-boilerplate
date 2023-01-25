@@ -1,3 +1,11 @@
+<script setup>
+import VFeather from 'vue-feather'
+defineProps({
+  icon: String,
+  size: Number
+})
+</script>
+
 <template>
     <v-feather
     v-bind="{
@@ -7,12 +15,3 @@
   />
 </template>
 
-<script>
-import VueFeather from 'vue-feather'
-export default {
-  props: ['icon', 'size'],
-  components: {
-    'v-feather': VueFeather,
-  },
-}
-</script>

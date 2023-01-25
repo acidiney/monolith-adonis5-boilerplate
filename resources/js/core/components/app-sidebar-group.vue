@@ -1,3 +1,9 @@
+<script setup>
+import AppSidebarItem from './app-sidebar-item.vue'
+
+defineProps(['menus'])
+</script>
+
 <template>
   <template v-for="(group, i) in menus" :key="i">
     <li class="nav-header hidden-folded" v-if="group.isGroup">
@@ -11,13 +17,3 @@
     <app-sidebar-item v-for="(item, v) in group.children" :key="'sub_' + v" :item="item" />
   </template>
 </template>
-<script>
-import AppSidebarItem from './app-sidebar-item.vue'
-
-export default {
-  props: ['menus'],
-  components: {
-    AppSidebarItem,
-  },
-}
-</script>

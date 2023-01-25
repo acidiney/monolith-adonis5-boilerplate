@@ -1,3 +1,9 @@
+<script setup>
+  defineProps({
+    isSidebar: Boolean
+  })
+</script>
+
 <template>
   <router-link href="/account" :class="['navbar-brand', { 'd-lg-none': !isSidebar }]">
     <svg
@@ -16,11 +22,3 @@
     <span :class="['hidden-folded d-inline l-s-n-1x', { 'd-lg-none': !isSidebar }]" >{{ $page.props.headers.appName }}</span>
   </router-link>
 </template>
-
-<script>
-  export default {
-    props: {
-      isSidebar: Boolean
-    }
-  }
-</script>
