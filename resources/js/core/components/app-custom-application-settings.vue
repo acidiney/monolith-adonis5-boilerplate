@@ -11,11 +11,11 @@
           <i></i>
           <small>Minimizar Menu</small>
         </label>
-        <label class="ui-check ui-check-rounded my-1 d-block">
+        <!-- <label class="ui-check ui-check-rounded my-1 d-block">
           <input type="checkbox" name="hideAside" />
           <i></i>
           <small>Esconder Menu</small>
-        </label>
+        </label> -->
       </div>
       <div class="mb-2 text-muted">
         <strong>Traduções:</strong>
