@@ -74,6 +74,10 @@ export default class InstallAddon extends BaseCommand {
       })
       .run()
 
+    /**
+       * Apply in-memory notification, to "inform that need to restart"
+       */
+
     this.logger.success('Please restart application')
   }
 }

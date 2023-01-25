@@ -9,3 +9,4 @@ docker/data
 app/modules/addons/**/*
 resources/lang/*.json
 resources/js/i18n/*.json
+public/assets/*
