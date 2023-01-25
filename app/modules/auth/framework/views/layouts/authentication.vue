@@ -27,11 +27,11 @@ h5 {
 }
 
 .auth {
-  height: 100vh;
+  margin-top: 7vh;
 }
 
 .card {
-  width: 450px;
+  width: 500px;
   min-height: 400px;
 }
 
@@ -42,8 +42,8 @@ main {
 
 <template>
   <Head :title="$page.props.headers.appName"/>
-  <div class="auth d-flex align-items-center justify-content-center">
-    <div class="card p-4">
+  <div class="auth d-flex  justify-content-center">
+    <div class="card p-4 py-5">
       <div class="card-body h-100">
         <h1 class="title mb-1">{{ headers.appName }}</h1>
         <h5 class="mt-1 text-center text-muted">
