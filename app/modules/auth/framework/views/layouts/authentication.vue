@@ -52,10 +52,10 @@ main {
         <main class="position-relative overflow-hidden">
           <div
             class="alert alert-danger fade show"
-            v-if="messages.errors && messages.errors.invalid_credentials"
+            v-if="messages.errors && messages.errors.message"
             role="alert"
           >
-            {{ messages.errors.invalid_credentials }}
+            {{ messages.errors.message }}
           </div>
           <div
             class="alert alert-success fade show"

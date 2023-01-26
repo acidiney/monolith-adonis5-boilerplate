@@ -27,7 +27,7 @@ export class SignInController implements Controller<HttpContextContract> {
 
     if (!error) {
       session.flash('errors', {
-        invalid_credentials: i18n.formatMessage('auth.login.failed'),
+        message: i18n.formatMessage('auth.login.failed'),
       })
       return response.redirect().back()
     }

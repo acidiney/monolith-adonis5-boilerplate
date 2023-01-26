@@ -8,6 +8,7 @@ import AuthLayout from "./layouts/authentication.vue";
 defineProps(["errors"]);
 
 function onSubmit(values) {
+  console.log(values)
   isLoading.value = true;
   router.post("/auth/reset/send-mail", values, {
     onFinish: () => {
@@ -26,7 +27,7 @@ const isLoading = ref(false);
 
 <template>
   <auth-layout>
-    <Form @submit.prevent="onSubmit" :validation-schema="schema">
+    <Form @submit="onSubmit" :validation-schema="schema">
       <div class="input-group mb-3">
         <p class="text-muted">
           {{ $t("auth.resetPasswordInstructions") }}
