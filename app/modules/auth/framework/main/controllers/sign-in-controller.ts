@@ -31,7 +31,7 @@ export class SignInController implements Controller<HttpContextContract> {
 
     if (output.isLeft()) {
       session.flash('errors', {
-        message: i18n.formatMessage(output.value.errorMessage),
+        message: i18n.formatMessage('auth.user.mismatch'),
       })
 
       return response.redirect().back()
