@@ -8,25 +8,25 @@ export class EventDispatcher implements IEventDispatcher {
   private _eventHandlers: IEventHandlers = {}
   private static instance: EventDispatcher
 
-  get eventHandlers(): IEventHandlers {
+  public get eventHandlers (): IEventHandlers {
     return this._eventHandlers
   }
 
-  publish<T>(event: T): void {
-    const eventName = event.constructor.name
+  public publish<T>(event: T): void {
+    const eventName = (event as any).constructor.name
     if (this._eventHandlers[eventName]) {
       this._eventHandlers[eventName].forEach((eventHandler) => eventHandler.handle(event as any))
     }
   }
 
-  register(eventName: string, handler: IHandle<IDomainEvent>): void {
+  public register (eventName: string, handler: IHandle<IDomainEvent>): void {
     if (!this._eventHandlers[eventName]) {
       this._eventHandlers[eventName] = []
     }
     this._eventHandlers[eventName].push(handler)
   }
 
-  unregister(eventName: string, handler: IHandle<IDomainEvent>): void {
+  public unregister (eventName: string, handler: IHandle<IDomainEvent>): void {
     if (this._eventHandlers[eventName]) {
       const index = this._eventHandlers[eventName].indexOf(handler)
       if (index > -1) {
@@ -35,11 +35,11 @@ export class EventDispatcher implements IEventDispatcher {
     }
   }
 
-  unregisterAll(): void {
+  public unregisterAll (): void {
     this._eventHandlers = {}
   }
 
-  static getInstance(): EventDispatcher {
+  public static getInstance (): EventDispatcher {
     if (!this.instance) {
       this.instance = new EventDispatcher()
     }

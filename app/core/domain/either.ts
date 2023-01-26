@@ -1,31 +1,31 @@
 export type Either<L, A> = Left<L, A> | Right<L, A>
 
 class Left<L, A> {
-  readonly value: L
+  public readonly value: L
   constructor (value: L) {
     this.value = value
   }
 
-  isLeft (): this is Left<L, A> {
+  public isLeft (): this is Left<L, A> {
     return true
   }
 
-  isRight (): this is Right<L, A> {
+  public isRight (): this is Right<L, A> {
     return false
   }
 }
 
 class Right<L, A> {
-  readonly value: A
+  public readonly value: A
   constructor (value: A) {
     this.value = value
   }
 
-  isLeft (): this is Left<L, A> {
+  public isLeft (): this is Left<L, A> {
     return false
   }
 
-  isRight (): this is Right<L, A> {
+  public isRight (): this is Right<L, A> {
     return true
   }
 }

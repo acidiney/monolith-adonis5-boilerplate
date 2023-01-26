@@ -1,9 +1,9 @@
 <script setup>
-import { onMounted, ref, nextTick } from "vue";
-import { Head } from "@inertiajs/vue3";
+import {onMounted, ref, nextTick, computed} from "vue";
 import AppHeader from "../core/components/app-header.vue";
 import AppFooter from "../core/components/app-footer.vue";
 import AppSidebar from "../core/components/app-sidebar.vue";
+import { usePage } from "@inertiajs/vue3";
 
 const animate = ref(false);
 onMounted(() => {
@@ -15,6 +15,11 @@ onMounted(() => {
     }
   });
 });
+
+const messages = computed(() => ({
+  errors: usePage().props.errors,
+  success: usePage().props.success
+}))
 
 defineProps({
   title: String
@@ -29,8 +34,19 @@ defineProps({
 
 <template>
   <app-head :title="title" />
-  <div class="alert alert-danger mb-0" v-if="$page.props.errors" role="alert">
-    {{ $page.props.errors }}
+  <div
+    class="alert alert-danger fade show mb-0"
+    v-if="messages.errors && messages.errors.message"
+    role="alert"
+  >
+    {{ messages.errors.message }}
+  </div>
+  <div
+    class="alert alert-success fade show mb-0"
+    v-if="messages.success"
+    role="alert"
+  >
+    {{ messages.success }}
   </div>
   <div class="layout-row">
     <app-sidebar />

@@ -7,5 +7,6 @@
   "menu.user.profile.subtitle": "Informações do utilizador",
   "menu.settings.subtitle": "Configurações da conta",
   "admin.page_hero.common.dasboard.subtitle": "Bem vindo de volta, {name}!",
-  "shared.account": "Conta"
+  "shared.account": "Conta",
+  "shared.errors.internal_server_error": "Erro interno no servidor!"
 }

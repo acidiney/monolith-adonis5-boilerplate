@@ -7,12 +7,12 @@ import GenerateResetPassword from 'App/Domain/User/Auth/UseCase/GenerateResetPas
 import ResetPassword from 'App/Domain/User/Auth/UseCase/ResetPasswordUseCase'
 
 export default class AuthenticationController {
-  constructor(
+  constructor (
     private readonly generateResetPasswordUseCase: GenerateResetPassword,
     private readonly resetPasswordUseCase: ResetPassword
   ) {}
 
-  public async resetPassword({
+  public async resetPassword ({
     params,
     i18n,
     request,

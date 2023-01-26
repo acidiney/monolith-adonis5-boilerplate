@@ -2,7 +2,6 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import '@sentry/tracing'
 import { startTransaction, configureScope, captureException } from '@sentry/node'
 
-import { internalServerError } from 'app/core/hooks'
 import { Controller} from 'app/core/ports'
 
 export interface ControllerMetaData {
@@ -30,7 +29,13 @@ export class CaptureErrorDecorator implements Controller<HttpContextContract> {
       return await this.controller.perform(input)
     } catch (e) {
       captureException(e)
-      return internalServerError()
+
+      input.session
+        .flash('errors', {
+          message: input.i18n.formatMessage('shared.errors.internal_server_error'),
+        })
+
+      return input.response.redirect().back()
     } finally {
       transaction.finish()
     }
