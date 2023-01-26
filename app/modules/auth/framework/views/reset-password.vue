@@ -1,109 +1,45 @@
-<template>
-  <auth-layout>
-    <v-form @submit="onSubmit" :validation-schema="schema">
-      <div class="mb-3">
-        <label for="confirmPassword" class="mt-3">{{ $t('auth.newPassword') }}</label>
-        <div class="input-group bg-light rounded flex mb-3 w-100">
-          <v-field
-            name="password"
-            id="password"
-            class="form-control"
-            :type="!showPassword ? 'password' : 'text'"
-          />
-          <span @click="toggleShowPassword" class="input-group-append">
-            <button class="btn no-bg no-shadow" type="button">
-              <app-icon :icon="showPassword ? 'eye' : 'eye-off'" class="text-fade" />
-            </button>
-          </span>
-        </div>
+<script setup>
+import AuthLayout from "./layouts/authentication.vue";
+import AppButton from "@core/components/app-button.vue";
+import {
+  Field as VField,
+  Form as VForm,
+  ErrorMessage as VErrorMessage,
+} from "vee-validate";
+import { router } from "@inertiajs/vue3";
 
-        <div class="invalid-feedback d-block iva-feed">
-          <v-error-message name="confirmPassword" />
-        </div>
-      </div>
+import * as yup from "yup";
+import { ref, computed } from "@vue/reactivity";
 
-      <div class="mb-3" v-if="!showPassword">
-        <label for="confirmPassword" class="mt-3">{{ $t('auth.confirmPassword') }}</label>
-        <div class="input-group bg-light rounded flex w-100">
-          <v-field
-            name="confirmPassword"
-            id="confirmPassword"
-            class="form-control"
-            type="password"
-          />
-        </div>
-        <div class="invalid-feedback d-block iva-feed">
-          <v-error-message name="confirmPassword" />
-        </div>
-      </div>
+const isLoading = ref(false);
+const showPassword = ref(false);
 
-      <app-button
-        type="submit"
-        :isLoading="isLoading"
-        customClasses="btn btn-primary btn-block px-4"
-        :loadingText="$t('auth.resetPasswordEvent')"
-      >
-        {{ $t('auth.resetPassword') }}
-      </app-button>
-    </v-form>
-  </auth-layout>
-</template>
+const toggleShowPassword = () => {
+  showPassword.value = !showPassword.value;
+};
 
-<script>
-import AuthLayout from './layouts/authentication.vue'
-import AppButton from '@core/components/app-button.vue'
-import { Field, Form, ErrorMessage } from 'vee-validate'
-import { Inertia } from '@inertiajs/inertia'
+function onSubmit(values) {
+  isLoading.value = true;
 
-import * as yup from 'yup'
-import { ref } from '@vue/reactivity'
+  if (!values.confirmPassword) {
+    values.confirmPassword = values.password;
+  }
 
-export default {
-  props: ['token'],
-  components: {
-    AuthLayout,
-    AppButton,
-    VField: Field,
-    VForm: Form,
-    VErrorMessage: ErrorMessage,
-  },
-
-  setup() {
-    const isLoading = ref(false)
-    const showPassword = ref(false)
-
-    const toggleShowPassword = () => {
-      showPassword.value = !showPassword.value
-    }
-
-    return { isLoading, showPassword, toggleShowPassword }
-  },
-
-  methods: {
-    onSubmit(values) {
-      this.isLoading = true
-
-      if (!values.confirmPassword) {
-        values.confirmPassword = values.password
-      }
-
-      Inertia.post(`/auth/reset/password/${this.token}`, values, {
-        onFinish: () => {
-          this.isLoading = false
-        },
-      })
+  router.post(`/auth/reset/password/${this.token}`, values, {
+    onFinish: () => {
+      isLoading.value = false;
     },
-  },
-
-  computed: {
-    schema() {
-      return {
-        password: yup.string().required().min(8),
-        confirmPassword: this.showPassword ? yup.string().min(8) : yup.string().required().min(8),
-      }
-    },
-  },
+  });
 }
+
+const schema = computed(() => ({
+  password: yup.string().required().min(8),
+  confirmPassword: this.showPassword
+    ? yup.string().min(8)
+    : yup.string().required().min(8),
+}));
+
+defineProps(["token"]);
 </script>
 
 <style scoped>
@@ -224,3 +160,61 @@ export default {
   margin: 5px 0;
 }
 </style>
+
+<template>
+  <auth-layout>
+    <v-form @submit="onSubmit" :validation-schema="schema">
+      <div class="mb-3">
+        <label for="confirmPassword" class="mt-3">{{
+          $t("auth.newPassword")
+        }}</label>
+        <div class="input-group bg-light rounded flex mb-3 w-100">
+          <v-field
+            name="password"
+            id="password"
+            class="form-control"
+            :type="!showPassword ? 'password' : 'text'"
+          />
+          <span @click="toggleShowPassword" class="input-group-append">
+            <button class="btn no-bg no-shadow" type="button">
+              <app-icon
+                :icon="showPassword ? 'eye' : 'eye-off'"
+                class="text-fade"
+              />
+            </button>
+          </span>
+        </div>
+
+        <div class="invalid-feedback d-block iva-feed">
+          <v-error-message name="confirmPassword" />
+        </div>
+      </div>
+
+      <div class="mb-3" v-if="!showPassword">
+        <label for="confirmPassword" class="mt-3">{{
+          $t("auth.confirmPassword")
+        }}</label>
+        <div class="input-group bg-light rounded flex w-100">
+          <v-field
+            name="confirmPassword"
+            id="confirmPassword"
+            class="form-control"
+            type="password"
+          />
+        </div>
+        <div class="invalid-feedback d-block iva-feed">
+          <v-error-message name="confirmPassword" />
+        </div>
+      </div>
+
+      <app-button
+        type="submit"
+        :isLoading="isLoading"
+        customClasses="btn btn-primary btn-block px-4"
+        :loadingText="$t('auth.resetPasswordEvent')"
+      >
+        {{ $t("auth.resetPassword") }}
+      </app-button>
+    </v-form>
+  </auth-layout>
+</template>
