@@ -13,8 +13,12 @@
     "sourceMap": true,
     "allowJs": true,
     "paths": {
-      "app/*": ["./app/*"],
-      "@core/*": ["./resources/js/core/*"]
+      "app/*": [
+        "./app/*"
+      ],
+      "@core/*": [
+        "./resources/js/core/*"
+      ]
     },
     "types": [
       "@adonisjs/core",
@@ -28,7 +32,8 @@
       "@eidellev/inertia-adonisjs",
       "@adonisjs/auth",
       "@adonisjs/lucid-slugify",
-      "@rocketseat/adonis-bull"
+      "@rocketseat/adonis-bull",
+      "@adonisjs/mail"
     ]
   }
 }

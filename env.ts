@@ -33,4 +33,9 @@ export default Env.rules({
   BULL_REDIS_PORT: Env.schema.number.optional(),
   BULL_REDIS_PASSWORD: Env.schema.string.optional(),
   GITLAB_URL: Env.schema.string({ format: 'url' }),
+  SMTP_HOST: Env.schema.string({ format: 'host' }),
+  SMTP_PORT: Env.schema.number(),
+  SMTP_USERNAME: Env.schema.string(),
+  SMTP_PASSWORD: Env.schema.string(),
+  MAIL_FROM: Env.schema.string(),
 })

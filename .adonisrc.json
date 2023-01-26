@@ -6,7 +6,8 @@
     "@adonisjs/repl/build/commands",
     "@adonisjs/lucid/build/commands",
     "@eidellev/inertia-adonisjs/build/commands",
-    "@rocketseat/adonis-bull/build/commands"
+    "@rocketseat/adonis-bull/build/commands",
+    "@adonisjs/mail/build/commands"
   ],
   "exceptionHandlerNamespace": "app/infra/exceptions/handler",
   "aliases": {
@@ -16,19 +17,24 @@
   "preloads": [
     {
       "file": "./start/i18n",
-      "environment": ["web"]
+      "environment": [
+        "web"
+      ]
     },
     {
       "file": "./start/sentry",
-      "environment": ["web"]
+      "environment": [
+        "web"
+      ]
     },
     {
       "file": "./start/inertia",
-      "environment": ["web"]
+      "environment": [
+        "web"
+      ]
     },
     "./start/routes",
     "./start/kernel",
-
     "./start/bull"
   ],
   "providers": [
@@ -42,7 +48,8 @@
     "@eidellev/inertia-adonisjs",
     "@adonisjs/auth",
     "@adonisjs/lucid-slugify",
-    "@rocketseat/adonis-bull"
+    "@rocketseat/adonis-bull",
+    "@adonisjs/mail"
   ],
   "metaFiles": [
     {
