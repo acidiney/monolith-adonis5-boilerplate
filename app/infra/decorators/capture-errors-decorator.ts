@@ -1,23 +1,22 @@
+import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import '@sentry/tracing'
 import { startTransaction, configureScope, captureException } from '@sentry/node'
 
-import { internalServerError } from '@core/hooks'
-import { Controller, Input, Output } from '@core/ports'
-
-import { Env } from 'config/env'
+import { internalServerError } from 'app/core/hooks'
+import { Controller} from 'app/core/ports'
 
 export interface ControllerMetaData {
   operation: string
-  description: string
+  description?: string
 }
 
-export class CaptureErrorDecorator<T, O> implements Controller<T, O> {
-  constructor(
-    private readonly controller: Controller<T, O>,
+export class CaptureErrorDecorator implements Controller<HttpContextContract> {
+  constructor (
+    private readonly controller: Controller<HttpContextContract>,
     private readonly meta: ControllerMetaData
   ) {}
 
-  async perform(input: Input<T>): Promise<Output<O>> {
+  public async perform (input: HttpContextContract): Promise<any> {
     const transaction = startTransaction({
       op: this.meta.operation,
       name: this.meta.description,
@@ -30,11 +29,7 @@ export class CaptureErrorDecorator<T, O> implements Controller<T, O> {
     try {
       return await this.controller.perform(input)
     } catch (e) {
-      if (Env.isProd) {
-        captureException(e)
-      } else {
-        console.log(e)
-      }
+      captureException(e)
       return internalServerError()
     } finally {
       transaction.finish()

@@ -1,5 +1,4 @@
-import { Input, Output } from './communication'
 
-export interface Controller<I, O> {
-  perform: (input: Input<I>) => Promise<Output<O>>
+export interface Controller<I> {
+  perform: (input: I) => Promise<any>
 }

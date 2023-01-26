@@ -1,12 +1,11 @@
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export class SignInValidator {
+export class SendResetPasswordLinkValidator {
   constructor (protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
     username: schema.string({}, [rules.email()]),
-    password: schema.string({}, [rules.minLength(8)]),
   })
 
   /**
@@ -23,7 +22,5 @@ export class SignInValidator {
   public messages = {
     'username.required': this.ctx.i18n.formatMessage('auth.validation.username.required'),
     'username.email': this.ctx.i18n.formatMessage('auth.validation.username.email'),
-    'password.required': this.ctx.i18n.formatMessage('auth.validation.password.required'),
-    'password.minLength': this.ctx.i18n.formatMessage('auth.validation.password.minLength'),
   }
 }

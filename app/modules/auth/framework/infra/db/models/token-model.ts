@@ -34,12 +34,12 @@ export class TokenModel extends BaseModel {
   public expires_at: DateTime
 
   @beforeCreate()
-  public static async setId(model: TokenModel) {
+  public static async setId (model: TokenModel) {
     model.id = model.id || cuid()
   }
 
   @beforeCreate()
-  public static async generateToken(model: TokenModel) {
+  public static async generateToken (model: TokenModel) {
     model.token = await crypto.randomBytes(32).toString('hex')
   }
 }

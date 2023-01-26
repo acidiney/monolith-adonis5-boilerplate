@@ -1,22 +1,38 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import SignInValidator from '../validators/sign-in-validator'
+import { Controller } from 'app/core/ports'
+import { SignInValidator } from '../validators/sign-in-validator'
 
-export class SignInController {
-  public async perform ({ auth, request, i18n, session, response, logger }: HttpContextContract) {
-    await request.validate(SignInValidator)
+export class SignInController implements Controller<HttpContextContract> {
+  public async perform ({
+    auth,
+    request,
+    i18n,
+    session,
+    response,
+    logger,
+  }: HttpContextContract) {
+    const validation = await request.validate(SignInValidator)
+      .catch((e) => {
+        session.flash('errors', e)
+      })
 
-    const { username, password } = request.all()
+    if (!validation) {
+      return response.redirect().back()
+    }
 
-    try {
-      await auth.use('web').attempt(username, password)
+    const { username, password } = validation
 
-      logger.info(username + ' - ' + i18n.formatMessage('auth.login.success'))
-      return response.redirect('/account/dashboard')
-    } catch (e) {
+    // refactor this to use "usecases"
+    const error = await auth.use('web').attempt(username, password)
+
+    if (!error) {
       session.flash('errors', {
         invalid_credentials: i18n.formatMessage('auth.login.failed'),
       })
       return response.redirect().back()
     }
+
+    logger.info(username + ' - ' + i18n.formatMessage('auth.login.success'))
+    return response.redirect('/account/dashboard')
   }
 }

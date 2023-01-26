@@ -1,7 +1,8 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { Controller } from 'app/core/ports'
 
-export class LogoutController {
-  public async perform ({ auth, session, i18n, logger, response }: HttpContextContract) {
+export class LogoutController implements Controller<HttpContextContract> {
+  public async perform ({ auth, session, i18n, logger, response }) {
     try {
       await auth.use('web').logout()
 

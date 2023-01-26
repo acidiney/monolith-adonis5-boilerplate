@@ -4,7 +4,7 @@ export class Result<T> {
   public error: T | string
   private readonly _value: T
 
-  public constructor (isSuccess: boolean, error?: T | string | null, value?: T) {
+  constructor (isSuccess: boolean, error?: T | string | null, value?: T) {
     if (isSuccess && error) {
       throw new Error(
         'InvalidOperation: A result cannot be successful and contain an error'
@@ -19,7 +19,7 @@ export class Result<T> {
     this.isSuccess = isSuccess
     this.isFailure = !isSuccess
     this.error = error as T
-    this._value = value
+    this._value = value as any
 
     Object.freeze(this)
   }
@@ -41,8 +41,12 @@ export class Result<T> {
     return this.error as T
   }
 
-  public errorMessage (): string {
+  public get errorMessage (): string {
     return (this.error as any).message
+  }
+
+  public get errorName (): string {
+    return (this.error as any).error
   }
 
   public static ok<U>(value?: U): Result<U> {
@@ -55,7 +59,9 @@ export class Result<T> {
 
   public static combine (results: Array<Result<any>>): Result<any> {
     for (const result of results) {
-      if (result.isFailure) return result
+      if (result.isFailure) {
+        return result
+      }
     }
     return Result.ok()
   }
