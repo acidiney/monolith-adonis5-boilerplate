@@ -1,5 +1,6 @@
 {
   "auth.frontend.login": "Autênticar",
+  "auth.username.not_found": "Username não existe",
   "auth.frontend.login_event": "A tentar autênticar...",
   "auth.frontend.logout": "Sair",
   "auth.frontend.field_email": "Entrar com o e-mail",

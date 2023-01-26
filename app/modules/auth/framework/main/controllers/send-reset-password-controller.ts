@@ -23,7 +23,7 @@ export class SendResetPasswordController implements Controller<HttpContextContra
     if (result.isLeft()) {
       logger.error(result.value.errorName)
       session.flash('errors', {
-        message: i18n.formatMessage(result.value.errorMessage)
+        message: i18n.formatMessage(result.value.errorMessage),
       })
       return response.redirect().back()
     }
