@@ -1,8 +1,15 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+
 import { Controller } from 'app/core/ports'
+import { AuthenticateUserUseCase } from 'app/modules/auth/domain/usecases'
+
 import { SignInValidator } from '../validators/sign-in-validator'
 
 export class SignInController implements Controller<HttpContextContract> {
+  constructor (
+    private readonly authenticateUserUseCase: AuthenticateUserUseCase
+  ) {}
+
   public async perform ({
     auth,
     request,
@@ -20,19 +27,19 @@ export class SignInController implements Controller<HttpContextContract> {
       return response.redirect().back()
     }
 
-    const { username, password } = validation
+    const output = await this.authenticateUserUseCase.perform(validation)
 
-    // refactor this to use "usecases"
-    const error = await auth.use('web').attempt(username, password)
-
-    if (!error) {
+    if (output.isLeft()) {
       session.flash('errors', {
-        message: i18n.formatMessage('auth.login.failed'),
+        message: i18n.formatMessage(output.value.errorMessage),
       })
+
       return response.redirect().back()
     }
 
-    logger.info(username + ' - ' + i18n.formatMessage('auth.login.success'))
+    await auth.use('web').loginViaId(output.value.userId)
+
+    logger.info(validation.username + ' - ' + i18n.formatMessage('auth.login.success'))
     return response.redirect('/account/dashboard')
   }
 }
