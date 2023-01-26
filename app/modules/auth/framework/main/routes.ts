@@ -19,15 +19,18 @@ Route.group(() => {
   Route.post('/reset/send-mail',
     routeAdapter(makeSendResetPasswordController(), {
       operation: 'send-reset-password-mail',
+      description: 'A user can ask for a recovery token',
     })
   )
 
   Route.post('/login',routeAdapter(makeSignInController(), {
     operation: 'do-login',
+    description: 'Authenticate a user',
   }))
 
   Route.post('/logout', routeAdapter(makeLogoutFactory(), {
     operation: 'do-logout',
+    description: 'Logout a user',
   }))
     .middleware(['auth'])
 }).prefix('auth')

@@ -7,7 +7,7 @@ import { Controller} from 'app/core/ports'
 
 export interface ControllerMetaData {
   operation: string
-  description?: string
+  description: string
 }
 
 export class CaptureErrorDecorator implements Controller<HttpContextContract> {
