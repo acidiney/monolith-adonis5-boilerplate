@@ -77,7 +77,7 @@
       {
         "name": "unit",
         "files": [
-          "app/modules/**/*.spec.ts"
+          "app/modules/**/*.adonis-spec.ts"
         ],
         "timeout": 60000
       }

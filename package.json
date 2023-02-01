@@ -7,7 +7,7 @@
     "build": "node ace build --production",
     "start": "node server.js",
     "lint": "eslint . --ext=.ts",
-    "test": "node ace test"
+    "test": "jest"
   },
   "eslintConfig": {
     "extends": [
@@ -24,13 +24,18 @@
     "@intlify/unplugin-vue-i18n": "^0.8.1",
     "@japa/preset-adonis": "^1.2.0",
     "@japa/runner": "^2.2.2",
+    "@swc/jest": "^0.2.24",
     "@symfony/webpack-encore": "^4.1.1",
+    "@types/jest": "^29.4.0",
     "@types/proxy-addr": "^2.0.0",
     "@types/source-map-support": "^0.5.6",
     "adonis-preset-ts": "^2.1.0",
     "eslint": "^8.32.0",
     "eslint-plugin-adonis": "^2.1.1",
+    "jest": "^29.0.0",
     "pino-pretty": "^9.1.1",
+    "ts-jest": "^29.0.5",
+    "ts-node": "^10.9.1",
     "typescript": "~4.6",
     "vue-loader": "^17.0.1",
     "webpack": "^5.75.0",
@@ -68,5 +73,9 @@
     "vue-feather": "^2.0.0",
     "vue-i18n": "^9.3.0-beta.16",
     "yup": "^0.32.11"
+  },
+  "volta": {
+    "node": "18.13.0",
+    "npm": "8.11.0"
   }
 }
