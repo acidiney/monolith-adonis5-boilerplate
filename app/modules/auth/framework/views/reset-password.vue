@@ -1,15 +1,14 @@
 <script setup>
-import AuthLayout from "./layouts/authentication.vue";
-import AppButton from "@core/components/app-button.vue";
-import {
-  Field as VField,
-  Form as VForm,
-  ErrorMessage as VErrorMessage,
-} from "vee-validate";
-import { router } from "@inertiajs/vue3";
-
 import * as yup from "yup";
-import { ref, computed } from "@vue/reactivity";
+import { ref, computed } from "vue";
+import { router } from "@inertiajs/vue3";
+import {
+  Field,
+  Form,
+  ErrorMessage,
+} from "vee-validate";
+
+import AuthLayout from "./layouts/authentication.vue";
 
 const isLoading = ref(false);
 const showPassword = ref(false);
@@ -42,134 +41,16 @@ const schema = computed(() => ({
 defineProps(["token"]);
 </script>
 
-<style scoped>
-.Text-input-login {
-  position: relative;
-  width: 100%;
-  height: 45px;
-}
-.input-login::placeholder {
-  color: transparent;
-}
-.y {
-  animation: tranX 1s backwards;
-}
-.input-login {
-  border: 1px solid #ddd;
-  width: 100%;
-  background: transparent;
-  color: #000;
-  height: 100%;
-  border-radius: 5px;
-  font-size: 12.5px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: 0.1s;
-  outline: none;
-  z-index: 1;
-  padding: 0px 16px;
-}
-.label-login {
-  z-index: 10;
-  position: absolute;
-  top: 0.5rem;
-  left: 1rem;
-  /* background: #fff; */
-  padding: 5px;
-  font-size: 15px;
-  color: #36404a;
-  pointer-events: none;
-  transition: all 0.2s;
-}
-
-.input-login:-internal-autofill-selected {
-  /* appearance: menulist-button; */
-  -webkit-appearance: none;
-  background-color: #fff !important;
-  background-image: none !important;
-  /* color: -internal-light-dark(black, white) !important; */
-}
-
-.input-login:focus {
-  border: 2px solid #1b66c9;
-}
-.input-login:focus + .label-login,
-.input-login:not(:placeholder-shown) + .label-login {
-  top: -8px;
-  font-size: 12px;
-  padding: 0 5px;
-  z-index: 33;
-  background: #fff;
-  color: #36404a;
-}
-
-.icone-login {
-  position: absolute;
-  right: 0%;
-  bottom: 0%;
-  display: flex;
-  border-radius: 5px;
-  align-items: center;
-  justify-content: center;
-  padding: 5px 20px;
-  background: #f5f5f7;
-  top: 0;
-  z-index: 444;
-}
-
-.zIndex {
-  z-index: 00;
-}
-.icone-login i {
-  font-size: 18px;
-  background: #f5f5f7;
-  color: black;
-}
-
-.loa {
-  margin: 10px 0;
-}
-
-.animate-slide-in-link {
-  animation: tranX 1s backwards;
-}
-.x {
-  animation: tranX 1s 250ms backwards;
-}
-.k {
-  animation: tranX 1s 350ms backwards;
-}
-.btn-login {
-  animation: tranX 1s 400ms backwards;
-}
-
-@keyframes tranX {
-  from {
-    transform: translateX(-125%);
-  }
-  to {
-    transform: translateX(0%);
-  }
-}
-
-.iva-feed {
-  position: absolute;
-  bottom: 0;
-  transform: translateY(23px);
-  margin: 5px 0;
-}
-</style>
-
 <template>
   <auth-layout>
-    <v-form @submit="onSubmit" :validation-schema="schema">
+    <Form @submit="onSubmit" :validation-schema="schema">
       <div class="mb-3">
-        <label for="confirmPassword" class="mt-3">{{
-          $t("auth.newPassword")
-        }}</label>
+        <label for="confirmPassword" class="mt-3">
+          {{ $t("auth.reset_password.new_password") }}
+        </label>
+
         <div class="input-group bg-light rounded flex mb-3 w-100">
-          <v-field
+          <Field
             name="password"
             id="password"
             class="form-control"
@@ -186,16 +67,16 @@ defineProps(["token"]);
         </div>
 
         <div class="invalid-feedback d-block iva-feed">
-          <v-error-message name="confirmPassword" />
+          <ErrorMessage name="confirmPassword" />
         </div>
       </div>
 
       <div class="mb-3" v-if="!showPassword">
-        <label for="confirmPassword" class="mt-3">{{
-          $t("auth.confirmPassword")
-        }}</label>
+        <label for="confirmPassword" class="mt-3">
+          {{ $t("auth.reset_password.confirm_password") }}
+        </label>
         <div class="input-group bg-light rounded flex w-100">
-          <v-field
+          <Field
             name="confirmPassword"
             id="confirmPassword"
             class="form-control"
@@ -203,7 +84,7 @@ defineProps(["token"]);
           />
         </div>
         <div class="invalid-feedback d-block iva-feed">
-          <v-error-message name="confirmPassword" />
+          <ErrorMessage name="confirmPassword" />
         </div>
       </div>
 
@@ -211,10 +92,10 @@ defineProps(["token"]);
         type="submit"
         :isLoading="isLoading"
         customClasses="btn btn-primary btn-block px-4"
-        :loadingText="$t('auth.resetPasswordEvent')"
+        :loadingText="$t('auth.reset_password.button_label_event')"
       >
-        {{ $t("auth.resetPassword") }}
+        {{ $t("auth.reset_password.button_label") }}
       </app-button>
-    </v-form>
+    </Form>
   </auth-layout>
 </template>

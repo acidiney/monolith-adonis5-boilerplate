@@ -5,8 +5,6 @@ import { ref, computed } from "@vue/reactivity";
 import { Field, Form, ErrorMessage } from "vee-validate";
 import AuthLayout from "./layouts/authentication.vue";
 
-defineProps(["errors"]);
-
 function onSubmit(values) {
   console.log(values)
   isLoading.value = true;
@@ -17,11 +15,13 @@ function onSubmit(values) {
   });
 }
 
-const schema = computed(() => {
+const schema = computed(() => ({
   username: yup.string().required().email()
-});
+}));
 
 const isLoading = ref(false);
+
+defineProps(["errors"]);
 </script>
 
 
@@ -30,13 +30,13 @@ const isLoading = ref(false);
     <Form @submit="onSubmit" :validation-schema="schema">
       <div class="input-group mb-3">
         <p class="text-muted">
-          {{ $t("auth.resetPasswordInstructions") }}
+          {{ $t("auth.send_reset_password.description") }}
         </p>
 
         <div class="w-100">
-          <label for="username">E-mail</label>
+          <label for="username">{{ $t('auth.send_reset_password.username') }}</label>
           <div class="input-group bg-light rounded flex w-100 mb-1">
-            <Field name="username" id="username" class="form-control" />
+            <Field name="username" type="email" id="username" class="form-control" />
             <span class="input-group-append">
               <button class="btn no-bg no-shadow" type="button">
                 <app-icon icon="user" class="text-fade" />
@@ -50,18 +50,18 @@ const isLoading = ref(false);
       </div>
 
       <div class="my-3">
-        <router-link href="/auth/login">{{
-          $t("auth.backToLogin")
-        }}</router-link>
+        <router-link href="/auth/login">
+          {{$t("auth.shared.back_login") }}
+        </router-link>
       </div>
 
       <app-button
         type="submit"
         :isLoading="isLoading"
         customClasses="btn btn-primary btn-block px-4"
-        :loadingText="$t('auth.sendResetPasswordInstructionsEvent')"
+        :loadingText="$t('auth.send_reset_password.send_link_event')"
       >
-        {{ $t("auth.sendResetPasswordInstructions") }}
+        {{ $t("auth.send_reset_password.send_link") }}
       </app-button>
     </Form>
   </auth-layout>

@@ -9,7 +9,7 @@
   "private": true,
   "scripts": {
     "prepare": "husky install",
-    "dev": "node ace serve --watch",
+    "dev": "node ace serve --watch  --encore-args='--host 0.0.0.0'",
     "build": "node ace build --production",
     "start": "node server.js",
     "lint": "eslint . --ext=.ts",
@@ -23,7 +23,11 @@
     "test:verbose": "jest --runInBand --passWithNoTests",
     "t:v": "npm run test:verbose",
     "test:verbose:watch": "npm run t:v -- -- --watchAll",
-    "t:v:w": "npm run test:verbose:watch"
+    "t:v:w": "npm run test:verbose:watch",
+    "cypress:open": "cypress open",
+    "c:o": "npm run cypress:open",
+    "cypress:dev:server": "node ace serve --encore-args='--host 0.0.0.0'",
+    "c:d:s": "node ace serve --encore-args='--host 0.0.0.0'"
   },
   "eslintConfig": {
     "extends": [
@@ -48,6 +52,7 @@
     "@types/proxy-addr": "2.0.0",
     "@types/source-map-support": "0.5.6",
     "adonis-preset-ts": "2.1.0",
+    "cypress": "^12.5.0",
     "eslint": "8.32.0",
     "eslint-plugin-adonis": "2.1.1",
     "husky": "^8.0.3",
@@ -81,6 +86,7 @@
     "@rocketseat/adonis-bull": "1.0.4",
     "@sentry/node": "7.31.1",
     "@sentry/tracing": "7.31.1",
+    "@vue/reactivity": "^3.2.45",
     "@vue/server-renderer": "3.2.45",
     "luxon": "3.2.1",
     "mysql2": "^3.1.0",

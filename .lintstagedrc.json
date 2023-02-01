@@ -1,7 +1,6 @@
 {
   "*.ts": [
     "npm run lint",
-    "npm t",
-    "npm run t:j"
+    "npm t"
   ]
 }

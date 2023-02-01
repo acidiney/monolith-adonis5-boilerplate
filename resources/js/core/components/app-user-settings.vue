@@ -11,7 +11,7 @@ const useLogout = () => {
     <a
       href="#"
       data-toggle="dropdown"
-      class="nav-link d-flex align-items-center px-2 text-color"
+      class="nav-link d-flex align-items-center px-2 text-color user-dropdown"
     >
       <span class="avatar w-24" style="margin: -2px">
         <img
@@ -31,7 +31,7 @@ const useLogout = () => {
       <router-link class="dropdown-item" href="/account/settings">
         <span>{{ $t('menu.settings') }}</span>
       </router-link>
-      <a class="dropdown-item" @click="useLogout">
+      <a class="dropdown-item button-logout" @click="useLogout">
       {{ $t('shared.logout') }}
     </a>
     </div>

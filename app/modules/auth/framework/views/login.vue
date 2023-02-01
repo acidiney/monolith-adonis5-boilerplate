@@ -1,9 +1,9 @@
 <script setup>
 import * as yup from "yup";
+import { useI18n } from 'vue-i18n'
 import { reactive, computed } from "vue";
 import { router, usePage } from "@inertiajs/vue3";
 import { Field, Form, ErrorMessage } from "vee-validate";
-import { useI18n } from 'vue-i18n'
 
 import AuthLayout from "./layouts/authentication.vue";
 
@@ -27,16 +27,12 @@ function onSubmit(values) {
 
 const { t } = useI18n()
 const schema = computed(() => ({
-  username: yup.string().required(
-    t('auth.validation.username.required')
-  ).email(
-    t('auth.validation.username.email')
-  ),
-  password: yup.string().required(
-    t('auth.validation.password.required')
-  ).min(8,
-    t('auth.validation.password.minLength')
-  ),
+  username: yup.string()
+    .required(t('auth.validation.username.required'))
+    .email(t('auth.validation.username.email')),
+  password: yup.string()
+    .required(t('auth.validation.password.required'))
+    .min(8, t('auth.validation.password.minLength')),
 }));
 
 const errors = computed(() => usePage().props.errors)
@@ -48,7 +44,7 @@ const errors = computed(() => usePage().props.errors)
       <label for="username">{{ $t("auth.frontend.field_email") }}</label>
 
       <div class="input-group flex bg-light rounded">
-        <Field class="form-control" name="username" id="username" />
+        <Field class="form-control" type="email" name="username" id="username" />
 
         <span class="input-group-append">
           <button class="btn no-bg no-shadow" type="button">
