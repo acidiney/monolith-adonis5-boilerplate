@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe('Login', function () {
   it('should authenticate', () => {
     cy.visit('/auth/login')

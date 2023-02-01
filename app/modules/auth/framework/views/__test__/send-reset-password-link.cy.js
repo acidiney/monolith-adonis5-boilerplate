@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe('SendResetPasswordLink', () => {
   it('should send reset password link', () => {
     cy.visit('auth/reset/password')

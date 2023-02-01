@@ -5,7 +5,7 @@ import {
   VerifyPasswordMatchAdapter,
 } from 'app/modules/auth/usecases'
 import {makeFindUsernameRepositoryStub, makeVerifyPasswordMatchAdapterStub} from './__test__'
-import {UserNameNotFoundError, UserPasswordMisMatch} from 'app/modules/auth/domain/errors'
+import {UserNameNotFoundError, UserPasswordMismatchError} from 'app/modules/auth/domain/errors'
 
 interface SutTypes {
   sut: AuthenticateUserUseCase,
@@ -56,7 +56,7 @@ describe('AuthenticateUserUseCase', () => {
     })
 
     expect(output.isLeft()).toBeTruthy()
-    expect(output.value).toBeInstanceOf(UserPasswordMisMatch)
+    expect(output.value).toBeInstanceOf(UserPasswordMismatchError)
   })
 
   it('should throws when findUsernameRepository throws', async () => {

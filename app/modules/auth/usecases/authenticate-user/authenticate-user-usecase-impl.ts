@@ -1,5 +1,5 @@
 import {AuthenticateUserInput, AuthenticateUserOutput, AuthenticateUserUseCase} from 'app/modules/auth/domain/usecases'
-import {UserNameNotFoundError, UserPasswordMisMatch} from 'app/modules/auth/domain/errors'
+import {UserNameNotFoundError, UserPasswordMismatchError} from 'app/modules/auth/domain/errors'
 import {Either, left, right} from 'app/core/domain'
 import {FindUsernameRepository} from 'app/modules/auth/usecases'
 import {VerifyPasswordMatchAdapter} from 'app/modules/auth/usecases/authenticate-user/ports'
@@ -12,7 +12,7 @@ export class AuthenticateUserUseCaseImpl implements AuthenticateUserUseCase {
   }
 
   public async perform (input: AuthenticateUserInput): Promise<
-    Either<UserNameNotFoundError | UserPasswordMisMatch, AuthenticateUserOutput>
+    Either<UserNameNotFoundError | UserPasswordMismatchError, AuthenticateUserOutput>
     > {
     const user = await this.findUsernameRepository.findUsername(input.username)
 
@@ -23,7 +23,7 @@ export class AuthenticateUserUseCaseImpl implements AuthenticateUserUseCase {
     const result = await this.verifyPasswordMatchAdapter.compare(user.password, input.password)
 
     if (!result) {
-      return left(new UserPasswordMisMatch())
+      return left(new UserPasswordMismatchError())
     }
 
     return right({

@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe('Logout', function () {
   it('should do logout', () => {
     cy.visit('/auth/login')

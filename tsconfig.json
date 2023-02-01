@@ -5,7 +5,8 @@
   ],
   "exclude": [
     "node_modules",
-    "build"
+    "build",
+    "cypress.config.ts"
   ],
   "compilerOptions": {
     "outDir": "build",
