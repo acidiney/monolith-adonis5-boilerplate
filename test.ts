@@ -41,5 +41,5 @@ kernel
       cwd: kernel.application.appRoot,
     })
 
-    run()
+    void run()
   })
