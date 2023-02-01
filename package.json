@@ -14,7 +14,7 @@
     "t:c": "npm run test:coverage",
     "test:verbose": "jest --runInBand --passWithNoTests",
     "t:v": "npm run test:verbose",
-    "test:verbose:watch": "npm run t:v -- --watchAll",
+    "test:verbose:watch": "npm run t:v -- -- --watchAll",
     "t:v:w": "npm run test:verbose:watch"
   },
   "eslintConfig": {

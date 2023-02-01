@@ -5,6 +5,7 @@ import {
   VerifyPasswordMatchAdapter,
 } from 'app/modules/auth/usecases'
 import {makeFindUsernameRepositoryStub, makeVerifyPasswordMatchAdapterStub} from './__test__'
+import {UserNameNotFoundError, UserPasswordMisMatch} from 'app/modules/auth/domain/errors'
 
 interface SutTypes {
   sut: AuthenticateUserUseCase,
@@ -28,12 +29,62 @@ const makeSut = (): SutTypes => {
 }
 
 describe('AuthenticateUserUseCase', () => {
-  test('it should not found a user', async () => {
+  it('should not found a user', async () => {
+    const { sut, findUsernameRepositoryStub } = makeSut()
+
+    jest.spyOn(findUsernameRepositoryStub, 'findUsername')
+      .mockReturnValueOnce(Promise.resolve(undefined))
+
+    const output = await sut.perform({
+      username: 'invalid@mail.com',
+      password: 'valid_password',
+    })
+
+    expect(output.isLeft()).toBeTruthy()
+    expect(output.value).toBeInstanceOf(UserNameNotFoundError)
+  })
+
+  it('should not match passwords', async () => {
+    const { sut, verifyPasswordMatchAdapterStub } = makeSut()
+
+    jest.spyOn(verifyPasswordMatchAdapterStub, 'compare')
+      .mockReturnValueOnce(Promise.resolve(false))
+
+    const output = await sut.perform({
+      username: 'valid@mail.com',
+      password: 'invalid_password',
+    })
+
+    expect(output.isLeft()).toBeTruthy()
+    expect(output.value).toBeInstanceOf(UserPasswordMisMatch)
+  })
+
+  it('should throws when findUsernameRepository throws', async () => {
+    const { sut, findUsernameRepositoryStub } = makeSut()
+
+    const error = new Error('Database Error')
+    jest.spyOn(findUsernameRepositoryStub, 'findUsername')
+      .mockReturnValueOnce(Promise.reject(error))
+
+    const output = sut.perform({
+      username: 'valid@mail.com',
+      password: 'valid_password',
+    })
+
+    await expect(output).rejects.toThrow(error)
+  })
+
+  it('should return userId when succeed', async () => {
     const { sut } = makeSut()
 
-    console.log(await sut.perform({
-      password: 'valid',
-      username: 'valid',
-    }))
+    const output = await sut.perform({
+      username: 'valid@mail.com',
+      password: 'valid_password',
+    })
+
+    expect(output.isRight())
+    expect(output.value).toEqual({
+      userId: 'valid_user_id',
+    })
   })
 })
