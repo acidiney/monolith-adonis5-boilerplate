@@ -1,12 +1,12 @@
 import { Either, left, right } from 'app/core/domain'
 import { UserNameNotFoundError } from '../../domain/errors'
 import { SendResetPasswordInput, SendResetPasswordUseCase } from '../../domain/usecases'
-import { FindUsernameRepository, GenerateRestPasswordTokenRepository, SendResetPasswordLinkService } from './ports'
+import { FindUsernameRepository, GenerateResetPasswordTokenRepository, SendResetPasswordLinkService } from './ports'
 
 export class SendResetPasswordUseCaseImpl implements SendResetPasswordUseCase {
   constructor (
     private readonly findUsernameRepository: FindUsernameRepository,
-    private readonly generateResetPasswordTokenRepository: GenerateRestPasswordTokenRepository,
+    private readonly generateResetPasswordTokenRepository: GenerateResetPasswordTokenRepository,
     private readonly sendResetPasswordLinkService: SendResetPasswordLinkService
   ) {}
 

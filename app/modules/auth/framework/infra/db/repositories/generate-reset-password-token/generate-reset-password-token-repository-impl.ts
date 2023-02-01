@@ -1,10 +1,10 @@
 import { UniqueEntityID } from 'app/core/domain'
-import { GenerateRestPasswordTokenRepository } from 'app/modules/auth/usecases'
+import { GenerateResetPasswordTokenRepository } from 'app/modules/auth/usecases'
 
 import { HashAdapter } from './ports/hash-adapter'
 import { TokenTypes, TokenModel } from '../../models/token-model'
 
-export class GenerateResetPasswordTokenRepositoryImpl implements GenerateRestPasswordTokenRepository {
+export class GenerateResetPasswordTokenRepositoryImpl implements GenerateResetPasswordTokenRepository {
   constructor (
     private readonly hashAdapter: HashAdapter
   ) {}

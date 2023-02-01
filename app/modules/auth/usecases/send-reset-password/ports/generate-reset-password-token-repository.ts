@@ -1,4 +1,4 @@
 import { UniqueEntityID } from 'App/core/domain'
-export interface GenerateRestPasswordTokenRepository {
+export interface GenerateResetPasswordTokenRepository {
   generate(userId: UniqueEntityID): Promise<string>
 }
