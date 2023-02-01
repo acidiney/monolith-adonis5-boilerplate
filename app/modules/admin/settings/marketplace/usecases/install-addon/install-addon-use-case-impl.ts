@@ -1,4 +1,3 @@
-import { InstallAddonController } from './../../framework/main/controllers/install-addon/install-addon-controller'
 import { UniqueEntityID } from 'app/core/domain'
 import { InstallAddonUseCase } from './../../domain/usecases/install-addon-usecase'
 import { InstallAddonViaCommandService, PersistInstalledAddonRepository } from './ports'

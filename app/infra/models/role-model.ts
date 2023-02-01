@@ -3,7 +3,6 @@ import { slugify } from '@ioc:Adonis/Addons/LucidSlugify'
 import { BaseModel, beforeSave, column, HasMany, hasMany, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import { UserModel } from './user-model'
-import { RolePermissionModel } from './role-permission-model'
 import { PermissionModel } from './permission-model'
 
 export class RoleModel extends BaseModel {

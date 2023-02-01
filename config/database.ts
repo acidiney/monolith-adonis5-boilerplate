@@ -71,6 +71,34 @@ const databaseConfig: DatabaseConfig = {
       healthCheck: true,
       debug: Application.inDev,
     },
+
+    sqlite: {
+      client: 'sqlite',
+      connection: {
+        filename: Application.tmpPath('db.sqlite3'),
+      },
+      pool: {
+        afterCreate: (conn, cb) => {
+          conn.run('PRAGMA foreign_keys=true', cb)
+        },
+      },
+      migrations: {
+        naturalSort: true,
+        paths: [
+          './database/migrations',
+          ...migrations,
+        ],
+      },
+      seeders: {
+        paths: [
+          './database/seeders',
+          ...seeders,
+        ],
+      },
+      useNullAsDefault: true,
+      healthCheck: false,
+      debug: false,
+    },
   },
 }
 

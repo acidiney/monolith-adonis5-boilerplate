@@ -75,9 +75,16 @@
   "tests": {
     "suites": [
       {
-        "name": "unit",
+        "name": "functional",
         "files": [
-          "app/modules/**/*.adonis-spec.ts"
+          "app/modules/**/*.test.ts"
+        ],
+        "timeout": 60000
+      },
+      {
+        "name": "internal",
+        "files": [
+          "tests/functional/*.test.ts"
         ],
         "timeout": 60000
       }

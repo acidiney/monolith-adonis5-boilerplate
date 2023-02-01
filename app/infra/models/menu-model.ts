@@ -1,7 +1,6 @@
-import { cuid } from '@ioc:Adonis/Core/Helpers'
-import { BaseModel, beforeCreate, beforeFetch, column } from '@ioc:Adonis/Lucid/Orm'
-import { DateTime } from 'luxon'
-import { capitalize } from 'vue'
+import {cuid} from '@ioc:Adonis/Core/Helpers'
+import {BaseModel, beforeCreate, beforeFetch, column} from '@ioc:Adonis/Lucid/Orm'
+import {DateTime} from 'luxon'
 
 export interface Menu {
   display: string
@@ -12,7 +11,6 @@ export interface Menu {
 
 export class MenuModel extends BaseModel {
   public static table = 'menus'
-  public static selfAssignPrimaryKey = true
 
   @column({ isPrimary: true })
   public id: string
@@ -69,13 +67,12 @@ export class MenuModel extends BaseModel {
         const principalMenus = menus.filter((menu) => !menu.belongsTo)
 
         return principalMenus.map((menu) => {
-          const menuMapped = this.constructMenuMapped({
+          return this.constructMenuMapped({
             display: menu.display,
             icon: menu.icon,
             url: menu.url,
             children: this.createSubMenuStructure(menus, menu.slug),
           })
-          return menuMapped
         })
       })
   }
