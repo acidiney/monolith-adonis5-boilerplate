@@ -1,6 +1,7 @@
 <script setup>
 import * as yup from "yup";
 import { ref, computed } from "vue";
+import { useI18n } from 'vue-i18n'
 import { router } from "@inertiajs/vue3";
 import {
   Field,
@@ -9,6 +10,9 @@ import {
 } from "vee-validate";
 
 import AuthLayout from "./layouts/authentication.vue";
+const props = defineProps({
+  token: String
+});
 
 const isLoading = ref(false);
 const showPassword = ref(false);
@@ -24,27 +28,33 @@ function onSubmit(values) {
     values.confirmPassword = values.password;
   }
 
-  router.post(`/auth/reset/password/${this.token}`, values, {
+  router.post(`/auth/reset/password/${props.token}`, values, {
     onFinish: () => {
       isLoading.value = false;
     },
   });
 }
+const { t } = useI18n()
 
 const schema = computed(() => ({
-  password: yup.string().required().min(8),
-  confirmPassword: this.showPassword
+  password: yup.string()
+    .required(t('auth.validation.password.required'))
+    .min(8, t('auth.validation.password.minLength')),
+  confirmPassword: showPassword.value
     ? yup.string().min(8)
     : yup.string().required().min(8),
 }));
 
-defineProps(["token"]);
 </script>
 
 <template>
   <auth-layout>
     <Form @submit="onSubmit" :validation-schema="schema">
       <div class="mb-3">
+        <p class="text-muted">
+          {{ $t("auth.reset_password.description") }}
+        </p>
+
         <label for="confirmPassword" class="mt-3">
           {{ $t("auth.reset_password.new_password") }}
         </label>
@@ -67,7 +77,7 @@ defineProps(["token"]);
         </div>
 
         <div class="invalid-feedback d-block iva-feed">
-          <ErrorMessage name="confirmPassword" />
+          <ErrorMessage name="password" />
         </div>
       </div>
 

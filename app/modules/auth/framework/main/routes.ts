@@ -2,6 +2,7 @@ import Route from '@ioc:Adonis/Core/Route'
 import { routeAdapter } from 'app/core/adapters/route-adapter'
 import { makeLogoutFactory, makeSignInController } from './factories'
 import { makeSendResetPasswordController } from './factories/send-reset-password-link-factory'
+import {makeResetPasswordFactory} from 'app/modules/auth/framework/main/factories/reset-password-factory'
 
 Route.group(() => {
   Route.get('/', ({ response }) => {
@@ -10,16 +11,24 @@ Route.group(() => {
 
   Route.inertia('/login', 'auth/framework/views/login')
   Route.inertia('/reset/password', 'auth/framework/views/send-reset-password-link')
+
   Route.get('/reset/password/:token', ({ params, inertia }) => {
     const { token } = params
 
-    return inertia.render('auth/reset-password', { token })
+    return inertia.render('auth/framework/views/reset-password', { token })
   })
 
   Route.post('/reset/send-mail',
     routeAdapter(makeSendResetPasswordController(), {
       operation: 'send-reset-password-mail',
       description: 'A user can ask for a recovery token',
+    })
+  )
+
+  Route.post('/reset/password/:token',
+    routeAdapter(makeResetPasswordFactory(), {
+      operation: 'reset-password',
+      description: 'Reset a user password using token and password',
     })
   )
 

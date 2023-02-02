@@ -2,7 +2,8 @@ import { UniqueEntityID } from 'app/core/domain'
 import { GenerateResetPasswordTokenRepository } from 'app/modules/auth/usecases'
 
 import { HashAdapter } from './ports/hash-adapter'
-import { TokenTypes, TokenModel } from '../../models/token-model'
+import { TokenModel } from '../../models/token-model'
+import {TokenTypes} from 'app/modules/auth/domain'
 
 export class GenerateResetPasswordTokenRepositoryImpl implements GenerateResetPasswordTokenRepository {
   constructor (

@@ -8,7 +8,7 @@ export class SendResetPasswordController implements Controller<HttpContextContra
     private readonly sendResetPasswordUseCase: SendResetPasswordUseCase
   ) {}
 
-  public async perform ({ request, response, logger, session, i18n }) {
+  public async perform ({ request, response, logger, session, i18n }: HttpContextContract) {
     const validation = await request.validate(SendResetPasswordLinkValidator)
       .catch((e) => {
         session.flash('errors', e)

@@ -1,12 +1,9 @@
-import { cuid } from '@ioc:Adonis/Core/Helpers'
 import { DateTime } from 'luxon'
 import * as crypto from 'crypto'
 
+import {TokenType} from 'app/modules/auth/domain'
+import { cuid } from '@ioc:Adonis/Core/Helpers'
 import { BaseModel, beforeCreate, column } from '@ioc:Adonis/Lucid/Orm'
-
-export enum TokenTypes {
-  RECOVER_PASSWORD = 'recover_password',
-}
 
 export class TokenModel extends BaseModel {
   public static table = 'tokens'
@@ -16,7 +13,7 @@ export class TokenModel extends BaseModel {
   public id: string
 
   @column()
-  public type: TokenTypes
+  public type: TokenType
 
   @column()
   public token: string
@@ -31,7 +28,7 @@ export class TokenModel extends BaseModel {
   public createdAt: DateTime
 
   @column.dateTime()
-  public expires_at: DateTime
+  public expiresAt: DateTime
 
   @beforeCreate()
   public static async setId (model: TokenModel) {

@@ -3,7 +3,7 @@ import {
   ResetPasswordUseCaseInput,
   ResetPasswordUseCaseResult,
 } from 'app/modules/auth/domain/usecases'
-import {FindTokenRepository, FindUserIdRepository, UpdateUserRepository} from './ports'
+import {FindTokenRepository, FindUserIdRepository, UpdateTokenRepository, UpdateUserRepository} from './ports'
 import {EventDispatcher, left, right} from 'app/core/domain'
 import {
   TokenExpiredError,
@@ -12,12 +12,14 @@ import {
 } from 'app/modules/auth/domain/errors'
 import {TokenEntity} from 'app/modules/auth/domain'
 import {PasswordChangedEvent} from 'app/modules/auth/domain/events/password-changed-event'
+import {TokenRevokedEvent} from 'app/modules/auth/domain/events/token-revoked-event'
 
 export class ResetPasswordUseCaseImpl implements ResetPasswordUseCase {
   constructor (
     private readonly findTokenRepository: FindTokenRepository,
     private readonly findUserIdRepository: FindUserIdRepository,
-    private readonly userUserRepository: UpdateUserRepository,
+    private readonly updateUserRepository: UpdateUserRepository,
+    private readonly updateTokenRepository: UpdateTokenRepository,
     private readonly eventEmitter: EventDispatcher
   ) {
   }
@@ -65,11 +67,20 @@ export class ResetPasswordUseCaseImpl implements ResetPasswordUseCase {
       return left(passwordUpdated.value)
     }
 
-    await this.userUserRepository.update(user)
+    await this.updateUserRepository.update(user)
+
+    token.revoke()
+    await this.updateTokenRepository.update(token)
 
     this.eventEmitter.publish(new PasswordChangedEvent({
       userId: user.id,
       success: true,
+    }))
+
+    this.eventEmitter.publish(new TokenRevokedEvent({
+      userId: user.id,
+      token: token.token,
+      tokenType: token.tokenType,
     }))
 
     return right(true)
