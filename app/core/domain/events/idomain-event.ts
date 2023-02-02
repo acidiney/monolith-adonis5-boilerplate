@@ -1,7 +1,7 @@
 import { UniqueEntityID } from 'App/core/domain'
 
-export interface IDomainEvent {
+export interface IDomainEvent<T = any> {
   dateTimeOccurred: Date
-  eventData: any
+  eventData: T
   eventId: () => UniqueEntityID
 }

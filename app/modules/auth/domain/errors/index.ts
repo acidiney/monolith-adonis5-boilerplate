@@ -1,5 +1,5 @@
-export * from './username-not-found-error'
-export * from './user-password-mismatch-error'
+export * from './user-not-found-error'
+export * from './password-mismatch-error'
 export * from './token-not-found-error'
 export * from './token-expired-error'
 export * from './token-revoked-error'

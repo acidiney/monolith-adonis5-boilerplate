@@ -1,5 +1,5 @@
 import { Either, left, right } from 'app/core/domain'
-import { UserNameNotFoundError } from '../../domain/errors'
+import { UserNotFoundError } from '../../domain/errors'
 import { SendResetPasswordInput, SendResetPasswordUseCase } from '../../domain/usecases'
 import { FindUsernameRepository, GenerateResetPasswordTokenRepository, SendResetPasswordLinkService } from './ports'
 
@@ -10,11 +10,11 @@ export class SendResetPasswordUseCaseImpl implements SendResetPasswordUseCase {
     private readonly sendResetPasswordLinkService: SendResetPasswordLinkService
   ) {}
 
-  public async perform (input: SendResetPasswordInput): Promise<Either<UserNameNotFoundError, boolean>> {
+  public async perform (input: SendResetPasswordInput): Promise<Either<UserNotFoundError, boolean>> {
     const user = await this.findUsernameRepository.findUsername(input.username)
 
     if (!user) {
-      return left(new UserNameNotFoundError())
+      return left(new UserNotFoundError())
     }
 
     const token = await this.generateResetPasswordTokenRepository.generate(user.id)

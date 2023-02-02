@@ -8,7 +8,7 @@ export class EventDispatcher implements IEventDispatcher {
   private _eventHandlers: IEventHandlers = {}
   private static instance: EventDispatcher
 
-  public get eventHandlers (): IEventHandlers {
+  public eventHandlers (): IEventHandlers {
     return this._eventHandlers
   }
 

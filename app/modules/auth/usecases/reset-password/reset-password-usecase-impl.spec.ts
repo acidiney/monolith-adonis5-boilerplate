@@ -1,26 +1,47 @@
-import {FindTokenRepository} from './ports'
-import {makeFindTokenRepositoryStub} from './__test__'
+import {FindTokenRepository, FindUserIdRepository, UpdateUserRepository} from './ports'
+import {makeFindTokenRepositoryStub, makeUpdateUserRepositoryStub} from './__test__'
 
 import {ResetPasswordUseCaseImpl} from 'app/modules/auth/usecases'
 import {ResetPasswordUseCase} from 'app/modules/auth/domain/usecases'
 
-import {UniqueEntityID} from 'app/core/domain'
-import {TokenEntity, TokenRevokedError, TokenExpiredError, TokenNotFoundError} from '../../domain'
+import {EventDispatcher, IEventDispatcher, UniqueEntityID} from 'app/core/domain'
+import {
+  TokenEntity,
+  TokenRevokedError,
+  TokenExpiredError,
+  TokenNotFoundError,
+  PasswordMismatchError,
+} from '../../domain'
+import {makeFindUserIdRepositoryStub} from 'app/modules/auth/__test__'
+import {PasswordChangedEvent} from 'app/modules/auth/domain/events/password-changed-event'
 
 interface SutTypes {
   sut: ResetPasswordUseCase,
   findTokenRepositoryStub: FindTokenRepository,
+  findUserIdRepositoryStub: FindUserIdRepository,
+  updateUserRepositoryStub: UpdateUserRepository,
+  eventDispatcher: IEventDispatcher
 }
 
 const makeSut = (): SutTypes => {
   const findTokenRepositoryStub = makeFindTokenRepositoryStub()
+  const findUserIdRepositoryStub = makeFindUserIdRepositoryStub()
+  const updateUserRepositoryStub = makeUpdateUserRepositoryStub()
+  const eventDispatcher = new EventDispatcher()
+
   const sut = new ResetPasswordUseCaseImpl(
-    findTokenRepositoryStub
+    findTokenRepositoryStub,
+    findUserIdRepositoryStub,
+    updateUserRepositoryStub,
+    eventDispatcher,
   )
 
   return {
     sut,
     findTokenRepositoryStub,
+    findUserIdRepositoryStub,
+    updateUserRepositoryStub,
+    eventDispatcher,
   }
 }
 
@@ -95,5 +116,42 @@ describe('ResetPasswordUseCaseImpl', function () {
 
     expect(output.isLeft()).toBeTruthy()
     expect(output.value).toBeInstanceOf(TokenRevokedError)
+  })
+
+  it('should return password mismatch', async () => {
+    const { sut, eventDispatcher } = makeSut()
+    const eventDispatcherSpy = jest.spyOn(eventDispatcher, 'publish')
+
+    const output = await sut.perform({
+      token: 'valid_token',
+      password: 'valid_password',
+      confirmPassword: 'in_valid_password',
+    })
+
+    expect(output.isLeft()).toBeTruthy()
+    expect(output.value).toBeInstanceOf(PasswordMismatchError)
+    expect(eventDispatcherSpy).toBeCalledWith(new PasswordChangedEvent({
+      userId: new UniqueEntityID('valid_user_id'),
+      success: false,
+      error: PasswordMismatchError.name,
+    }))
+  })
+
+  it('should return success', async () => {
+    const { sut, eventDispatcher } = makeSut()
+
+    const eventDispatcherSpy = jest.spyOn(eventDispatcher, 'publish')
+
+    const output = await sut.perform({
+      token: 'valid_token',
+      password: 'valid_password',
+      confirmPassword: 'valid_password',
+    })
+
+    expect(output.isRight()).toBeTruthy()
+    expect(eventDispatcherSpy).toBeCalledWith(new PasswordChangedEvent({
+      userId: new UniqueEntityID('valid_user_id'),
+      success: true,
+    }))
   })
 })

@@ -10,7 +10,7 @@ import {
   SendResetPasswordLinkService,
   SendResetPasswordUseCaseImpl,
 } from 'app/modules/auth/usecases'
-import {UserNameNotFoundError} from 'app/modules/auth/domain/errors'
+import {UserNotFoundError} from 'app/modules/auth/domain/errors'
 import {SendResetPasswordUseCase} from 'app/modules/auth/domain/usecases'
 import {UniqueEntityID} from 'app/core/domain'
 
@@ -52,7 +52,7 @@ describe('SendResetPasswordUseCase', () => {
     })
 
     expect(output.isLeft()).toBeTruthy()
-    expect(output.value).toBeInstanceOf(UserNameNotFoundError)
+    expect(output.value).toBeInstanceOf(UserNotFoundError)
   })
 
   it ('should calls generatePasswordTokenRepository with userId', async () => {

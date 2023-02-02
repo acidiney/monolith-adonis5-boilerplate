@@ -1,5 +1,5 @@
 import { Either, UseCase } from 'app/core/domain'
-import { UserNameNotFoundError, UserPasswordMismatchError } from '../errors'
+import { UserNotFoundError, PasswordMismatchError } from '../errors'
 
 export interface AuthenticateUserInput {
   username: string,
@@ -11,4 +11,4 @@ export interface AuthenticateUserOutput {
 }
 
 export type AuthenticateUserUseCase = UseCase<AuthenticateUserInput,
-Either<UserNameNotFoundError | UserPasswordMismatchError, AuthenticateUserOutput>>
+Either<UserNotFoundError | PasswordMismatchError, AuthenticateUserOutput>>
