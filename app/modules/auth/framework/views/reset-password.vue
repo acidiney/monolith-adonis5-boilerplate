@@ -2,7 +2,7 @@
 import * as yup from "yup";
 import { ref, computed } from "vue";
 import { useI18n } from 'vue-i18n'
-import { router } from "@inertiajs/vue3";
+import { router, usePage } from "@inertiajs/vue3";
 import {
   Field,
   Form,
@@ -24,11 +24,11 @@ const toggleShowPassword = () => {
 function onSubmit(values) {
   isLoading.value = true;
 
-  if (!values.confirmPassword) {
-    values.confirmPassword = values.password;
-  }
-
-  router.post(`/auth/reset/password/${props.token}`, values, {
+  router.post(`/auth/reset/password`, {
+    token: props.token,
+    password: values.password,
+    confirmPassword: showPassword.value ? values.password : values.confirmPassword
+  }, {
     onFinish: () => {
       isLoading.value = false;
     },
@@ -44,6 +44,7 @@ const schema = computed(() => ({
     ? yup.string().min(8)
     : yup.string().required().min(8),
 }));
+const errors = computed(() => usePage().props.errors)
 
 </script>
 
@@ -78,6 +79,9 @@ const schema = computed(() => ({
 
         <div class="invalid-feedback d-block iva-feed">
           <ErrorMessage name="password" />
+          <template v-if="errors && errors.password">
+            <span v-for="error in errors.password"> {{ error }} </span>
+          </template>
         </div>
       </div>
 
@@ -95,6 +99,10 @@ const schema = computed(() => ({
         </div>
         <div class="invalid-feedback d-block iva-feed">
           <ErrorMessage name="confirmPassword" />
+
+          <template v-if="errors && errors.confirmPassword">
+            <span v-for="error in errors.confirmPassword"> {{ error }} </span>
+          </template>
         </div>
       </div>
 

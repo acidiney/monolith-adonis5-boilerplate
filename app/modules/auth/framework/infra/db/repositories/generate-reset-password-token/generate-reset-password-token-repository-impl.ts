@@ -1,3 +1,4 @@
+import * as luxon from 'luxon'
 import { UniqueEntityID } from 'app/core/domain'
 import { GenerateResetPasswordTokenRepository } from 'app/modules/auth/usecases'
 
@@ -17,6 +18,9 @@ export class GenerateResetPasswordTokenRepositoryImpl implements GenerateResetPa
       userId: userId.toString(),
       token: hash,
       type: TokenTypes.RECOVER_PASSWORD,
+      expiresAt: luxon.DateTime.fromJSDate(new Date()).plus({
+        hour: 24,
+      }),
     })
 
     return hash

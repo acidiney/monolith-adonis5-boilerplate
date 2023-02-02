@@ -1,4 +1,4 @@
-import luxon from 'luxon'
+import * as luxon from 'luxon'
 import {TokenEntity} from 'app/modules/auth/domain'
 import {Mapper, UniqueEntityID} from 'app/core/domain'
 import {TokenModel} from 'app/modules/auth/framework/infra/db/models/token-model'
@@ -14,10 +14,9 @@ export class TokenMapper implements Mapper<TokenEntity, TokenModel>{
     })
   }
 
-  public toPersistence (tokenEntity: TokenEntity): TokenModel {
-    const tokenModel = new TokenModel()
+  public async toPersistence (tokenEntity: TokenEntity): Promise<TokenModel> {
+    const tokenModel = await TokenModel.findOrFail(tokenEntity.id.toString())
 
-    tokenModel.id = tokenEntity.id.toString()
     tokenModel.type = tokenEntity.tokenType
     tokenModel.token = tokenEntity.token
     tokenModel.expiresAt = luxon.DateTime.fromJSDate(tokenEntity.expiredAt)

@@ -13,7 +13,7 @@ export class ResetPasswordController implements Controller<HttpContextContract> 
   public async perform ({ session, request, response, i18n }: HttpContextContract): Promise<any> {
     const validation = await request.validate(ResetPasswordValidator)
       .catch((e) => {
-        session.flash('errors', e)
+        session.flash('errors', e.messages)
       })
 
     if (!validation) {
@@ -23,11 +23,13 @@ export class ResetPasswordController implements Controller<HttpContextContract> 
     const output = await this.resetPasswordUseCase.perform({
       token: validation.token,
       password: validation.password,
-      confirmPassword: validation.confirmPassword,
+      confirmPassword: validation.password,
     })
 
     if (output.isLeft()) {
-      session.flash('errors', i18n.formatMessage(output.value.errorMessage))
+      session.flash('errors', {
+        message: i18n.formatMessage(output.value.errorMessage),
+      })
 
       return response.redirect().back()
     }

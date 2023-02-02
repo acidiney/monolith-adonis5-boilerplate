@@ -25,7 +25,7 @@ Route.group(() => {
     })
   )
 
-  Route.post('/reset/password/:token',
+  Route.post('/reset/password',
     routeAdapter(makeResetPasswordFactory(), {
       operation: 'reset-password',
       description: 'Reset a user password using token and password',

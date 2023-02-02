@@ -11,10 +11,9 @@ export class UserMapper extends Mapper<UserEntity, UserModel> {
     })
   }
 
-  public toPersistence (userEntity: UserEntity): UserModel {
-    const userModel = new UserModel()
+  public async toPersistence (userEntity: UserEntity): Promise<UserModel> {
+    const userModel = await UserModel.findOrFail(userEntity.id.toString())
 
-    userModel.id = userEntity.id.toString()
     userModel.email = userEntity.email
     userModel.password = userEntity.password
 

@@ -8,7 +8,7 @@ export class UpdateUserRepositoryImpl implements UpdateUserRepository {
   ) {
   }
   public async update (user: UserEntity): Promise<void> {
-    const userModel = this.userMapper.toPersistence(user)
+    const userModel = await this.userMapper.toPersistence(user)
 
     await userModel.save()
   }

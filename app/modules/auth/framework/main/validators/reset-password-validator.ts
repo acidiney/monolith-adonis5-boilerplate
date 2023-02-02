@@ -6,8 +6,11 @@ export class ResetPasswordValidator {
 
   public schema = schema.create({
     token: schema.string({}, [rules.required(), rules.trim()]),
-    password: schema.string({}, [rules.required(), rules.minLength(8), rules.trim()]),
-    confirmPassword: schema.string({}, [rules.equalTo('password')]),
+    password: schema.string({}, [rules.required(),
+      rules.minLength(8),
+      rules.trim(),
+      rules.confirmed('confirmPassword'),
+    ]),
   })
 
   /**
@@ -25,6 +28,6 @@ export class ResetPasswordValidator {
     'token.required': this.ctx.i18n.formatMessage('auth.validation.token.required'),
     'password.required': this.ctx.i18n.formatMessage('auth.validation.password.required'),
     'password.minLength': this.ctx.i18n.formatMessage('auth.validation.password.minLength'),
-    'confirmPassword.equalTo': this.ctx.i18n.formatMessage('auth.validation.confirmPassword.mismatch'),
+    'confirmPassword.equalTo': this.ctx.i18n.formatMessage('auth.validation.password.confirmed'),
   }
 }

@@ -8,7 +8,7 @@ export class UpdateTokenRepositoryImpl implements UpdateTokenRepository {
   ) {}
 
   public async update (tokenEntity: TokenEntity): Promise<void> {
-    const tokenModel = this.tokenMapper.toPersistence(tokenEntity)
+    const tokenModel = await this.tokenMapper.toPersistence(tokenEntity)
 
     await tokenModel.save()
   }

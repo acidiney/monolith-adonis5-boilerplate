@@ -23,5 +23,9 @@
   "auth.validation.username.required": "Username é obrigatório!",
   "auth.validation.username.email": "Username precisa ser um e-mail valido",
   "auth.validation.password.required": "Password é obrigatório!",
-  "auth.validation.password.minLength": "Password é menor que 8 caracteres!"
+  "auth.validation.password.minLength": "Password é menor que 8 caracteres!",
+  "auth.reset_password.token.revoked": "Token de recuperação de senha invalido!",
+  "auth.reset_password.token.expired": "Token de recuperação de senha expirado, solicite outro!",
+  "auth.reset_password.token.not_found": "Token de recuperação de senha não encontrado!",
+  "auth.reset_password.description": "Por favor, use o formulário abaixo para poder alterar a sua senha!"
 }
