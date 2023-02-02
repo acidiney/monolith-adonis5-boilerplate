@@ -12,6 +12,7 @@ describe('SendResetPasswordLink', () => {
     cy.visit('auth/reset/password')
       .get('input[type="email"]').type('invalid@itgest.co.ao')
       .get('button[type="submit"]').click()
-      .get('.alert-danger').should('be.visible')
+      .get('.alert-danger')
+      .should('be.visible')
   })
 })

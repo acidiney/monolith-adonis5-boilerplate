@@ -1,0 +1,24 @@
+version: '3'
+services:
+  web:
+    image: node:18.13-alpine
+    build: ./
+    container_name: app
+    volumes:
+      - .:/usr/app
+      - /usr/app/node_modules
+    ports:
+      - "8080:5555"
+
+  e2e:
+    image: cypress
+    build: ./e2e
+    container_name: cypress
+    depends_on:
+      - web
+    environment:
+      - CYPRESS_baseUrl=http://app
+    command: npx cypress run
+    volumes:
+      - ./e2e/cypress:/app/cypress
+      - ./e2e/cypress.config.js:/app/cypress.config.js

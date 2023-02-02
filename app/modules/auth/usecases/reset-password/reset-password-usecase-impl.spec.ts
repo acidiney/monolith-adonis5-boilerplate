@@ -1,16 +1,17 @@
-import {FindTokenRepository, FindUserIdRepository, UpdateUserRepository} from './ports'
-import {makeFindTokenRepositoryStub, makeUpdateUserRepositoryStub} from './__test__'
+import {FindTokenRepository, FindUserIdRepository, UpdateTokenRepository, UpdateUserRepository} from './ports'
+import {makeFindTokenRepositoryStub, makeUpdateTokenRepositoryStub, makeUpdateUserRepositoryStub} from './__test__'
 
 import {ResetPasswordUseCaseImpl} from 'app/modules/auth/usecases'
 import {ResetPasswordUseCase} from 'app/modules/auth/domain/usecases'
 
 import {EventDispatcher, IEventDispatcher, UniqueEntityID} from 'app/core/domain'
 import {
+  PasswordMismatchError,
   TokenEntity,
-  TokenRevokedError,
   TokenExpiredError,
   TokenNotFoundError,
-  PasswordMismatchError,
+  TokenRevokedError,
+  TokenTypes,
 } from '../../domain'
 import {makeFindUserIdRepositoryStub} from 'app/modules/auth/__test__'
 import {PasswordChangedEvent} from 'app/modules/auth/domain/events/password-changed-event'
@@ -20,6 +21,7 @@ interface SutTypes {
   findTokenRepositoryStub: FindTokenRepository,
   findUserIdRepositoryStub: FindUserIdRepository,
   updateUserRepositoryStub: UpdateUserRepository,
+  updateTokenRepositoryStub: UpdateTokenRepository,
   eventDispatcher: IEventDispatcher
 }
 
@@ -27,12 +29,14 @@ const makeSut = (): SutTypes => {
   const findTokenRepositoryStub = makeFindTokenRepositoryStub()
   const findUserIdRepositoryStub = makeFindUserIdRepositoryStub()
   const updateUserRepositoryStub = makeUpdateUserRepositoryStub()
+  const updateTokenRepositoryStub = makeUpdateTokenRepositoryStub()
   const eventDispatcher = new EventDispatcher()
 
   const sut = new ResetPasswordUseCaseImpl(
     findTokenRepositoryStub,
     findUserIdRepositoryStub,
     updateUserRepositoryStub,
+    updateTokenRepositoryStub,
     eventDispatcher,
   )
 
@@ -42,6 +46,7 @@ const makeSut = (): SutTypes => {
     findUserIdRepositoryStub,
     updateUserRepositoryStub,
     eventDispatcher,
+    updateTokenRepositoryStub,
   }
 }
 
@@ -77,6 +82,7 @@ describe('ResetPasswordUseCaseImpl', function () {
           userId: new UniqueEntityID('valid_user_id'),
           expiredAt: new Date(2022, 1, 1),
           revoked: false,
+          tokenType: TokenTypes.RECOVER_PASSWORD,
         }
       )))
 
@@ -105,6 +111,7 @@ describe('ResetPasswordUseCaseImpl', function () {
           userId: new UniqueEntityID('valid_user_id'),
           expiredAt: new Date(2022, 1, 1),
           revoked: true,
+          tokenType: TokenTypes.RECOVER_PASSWORD,
         }
       )))
 
