@@ -1,12 +1,7 @@
 {
   "extends": "adonis-preset-ts/tsconfig.json",
   "include": [
-    "**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "build",
-    "**/*.spec.ts",
+    "**/*.ts"
   ],
   "compilerOptions": {
     "outDir": "build",
@@ -37,5 +32,11 @@
       "@rocketseat/adonis-bull",
       "@adonisjs/mail"
     ]
-  }
+  },
+  "exclude": [
+    "cypress",
+    "node_modules",
+    "build",
+    "./cypress.config.ts"
+  ]
 }

@@ -5,7 +5,7 @@ import {
 } from 'app/modules/auth/domain/usecases'
 import {FindTokenRepository} from './ports'
 import {left, right} from 'app/core/domain'
-import {TokenNotFoundError} from 'app/modules/auth/domain/errors'
+import {TokenExpiredError, TokenNotFoundError, TokenRevokedError} from 'app/modules/auth/domain/errors'
 
 export class ResetPasswordUseCaseImpl implements ResetPasswordUseCase {
   constructor (
@@ -18,6 +18,14 @@ export class ResetPasswordUseCaseImpl implements ResetPasswordUseCase {
 
     if (!token) {
       return left(new TokenNotFoundError())
+    }
+
+    if (token.isExpired) {
+      return left(new TokenExpiredError())
+    }
+
+    if (token.isRevoked) {
+      return left(new TokenRevokedError())
     }
 
     return right(true)

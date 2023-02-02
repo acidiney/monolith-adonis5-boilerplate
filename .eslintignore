@@ -1,7 +1,8 @@
 node_modules/
 dist/
 coverage/
-**/*.spec.ts
+cypress.config.ts
+cypress/**/*.ts
 
 *.md
 

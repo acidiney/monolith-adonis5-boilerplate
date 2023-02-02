@@ -1,5 +1,5 @@
 import {Either, UseCase} from 'app/core/domain'
-import {TokenExpiredError, TokenNotFoundError} from 'app/modules/auth/domain/errors'
+import {TokenExpiredError, TokenNotFoundError, TokenRevokedError} from 'app/modules/auth/domain/errors'
 
 export interface ResetPasswordUseCaseInput {
   token: string,
@@ -7,6 +7,8 @@ export interface ResetPasswordUseCaseInput {
   confirmPassword: string,
 }
 
-export type ResetPasswordUseCaseResult = Either<TokenExpiredError | TokenNotFoundError, boolean>
+export type ResetPasswordUseCaseResult = Either<
+    TokenExpiredError | TokenNotFoundError | TokenRevokedError
+  , boolean>
 
 export type ResetPasswordUseCase = UseCase<ResetPasswordUseCaseInput, ResetPasswordUseCaseResult>

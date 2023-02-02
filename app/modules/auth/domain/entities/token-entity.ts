@@ -4,6 +4,7 @@ interface TokenProps {
   expiredAt: Date
   revoked: boolean
 
+  token: string
   userId: UniqueEntityID
 }
 
@@ -16,8 +17,8 @@ export class TokenEntity extends Entity<TokenProps> {
     return this.props.revoked
   }
 
-  public get isExpiredAt (): boolean {
-    return this.expiredAt.getTime() > (new Date()).getTime()
+  public get isExpired (): boolean {
+    return this.expiredAt.getTime() < (new Date()).getTime()
   }
 
   public get userId (): UniqueEntityID {

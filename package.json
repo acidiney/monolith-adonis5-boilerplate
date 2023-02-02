@@ -29,14 +29,6 @@
     "cypress:dev:server": "node ace serve --encore-args='--host 0.0.0.0'",
     "c:d:s": "node ace serve --encore-args='--host 0.0.0.0'"
   },
-  "eslintConfig": {
-    "extends": [
-      "plugin:adonis/typescriptApp"
-    ]
-  },
-  "eslintIgnore": [
-    "build"
-  ],
   "devDependencies": {
     "@adonisjs/assembler": "5.9.5",
     "@babel/core": "7.20.12",
@@ -89,6 +81,7 @@
     "@vue/reactivity": "^3.2.45",
     "@vue/server-renderer": "3.2.45",
     "luxon": "3.2.1",
+    "module-alias": "^2.2.2",
     "mysql2": "^3.1.0",
     "phc-bcrypt": "1.0.8",
     "proxy-addr": "2.0.7",
@@ -104,5 +97,9 @@
   "volta": {
     "node": "18.13.0",
     "npm": "8.11.0"
+  },
+  "_moduleAliases": {
+    "app": "./app",
+    "@core": "./resources/js/core"
   }
 }
