@@ -1,6 +1,6 @@
 import { Mapper, UniqueEntityID } from 'app/core/domain'
 import { UserModel } from 'app/infra/models'
-import { UserEntity } from 'app/modules/auth/domain/entities/user-entity'
+import { UserEntity } from 'app/domain/entities/user-entity'
 
 export class UserMapper extends Mapper<UserEntity, UserModel> {
   public toDomain (userModel: UserModel): UserEntity {

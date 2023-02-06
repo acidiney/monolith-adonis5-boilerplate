@@ -1,4 +1,4 @@
-import { UserEntity } from 'app/modules/auth/domain/entities/user-entity'
+import { UserEntity } from 'app/domain/entities/user-entity'
 import { UniqueEntityID } from 'app/core/domain'
 import {FindUserIdRepository} from 'app/modules/auth/usecases/shared/ports/find-user-id-repository'
 
