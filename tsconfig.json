@@ -2,6 +2,7 @@
   "extends": "adonis-preset-ts/tsconfig.json",
   "include": [
     "**/*.ts",
+    "**/*.d.ts",
     "**/*.vue"
   ],
   "exclude": [

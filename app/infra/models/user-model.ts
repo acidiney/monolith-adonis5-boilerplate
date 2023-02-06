@@ -4,6 +4,7 @@ import { BaseModel, beforeSave, column, computed, HasOne, hasOne } from '@ioc:Ad
 import { DateTime } from 'luxon'
 import { RoleModel } from './role-model'
 import { StatusModel } from './status-model-model'
+import {slugify} from '@ioc:Adonis/Addons/LucidSlugify'
 
 export class UserModel extends BaseModel {
   public static table = 'users'
@@ -17,6 +18,13 @@ export class UserModel extends BaseModel {
 
   @column()
   public lastName: string
+
+  @column()
+  @slugify({
+    strategy: 'dbIncrement',
+    fields: ['firstName', 'lastName'],
+  })
+  public slug: string
 
   @column()
   public email: string

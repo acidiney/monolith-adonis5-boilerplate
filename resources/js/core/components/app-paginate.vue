@@ -1,5 +1,4 @@
 <script>
-import Pagination from 'v-pagination-3'
 import CustomPagination from './app-custom-pagination.vue'
 
 export default {
@@ -12,9 +11,6 @@ export default {
       type: Number,
       default: 10,
     },
-  },
-  components: {
-    VPagination: Pagination
   },
   data() {
     return {
@@ -41,13 +37,7 @@ export default {
 
 <template>
   <div class="d-flex">
-    <v-pagination
-      v-model="page"
-      :records="records"
-      :perPage="perPage"
-      @paginate="handleChangePage"
-      :options="options"
-    />
+
   </div>
 </template>
 

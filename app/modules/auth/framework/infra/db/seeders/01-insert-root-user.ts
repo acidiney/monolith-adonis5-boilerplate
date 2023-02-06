@@ -9,12 +9,14 @@ export default class InsertRootUser extends BaseSeeder {
       throw new Error('Role "root" not found!')
     }
 
-    await UserModel.firstOrCreate({
-      firstName: 'Root',
-      email: 'root@itgest.co.ao',
-      password: '12345678',
-      statusId: 'active',
-      roleId: role.id,
-    })
+    const rootUser = new UserModel()
+
+    rootUser.firstName = 'Root'
+    rootUser.lastName = 'User'
+    rootUser.email = 'root@itgest.co.ao'
+    rootUser.password = '12345678'
+    rootUser.statusId = 'active'
+    rootUser.roleId = role.id
+    await rootUser.save()
   }
 }
