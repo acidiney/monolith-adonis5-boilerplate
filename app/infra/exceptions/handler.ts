@@ -19,7 +19,6 @@ import HttpExceptionHandler from '@ioc:Adonis/Core/HttpExceptionHandler'
 import * as Sentry from '@sentry/node'
 
 export default class ExceptionHandler extends HttpExceptionHandler {
-  protected ignoreCodes = ['E_ROUTE_NOT_FOUND', 'E_UNAUTHORIZED_ACCESS']
   protected statusPages = {
     '403': 'errors/unauthorized',
     '404': 'errors/not-found',
@@ -35,10 +34,12 @@ export default class ExceptionHandler extends HttpExceptionHandler {
     }
   }
   public async report (error) {
-    Sentry.configureScope(scope => {
-      scope.setExtra(error.code, error)
-    })
+    if (!['E_ROUTE_NOT_FOUND', 'E_UNAUTHORIZED_ACCESS'].includes(error.code)) {
+      Sentry.configureScope(scope => {
+        scope.setExtra(error.code, error)
+      })
 
-    Sentry.captureException(error)
+      Sentry.captureException(error)
+    }
   }
 }
