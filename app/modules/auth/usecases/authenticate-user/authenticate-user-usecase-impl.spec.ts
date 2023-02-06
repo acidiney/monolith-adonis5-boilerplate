@@ -6,6 +6,7 @@ import {
 } from 'app/modules/auth/usecases'
 import {makeFindUsernameRepositoryStub, makeVerifyPasswordMatchAdapterStub} from './__test__'
 import {UserNotFoundError, PasswordMismatchError} from 'app/modules/auth/domain/errors'
+import {EventDispatcher} from 'app/core/domain'
 
 interface SutTypes {
   sut: AuthenticateUserUseCase,
@@ -18,7 +19,8 @@ const makeSut = (): SutTypes => {
   const verifyPasswordMatchAdapterStub = makeVerifyPasswordMatchAdapterStub()
   const sut = new AuthenticateUserUseCaseImpl(
     findUsernameRepositoryStub,
-    verifyPasswordMatchAdapterStub
+    verifyPasswordMatchAdapterStub,
+    new EventDispatcher()
   )
 
   return {
