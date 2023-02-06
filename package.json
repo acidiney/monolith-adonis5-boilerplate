@@ -24,10 +24,10 @@
     "t:v": "npm run test:verbose",
     "test:verbose:watch": "npm run t:v -- -- --watchAll",
     "t:v:w": "npm run test:verbose:watch",
-    "cypress:open": "cypress open",
-    "c:o": "npm run cypress:open",
-    "cypress:dev:server": "node ace serve --encore-args='--host 0.0.0.0'",
-    "c:d:s": "node ace serve --encore-args='--host 0.0.0.0'"
+    "test:prepare": "NODE_ENV=test node ace migration:fresh && NODE_ENV=test node ace db:sync",
+    "cypress:dev:server": "NODE_ENV=test node ace serve --encore-args='--host 0.0.0.0'",
+    "cypress:open": "concurrently \"npm run cypress:dev:server\" \"cypress open\"",
+    "c:o": "npm run cypress:open"
   },
   "devDependencies": {
     "@adonisjs/assembler": "5.9.5",
@@ -44,6 +44,7 @@
     "@types/proxy-addr": "2.0.0",
     "@types/source-map-support": "0.5.6",
     "adonis-preset-ts": "2.1.0",
+    "concurrently": "^7.6.0",
     "cypress": "^12.5.0",
     "eslint": "8.32.0",
     "eslint-plugin-adonis": "2.1.1",
