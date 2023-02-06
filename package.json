@@ -25,7 +25,7 @@
     "test:verbose:watch": "npm run t:v -- -- --watchAll",
     "t:v:w": "npm run test:verbose:watch",
     "test:prepare": "NODE_ENV=test node ace migration:fresh && NODE_ENV=test node ace db:sync",
-    "cypress:dev:server": "NODE_ENV=test node ace serve --encore-args='--host 0.0.0.0'",
+    "cypress:dev:server": "npm NODE_ENV=test node ace serve --encore-args='--host 0.0.0.0'",
     "cypress:open": "concurrently \"npm run cypress:dev:server\" \"cypress open\"",
     "c:o": "npm run cypress:open"
   },

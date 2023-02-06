@@ -1,41 +1,45 @@
+
 import {
-  makeFindUsernameRepositoryStub,
-  makeGeneratePasswordTokenRepositoryStub,
+  makeFindUsernameRepositoryStub, makeHashAdapterStub,
+  makePersistPasswordTokenRepositoryStub,
   makeSendResetPasswordLinkServiceStub,
 } from './__test__'
 
 import {
-  FindUsernameRepository,
-  GenerateResetPasswordTokenRepository,
+  FindUsernameRepository, HashAdapter,
+  PersistResetPasswordTokenRepository,
   SendResetPasswordLinkService,
   SendResetPasswordUseCaseImpl,
 } from 'app/modules/auth/usecases'
 import {UserNotFoundError} from 'app/modules/auth/domain/errors'
 import {SendResetPasswordUseCase} from 'app/modules/auth/domain/usecases'
-import {UniqueEntityID} from 'app/core/domain'
 
 interface SutTypes {
   sut: SendResetPasswordUseCase
-  generatePasswordTokenRepositoryStub: GenerateResetPasswordTokenRepository
+  hashAdapterStub: HashAdapter
+  persistPasswordTokenRepositoryStub: PersistResetPasswordTokenRepository
   sendResetPasswordLinkServiceSub: SendResetPasswordLinkService
   findUsernameRepositoryStub: FindUsernameRepository
 }
 
 const makeSut = (): SutTypes => {
   const findUsernameRepositoryStub = makeFindUsernameRepositoryStub()
-  const generatePasswordTokenRepositoryStub = makeGeneratePasswordTokenRepositoryStub()
+  const persistPasswordTokenRepositoryStub = makePersistPasswordTokenRepositoryStub()
+  const hashAdapterStub = makeHashAdapterStub()
   const sendResetPasswordLinkServiceSub = makeSendResetPasswordLinkServiceStub()
 
   const sut = new SendResetPasswordUseCaseImpl(
     findUsernameRepositoryStub,
-    generatePasswordTokenRepositoryStub,
+    hashAdapterStub,
+    persistPasswordTokenRepositoryStub,
     sendResetPasswordLinkServiceSub,
   )
 
   return {
     sut,
     findUsernameRepositoryStub,
-    generatePasswordTokenRepositoryStub,
+    hashAdapterStub,
+    persistPasswordTokenRepositoryStub,
     sendResetPasswordLinkServiceSub,
   }
 }
@@ -53,16 +57,6 @@ describe('SendResetPasswordUseCase', () => {
 
     expect(output.isLeft()).toBeTruthy()
     expect(output.value).toBeInstanceOf(UserNotFoundError)
-  })
-
-  it ('should calls generatePasswordTokenRepository with userId', async () => {
-    const { sut, generatePasswordTokenRepositoryStub } = makeSut()
-
-    const generatePasswordTokenRepositorySpy = jest.spyOn(generatePasswordTokenRepositoryStub, 'generate')
-
-    await sut.perform({ username: 'valid@mail.com' })
-    expect(generatePasswordTokenRepositorySpy).toBeCalledTimes(1)
-    expect(generatePasswordTokenRepositorySpy).toBeCalledWith(new UniqueEntityID('valid_user_id'))
   })
 
   it ('should calls sendResetPasswordLinkService with token', async () => {

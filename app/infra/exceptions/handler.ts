@@ -14,11 +14,12 @@
 */
 
 import Logger from '@ioc:Adonis/Core/Logger'
-// import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import HttpExceptionHandler from '@ioc:Adonis/Core/HttpExceptionHandler'
 import * as Sentry from '@sentry/node'
 
 export default class ExceptionHandler extends HttpExceptionHandler {
+  protected ignoreCodes = ['E_ROUTE_NOT_FOUND', 'E_UNAUTHORIZED_ACCESS']
   protected statusPages = {
     '403': 'errors/unauthorized',
     '404': 'errors/not-found',
@@ -28,14 +29,16 @@ export default class ExceptionHandler extends HttpExceptionHandler {
   constructor () {
     super(Logger)
   }
-
-  // public async handle(error: any, ctx: HttpContextContract) {
-  //   return super.handle(error, ctx)
-  // }
-
-  public async report (error) {
-    if (!['E_ROUTE_NOT_FOUND', 'E_UNAUTHORIZED_ACCESS'].includes(error.code)) {
-      await Sentry.captureException(error)
+  protected context (ctx: HttpContextContract) {
+    return {
+      userId: ctx.auth.user?.id,
     }
+  }
+  public async report (error) {
+    Sentry.configureScope(scope => {
+      scope.setExtra(error.code, error)
+    })
+
+    Sentry.captureException(error)
   }
 }

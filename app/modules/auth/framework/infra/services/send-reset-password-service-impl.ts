@@ -4,10 +4,6 @@ import { SendResetPasswordLinkInput, SendResetPasswordLinkService } from 'app/mo
 
 export class SendResetPasswordServiceImpl implements SendResetPasswordLinkService {
   public async send (input: SendResetPasswordLinkInput): Promise<void> {
-    Bull.add(new Job().key, {
-      email: input.username,
-      fullName: input.fullName,
-      token: input.token,
-    })
+    Bull.add(new Job().key, input)
   }
 }

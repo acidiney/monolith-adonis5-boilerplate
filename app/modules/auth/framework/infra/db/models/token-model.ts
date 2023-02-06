@@ -1,5 +1,4 @@
 import { DateTime } from 'luxon'
-import * as crypto from 'crypto'
 
 import {TokenType} from 'app/modules/auth/domain'
 import { cuid } from '@ioc:Adonis/Core/Helpers'
@@ -33,10 +32,5 @@ export class TokenModel extends BaseModel {
   @beforeCreate()
   public static async setId (model: TokenModel) {
     model.id = model.id || cuid()
-  }
-
-  @beforeCreate()
-  public static async generateToken (model: TokenModel) {
-    model.token = await crypto.randomBytes(32).toString('hex')
   }
 }
