@@ -13,6 +13,7 @@ import {
 } from 'app/modules/auth/usecases'
 import {UserNotFoundError} from 'app/modules/auth/domain/errors'
 import {SendResetPasswordUseCase} from 'app/modules/auth/domain/usecases'
+import {EventDispatcher} from 'app/core/domain'
 
 interface SutTypes {
   sut: SendResetPasswordUseCase
@@ -33,6 +34,7 @@ const makeSut = (): SutTypes => {
     hashAdapterStub,
     persistPasswordTokenRepositoryStub,
     sendResetPasswordLinkServiceSub,
+    new EventDispatcher()
   )
 
   return {

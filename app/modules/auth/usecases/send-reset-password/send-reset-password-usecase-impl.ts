@@ -1,4 +1,4 @@
-import { Either, left, right } from 'app/core/domain'
+import {Either, IEventDispatcher, left, right} from 'app/core/domain'
 import { UserNotFoundError } from '../../domain/errors'
 import { SendResetPasswordInput, SendResetPasswordUseCase } from '../../domain/usecases'
 import {
@@ -8,13 +8,15 @@ import {
   SendResetPasswordLinkService,
 } from './ports'
 import {TokenTypes} from 'app/modules/auth/domain'
+import {SentResetPasswordEvent} from 'app/modules/auth/domain/events/sent-reset-password-event'
 
 export class SendResetPasswordUseCaseImpl implements SendResetPasswordUseCase {
   constructor (
     private readonly findUsernameRepository: FindUsernameRepository,
     private readonly hashAdapter: HashAdapter,
     private readonly persistResetPasswordTokenRepository: PersistResetPasswordTokenRepository,
-    private readonly sendResetPasswordLinkService: SendResetPasswordLinkService
+    private readonly sendResetPasswordLinkService: SendResetPasswordLinkService,
+    private readonly eventDispatcher: IEventDispatcher
   ) {}
 
   public async perform (input: SendResetPasswordInput): Promise<Either<UserNotFoundError, boolean>> {
@@ -31,6 +33,10 @@ export class SendResetPasswordUseCaseImpl implements SendResetPasswordUseCase {
       fullName: user.fullName,
       token,
     })
+
+    await this.eventDispatcher.publish(new SentResetPasswordEvent({
+      userId: user.id,
+    }))
 
     return right(true)
   }
