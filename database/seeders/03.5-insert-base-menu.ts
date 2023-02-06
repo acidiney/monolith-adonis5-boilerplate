@@ -138,7 +138,7 @@ export default class MenuSeedSeeder extends BaseSeeder {
       {
         display: 'menu.acl.view-users',
         slug: 'setting_acl_view_users',
-        url: '/account/settings/acl/users',
+        url: '/admin/settings/acl/users',
         icon: 'users',
         order: 1,
         permissionId: 'admin-acl-view-users',
@@ -147,7 +147,7 @@ export default class MenuSeedSeeder extends BaseSeeder {
       {
         display: 'menu.acl.view-roles',
         slug: 'setting_acl_view_roles',
-        url: '/account/settings/acl/roles',
+        url: '/admin/settings/acl/roles',
         icon: 'user',
         order: 2,
         permissionId: 'admin-acl-view-roles',
