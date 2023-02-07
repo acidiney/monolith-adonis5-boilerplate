@@ -28,8 +28,9 @@ export class RoleModel extends BaseModel {
   @column({ columnName: 'system' })
   public isSystem?: boolean
 
-  @hasOne(() => UserModel)
-  @column({ columnName: 'user_id' })
+  @hasOne(() => UserModel, {
+    foreignKey: 'roleId',
+  })
   public user: HasOne<typeof UserModel>
 
   @hasMany(() => PermissionModel, {

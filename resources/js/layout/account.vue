@@ -21,6 +21,11 @@ const messages = computed(() => ({
   success: usePage().props.success
 }))
 
+
+const user = computed(() => (
+ usePage().props.user
+))
+
 defineProps({
   title: String
 })
@@ -34,6 +39,15 @@ defineProps({
 
 <template>
   <app-head :title="title" />
+
+  <div
+    class="alert alert-warning fade show mb-0"
+    v-if="user.role.slug === 'root'"
+    role="alert"
+  >
+    {{ $t('shared.root_authenticated') }}
+  </div>
+
   <div
     class="alert alert-danger fade show mb-0"
     v-if="messages.errors && messages.errors.message"
@@ -58,7 +72,7 @@ defineProps({
             <div>
               <slot name="header"></slot>
 
-            <div class="page-content page-container">
+            <div class="page-content page-container-fluid">
               <div class="padding">
                 <slot name="body"></slot>
               </div>

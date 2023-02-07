@@ -8,7 +8,7 @@ defineProps({
 
 <template>
   <div
-    :class="['page-hero', { 'page-container': !notContainer }]"
+    :class="['page-hero', { 'page-container-fluid': !notContainer }]"
     id="page-hero"
   >
     <div class="padding d-flex">

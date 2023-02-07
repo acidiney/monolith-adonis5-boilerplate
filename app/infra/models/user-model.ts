@@ -1,6 +1,6 @@
 import { cuid } from '@ioc:Adonis/Core/Helpers'
 import Hash from '@ioc:Adonis/Core/Hash'
-import { BaseModel, beforeSave, column, computed, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
+import {BaseModel, BelongsTo, beforeSave, belongsTo, column, computed, HasOne, hasOne} from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import { RoleModel } from './role-model'
 import { StatusModel } from './status-model-model'
@@ -47,14 +47,19 @@ export class UserModel extends BaseModel {
   @hasOne(() => StatusModel)
   public status: HasOne<typeof StatusModel>
 
+  @column.dateTime({ columnName: 'last_login' })
+  public lastLoginAt: DateTime
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @hasOne(() => RoleModel)
-  public role: HasOne<typeof RoleModel>
+  @belongsTo(() => RoleModel, {
+    foreignKey: 'roleId',
+  })
+  public role: BelongsTo<typeof RoleModel>
 
   @computed()
   public get fullName () {
