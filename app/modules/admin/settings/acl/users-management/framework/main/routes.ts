@@ -2,7 +2,7 @@ import Route from '@ioc:Adonis/Core/Route'
 import {routeAdapter} from 'app/core/adapters/route-adapter'
 import {
   makeListUsersFactory,
-} from 'app/modules/admin/settings/acl/users/framework/main/factories/make-list-users-factory'
+} from 'app/modules/admin/settings/acl/users-management/framework/main/factories/make-list-users-factory'
 
 Route.group(() => {
   Route.get('/users', routeAdapter(makeListUsersFactory(), {

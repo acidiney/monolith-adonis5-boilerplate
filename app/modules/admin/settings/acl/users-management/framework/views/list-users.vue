@@ -1,8 +1,9 @@
 <script setup>
-  import { useI18n } from 'vue-i18n'
-  import AppTable from "@core/components/app-table.vue";
-  import {computed, ref} from "vue";
-  import {usePage} from "@inertiajs/vue3";
+import {computed, ref} from "vue"
+import { useI18n } from 'vue-i18n'
+import {usePage} from "@inertiajs/vue3"
+
+import AppTable from "@core/components/app-table.vue"
 
 
   const { t } = useI18n()
@@ -25,16 +26,16 @@
     },
     {
       display: t('shared.status'),
-      field: 'status_id',
+      field: 'status',
       isStatus: true
     },
     {
       display: t('acl.users.list-users.last_login'),
-      field: 'last_login_at'
+      field: 'lastLoginAtText'
     },
     {
       display: t('acl.users.list-users.updated_at'),
-      field: 'updated_at'
+      field: 'updatedAtText'
     },
   ])
 

@@ -1,6 +1,6 @@
 import { UniqueEntityID } from './unique-entity-id'
 
-interface Options {
+export interface Options {
   createdAt?: Date
   updatedAt?: Date
   isDeleted?: boolean

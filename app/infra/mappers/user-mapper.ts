@@ -10,6 +10,11 @@ export class UserMapper extends Mapper<UserEntity, UserModel> {
       fullName: userModel.fullName,
       email: userModel.email,
       lasLoginAt: userModel.lastLoginAt && userModel.lastLoginAt.toJSDate(),
+      status: userModel.statusId,
+      slug: userModel.slug,
+    }, {
+      createdAt: userModel.createdAt.toJSDate(),
+      updatedAt: userModel.updatedAt.toJSDate(),
     })
   }
 

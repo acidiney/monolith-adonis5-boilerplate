@@ -3,12 +3,11 @@ import Logger from '@ioc:Adonis/Core/Logger'
 import {IHandler} from 'app/core/domain'
 import {UserLoggedEvent} from 'app/modules/auth/domain/events/user-logged-event'
 import {FindUserIdRepository} from 'app/modules/auth/usecases/shared/ports/find-user-id-repository'
-import {UpdateUserRepository} from 'app/modules/auth/usecases/reset-password/ports'
+import Database from '@ioc:Adonis/Lucid/Database'
 
 export class UserLoggedListener implements IHandler<UserLoggedEvent> {
   constructor (
     private readonly findUserIdRepository: FindUserIdRepository,
-    private readonly updateUserRepository: UpdateUserRepository
   ) {
   }
 
@@ -20,10 +19,13 @@ export class UserLoggedListener implements IHandler<UserLoggedEvent> {
       return
     }
 
-    Logger.info(`User "${user.fullName}" logged at ${event.dateTimeOccurred}!`)
+    Logger.info(`User "${user.fullName}" logged!`)
 
     user.userLogged(event.dateTimeOccurred)
 
-    await this.updateUserRepository.update(user)
+    await Database
+      .from('users')
+      .where('id', user.id.toString())
+      .update('last_login', user.lastLoginAt)
   }
 }

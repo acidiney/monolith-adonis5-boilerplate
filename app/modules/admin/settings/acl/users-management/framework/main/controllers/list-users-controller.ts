@@ -1,6 +1,6 @@
 import {Controller} from 'app/core/ports'
 import {HttpContextContract} from '@ioc:Adonis/Core/HttpContext'
-import {ListUsersUseCase} from 'app/modules/admin/settings/acl/users/domain'
+import {ListUsersUseCase} from 'app/modules/admin/settings/acl/users-management/domain'
 
 export class ListUsersController implements Controller<HttpContextContract> {
   constructor (
@@ -17,7 +17,7 @@ export class ListUsersController implements Controller<HttpContextContract> {
       perPage: perPage ?? 10,
     })
 
-    return inertia.render('admin/settings/acl/users/framework/views/list-users', {
+    return inertia.render('admin/settings/acl/users-management/framework/views/list-users', {
       content: output,
     })
   }
