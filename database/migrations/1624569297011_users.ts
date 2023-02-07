@@ -9,7 +9,7 @@ export default class UsersSchema extends BaseSchema {
       table.string('first_name', 255).notNullable()
       table.string('last_name', 255).nullable()
       table.string('slug', 255).notNullable().unique().index()
-      table.string('email', 255).notNullable()
+      table.string('email', 255).notNullable().unique().index()
       table.string('password', 180).notNullable()
       table.boolean('force_change_password').defaultTo(true)
       table.string('remember_me_token').nullable()
