@@ -45,7 +45,7 @@ defineProps({
     v-if="user.role.slug === 'root'"
     role="alert"
   >
-    {{ $t('shared.root_authenticated') }}
+    {{ $t('shared.authenticated.root') }}
   </div>
 
   <div
