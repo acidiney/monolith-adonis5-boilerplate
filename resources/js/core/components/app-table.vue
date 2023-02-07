@@ -39,7 +39,7 @@ defineProps({
               <app-status :status="row[col.field]" />
             </template>
             <template v-else-if="col.isLink">
-              <inertia-link :href="row.href" />
+              <router-link :href="`${col.href}/${row[col.param]}`">{{ row[col.field] }}</router-link>
             </template>
             <template v-else>
               {{ row[col.field] }}

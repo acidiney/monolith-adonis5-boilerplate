@@ -10,11 +10,14 @@
   const columns = ref([
     {
       display: t('acl.users.list-users.id'),
-      field: 'id'
+      autoIncrement: true
     },
     {
       display: t('acl.users.list-users.username'),
-      field: 'fullName'
+      field: 'fullName',
+      isLink: true,
+      href: '/account/profile',
+      param: 'slug'
     },
     {
       display: t('acl.users.list-users.email'),
