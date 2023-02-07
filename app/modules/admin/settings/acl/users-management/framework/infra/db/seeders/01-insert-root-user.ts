@@ -12,6 +12,7 @@ export default class InsertRootUser extends BaseSeeder {
     await UserModel.firstOrCreate({
       firstName: 'Root',
       email: 'root@itgest.co.ao',
+      slug: 'root-user',
       password: '12345678',
       statusId: 'active',
       roleId: role.id,
