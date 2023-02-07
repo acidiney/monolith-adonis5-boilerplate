@@ -16,7 +16,6 @@ export class SignInController implements Controller<HttpContextContract> {
     i18n,
     session,
     response,
-    logger,
   }: HttpContextContract) {
     const validation = await request.validate(SignInValidator)
       .catch((e) => {
@@ -38,8 +37,6 @@ export class SignInController implements Controller<HttpContextContract> {
     }
 
     await auth.use('web').loginViaId(output.value.userId)
-
-    logger.info(validation.username + ' - ' + i18n.formatMessage('auth.login.success'))
     return response.redirect('/account/dashboard')
   }
 }

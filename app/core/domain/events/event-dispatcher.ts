@@ -1,7 +1,7 @@
-import { IEventDispatcher, IHandle, IDomainEvent } from 'App/core/domain'
+import { IEventDispatcher, IHandler, IDomainEvent } from 'App/core/domain'
 
 interface IEventHandlers {
-  [eventName: string]: Array<IHandle<IDomainEvent>>
+  [eventName: string]: Array<IHandler<IDomainEvent>>
 }
 
 export class EventDispatcher implements IEventDispatcher {
@@ -19,24 +19,28 @@ export class EventDispatcher implements IEventDispatcher {
     }
   }
 
-  public register (eventName: string, handler: IHandle<IDomainEvent>): void {
+  public register (eventName: string, handler: IHandler<IDomainEvent>): EventDispatcher {
     if (!this._eventHandlers[eventName]) {
       this._eventHandlers[eventName] = []
     }
     this._eventHandlers[eventName].push(handler)
+
+    return this
   }
 
-  public unregister (eventName: string, handler: IHandle<IDomainEvent>): void {
+  public unregister (eventName: string, handler: IHandler<IDomainEvent>): EventDispatcher {
     if (this._eventHandlers[eventName]) {
       const index = this._eventHandlers[eventName].indexOf(handler)
       if (index > -1) {
         this._eventHandlers[eventName].splice(index, 1)
       }
     }
+    return this
   }
 
-  public unregisterAll (): void {
+  public unregisterAll (): EventDispatcher {
     this._eventHandlers = {}
+    return this
   }
 
   public static getInstance (): EventDispatcher {

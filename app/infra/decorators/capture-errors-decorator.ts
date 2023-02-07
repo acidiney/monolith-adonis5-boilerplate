@@ -3,6 +3,8 @@ import '@sentry/tracing'
 import { startTransaction, configureScope, captureException } from '@sentry/node'
 
 import { Controller} from 'app/core/ports'
+import Application from '@ioc:Adonis/Core/Application'
+import Logger from '@ioc:Adonis/Core/Logger'
 
 export interface ControllerMetaData {
   operation: string
@@ -29,6 +31,10 @@ export class CaptureErrorDecorator implements Controller<HttpContextContract> {
       return await this.controller.perform(input)
     } catch (e) {
       captureException(e)
+
+      if (Application.inDev) {
+        Logger.error(e)
+      }
 
       input.session
         .flash('errors', {

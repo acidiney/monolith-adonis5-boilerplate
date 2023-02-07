@@ -1,5 +1,6 @@
-import { Mapper, UniqueEntityID } from 'app/core/domain'
+import * as luxon from 'luxon'
 import { UserModel } from 'app/infra/models'
+import { Mapper, UniqueEntityID } from 'app/core/domain'
 import { UserEntity } from 'app/domain/entities/user-entity'
 
 export class UserMapper extends Mapper<UserEntity, UserModel> {
@@ -8,6 +9,7 @@ export class UserMapper extends Mapper<UserEntity, UserModel> {
       password: userModel.password,
       fullName: userModel.fullName,
       email: userModel.email,
+      lasLoginAt: userModel.lastLoginAt && userModel.lastLoginAt.toJSDate(),
     })
   }
 
@@ -16,6 +18,7 @@ export class UserMapper extends Mapper<UserEntity, UserModel> {
 
     userModel.email = userEntity.email
     userModel.password = userEntity.password
+    userModel.lastLoginAt = luxon.DateTime.fromJSDate(userEntity.lastLoginAt)
 
     return userModel
   }

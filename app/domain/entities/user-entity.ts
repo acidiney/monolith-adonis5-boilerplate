@@ -5,6 +5,8 @@ interface UserProps {
   fullName: string,
   email: string
   password: string
+
+  lasLoginAt: Date
 }
 
 export class UserEntity extends Entity<UserProps> {
@@ -20,6 +22,10 @@ export class UserEntity extends Entity<UserProps> {
     return this.props.password
   }
 
+  public get lastLoginAt (): Date {
+    return this.props.lasLoginAt
+  }
+
   public changePassword (password: string, confirmPassword: string): Either<PasswordMismatchError, boolean> {
     if (password !== confirmPassword) {
       return left(new PasswordMismatchError())
@@ -28,6 +34,10 @@ export class UserEntity extends Entity<UserProps> {
     this.props.password = password
 
     return right(true)
+  }
+
+  public userLogged (loggedAt: Date): void {
+    this.props.lasLoginAt = loggedAt
   }
 
   public static hydrate (id: UniqueEntityID, props: UserProps): UserEntity {
