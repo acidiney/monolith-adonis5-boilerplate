@@ -5,7 +5,7 @@ import { createI18n } from 'vue-i18n'
 
 import '../css/app.css'
 import messages from './i18n'
-import { loadComponent } from './core'
+import { loadComponent } from '@core'
 
 const i18n = createI18n({
   locale: 'pt',

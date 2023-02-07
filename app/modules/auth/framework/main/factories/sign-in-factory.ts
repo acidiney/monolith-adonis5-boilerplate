@@ -6,11 +6,13 @@ import {
 import { VerifyPasswordMatchAdapterImpl } from 'app/modules/auth/framework/infra/adapters'
 
 import { SignInController } from '../controllers/sign-in-controller'
+import {EventDispatcher} from 'app/core/domain'
 
 export const makeSignInController = (): SignInController =>
   new SignInController(
     new AuthenticateUserUseCaseImpl(
       new FindUsernameRepositoryImpl(),
-      new VerifyPasswordMatchAdapterImpl()
+      new VerifyPasswordMatchAdapterImpl(),
+      EventDispatcher.getInstance()
     )
   )
