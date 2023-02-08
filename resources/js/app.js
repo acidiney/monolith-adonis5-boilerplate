@@ -8,7 +8,7 @@ import messages from './i18n'
 import { loadComponent } from '@core'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-
+import 'element-plus/theme-chalk/dark/css-vars.css'
 
 const i18n = createI18n({
   locale: 'pt',
