@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2023.
+ * ITGest Angola
+ */
+
 import {UseCase} from 'app/core/domain'
 import {ListUsersUseCaseInput, ListUsersUseCaseOutput} from 'app/modules/admin/settings/acl/users-management/domain'
 
