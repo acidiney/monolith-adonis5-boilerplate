@@ -1,4 +1,5 @@
 {
+  "menu.acl.view-users": "Utilizadores",
   "menu.admin.setting.acl.users": "Gestão de utilizadores",
   "acl.users.list-users.id": "#",
   "acl.users.list-users.full_name": "Nome Completo",
