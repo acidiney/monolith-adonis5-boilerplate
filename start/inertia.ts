@@ -20,5 +20,5 @@ Inertia.share({
   headers: (ctx) => ctx.session.get('header'),
   today: DateTime.now().setLocale('pt-PT').toFormat('dd, LLLL yyyy'),
   version: pkg.version,
-  copyright: pkg.copyright,
+  copyright: DateTime.now().get('year'),
 })

@@ -66,7 +66,7 @@ defineProps({
     <app-sidebar />
     <div id="main" class="layout-column flex">
       <app-header />
-      <div id="content" class="flex">
+      <div id="content" class="flex pt-1">
         <transition name="slide-fade">
           <template v-if="animate">
             <div>
@@ -81,7 +81,7 @@ defineProps({
           </template>
         </transition>
       </div>
-      <app-footer />
+      <app-footer right-text />
     </div>
   </div>
 </template>
