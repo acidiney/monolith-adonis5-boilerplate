@@ -44,6 +44,10 @@ main {
 .no-required-exclamation label::before {
   content: '' !important;
 }
+
+.el-form-item__label {
+  color: unset !important;
+}
 </style>
 
 <template>
@@ -51,8 +55,8 @@ main {
   <div class="auth d-flex  justify-content-center">
     <div class="card p-4 py-5">
       <div class="card-body h-100">
-        <h1 class="title mb-1">{{ headers.appName }}</h1>
-        <h5 class="mt-1 text-center text-muted">
+        <h1 class="title mb-1 text-highlight">{{ headers.appName }}</h1>
+        <h5 class="mt-1 text-center text-highlight text-muted">
           {{ headers.appDescription }}
         </h5>
         <main class="position-relative overflow-hidden">

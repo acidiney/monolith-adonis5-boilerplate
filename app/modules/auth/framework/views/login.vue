@@ -61,7 +61,7 @@ const errors = computed(() => usePage().props.errors)
       status-icon
       label-position="top"
     >
-      <el-form-item :label="$t('auth.frontend.field_email')" prop="username">
+      <el-form-item  class="text-color" :label="$t('auth.frontend.field_email')" prop="username">
         <el-input
           name="username"
           v-model="state.username" />
