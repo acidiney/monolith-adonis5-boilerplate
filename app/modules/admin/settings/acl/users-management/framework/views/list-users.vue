@@ -6,9 +6,13 @@ import {usePage} from "@inertiajs/vue3"
 import AppStatus from "@core/components/app-status.vue";
 
 
-  const { t } = useI18n()
+const { t } = useI18n()
 
-  const content = computed(() => usePage().props.content)
+const content = computed(() => usePage().props.content)
+
+const onSortChange = (e) => {
+  console.log(e)
+}
 
 </script>
 
@@ -34,6 +38,7 @@ import AppStatus from "@core/components/app-status.vue";
           stripe
           cell-class-name="bg-body text-color"
           :data="content.data"
+          @sort-change="onSortChange"
       >
         <el-table-column type="selection" width="50" />
         <el-table-column prop="fullName" sortable :label="$t('acl.users.list-users.full_name')">
@@ -47,8 +52,30 @@ import AppStatus from "@core/components/app-status.vue";
             <app-status :status="scope.row.status"  />
           </template>
         </el-table-column>
-        <el-table-column prop="lastLoginAtText" sortable :label="$t('acl.users.list-users.last_login')" />
-        <el-table-column prop="updatedAtText" sortable :label="$t('acl.users.list-users.updated_at')" />
+        <el-table-column prop="lastLoginAtText" sortable :label="$t('acl.users.list-users.last_login')">
+          <template #default="scope">
+            <el-popover effect="light" trigger="hover" placement="top" width="auto">
+              <template #default>
+                <div>{{ scope.row.lastLoginAt }}</div>
+              </template>
+              <template #reference>
+                {{ scope.row.lastLoginAtText }}
+              </template>
+            </el-popover>
+          </template>
+        </el-table-column>
+        <el-table-column prop="updatedAtText" sortable :label="$t('acl.users.list-users.updated_at')">
+          <template #default="scope">
+            <el-popover effect="light" trigger="hover" placement="top" width="auto">
+              <template #default>
+                <div>{{ scope.row.updatedAt }}</div>
+              </template>
+              <template #reference>
+                {{ scope.row.updatedAtText }}
+              </template>
+            </el-popover>
+          </template>
+        </el-table-column>
       </el-table>
     </template>
   </account-layout>
