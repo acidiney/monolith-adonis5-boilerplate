@@ -1,3 +1,8 @@
 {
-  "menu.admin.setting.acl.users": "Gestão de utilizadores"
+  "menu.admin.setting.acl.users": "Gestão de utilizadores",
+  "acl.users.list-users.id": "#",
+  "acl.users.list-users.full_name": "Nome Completo",
+  "acl.users.list-users.email": "E-mail",
+  "acl.users.list-users.last_login": "Último Login",
+  "acl.users.list-users.updated_at": "Ultima actualização"
 }

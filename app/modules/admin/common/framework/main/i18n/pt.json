@@ -8,5 +8,11 @@
   "menu.settings.subtitle": "Configurações da conta",
   "admin.page_hero.common.dasboard.subtitle": "Bem vindo de volta, {name}!",
   "shared.account": "Conta",
+  "shared.status": "Estado",
+  "shared.status.active": "Activo",
+  "shared.status.approved": "Aprovado",
+  "shared.status.canceled": "Cancelado",
+  "shared.status.rejected": "Rejeitado",
+  "shared.status.wait_human_validation": "Aguardando Validação Manual",
   "shared.errors.internal_server_error": "Erro interno no servidor!"
 }
