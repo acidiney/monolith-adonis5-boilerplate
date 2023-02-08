@@ -36,8 +36,11 @@ import AppStatus from "@core/components/app-status.vue";
           :data="content.data"
       >
         <el-table-column type="selection" width="50" />
-        <el-table-column prop="id" :label="$t('acl.users.list-users.id')" />
-        <el-table-column prop="fullName" sortable :label="$t('acl.users.list-users.full_name')"  />
+        <el-table-column prop="fullName" sortable :label="$t('acl.users.list-users.full_name')">
+          <template #default="scope">
+            <router-link :href="`/account/profile/${scope.row.slug}`">{{ scope.row.fullName }}</router-link>
+          </template>
+        </el-table-column>
         <el-table-column prop="email" :label="$t('acl.users.list-users.email')" />
         <el-table-column prop="status" sortable :label="$t('shared.status')">
           <template #default="scope">
