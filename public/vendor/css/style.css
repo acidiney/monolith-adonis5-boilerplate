@@ -24,4 +24,8 @@ Custom css
 .el-table__body {
    border-collapse: separate !important;
   border-spacing: 0 10px !important;
- }.
+ }
+
+.el-pager li, .el-pagination button {
+  background: unset !important;
+}

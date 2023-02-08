@@ -17,7 +17,9 @@ const onSortChange = (e) => {
 </script>
 
 <style scoped>
-
+.w-4 {
+  width: 4% !important;
+}
 </style>
 
 
@@ -27,7 +29,23 @@ const onSortChange = (e) => {
       <app-page-hero
         :title="$t('menu.admin.setting.acl.users')"
         :sub-title="$t('menu.admin.setting.acl.users-description')"
-      ></app-page-hero>
+      >
+
+        <div class="flex"></div>
+        <div class="user-management-options">
+          <el-dropdown split-button type="primary">
+            {{ $t('admin.acl.users.register') }}
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item>
+                  <app-icon :size="14" icon="download-cloud" /> {{  $t('admin.acl.users.export') }}</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+        </div>
+      </app-page-hero>
+
+
     </template>
 
     <template v-slot:body>
@@ -77,6 +95,21 @@ const onSortChange = (e) => {
           </template>
         </el-table-column>
       </el-table>
+      <div class="d-flex w-100 justify-content-between">
+        <el-select class="w-4" model-value="10" size="small">
+          <el-option
+            v-for="item in [10, 50, 100]"
+            :key="item"
+            :label="item"
+            :value="item"
+          />
+        </el-select>
+
+        <el-pagination
+          :total="content.total"
+          layout="prev, pager, next"
+        />
+      </div>
     </template>
   </account-layout>
 </template>
