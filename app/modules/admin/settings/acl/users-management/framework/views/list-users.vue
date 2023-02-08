@@ -3,7 +3,6 @@ import {computed, ref} from "vue"
 import { useI18n } from 'vue-i18n'
 import {usePage} from "@inertiajs/vue3"
 
-import AppTable from "@core/components/app-table.vue"
 import AppStatus from "@core/components/app-status.vue";
 
 
