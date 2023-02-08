@@ -17,6 +17,7 @@ import * as Sentry from '@sentry/node'
 import { Job } from '@ioc:Rocketseat/Bull'
 import Logger from '@ioc:Adonis/Core/Logger'
 import BullExceptionHandler from '@ioc:Rocketseat/Bull/BullExceptionHandler'
+import Application from '@ioc:Adonis/Core/Application'
 
 export default class JobExceptionHandler extends BullExceptionHandler {
   constructor () {
@@ -25,10 +26,12 @@ export default class JobExceptionHandler extends BullExceptionHandler {
 
   public async handle (error: Error, job: Job) {
     this.logger.error(`key=${job.name} id=${job.id} error=${error.message}`)
-    Sentry.configureScope(scope => {
-      scope.setExtra(job.name, job)
-    })
+    if (!Application.inTest && !Application.inDev) {
+      Sentry.configureScope(scope => {
+        scope.setExtra(job.name, job)
+      })
 
-    Sentry.captureException(error)
+      Sentry.captureException(error)
+    }
   }
 }
