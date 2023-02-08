@@ -8,33 +8,6 @@ import AppStatus from "@core/components/app-status.vue";
 
   const { t } = useI18n()
 
-  const columns = ref([
-    /* {
-      display: ,
-      field: 'fullName',
-      isLink: true,
-      href: '/account/profile',
-      param: 'slug'
-    }, */
-    {
-      display: t('acl.users.list-users.email'),
-      field: 'email'
-    },
-    {
-      display: t('shared.status'),
-      field: 'status',
-      isStatus: true
-    },
-    {
-      display: t('acl.users.list-users.last_login'),
-      field: 'lastLoginAtText'
-    },
-    {
-      display: t('acl.users.list-users.updated_at'),
-      field: 'updatedAtText'
-    },
-  ])
-
   const content = computed(() => usePage().props.content)
 
 </script>
@@ -62,7 +35,8 @@ import AppStatus from "@core/components/app-status.vue";
           cell-class-name="bg-body text-color"
           :data="content.data"
       >
-        <el-table-column prop="id" :label="$t('acl.users.list-users.id')" width="180" />
+        <el-table-column type="selection" width="50" />
+        <el-table-column prop="id" :label="$t('acl.users.list-users.id')" />
         <el-table-column prop="fullName" :label="$t('acl.users.list-users.username')"  />
         <el-table-column prop="email" :label="$t('acl.users.list-users.email')" />
         <el-table-column prop="status" :label="$t('shared.status')">

@@ -18,7 +18,7 @@ Custom css
 .bg-dark .table-theme tbody td.el-table__cell {
   color: #b9c0d3;
   background-color: #1c233f !important;
-  padding: 20px;
+  padding: 20px 0;
 }
 
 .el-table__body {
