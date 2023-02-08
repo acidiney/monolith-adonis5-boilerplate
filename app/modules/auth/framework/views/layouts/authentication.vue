@@ -40,6 +40,12 @@ main {
 }
 </style>
 
+<style>
+.no-required-exclamation label::before {
+  content: '' !important;
+}
+</style>
+
 <template>
   <Head :title="$page.props.headers.appName"/>
   <div class="auth d-flex  justify-content-center">

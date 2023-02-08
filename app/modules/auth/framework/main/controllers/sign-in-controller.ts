@@ -19,7 +19,9 @@ export class SignInController implements Controller<HttpContextContract> {
   }: HttpContextContract) {
     const validation = await request.validate(SignInValidator)
       .catch((e) => {
-        session.flash('errors', e)
+        session.flash('errors', {
+          validation: e.messages,
+        })
       })
 
     if (!validation) {
