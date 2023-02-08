@@ -4,22 +4,19 @@ import { useI18n } from 'vue-i18n'
 import {usePage} from "@inertiajs/vue3"
 
 import AppTable from "@core/components/app-table.vue"
+import AppStatus from "@core/components/app-status.vue";
 
 
   const { t } = useI18n()
 
   const columns = ref([
-    {
-      display: t('acl.users.list-users.id'),
-      autoIncrement: true
-    },
-    {
-      display: t('acl.users.list-users.username'),
+    /* {
+      display: ,
       field: 'fullName',
       isLink: true,
       href: '/account/profile',
       param: 'slug'
-    },
+    }, */
     {
       display: t('acl.users.list-users.email'),
       field: 'email'
@@ -58,7 +55,25 @@ import AppTable from "@core/components/app-table.vue"
     </template>
 
     <template v-slot:body>
-      <app-table :rows="content.data" :columns="columns" />
+      <el-table
+          class="table-theme bg-body"
+          header-cell-class-name="bg-body text-muted text-uppercase "
+          size="large"
+          stripe
+          cell-class-name="bg-body text-color"
+          :data="content.data"
+      >
+        <el-table-column prop="id" :label="$t('acl.users.list-users.id')" width="180" />
+        <el-table-column prop="fullName" :label="$t('acl.users.list-users.username')"  />
+        <el-table-column prop="email" :label="$t('acl.users.list-users.email')" />
+        <el-table-column prop="status" :label="$t('shared.status')">
+          <template #default="scope">
+            <app-status :status="scope.row.status"  />
+          </template>
+        </el-table-column>
+        <el-table-column prop="lastLoginAtText" :label="$t('acl.users.list-users.last_login')" />
+        <el-table-column prop="updatedAtText" :label="$t('acl.users.list-users.updated_at')" />
+      </el-table>
     </template>
   </account-layout>
 </template>

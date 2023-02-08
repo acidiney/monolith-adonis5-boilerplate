@@ -23,8 +23,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="">
-    <table id="datatable" class="table table-theme table-row v-middle">
+  <table id="datatable" class="table table-theme table-row v-middle">
       <thead>
         <tr>
           <th v-for="(col, i) of columns" :key="'th_' + i">
@@ -75,5 +74,4 @@ defineProps({
         </tr>
       </tfoot>
     </table>
-  </div>
 </template>
