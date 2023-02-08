@@ -93,45 +93,4 @@ const errors = computed(() => usePage().props.errors)
       </el-button>
     </el-form>
   </auth-layout>
-  <auth-layout>
-    <el-form
-      ref="ruleFormRef"
-      :model="state"
-      :rules="rules"
-      class="no-required-exclamation"
-      status-icon
-      label-position="top"
-    >
-      <el-form-item :label="$t('auth.frontend.field_email')" prop="username">
-        <el-input
-          name="username"
-          v-model="state.username" />
-      </el-form-item>
-      <el-form-item :label="$t('auth.frontend.field_password')" prop="password">
-        <el-input
-          type="password"
-          name="password"
-          show-password
-          v-model="state.password"
-        />
-      </el-form-item>
-
-      <div class="animate-slide-in-link mt-3" style="margin-bottom: 19px">
-        <router-link href="/auth/reset/password" class="cursor-pointer">{{
-            $t("auth.frontend.forget_password_link")
-          }}</router-link>
-      </div>
-
-      <el-button
-        class="w-100"
-        native-type="submit"
-        type="primary"
-        :loading="isLoading"
-        @click.prevent="onSubmit(ruleFormRef)"
-      >
-        {{ $t("auth.frontend.login") }}
-
-      </el-button>
-    </el-form>
-  </auth-layout>
 </template>
