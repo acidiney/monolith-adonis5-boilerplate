@@ -13,7 +13,7 @@ export default class MenuMiddleware {
         .where('role_id', auth.user.roleId)
 
       if (permissions) {
-        const data = await MenuModel.loadMenuBaseadInUserPermissions(permissions.map((p) => p.permissionId))
+        const data = await MenuModel.loadMenuBasedInUserPermissions(permissions.map((p) => p.permissionId))
 
         session.put('menu', data)
       }

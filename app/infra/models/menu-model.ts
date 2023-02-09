@@ -58,10 +58,11 @@ export class MenuModel extends BaseModel {
     query.orderBy('order', 'asc')
   }
 
-  public static loadMenuBaseadInUserPermissions (permissions: string[]) {
+  public static loadMenuBasedInUserPermissions (permissions: string[]) {
     return MenuModel.query()
       .whereNull('permissionId')
       .orWhereIn('permission_id', permissions)
+      .andWhereNull('deleted_at')
       .orderBy('order', 'asc')
       .then((menus) => {
         const principalMenus = menus.filter((menu) => !menu.belongsTo)
