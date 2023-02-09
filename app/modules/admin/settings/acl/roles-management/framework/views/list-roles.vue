@@ -37,7 +37,7 @@ const onSortChange = (e) => {
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item>
-                  <app-icon :size="14" icon="download-cloud" /> {{  $t('admin.acl.roles.export') }}</el-dropdown-item>
+                  <app-icon :size="14" icon="download-cloud" /> {{  $t('shared.export') }}</el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>
