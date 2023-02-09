@@ -113,7 +113,7 @@ const onSortChange = (e) => {
                   <el-dropdown-item>{{ $t('admin.acl.reset_password') }}</el-dropdown-item>
                   <el-dropdown-item divided>{{ $t('admin.acl.inactivate') }}</el-dropdown-item>
                   <el-dropdown-item>{{ $t('admin.acl.impersonate') }}</el-dropdown-item>
-                  <el-dropdown-item divided>{{ $t('shared.remove') }}</el-dropdown-item>
+                  <el-dropdown-item class="text-danger" divided>{{ $t('shared.remove') }}</el-dropdown-item>
                 </el-dropdown-menu>
               </template>
             </el-dropdown>

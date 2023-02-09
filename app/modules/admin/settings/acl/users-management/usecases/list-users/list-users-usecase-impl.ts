@@ -20,12 +20,12 @@ export class ListUsersUseCaseImpl implements ListUsersUseCase {
       .then((pagination) => ({
         ...pagination,
         data: pagination.data?.map(u => ({
-          updatedAt: u.updatedAt,
-          updatedAtText: this.dateAdapter.format(u.updatedAt),
+          updatedAt: this.dateAdapter.format(u.updatedAt),
+          updatedAtText: this.dateAdapter.toRelative(u.updatedAt),
           fullName: u.fullName,
-          lastLoginAt: u.lastLoginAt,
+          lastLoginAt: this.dateAdapter.format(u.lastLoginAt),
           email: u.email,
-          lastLoginAtText: this.dateAdapter.format(u.lastLoginAt),
+          lastLoginAtText: this.dateAdapter.toRelative(u.lastLoginAt),
           slug: u.slug,
           status: u.status,
           roleText: u.role,

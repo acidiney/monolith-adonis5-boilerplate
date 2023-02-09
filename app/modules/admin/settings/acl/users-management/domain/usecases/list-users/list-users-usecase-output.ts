@@ -8,11 +8,11 @@ import {Pagination} from 'app/core/ports'
 export interface User {
   slug: string,
   fullName: string,
-  updatedAt: Date,
+  updatedAt: string,
 
   email: string,
   updatedAtText: string
-  lastLoginAt: Date
+  lastLoginAt: string
   lastLoginAtText: string
   status: string
   roleText: string
