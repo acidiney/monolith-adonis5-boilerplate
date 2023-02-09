@@ -2,6 +2,7 @@ import {IDomainEvent, UniqueEntityID} from 'app/core/domain'
 
 export interface UserCreatedProps {
   userId: UniqueEntityID
+  password: string
 }
 
 export class UserCreatedEvent implements IDomainEvent<UserCreatedProps> {

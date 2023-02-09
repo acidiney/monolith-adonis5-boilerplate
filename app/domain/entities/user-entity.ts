@@ -11,7 +11,7 @@ interface UserProps {
   email: Email
   password: string
   roleId: UniqueEntityID
-  role: string
+  role?: string
   status?: StatusType
   slug?: string
   lastLoginAt?: Date
@@ -56,7 +56,7 @@ export class UserEntity extends Entity<UserProps> {
     return this.props.roleId.toString()
   }
 
-  public get role (): string {
+  public get role (): string | undefined {
     return this.props.role
   }
 

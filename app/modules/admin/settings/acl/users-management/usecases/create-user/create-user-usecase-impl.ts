@@ -61,6 +61,7 @@ export class CreateUserUseCaseImpl implements CreateUserUseCase {
 
     this.eventDispatcher.publish(new UserCreatedEvent({
       userId: userEntityOrEntity.value.id,
+      password: randomPassword,
     }))
 
     return right(userSlug)
