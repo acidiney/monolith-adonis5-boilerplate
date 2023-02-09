@@ -1,4 +1,5 @@
 {
   "menu.acl.view-roles": "Perfis",
-  "acl.roles.role_name": "Nome do perfil"
+  "acl.roles.role_name": "Nome do perfil",
+  "menu.admin.setting.acl.roles": "Gestão de Perfis"
 }
