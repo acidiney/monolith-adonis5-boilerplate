@@ -64,9 +64,10 @@ const onSortChange = (e) => {
           @sort-change="onSortChange"
       >
         <el-table-column type="selection" width="50" />
-        <el-table-column prop="fullName" sortable :label="$t('acl.users.list-users.full_name')">
+        <el-table-column prop="fullName" width="280" sortable :label="$t('acl.users.list-users.full_name')">
           <template #default="scope">
-            <router-link :href="`/account/profile/${scope.row.slug}`">{{ scope.row.fullName }}</router-link>
+            <router-link :href="`/account/profile/${scope.row.slug}`">{{ scope.row.fullName }}</router-link> <br />
+            <span class="sm">{{ scope.row.email }}</span>
           </template>
         </el-table-column>
         <el-table-column prop="roleText" :label="$t('acl.users.list-users.role')">
@@ -74,13 +75,12 @@ const onSortChange = (e) => {
             {{ $t(scope.row.roleText) }}
           </template>
         </el-table-column>
-        <el-table-column prop="email" :label="$t('acl.users.list-users.email')" />
         <el-table-column prop="status" sortable :label="$t('shared.status')">
           <template #default="scope">
             <app-status :status="scope.row.status"  />
           </template>
         </el-table-column>
-        <el-table-column prop="lastLoginAtText" sortable :label="$t('acl.users.list-users.last_login')">
+        <el-table-column prop="lastLoginAtText" min-width="100" sortable :label="$t('acl.users.list-users.last_login')">
           <template #default="scope">
             <el-popover effect="light" trigger="hover" placement="top" width="auto">
               <template #default>
@@ -92,7 +92,7 @@ const onSortChange = (e) => {
             </el-popover>
           </template>
         </el-table-column>
-        <el-table-column prop="updatedAtText" sortable :label="$t('shared.updated_at')">
+        <el-table-column prop="updatedAtText" min-width="200" sortable :label="$t('shared.updated_at')">
           <template #default="scope">
             <el-popover effect="light" trigger="hover" placement="top" width="auto">
               <template #default>
@@ -104,7 +104,7 @@ const onSortChange = (e) => {
             </el-popover>
           </template>
         </el-table-column>
-        <el-table-column fixed="right" label="Operations">
+        <el-table-column fixed="right">
           <template #default>
             <el-dropdown split-button size="small" type="primary">
               {{ $t('shared.edit') }}
