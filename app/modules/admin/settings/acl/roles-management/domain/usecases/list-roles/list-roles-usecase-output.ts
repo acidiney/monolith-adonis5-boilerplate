@@ -9,7 +9,7 @@ export interface Role {
   slug: string,
   name: string,
   isInternal: boolean
-  updatedAt: Date,
+  updatedAt: string,
   updatedAtText: string
 }
 
