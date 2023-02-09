@@ -21,7 +21,9 @@ const onSortChange = (e) => {
 
 
 <template>
-  <account-layout>
+  <account-layout
+  :title="$t('menu.admin.setting.acl.roles')"
+  >
     <template v-slot:header>
       <app-page-hero
         :title="$t('menu.admin.setting.acl.roles')"

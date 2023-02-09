@@ -4,9 +4,13 @@ import { useI18n } from 'vue-i18n'
 import {usePage} from "@inertiajs/vue3"
 
 import AppStatus from "@core/components/app-status.vue";
+import AppCreateUserDialog
+  from "./components/app-create-user-dialog.vue";
+import AppHead from "@core/components/app-head.vue";
 
 
 const { t } = useI18n()
+const dialogVisible = ref(false)
 
 const content = computed(() => usePage().props.content)
 
@@ -24,7 +28,9 @@ const onSortChange = (e) => {
 
 
 <template>
-  <account-layout>
+  <account-layout
+    :title="$t('menu.admin.setting.acl.users')"
+  >
     <template v-slot:header>
       <app-page-hero
         :title="$t('menu.admin.setting.acl.users')"
@@ -33,7 +39,7 @@ const onSortChange = (e) => {
 
         <div class="flex"></div>
         <div class="user-management-options">
-          <el-dropdown split-button type="primary">
+          <el-dropdown @click="dialogVisible = true" split-button type="primary">
             {{ $t('admin.acl.users.register') }}
             <template #dropdown>
               <el-dropdown-menu>
@@ -95,6 +101,7 @@ const onSortChange = (e) => {
           </template>
         </el-table-column>
       </el-table>
+
       <div class="d-flex w-100 justify-content-between">
         <el-select class="w-4" model-value="10" size="small">
           <el-option
@@ -110,6 +117,8 @@ const onSortChange = (e) => {
           layout="prev, pager, next"
         />
       </div>
+
+      <app-create-user-dialog v-model:dialog-visible="dialogVisible" />
     </template>
   </account-layout>
 </template>

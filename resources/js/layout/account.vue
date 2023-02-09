@@ -47,7 +47,6 @@ defineProps({
   >
     {{ $t('shared.authenticated.root') }}
   </div>
-
   <div
     class="alert alert-danger fade show mb-0"
     v-if="messages.errors && messages.errors.message"

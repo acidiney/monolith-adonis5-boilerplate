@@ -26,7 +26,9 @@ const errors = computed(() => usePage().props.errors)
 </script>
 
 <template>
-  <account-layout>
+  <account-layout
+  :title="$t('menu.main.dashboard')"
+  >
     <template v-slot:header>
       <app-page-hero
         :title="$t('menu.main.dashboard')"
