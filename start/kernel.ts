@@ -47,4 +47,5 @@ Server.middleware.register([
 */
 Server.middleware.registerNamed({
   auth: () => import('app/infra/middlewares/auth'),
+  can: () => import('app/infra/middlewares/acl-middleware'),
 })
