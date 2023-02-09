@@ -5,6 +5,7 @@ import { DateTime } from 'luxon'
 import { RoleModel } from './role-model'
 import { StatusModel } from './status-model-model'
 import {slugify} from '@ioc:Adonis/Addons/LucidSlugify'
+import {StatusType} from 'app/domain/types'
 
 export class UserModel extends BaseModel {
   public static table = 'users'
@@ -42,13 +43,13 @@ export class UserModel extends BaseModel {
   public rememberMeToken?: string
 
   @column({ columnName: 'status_id' })
-  public statusId: string
+  public statusId: StatusType
 
   @hasOne(() => StatusModel)
   public status: HasOne<typeof StatusModel>
 
   @column.dateTime({ columnName: 'last_login' })
-  public lastLoginAt: DateTime
+  public lastLoginAt?: DateTime
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

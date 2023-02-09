@@ -86,7 +86,7 @@ describe('AuthenticateUserUseCase', () => {
 
     expect(output.isRight())
     expect(output.value).toEqual({
-      userId: 'valid_user_id',
+      userId: 'valid_id',
     })
   })
 })
