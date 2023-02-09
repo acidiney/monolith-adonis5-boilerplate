@@ -2039,7 +2039,7 @@ Colors
   background-clip: padding-box; }
 
 .bg-body {
-  background-color: #f9f9fa; }
+  background-color: #f9f9fa !important; }
 
 .no-bg {
   background: transparent !important; }

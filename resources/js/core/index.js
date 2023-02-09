@@ -1,4 +1,3 @@
-import AppButton from './components/app-button.vue'
 import AppIcon from './components/app-icon.vue'
 import AppLogo from './components/app-logo.vue'
 import AppHead from './components/app-head.vue'
@@ -15,6 +14,5 @@ export const loadComponent = {
       .component('app-icon', AppIcon)
       .component('app-head', AppHead)
       .component('app-page-hero', AppPageHero)
-      .component('app-button', AppButton)
   },
 }

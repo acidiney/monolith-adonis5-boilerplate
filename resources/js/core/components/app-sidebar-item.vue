@@ -40,12 +40,12 @@ defineProps({
     </template>
 
     <ul class="nav-sub nav-mega" v-if="item.children">
-      <sidebar-item
+      <app-sidebar-item
         v-for="(sub, i) in item.children"
         :key="i"
         :item="sub"
         :subSlide="true"
-      ></sidebar-item>
+      ></app-sidebar-item>
     </ul>
   </li>
 </template>

@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2023.
+ * ITGest Angola
+ */
+
 import {Pagination} from 'app/core/ports'
 
 export interface User {

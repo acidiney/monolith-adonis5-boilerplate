@@ -1,3 +1,31 @@
 /*
 Custom css
 */
+
+.el-table, .el-table td.el-table__cell, .el-table th.el-table__cell.is-leaf {
+  border: 0 !important;
+}
+
+.table-theme tbody td:first-child, .table-theme tbody td:last-child {
+  border-radius: unset !important;
+}
+
+.el-table__inner-wrapper::before {
+  content: unset !important;
+}
+
+
+.bg-dark .table-theme tbody td.el-table__cell {
+  color: #b9c0d3;
+  background-color: #1c233f !important;
+  padding: 20px 0;
+}
+
+.el-table__body {
+   border-collapse: separate !important;
+  border-spacing: 0 10px !important;
+ }
+
+.el-pager li, .el-pagination button {
+  background: unset !important;
+}

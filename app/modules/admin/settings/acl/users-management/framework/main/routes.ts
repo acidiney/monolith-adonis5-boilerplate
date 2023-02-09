@@ -9,6 +9,7 @@ Route.group(() => {
     operation: 'admin-acl-list-users',
     description: '[AdminRoute] List all users',
   }))
+    .middleware('can:admin-acl-view-users')
 })
   .prefix('/admin/settings/acl')
   .middleware(['auth'])

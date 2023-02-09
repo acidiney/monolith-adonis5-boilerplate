@@ -12,16 +12,3 @@
   opacity: 0;
 }
 
-.bg-dark .label-login {
-  background-color: #192039 !important;
-  color: #fff !important
-}
-
-body {
-  background-color: #f9f9fa !important;
-  color: #5e676f !important;
-}
-
-.ant-modal-wrap, .ant-modal-mask {
-  z-index: 1040 !important;
-}

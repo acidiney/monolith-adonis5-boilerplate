@@ -1,68 +1,81 @@
 <script setup>
-import * as yup from "yup";
+import { useI18n } from 'vue-i18n'
+import { reactive, ref } from "vue";
 import { router } from "@inertiajs/vue3";
-import { ref, computed } from "@vue/reactivity";
-import { Field, Form, ErrorMessage } from "vee-validate";
+
 import AuthLayout from "./layouts/authentication.vue";
 
-function onSubmit(values) {
-  console.log(values)
-  isLoading.value = true;
-  router.post("/auth/reset/send-mail", values, {
-    onFinish: () => {
-      isLoading.value = false;
-    },
-  });
-}
+const ruleFormRef = ref()
 
-const schema = computed(() => ({
-  username: yup.string().required().email()
-}));
+const { t } = useI18n()
+
+const state = reactive({
+  username: '',
+});
+
+const rules = reactive({
+  username: [
+    { required: true, message: t('auth.validation.username.required'), trigger: 'blur' },
+    { type: 'email', message: t('auth.validation.username.email'), trigger: ['blur', 'change'] },
+  ],
+})
+
+async function onSubmit(formEl) {
+if (!formEl) return
+  await formEl.validate((valid) => {
+    if (valid) {
+      isLoading.value = true;
+      router.post("/auth/reset/send-mail", state, {
+        onFinish: () => {
+          isLoading.value = false;
+        },
+      })
+    }
+  })
+}
 
 const isLoading = ref(false);
 
 defineProps(["errors"]);
 </script>
 
-
 <template>
   <auth-layout>
-    <Form @submit="onSubmit" :validation-schema="schema">
-      <div class="input-group mb-3">
-        <p class="text-muted">
-          {{ $t("auth.send_reset_password.description") }}
-        </p>
+    <div class="mb-3">
+      <p class="text-muted">
+        {{ $t("auth.send_reset_password.description") }}
+      </p>
 
-        <div class="w-100">
-          <label for="username">{{ $t('auth.send_reset_password.username') }}</label>
-          <div class="input-group bg-light rounded flex w-100 mb-1">
-            <Field name="username" type="email" id="username" class="form-control" />
-            <span class="input-group-append">
-              <button class="btn no-bg no-shadow" type="button">
-                <app-icon icon="user" class="text-fade" />
-              </button>
-            </span>
-          </div>
-          <div class="invalid-feedback d-block iva-feed">
-            <ErrorMessage name="username" />
-          </div>
-        </div>
-      </div>
-
-      <div class="my-3">
-        <router-link href="/auth/login">
-          {{$t("auth.shared.back_login") }}
-        </router-link>
-      </div>
-
-      <app-button
-        type="submit"
-        :isLoading="isLoading"
-        customClasses="btn btn-primary btn-block px-4"
-        :loadingText="$t('auth.send_reset_password.send_link_event')"
+      <el-form
+        ref="ruleFormRef"
+        :model="state"
+        :rules="rules"
+        class="no-required-exclamation"
+        status-icon
+        label-position="top"
       >
-        {{ $t("auth.send_reset_password.send_link") }}
-      </app-button>
-    </Form>
+        <el-form-item :label="$t('auth.frontend.field_email')" prop="username">
+          <el-input
+            name="username"
+            v-model="state.username" />
+        </el-form-item>
+
+        <div class="my-3">
+          <router-link href="/auth/login">
+            {{$t("auth.shared.back_login") }}
+          </router-link>
+        </div>
+
+        <el-button
+          class="w-100"
+          native-type="submit"
+          type="primary"
+          :loading="isLoading"
+          @click.prevent="onSubmit(ruleFormRef)"
+        >
+          {{ $t("auth.send_reset_password.send_link") }}
+        </el-button>
+      </el-form>
+    </div>
   </auth-layout>
 </template>

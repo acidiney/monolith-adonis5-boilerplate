@@ -30,7 +30,9 @@ export class CaptureErrorDecorator implements Controller<HttpContextContract> {
     try {
       return await this.controller.perform(input)
     } catch (e) {
-      captureException(e)
+      if (!Application.inProduction) {
+        captureException(e)
+      }
 
       if (Application.inDev) {
         Logger.error(e)

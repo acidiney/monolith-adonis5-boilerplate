@@ -1,9 +1,28 @@
-<script>
-export default {
-  props: {
-    errors: Object,
+<script setup>
+import {computed, reactive, ref} from "vue";
+import {usePage} from "@inertiajs/vue3";
+
+const dashboardListOptions = ref([
+  {
+    display: 'Dashboard 1',
+    id: 'default'
   },
-};
+])
+
+const refreshIntervalOptions = ref([
+  '5sec',
+  '5min',
+  '10min',
+  ' 30min',
+  '1h'
+])
+
+const state = reactive({
+  dashboard: 'default',
+  refreshInterval: '5sec'
+})
+
+const errors = computed(() => usePage().props.errors)
 </script>
 
 <template>
@@ -12,25 +31,34 @@ export default {
       <app-page-hero
         :title="$t('menu.main.dashboard')"
         :sub-title="
-          $t('admin.page_hero.common.dasboard.subtitle', {
+          $t('admin.page_hero.common.dashboard.subtitle', {
             name: $page.props.user.fullName,
           })
         "
       >
         <div class="flex"></div>
         <div class="refresh-dashboard-timer mr-2">
-          <select class="form-control">
-            <option>Dashboard: Layout 1</option>
-          </select>
+          <el-select v-model="state.dashboard" class="m-2"
+                     :placeholder="$t('common.dashboard.select_dashboard')"
+                     size="default">
+            <el-option
+              v-for="item in dashboardListOptions"
+              :key="item.id"
+              :label="item.display"
+              :value="item.id"
+            />
+          </el-select>
         </div>
-        <div class="refresh-dashboard-timeer">
-          <select class="form-control">
-            <option>5sec</option>
-            <option>5min</option>
-            <option>10min</option>
-            <option>30min</option>
-            <option>1h</option>
-          </select>
+        <div>
+          <el-select v-model="state.refreshInterval" class="m-2"
+                  :placeholder="$t('common.dashboard.select_refresh_interval')" size="default">
+            <el-option
+              v-for="item in refreshIntervalOptions"
+              :key="item"
+              :label="item"
+              :value="item"
+            />
+          </el-select>
         </div>
       </app-page-hero>
     </template>

@@ -6,6 +6,9 @@ import { createI18n } from 'vue-i18n'
 import '../css/app.css'
 import messages from './i18n'
 import { loadComponent } from '@core'
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+import 'element-plus/theme-chalk/dark/css-vars.css'
 
 const i18n = createI18n({
   locale: 'pt',
@@ -23,6 +26,7 @@ createInertiaApp({
     createApp({ render: () => h(App, props) })
       .use(plugin)
       .use(i18n)
+      .use(ElementPlus)
       .use(loadComponent)
       .mount(el)
   },
