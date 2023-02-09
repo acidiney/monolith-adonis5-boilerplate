@@ -10,6 +10,7 @@ Route.group(() => {
     operation: 'admin-acl-list-roles',
     description: '[AdminRoute] List all roles',
   }))
+    .middleware('can:admin-acl-view-roles')
 })
   .prefix('/admin/settings/acl')
   .middleware(['auth'])

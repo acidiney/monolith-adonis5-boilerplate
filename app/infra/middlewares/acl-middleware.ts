@@ -33,7 +33,7 @@ export default class AclMiddleware {
         message: i18n.formatMessage('shared.missing.permissions'),
       })
 
-      return response.redirect('/account')
+      return response.redirect('/account/dashboard')
     }
 
     await next()
