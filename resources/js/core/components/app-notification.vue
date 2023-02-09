@@ -12,7 +12,6 @@
             <div>
               <a href="#">
                 <span class="w-32 avatar gd-danger">
-                  <!-- <img src="/vendor/img/a6.jpg" alt="." /> -->
                 </span>
               </a>
             </div>
@@ -29,7 +28,7 @@
         <div class="flex">
           <span>6 Notifications</span>
         </div>
-        <a href="page.setting.html"
+        <a
           >See all
           <i class="fa fa-angle-right text-muted"></i>
         </a>

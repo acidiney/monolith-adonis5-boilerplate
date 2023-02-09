@@ -28,6 +28,7 @@ export class ListUsersUseCaseImpl implements ListUsersUseCase {
           lastLoginAtText: this.dateAdapter.format(u.lastLoginAt),
           slug: u.slug,
           status: u.status,
+          roleText: u.role,
         }) as User),
       }))
   }

@@ -8,13 +8,20 @@
   import {useI18n} from "vue-i18n";
   import {router} from "@inertiajs/vue3";
 
+  import { loadRoles } from '../services/api'
+
   defineProps({
     dialogVisible: Boolean,
   })
 
   const { t } = useI18n()
 
-  const isLoading = ref(false)
+  const state = reactive({
+    loading: false,
+    loadingOptions: true,
+    options: []
+  })
+
   const ruleFormRef = ref()
 
   const form = reactive({
@@ -23,6 +30,7 @@
     email: '',
     role: ''
   })
+
   const rules = reactive({
     firstName: [
       { required: true, message: t('admin.acl.users.validation.first_name.required'), trigger: 'blur' },
@@ -55,14 +63,23 @@
     ],
   })
 
+
+  loadRoles().then(({ data }) => {
+    console.log(data)
+    state.options = data
+  })
+    .finally(() => {
+      state.loadingOptions = false
+    })
+
   const onSubmit = async (formEl) => {
     if (!formEl) return
     await formEl.validate((valid) => {
       if (valid) {
-        isLoading.value = true;
+        state.loading = true;
         router.post("/admin/settings/acl/user", form, {
           onFinish: () => {
-            isLoading.value = false;
+            state.loading = false;
           },
         });
       }
@@ -110,12 +127,15 @@
         <el-input native-type="email" v-model="form.email" />
       </el-form-item>
       <el-form-item prop="role" :label="$t('shared.users.role')">
-          <el-select  class="w-100" v-model="form.role">
+          <el-select
+            :loading="state.loadingOptions"
+            :disabled="state.loadingOptions"
+            class="w-100" v-model="form.role">
             <el-option
-              v-for="item in ['root', 'admin']"
-              :key="item"
-              :label="item"
-              :value="item"
+              v-for="item in state.options"
+              :key="item.id"
+              :label="$t(item.name)"
+              :value="item.id"
             />
           </el-select>
         </el-form-item>
@@ -125,7 +145,7 @@
       <span class="dialog-footer">
         <el-button > {{ $t('shared.cancel') }} </el-button>
         <el-button
-          :loading="isLoading"
+          :loading="state.loading"
           @click.prevent="onSubmit(ruleFormRef)"
           type="primary">
           {{ $t('admin.acl.users.create') }}

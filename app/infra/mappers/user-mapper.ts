@@ -6,14 +6,13 @@ import {Email} from 'app/domain/value-objects/email'
 import {StatusEnum} from 'app/domain/types'
 
 export class UserMapper extends Mapper<UserEntity, UserModel> {
-  public toDomain (userModel: UserModel): UserEntity {
+  public toDomain (userModel: UserModel):UserEntity {
     const emailOrError = Email.create(userModel.email)
 
     if (emailOrError.isLeft()) {
       throw new Error(emailOrError.value.errorMessage)
     }
 
-    console.log()
     const userEntity = UserEntity.hydrate(new UniqueEntityID(userModel.id), {
       password: userModel.password,
       firstName: userModel.firstName,
@@ -23,6 +22,7 @@ export class UserMapper extends Mapper<UserEntity, UserModel> {
       status: userModel.statusId,
       roleId: new UniqueEntityID(userModel.roleId),
       slug: userModel.slug,
+      role: userModel.role.name,
     }, {
       createdAt: userModel.createdAt.toJSDate(),
       updatedAt: userModel.updatedAt.toJSDate(),
@@ -31,6 +31,7 @@ export class UserMapper extends Mapper<UserEntity, UserModel> {
     if (userEntity.isLeft()) {
       throw new Error(userEntity.value.errorMessage)
     }
+
     return userEntity.value
   }
 

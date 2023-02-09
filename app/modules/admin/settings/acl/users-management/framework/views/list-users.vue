@@ -1,12 +1,11 @@
 <script setup>
-import {computed, ref} from "vue"
+import {computed, ref} from 'vue'
 import { useI18n } from 'vue-i18n'
 import {usePage} from "@inertiajs/vue3"
 
-import AppStatus from "@core/components/app-status.vue";
+import AppStatus from '@core/components/app-status.vue'
 import AppCreateUserDialog
-  from "./components/app-create-user-dialog.vue";
-import AppHead from "@core/components/app-head.vue";
+  from './components/app-create-user-dialog.vue'
 
 
 const { t } = useI18n()
@@ -70,6 +69,11 @@ const onSortChange = (e) => {
             <router-link :href="`/account/profile/${scope.row.slug}`">{{ scope.row.fullName }}</router-link>
           </template>
         </el-table-column>
+        <el-table-column prop="roleText" :label="$t('acl.users.list-users.role')">
+          <template #default="scope">
+            {{ $t(scope.row.roleText) }}
+          </template>
+        </el-table-column>
         <el-table-column prop="email" :label="$t('acl.users.list-users.email')" />
         <el-table-column prop="status" sortable :label="$t('shared.status')">
           <template #default="scope">
@@ -88,7 +92,7 @@ const onSortChange = (e) => {
             </el-popover>
           </template>
         </el-table-column>
-        <el-table-column prop="updatedAtText" sortable :label="$t('acl.users.list-users.updated_at')">
+        <el-table-column prop="updatedAtText" sortable :label="$t('shared.updated_at')">
           <template #default="scope">
             <el-popover effect="light" trigger="hover" placement="top" width="auto">
               <template #default>
@@ -98,6 +102,21 @@ const onSortChange = (e) => {
                 {{ scope.row.updatedAtText }}
               </template>
             </el-popover>
+          </template>
+        </el-table-column>
+        <el-table-column fixed="right" label="Operations">
+          <template #default>
+            <el-dropdown split-button size="small" type="primary">
+              {{ $t('shared.edit') }}
+              <template #dropdown>
+                <el-dropdown-menu >
+                  <el-dropdown-item>{{ $t('admin.acl.reset_password') }}</el-dropdown-item>
+                  <el-dropdown-item divided>{{ $t('admin.acl.inactive') }}</el-dropdown-item>
+                  <el-dropdown-item>{{ $t('admin.acl.impersonate') }}</el-dropdown-item>
+                  <el-dropdown-item divided>{{ $t('shared.remove') }}</el-dropdown-item>
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
           </template>
         </el-table-column>
       </el-table>
@@ -118,7 +137,9 @@ const onSortChange = (e) => {
         />
       </div>
 
-      <app-create-user-dialog v-model:dialog-visible="dialogVisible" />
+      <app-create-user-dialog
+        v-if="dialogVisible"
+        v-model:dialog-visible="dialogVisible" />
     </template>
   </account-layout>
 </template>

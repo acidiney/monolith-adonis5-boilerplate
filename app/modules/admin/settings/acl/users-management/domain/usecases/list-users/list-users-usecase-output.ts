@@ -15,6 +15,7 @@ export interface User {
   lastLoginAt: Date
   lastLoginAtText: string
   status: string
+  roleText: string
 }
 
 export type ListUsersUseCaseOutput = Pagination<User>

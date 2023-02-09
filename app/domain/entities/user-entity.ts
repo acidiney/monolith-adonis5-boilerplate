@@ -11,6 +11,7 @@ interface UserProps {
   email: Email
   password: string
   roleId: UniqueEntityID
+  role: string
   status?: StatusType
   slug?: string
   lastLoginAt?: Date
@@ -53,6 +54,10 @@ export class UserEntity extends Entity<UserProps> {
 
   public get roleId (): string {
     return this.props.roleId.toString()
+  }
+
+  public get role (): string {
+    return this.props.role
   }
 
   public changePassword (password: string, confirmPassword: string): Either<PasswordMismatchError, boolean> {
