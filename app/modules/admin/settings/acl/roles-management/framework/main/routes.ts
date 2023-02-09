@@ -9,21 +9,23 @@ import {
 } from 'app/modules/admin/settings/acl/roles-management/framework/main/factories/make-list-roles-dropdown-factory'
 
 Route.group(() => {
-  Route.get('/roles', routeAdapter(makeListRolesFactory(), {
+  Route.get('/', routeAdapter(makeListRolesFactory(), {
     operation: 'admin-acl-list-roles',
     description: '[AdminRoute] List all roles',
   }))
     .middleware('can:admin-acl-view-roles')
+
+  Route.inertia('/new', 'admin/settings/acl/roles-management/framework/views/create-role')
 })
-  .prefix('/admin/settings/acl')
+  .prefix('/admin/settings/acl/roles')
   .middleware(['auth'])
 
 Route.group(() => {
-  Route.get('/roles/dropdown', routeAdapter(makeListDropdownRolesFactory(), {
+  Route.get('/dropdown', routeAdapter(makeListDropdownRolesFactory(), {
     operation: 'admin-acl-list-dropdown-roles',
     description: '[AdminRoute] List all roles as options',
   }))
     .middleware('can:admin-acl-view-roles')
 })
-  .prefix('/api/admin/settings/acl')
+  .prefix('/api/admin/settings/acl/roles')
   .middleware(['auth'])

@@ -36,8 +36,14 @@ const redirectTo = (url) => {
 
         <div class="flex"></div>
         <div class="user-management-options">
-          <el-dropdown split-button type="primary">
-            {{ $t('admin.acl.roles.register') }}
+          <el-dropdown
+
+              split-button
+              type="primary"
+          >
+            <router-link class="text-white" href="/admin/settings/acl/roles/new">
+              {{ $t('admin.acl.roles.register') }}
+            </router-link>
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item>
