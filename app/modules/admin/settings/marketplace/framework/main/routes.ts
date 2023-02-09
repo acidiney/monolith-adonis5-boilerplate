@@ -12,6 +12,7 @@ Route.group(() => {
       description: '[AdminRoute] Retrieve all available addons',
     })
   )
+    .middleware('can:admin-view-marketplace')
 
   Route.post('/settings/marketplace/addon/install',
     routeAdapter(makeInstallAddonControllerFactory(), {
@@ -19,6 +20,7 @@ Route.group(() => {
       description: '[AdminRoute] Install an addon',
     })
   )
+    .middleware('can:admin-install-marketplace-addon')
 })
   .middleware(['auth'])
   .prefix('/admin')

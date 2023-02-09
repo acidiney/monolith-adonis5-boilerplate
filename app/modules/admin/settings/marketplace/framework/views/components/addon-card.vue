@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { router } from '@inertiajs/vue3'
 
@@ -40,6 +40,18 @@ function installOrUpdatePackage (addonName, version) {
     }
   })
 }
+
+const type = computed(() => {
+  if (props.update) {
+    return 'warning'
+  }
+
+  if (!props.canInstall) {
+    return 'success'
+  }
+
+  return 'primary'
+})
 </script>
 
 <style scoped>
@@ -65,19 +77,14 @@ function installOrUpdatePackage (addonName, version) {
       </p>
     </div>
     <div class="card-footer">
-      <app-button
-        type="button"
+      <el-button
+        :type="type"
         @click="installOrUpdatePackage(name, version)"
         :disabled="!canInstall"
         :is-loading="isLoading"
-        :class="{
-          'btn-warning': update,
-          'btn-primary': canInstall,
-          'btn-success': !canInstall,
-        }"
       >
         {{ loadInstallText() }}
-      </app-button>
+      </el-button>
     </div>
   </div>
 </template>
