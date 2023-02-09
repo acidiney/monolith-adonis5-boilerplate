@@ -14,6 +14,7 @@ export class ListRolesRepositoryImpl implements ListRolesRepository {
   public async findAll (input: ListRolesUseCaseInput): Promise<Pagination<RoleEntity>> {
     const rolesPaginated = await RoleModel
       .query()
+      .whereNull('deleted_at')
       .paginate(input.page, input.perPage)
 
     return {

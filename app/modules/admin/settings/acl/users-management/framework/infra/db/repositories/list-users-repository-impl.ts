@@ -14,6 +14,7 @@ export class ListUsersRepositoryImpl implements ListUsersRepository {
   public async findAll (input: ListUsersUseCaseInput): Promise<Pagination<UserEntity>> {
     const usersPaginated = await UserModel
       .query()
+      .whereNull('deleted_at')
       .paginate(input.page, input.perPage)
 
     return {
