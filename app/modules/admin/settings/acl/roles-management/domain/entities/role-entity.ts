@@ -8,6 +8,8 @@ import {Entity, Options, UniqueEntityID} from 'app/core/domain'
 export interface RoleProps {
   name: string
   slug?: string
+
+  description: string
   internal: boolean
 }
 
@@ -18,6 +20,10 @@ export class RoleEntity extends Entity<RoleProps> {
 
   public get isInternal (): boolean {
     return this.props.internal
+  }
+
+  public get description (): string {
+    return this.props.description
   }
 
   public get slug (): string {

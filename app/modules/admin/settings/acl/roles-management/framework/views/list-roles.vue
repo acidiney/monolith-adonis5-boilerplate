@@ -1,7 +1,7 @@
 <script setup>
 import {computed, ref} from "vue"
 import { useI18n } from 'vue-i18n'
-import {usePage} from "@inertiajs/vue3"
+import {usePage, router} from "@inertiajs/vue3"
 
 const { t } = useI18n()
 
@@ -9,6 +9,10 @@ const content = computed(() => usePage().props.content)
 
 const onSortChange = (e) => {
   console.log(e)
+}
+
+const redirectTo = (url) => {
+  router.get(url)
 }
 
 </script>
@@ -60,8 +64,15 @@ const onSortChange = (e) => {
         <el-table-column type="selection" width="50" />
         <el-table-column prop="name" sortable :label="$t('acl.roles.role_name')">
           <template #default="scope">
-            <span v-if="scope.row.isInternal">{{ $t(scope.row.name) }}</span>
-            <span v-else>{{ scope.row.name }}</span>
+
+            <router-link :href="`/admin/settings/acl/roles/${scope.row.slug}/edit`">
+              <span v-if="scope.row.isInternal">{{ $t(scope.row.name) }}</span>
+              <span v-else>{{ scope.row.name }}</span>
+            </router-link>
+
+            <br />
+            <span  v-if="scope.row.isInternal" class="small text-muted"> {{ $t(scope.row.description) }} </span>
+            <span  v-else class="small text-muted"> {{ scope.row.description }} </span>
           </template>
         </el-table-column>
         <el-table-column prop="updatedAtText" sortable :label="$t('shared.updated_at')">
@@ -74,6 +85,23 @@ const onSortChange = (e) => {
                 {{ scope.row.updatedAtText }}
               </template>
             </el-popover>
+          </template>
+        </el-table-column>
+        <el-table-column :width="150" fixed="right">
+          <template #default="scope">
+            <el-dropdown
+              split-button
+              size="small"
+              type="primary"
+              @click="redirectTo(`/admin/settings/acl/roles/${scope.row.slug}/edit`)"
+            >
+              {{ $t('shared.edit') }}
+              <template #dropdown>
+                <el-dropdown-menu >
+                  <el-dropdown-item class="text-danger">{{ $t('shared.remove') }}</el-dropdown-item>
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
           </template>
         </el-table-column>
       </el-table>

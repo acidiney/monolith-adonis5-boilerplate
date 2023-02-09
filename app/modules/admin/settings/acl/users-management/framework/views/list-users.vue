@@ -67,7 +67,7 @@ const onSortChange = (e) => {
         <el-table-column prop="fullName" width="280" sortable :label="$t('acl.users.list-users.full_name')">
           <template #default="scope">
             <router-link :href="`/account/profile/${scope.row.slug}`">{{ scope.row.fullName }}</router-link> <br />
-            <span class="sm">{{ scope.row.email }}</span>
+            <a :href="`mailto:${scope.row.email}`" class="small text-muted">{{ scope.row.email }}</a>
           </template>
         </el-table-column>
         <el-table-column prop="roleText" :label="$t('acl.users.list-users.role')">

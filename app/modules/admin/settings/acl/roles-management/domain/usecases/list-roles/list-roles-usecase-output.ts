@@ -10,6 +10,8 @@ export interface Role {
   name: string,
   isInternal: boolean
   updatedAt: string,
+
+  description: string
   updatedAtText: string
 }
 

@@ -25,6 +25,7 @@ export class ListRolesUseCaseImpl implements ListRolesUseCase {
         data: pagination.data?.map(r => ({
           updatedAt: this.dateAdapter.format(r.updatedAt),
           updatedAtText: this.dateAdapter.toRelative(r.updatedAt),
+          description: r.description,
           name: r.name,
           slug: r.slug,
           isInternal: r.isInternal,

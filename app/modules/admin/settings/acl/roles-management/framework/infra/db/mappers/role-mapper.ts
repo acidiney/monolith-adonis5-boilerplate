@@ -8,14 +8,15 @@ import {RoleEntity} from 'app/modules/admin/settings/acl/roles-management/domain
 import {RoleModel} from 'app/infra/models'
 
 export class RoleMapper implements Mapper<RoleEntity, RoleModel> {
-  public toDomain (data: RoleModel): RoleEntity {
-    return RoleEntity.hydrate(new UniqueEntityID(data.id), {
-      name: data.name,
-      slug: data.slug,
-      internal: Boolean(data.isSystem),
+  public toDomain (roleModel: RoleModel): RoleEntity {
+    return RoleEntity.hydrate(new UniqueEntityID(roleModel.id), {
+      name: roleModel.name,
+      slug: roleModel.slug,
+      description: roleModel.description,
+      internal: Boolean(roleModel.isSystem),
     }, {
-      updatedAt: data.updatedAt.toJSDate(),
-      createdAt: data.createdAt.toJSDate(),
+      updatedAt: roleModel.updatedAt.toJSDate(),
+      createdAt: roleModel.createdAt.toJSDate(),
     })
   }
 
