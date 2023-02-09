@@ -10,7 +10,11 @@ export class FindUserIdRepositoryImpl implements FindUserIdRepository {
   ) {}
 
   public async findUserId (userId: UniqueEntityID): Promise<UserEntity | undefined> {
-    const user = await UserModel.findBy('id', userId.toString())
+    const user = await UserModel
+      .query()
+      .preload('role')
+      .where('id', userId.toString())
+      .first()
 
     if (!user) {
       return

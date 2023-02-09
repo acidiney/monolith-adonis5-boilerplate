@@ -9,7 +9,11 @@ export class FindUsernameRepositoryImpl implements FindUsernameRepository {
   ) {}
 
   public async findUsername (username: string): Promise<UserEntity | undefined> {
-    const user = await UserModel.findBy('email', username)
+    const user = await UserModel
+      .query()
+      .preload('role')
+      .where('email', username)
+      .first()
 
     if (!user) {
       return
