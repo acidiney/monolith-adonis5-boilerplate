@@ -11,7 +11,7 @@ import {
   CreateUserUseCase,
   CreateUserUseCaseInput,
 } from 'app/modules/admin/settings/acl/users-management/domain'
-import {Either, IEventDispatcher, left, right} from 'app/core/domain'
+import {Either, IEventDispatcher, left, right, UniqueEntityID} from 'app/core/domain'
 import {
   GenerateRandomPasswordService, PersistUserRepository,
 } from 'app/modules/admin/settings/acl/users-management/usecases/create-user/ports'
@@ -27,7 +27,7 @@ export class CreateUserUseCaseImpl implements CreateUserUseCase {
   ) {}
 
   public async perform (input: CreateUserUseCaseInput):
-  Promise<Either<UserAlreadyExistError, boolean>> {
+  Promise<Either<UserAlreadyExistError, string>> {
     const emailOrError = Email.create(input.email)
 
     if (emailOrError.isLeft()) {
@@ -39,6 +39,7 @@ export class CreateUserUseCaseImpl implements CreateUserUseCase {
       lastName: input.lastName,
       email: emailOrError.value,
       status: StatusEnum.ACTIVE,
+      roleId: new UniqueEntityID(input.role),
       password: 'first_password',
     })
 
@@ -56,12 +57,12 @@ export class CreateUserUseCaseImpl implements CreateUserUseCase {
 
     userEntityOrEntity.value.changePassword(randomPassword, randomPassword)
 
-    await this.persistUserRepository.persist(userEntityOrEntity.value)
+    const userSlug = await this.persistUserRepository.persist(userEntityOrEntity.value)
 
     this.eventDispatcher.publish(new UserCreatedEvent({
       userId: userEntityOrEntity.value.id,
     }))
 
-    return right(true)
+    return right(userSlug)
   }
 }

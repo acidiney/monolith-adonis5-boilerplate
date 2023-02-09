@@ -6,6 +6,7 @@
 <script setup>
   import {reactive, ref} from "vue";
   import {useI18n} from "vue-i18n";
+  import {router} from "@inertiajs/vue3";
 
   defineProps({
     dialogVisible: Boolean,
@@ -13,14 +14,15 @@
 
   const { t } = useI18n()
 
+  const isLoading = ref(false)
+  const ruleFormRef = ref()
+
   const form = reactive({
     firstName: '',
     lastName: '',
     email: '',
     role: ''
   })
-  const ruleFormRef = ref()
-
   const rules = reactive({
     firstName: [
       { required: true, message: t('admin.acl.users.validation.first_name.required'), trigger: 'blur' },
@@ -52,6 +54,20 @@
       },
     ],
   })
+
+  const onSubmit = async (formEl) => {
+    if (!formEl) return
+    await formEl.validate((valid) => {
+      if (valid) {
+        isLoading.value = true;
+        router.post("/admin/settings/acl/user", form, {
+          onFinish: () => {
+            isLoading.value = false;
+          },
+        });
+      }
+    })
+  }
 
   defineEmits(['update:dialogVisible'])
 </script>
@@ -108,7 +124,10 @@
     <template #footer>
       <span class="dialog-footer">
         <el-button > {{ $t('shared.cancel') }} </el-button>
-        <el-button type="primary">
+        <el-button
+          :loading="isLoading"
+          @click.prevent="onSubmit(ruleFormRef)"
+          type="primary">
           {{ $t('admin.acl.users.create') }}
         </el-button>
       </span>

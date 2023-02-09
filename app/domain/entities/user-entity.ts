@@ -10,11 +10,9 @@ interface UserProps {
   lastName: string,
   email: Email
   password: string
-
+  roleId: UniqueEntityID
   status?: StatusType
-
   slug?: string
-
   lastLoginAt?: Date
 }
 
@@ -23,6 +21,14 @@ type UserEntityError = UserNameErrors.UserFirstNameRequiredError | UserNameError
 export class UserEntity extends Entity<UserProps> {
   public get fullName (): string {
     return `${this.props.firstName} ${this.props.lastName ?? ''}`
+  }
+
+  public get firstName () : string {
+    return this.props.firstName
+  }
+
+  public get lastName (): string {
+    return this.props.lastName
   }
 
   public get email (): string {
@@ -43,6 +49,10 @@ export class UserEntity extends Entity<UserProps> {
 
   public get slug (): string {
     return this.props.slug as string
+  }
+
+  public get roleId (): string {
+    return this.props.roleId.toString()
   }
 
   public changePassword (password: string, confirmPassword: string): Either<PasswordMismatchError, boolean> {

@@ -9,4 +9,4 @@ import {
 } from './create-user-usecase-input'
 import {UserAlreadyExistError} from 'app/modules/admin/settings/acl/users-management/domain/errors'
 
-export type CreateUserUseCase = UseCase<CreateUserUseCaseInput, Either<UserAlreadyExistError, boolean>>
+export type CreateUserUseCase = UseCase<CreateUserUseCaseInput, Either<UserAlreadyExistError, string>>

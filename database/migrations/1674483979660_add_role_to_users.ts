@@ -5,7 +5,7 @@ export default class extends BaseSchema {
 
   public async up () {
     this.schema.alterTable(this.tableName, (table) => {
-      table.string('role_id').index()
+      table.string('role_id').index().notNullable()
 
       table.foreign('role_id')
         .references('id')

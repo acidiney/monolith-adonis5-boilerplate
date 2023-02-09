@@ -2,7 +2,7 @@ import Logger from '@ioc:Adonis/Core/Logger'
 
 import {IHandler} from 'app/core/domain'
 import {UserLoggedEvent} from 'app/modules/auth/domain/events/user-logged-event'
-import {FindUserIdRepository} from 'app/modules/auth/usecases/shared/ports/find-user-id-repository'
+import {FindUserIdRepository} from 'app/infra/ports/find-user-id-repository'
 import Database from '@ioc:Adonis/Lucid/Database'
 
 export class UserLoggedListener implements IHandler<UserLoggedEvent> {

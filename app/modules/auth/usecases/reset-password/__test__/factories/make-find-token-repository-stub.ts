@@ -1,4 +1,4 @@
-import {FindTokenRepository} from 'app/modules/auth/usecases/shared/ports/find-token-repository'
+import {FindTokenRepository} from 'app/infra/ports/find-token-repository'
 import {TokenEntity, TokenTypes} from 'app/modules/auth/domain/entities/token-entity'
 import {UniqueEntityID} from 'app/core/domain'
 

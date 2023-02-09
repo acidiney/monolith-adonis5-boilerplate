@@ -1,7 +1,7 @@
 import { UserModel } from 'app/infra/models'
 import { UserEntity } from 'app/domain/entities/user-entity'
 import { FindUsernameRepository } from 'app/modules/auth/usecases'
-import { UserMapper } from '../../../../../../infra/mappers/user-mapper'
+import { UserMapper } from '../mappers/user-mapper'
 
 export class FindUsernameRepositoryImpl implements FindUsernameRepository {
   constructor (

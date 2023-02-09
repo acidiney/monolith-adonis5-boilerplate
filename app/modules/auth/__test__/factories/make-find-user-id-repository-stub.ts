@@ -1,6 +1,6 @@
 import {UserEntity} from 'app/domain/entities/user-entity'
 import {UniqueEntityID} from 'app/core/domain'
-import {FindUserIdRepository} from 'app/modules/auth/usecases/shared/ports/find-user-id-repository'
+import {FindUserIdRepository} from 'app/infra/ports/find-user-id-repository'
 import {Email} from 'app/domain/value-objects/email'
 import {StatusEnum} from 'app/domain/types'
 

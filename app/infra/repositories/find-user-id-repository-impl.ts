@@ -1,8 +1,8 @@
 import { UserModel } from 'app/infra/models'
 import { UserEntity } from 'app/domain/entities/user-entity'
-import { UserMapper } from '../../../../../../infra/mappers/user-mapper'
+import { UserMapper } from '../mappers/user-mapper'
 import {UniqueEntityID} from 'app/core/domain'
-import {FindUserIdRepository} from 'app/modules/auth/usecases/shared/ports/find-user-id-repository'
+import {FindUserIdRepository} from 'app/infra/ports/find-user-id-repository'
 
 export class FindUserIdRepositoryImpl implements FindUserIdRepository {
   constructor (
