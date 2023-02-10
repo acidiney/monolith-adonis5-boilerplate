@@ -73,13 +73,13 @@ const errorHandler = () => true
             </el-avatar>
           </template>
         </el-table-column>
-        <el-table-column prop="fullName" width="280" sortable :label="$t('acl.users.list-users.full_name')">
+        <el-table-column prop="fullName" :min-width="180" sortable :label="$t('acl.users.list-users.full_name')">
           <template #default="scope">
             <router-link :href="`/account/profile/${scope.row.slug}`">{{ scope.row.fullName }}</router-link> <br />
             <a :href="`mailto:${scope.row.email}`" class="small text-muted">{{ scope.row.email }}</a>
           </template>
         </el-table-column>
-        <el-table-column prop="roleText" :label="$t('acl.users.list-users.role')">
+        <el-table-column prop="roleText" min-width="120" :label="$t('acl.users.list-users.role')">
           <template #default="scope">
             {{ $t(scope.row.roleText) }}
           </template>
@@ -101,7 +101,7 @@ const errorHandler = () => true
             </el-popover>
           </template>
         </el-table-column>
-        <el-table-column prop="updatedAtText" min-width="200" sortable :label="$t('shared.updated_at')">
+        <el-table-column prop="updatedAtText" min-width="130" sortable :label="$t('shared.updated_at')">
           <template #default="scope">
             <el-popover effect="light" trigger="hover" placement="top" width="auto">
               <template #default>
