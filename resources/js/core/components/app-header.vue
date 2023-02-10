@@ -7,26 +7,7 @@ import AppCustomApplicationSettings from './app-custom-application-settings.vue'
 <template>
   <div id="header" class="page-header">
     <div class="navbar navbar-expand-lg">
-      <!-- brand -->
       <app-logo />
-      <!-- / brand -->
-      <!-- Navbar collapse -->
-      <!-- <div class="collapse navbar-collapse order-2 order-lg-1" id="navbarToggler">
-        <form class="input-group m-2 my-lg-0">
-          <div class="input-group-prepend">
-            <button type="button" class="btn no-shadow no-bg px-0 text-inherit">
-              <i data-feather="search"></i>
-            </button>
-          </div>
-          <input
-            type="text"
-            class="form-control no-border no-shadow no-bg typeahead"
-            placeholder="Search components..."
-            data-plugin="typeahead"
-            data-api="/vendor/api/menu.json"
-          />
-        </form>
-      </div> -->
       <ul class="nav navbar-menu order-1 order-lg-2">
         <li class="nav-item d-none d-sm-block">
           <a class="nav-link px-2 d-flex" data-toggle="fullscreen" data-plugin="fullscreen">

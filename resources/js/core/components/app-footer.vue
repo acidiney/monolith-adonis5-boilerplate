@@ -1,7 +1,7 @@
 <script setup>
 defineProps({
   centerText: Boolean,
-  rightText: Boolean
+  rightText: Boolean,
 })
 </script>
 

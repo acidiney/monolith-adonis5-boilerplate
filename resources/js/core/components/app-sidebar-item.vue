@@ -1,8 +1,4 @@
 <script setup>
-import { ref } from "vue";
-
-const iconFontSize = ref("16px");
-
 defineProps({
   item: {
     type: Object,

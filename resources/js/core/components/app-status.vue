@@ -24,11 +24,7 @@ const fallbackStatusText = {
 };
 
 defineProps({
-  status: {
-    validator: (value) => {
-      return true// [...Object.keys(statusTheme)].indexOf(value) !== -1;
-    },
-  },
+  status: String,
   text: String,
 });
 </script>
