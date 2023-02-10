@@ -20,5 +20,5 @@ Route.group(() => {
   }))
     .middleware('can:admin-acl-create-user')
 })
-  .prefix('/admin/settings/acl')
+  .prefix('/account/admin/settings/acl')
   .middleware(['auth'])

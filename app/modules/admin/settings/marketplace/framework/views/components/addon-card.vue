@@ -31,7 +31,7 @@ const isLoading = ref(false)
 
 function installOrUpdatePackage (addonName, version) {
   isLoading.value = true
-  router.post('/admin/settings/marketplace/addon/install', {
+  router.post('/account/admin/settings/marketplace/addon/install', {
     addonName,
     version
   }, {

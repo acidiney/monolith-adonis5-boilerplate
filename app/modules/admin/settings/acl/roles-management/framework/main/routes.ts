@@ -17,7 +17,7 @@ Route.group(() => {
 
   Route.inertia('/new', 'admin/settings/acl/roles-management/framework/views/create-role')
 })
-  .prefix('/admin/settings/acl/roles')
+  .prefix('/account/admin/settings/acl/roles')
   .middleware(['auth'])
 
 Route.group(() => {

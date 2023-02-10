@@ -5,10 +5,9 @@
 
 <script setup>
   import {useI18n} from "vue-i18n";
-  import {router} from "@inertiajs/vue3";
   import {computed, onMounted, reactive, ref} from "vue";
 
-  import { loadRoles } from '../services/api'
+  import {apiService} from '../services/api'
 
   const { t } = useI18n()
 
@@ -70,18 +69,17 @@
     await formEl.validate((valid) => {
       if (valid) {
         state.loading = true;
-        router.post("/admin/settings/acl/user", form, {
-          onFinish: () => {
+        apiService.createUser(form)
+          .finally(() => {
             state.loading = false;
-          },
-        });
+          })
       }
     })
   }
 
 
   onMounted(() => {
-    loadRoles().then(({ data }) => {
+    apiService.loadRoles().then(({ data }) => {
       console.log(data)
       state.options = data
     })
@@ -114,9 +112,23 @@
       label-width="100px"
       :model="form"
     >
+
       <p class="text-muted">
         {{ $t("admin.acl.users.register.description") }}
       </p>
+
+      <div class="alert alert-success alert-dismissible" v-if="$page.props.success">
+        {{ $t($page.props.success.createUser) }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="alert alert-danger alert-dismissible" v-if="$page.props.errors">
+        {{ $t($page.props.errors.createUser) }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
       <el-row>
         <el-col :span="11">
           <el-form-item prop="firstName" :label="$t('shared.user.first_name')">

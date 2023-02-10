@@ -23,4 +23,4 @@ Route.group(() => {
     .middleware('can:admin-install-marketplace-addon')
 })
   .middleware(['auth'])
-  .prefix('/admin')
+  .prefix('/account/admin')

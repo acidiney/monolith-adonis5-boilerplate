@@ -7,7 +7,7 @@ export default class InsertMarketplaceMenuSeed extends BaseSeeder {
       .create({
         display: 'menu.admin.setting.setup.addons',
         slug: 'setup_addons',
-        url: '/admin/settings/marketplace',
+        url: '/account/admin/settings/marketplace',
         icon: 'database',
         order: 4,
         permissionId: 'admin-view-marketplace',

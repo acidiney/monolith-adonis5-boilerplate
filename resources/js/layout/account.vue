@@ -49,10 +49,10 @@ defineProps({
   </div>
   <div
     class="alert alert-success fade show mb-0"
-    v-if="messages.success"
+    v-if="messages.success && messages.success.message"
     role="alert"
   >
-    {{ messages.success }}
+    {{ messages.success.message }}
   </div>
   <div class="layout-row">
     <app-sidebar />

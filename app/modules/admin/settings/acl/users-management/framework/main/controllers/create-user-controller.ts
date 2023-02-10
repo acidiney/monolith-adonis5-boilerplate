@@ -30,15 +30,15 @@ export class CreateUserController implements Controller<HttpContextContract> {
 
     if (output.isLeft()) {
       session.flash('errors', {
-        message: i18n.formatMessage(output.value.errorMessage),
+        createUser: i18n.formatMessage(output.value.errorMessage),
       })
       return response.redirect().back()
     }
 
     session.flash('success', {
-      message: i18n.formatMessage('admin.acl.user.new'),
+      createUser: i18n.formatMessage('admin.acl.user.new'),
     })
 
-    return response.redirect('/')
+    return response.redirect().back()
   }
 }
