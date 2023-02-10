@@ -1,5 +1,5 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-import { PermissionModel } from 'app/modules/shared/framework/infra/models'
+import { PermissionModel } from 'app/modules/shared/framework/infra/db/models'
 
 export default class InsertBasePermissionsSeed extends BaseSeeder {
   public async run () {

@@ -1,5 +1,5 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-import { MenuModel } from 'app/modules/shared/framework/infra/models/menu-model'
+import { MenuModel } from 'app/modules/shared/framework/infra/db/models/menu-model'
 
 export default class MenuSeedSeeder extends BaseSeeder {
   public async run () {

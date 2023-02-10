@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 
 import Inertia from '@ioc:EidelLev/Inertia'
-import {UserModel} from 'app/modules/shared/framework/infra/models'
+import {UserModel} from 'app/modules/shared/framework/infra/db/models'
 const pkg = require('../package.json')
 
 Inertia.share({

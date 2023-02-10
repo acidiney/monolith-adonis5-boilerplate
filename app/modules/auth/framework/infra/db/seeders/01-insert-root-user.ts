@@ -1,5 +1,5 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-import { RoleModel, UserModel } from 'app/modules/shared/framework/infra/models'
+import { RoleModel, UserModel } from 'app/modules/shared/framework/infra/db/models'
 
 export default class InsertRootUser extends BaseSeeder {
   public async run () {

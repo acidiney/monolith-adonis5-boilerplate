@@ -1,4 +1,4 @@
-import {RoleModel} from 'app/modules/shared/framework/infra/models'
+import {RoleModel} from 'app/modules/shared/framework/infra/db/models'
 import {Pagination} from 'app/core/ports'
 import {ListRolesRepository} from 'app/modules/admin/settings/acl/roles-management/usecases/list-roles/props'
 import {RoleMapper} from 'app/modules/admin/settings/acl/roles-management/framework/infra/db/mappers/role-mapper'

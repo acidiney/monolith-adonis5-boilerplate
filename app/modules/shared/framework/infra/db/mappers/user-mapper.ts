@@ -1,5 +1,5 @@
 import * as luxon from 'luxon'
-import {UserModel} from 'app/modules/shared/framework/infra/models'
+import {UserModel} from 'app/modules/shared/framework/infra/db/models'
 import {Mapper, UniqueEntityID} from 'app/core/domain'
 import {UserEntity} from 'app/domain/entities/user-entity'
 import {Email} from 'app/domain/value-objects/email'
