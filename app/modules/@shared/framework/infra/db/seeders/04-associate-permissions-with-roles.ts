@@ -1,5 +1,5 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-import { RoleModel, RolePermissionModel } from 'app/modules/shared/framework/infra/db/models'
+import { RoleModel, RolePermissionModel } from 'app/modules/@shared/framework/infra/db/models'
 
 export default class AssociateRoleWithPermissionSeed extends BaseSeeder {
   private async associateAdminPermissions () {

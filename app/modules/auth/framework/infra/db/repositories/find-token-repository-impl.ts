@@ -1,6 +1,6 @@
 import {TokenEntity} from 'app/modules/auth/domain'
 import {TokenModel} from 'app/modules/auth/framework/infra/db/models/token-model'
-import {FindTokenRepository} from 'app/modules/shared/usecases/ports/find-token-repository'
+import {FindTokenRepository} from 'app/modules/@shared/usecases/ports/find-token-repository'
 import {TokenMapper} from 'app/modules/auth/framework/infra/db/mappers/token-mapper'
 
 export class FindTokenRepositoryImpl implements FindTokenRepository {

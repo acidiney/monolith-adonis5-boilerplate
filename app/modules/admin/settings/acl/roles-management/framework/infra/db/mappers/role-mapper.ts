@@ -5,7 +5,7 @@
 
 import {Mapper, UniqueEntityID} from 'app/core/domain'
 import {RoleEntity} from 'app/modules/admin/settings/acl/roles-management/domain/entities/role-entity'
-import {RoleModel} from 'app/modules/shared/framework/infra/db/models'
+import {RoleModel} from 'app/modules/@shared/framework/infra/db/models'
 
 export class RoleMapper implements Mapper<RoleEntity, RoleModel> {
   public toDomain (roleModel: RoleModel): RoleEntity {

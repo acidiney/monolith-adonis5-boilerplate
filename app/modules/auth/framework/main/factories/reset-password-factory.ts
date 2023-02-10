@@ -5,7 +5,7 @@ import {
   UpdateUserRepositoryImpl,
 } from 'app/modules/auth/framework/infra/db/repositories'
 import {ResetPasswordUseCaseImpl} from 'app/modules/auth/usecases'
-import {UserMapper} from 'app/modules/shared/framework/infra/db/mappers/user-mapper'
+import {UserMapper} from 'app/modules/@shared/framework/infra/db/mappers/user-mapper'
 import {TokenMapper} from 'app/modules/auth/framework/infra/db/mappers/token-mapper'
 import {ResetPasswordController} from 'app/modules/auth/framework/main/controllers/reset-password-controller'
 import {UpdateTokenRepositoryImpl} from 'app/modules/auth/framework/infra/db/repositories/update-token-repository-impl'

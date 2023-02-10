@@ -1,5 +1,5 @@
 import { BaseModel, column, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
-import { UserModel } from 'app/modules/shared/framework/infra/db/models'
+import { UserModel } from 'app/modules/@shared/framework/infra/db/models'
 import { DateTime } from 'luxon'
 
 export class InstalledAddonModel extends BaseModel {

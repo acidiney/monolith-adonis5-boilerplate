@@ -1,4 +1,4 @@
-import { AddonService } from 'app/modules/shared/usecases/ports/addon-service'
+import { AddonService } from 'app/modules/@shared/usecases/ports/addon-service'
 import { Addon } from '../../../domain/entities/addon'
 import { RetrieveAddonsService } from '../../../usecases/list-addons/ports'
 

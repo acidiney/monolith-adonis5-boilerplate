@@ -30,7 +30,7 @@ export default class SeedSyncCommand extends BaseCommand {
 
   public async run () {
     const { loadContext, execCommand } = await import('../app/infra/utils')
-    const { DbSyncModel } = await import('app/modules/shared/framework/infra/db/models/db-sync-model')
+    const { DbSyncModel } = await import('app/modules/@shared/framework/infra/db/models/db-sync-model')
 
     const executedSeeds = await (await DbSyncModel.all()).map((seed) => seed.seedName)
     let difference: string[]
@@ -40,20 +40,14 @@ export default class SeedSyncCommand extends BaseCommand {
     await taskManager
       .add('Comparing seeds', async (_, task) => {
         try {
-          const baseSeeders = await loadContext(resolve(Application.appRoot, 'database', 'seeders'), true)
           const modulesSeeders = await loadContext(resolve(Application.appRoot, './app/modules'),
             true, /infra\/db\/seeders\/.*\.ts$/)
 
-          const seedNames = [...baseSeeders.keys()
-            .map((k) => {
-              return k.replace(Application.appRoot, '.')
-            }),
-          ...modulesSeeders.keys()
+          const seedNames =
+          modulesSeeders.keys()
             .map((k) => {
               return k.replace(Application.appRoot, '.')
             })
-            ,
-          ]
 
           difference = lodash.difference(seedNames, executedSeeds)
 

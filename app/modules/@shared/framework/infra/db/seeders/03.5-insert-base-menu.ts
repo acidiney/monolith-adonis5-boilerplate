@@ -1,4 +1,4 @@
-import { MenuModel } from 'app/modules/shared/framework/infra/db/models/menu-model'
+import { MenuModel } from 'app/modules/@shared/framework/infra/db/models/menu-model'
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 
 export default class MenuSeedSeeder extends BaseSeeder {
