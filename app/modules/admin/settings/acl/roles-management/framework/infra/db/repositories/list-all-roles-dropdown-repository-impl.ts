@@ -4,6 +4,9 @@ import {RoleEntity} from 'app/modules/admin/settings/acl/roles-management/domain
 import {
   ListAllRolesRepository,
 } from 'app/modules/admin/settings/acl/roles-management/usecases/list-roles-dropdown/props'
+import {
+  ListRolesDropdownUseCaseInput,
+} from 'app/modules/admin/settings/acl/roles-management/domain/usecases/list-roles-dropdown'
 
 export class ListAllRolesDropdownRepositoryImpl implements ListAllRolesRepository {
   constructor (
@@ -11,10 +14,15 @@ export class ListAllRolesDropdownRepositoryImpl implements ListAllRolesRepositor
   ) {
   }
 
-  public async findAll (): Promise<RoleEntity[]> {
+  public async findAll (input: ListRolesDropdownUseCaseInput): Promise<RoleEntity[]> {
     const rolesPaginated = await RoleModel
       .query()
       .whereNull('deleted_at')
+      .andWhere((q) => {
+        if (!input.isRoot) {
+          q.whereNot('slug', 'root')
+        }
+      })
       .exec()
 
     return rolesPaginated.map(this.roleMapper.toDomain)

@@ -2,7 +2,7 @@ import {
   ListAllRolesRepository,
 } from './props'
 import {
-  ListRolesDropdownUseCase, ListRolesDropdownUseCaseOutput, RoleOptions,
+  ListRolesDropdownUseCase, ListRolesDropdownUseCaseInput, ListRolesDropdownUseCaseOutput, RoleOptions,
 } from 'app/modules/admin/settings/acl/roles-management/domain/usecases/list-roles-dropdown'
 
 export class ListRolesDropdownUseCaseImpl implements ListRolesDropdownUseCase {
@@ -11,8 +11,8 @@ export class ListRolesDropdownUseCaseImpl implements ListRolesDropdownUseCase {
   ) {
   }
 
-  public async perform (): Promise<ListRolesDropdownUseCaseOutput> {
-    return this.listAllRolesRepository.findAll()
+  public async perform (input: ListRolesDropdownUseCaseInput): Promise<ListRolesDropdownUseCaseOutput> {
+    return this.listAllRolesRepository.findAll(input)
       .then((data) => data.map(r => ({
         name: r.name,
         id: r.id.toString(),

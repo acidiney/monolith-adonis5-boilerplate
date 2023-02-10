@@ -3,9 +3,13 @@
  * ITGest Angola
  */
 
-import { UseCaseWithoutInput} from 'app/core/domain'
+import {UseCase} from 'app/core/domain'
 import {
   ListRolesDropdownUseCaseOutput,
 } from './list-roles-dropdown-usecase-output'
 
-export type ListRolesDropdownUseCase = UseCaseWithoutInput<ListRolesDropdownUseCaseOutput>
+export type ListRolesDropdownUseCaseInput = {
+  isRoot: boolean
+}
+
+export type ListRolesDropdownUseCase = UseCase<ListRolesDropdownUseCaseInput, ListRolesDropdownUseCaseOutput>

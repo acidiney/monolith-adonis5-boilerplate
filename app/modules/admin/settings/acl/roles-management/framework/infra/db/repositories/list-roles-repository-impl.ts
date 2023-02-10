@@ -15,6 +15,11 @@ export class ListRolesRepositoryImpl implements ListRolesRepository {
     const rolesPaginated = await RoleModel
       .query()
       .whereNull('deleted_at')
+      .andWhere((q) => {
+        if (!input.isRoot) {
+          q.whereNot('slug', 'root')
+        }
+      })
       .paginate(input.page, input.perPage)
 
     return {

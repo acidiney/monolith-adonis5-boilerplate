@@ -5,4 +5,6 @@
 
 import {Paginate, Search} from 'app/core/ports'
 
-export interface ListRolesUseCaseInput extends Search, Paginate {}
+export interface ListRolesUseCaseInput extends Search, Paginate {
+  isRoot: boolean
+}
