@@ -1,6 +1,6 @@
 import {PersistUserRepository} from 'app/modules/admin/settings/acl/users-management/usecases/create-user/ports'
 import {UserEntity} from 'app/domain/entities/user-entity'
-import {UserMapper} from 'app/infra/mappers/user-mapper'
+import {UserMapper} from 'app/modules/shared/framework/infra/mappers/user-mapper'
 
 export class PersistUserRepositoryImpl implements PersistUserRepository {
   constructor (

@@ -1,0 +1,22 @@
+{
+  "shared.minimize.menu": "Minimizar Menu",
+  "shared.logout": "Terminar sessão",
+  "shared.account": "Conta",
+  "shared.updated_at": "Ultima actualização",
+  "shared.status": "Estado",
+  "shared.roles.root": "Root",
+  "shared.remove": "Remover",
+  "shared.edit": "Editar",
+  "shared.export": "Exportar Dados",
+  "shared.version": "Versão",
+  "shared.roles.admin": "Administrador do sistema",
+  "shared.status.active": "Activo",
+  "shared.status.approved": "Aprovado",
+  "shared.status.canceled": "Cancelado",
+  "shared.status.rejected": "Rejeitado",
+  "shared.status.wait_human_validation": "Aguardando Validação Manual",
+  "shared.errors.internal_server_error": "Erro interno no servidor!",
+  "shared.interface": "Aparência",
+  "shared.translations": "Idioma",
+  "shared.background.color": "Tema"
+}

@@ -6,7 +6,7 @@ import {ListRolesUseCaseImpl}
 import {
   ListRolesRepositoryImpl,
 } from 'app/modules/admin/settings/acl/roles-management/framework/infra/db/repositories/list-roles-repository-impl'
-import {DateAdapterImpl} from 'app/infra/adapters/date-adapter-impl'
+import {DateAdapterImpl} from 'app/modules/shared/framework/infra/adapters/date-adapter-impl'
 
 export const makeListRolesFactory = (): ListRolesController => {
   return new ListRolesController(

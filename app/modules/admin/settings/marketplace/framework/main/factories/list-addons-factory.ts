@@ -1,5 +1,5 @@
-import { AddonServiceImpl } from 'app/infra/services/addon-service-impl'
-import { HttpClientAdapterImpl } from 'app/infra/adapters/http-client-adapter-impl'
+import { AddonServiceImpl } from 'app/modules/shared/framework/infra/services/addon-service-impl'
+import { HttpClientAdapterImpl } from 'app/modules/shared/framework/infra/adapters/http-client-adapter-impl'
 
 import { ListAddonsController } from '../controllers/list-addons/list-addons-controller'
 import { ListAddonsUseCaseImpl } from '../../../usecases/list-addons/list-addons-use-case-impl'

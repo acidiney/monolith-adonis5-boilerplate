@@ -2,7 +2,7 @@ import {AuthenticateUserUseCaseImpl} from 'app/modules/auth/usecases'
 
 import {
   FindUsernameRepositoryImpl,
-} from 'app/infra/repositories/find-username-repository-impl'
+} from 'app/modules/shared/framework/infra/repositories/find-username-repository-impl'
 import { VerifyPasswordMatchAdapterImpl } from 'app/modules/auth/framework/infra/adapters'
 
 import { SignInController } from '../controllers/sign-in-controller'

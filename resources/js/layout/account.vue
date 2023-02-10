@@ -41,13 +41,6 @@ defineProps({
   <app-head :title="title" />
 
   <div
-    class="alert alert-warning fade show mb-0"
-    v-if="user.role.slug === 'root'"
-    role="alert"
-  >
-    {{ $t('shared.authenticated.root') }}
-  </div>
-  <div
     class="alert alert-danger fade show mb-0"
     v-if="messages.errors && messages.errors.message"
     role="alert"

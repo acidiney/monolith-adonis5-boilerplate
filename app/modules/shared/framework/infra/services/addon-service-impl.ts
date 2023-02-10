@@ -1,6 +1,6 @@
 import { AddonEntity } from 'app/domain/entities/addon-entity'
-import { AddonService } from '../ports/addon-service'
-import { HttpClient } from '../ports/http-client'
+import { AddonService } from '../../../usecases/ports/addon-service'
+import { HttpClient } from '../../../usecases/ports/http-client'
 
 export class AddonServiceImpl implements AddonService {
   constructor (

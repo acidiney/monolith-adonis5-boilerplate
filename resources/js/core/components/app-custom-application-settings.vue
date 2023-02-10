@@ -9,23 +9,13 @@
         <label class="ui-check ui-check-rounded my-1 d-block">
           <input type="checkbox" name="foldedAside" />
           <i></i>
-          <small>{{ $t('shared.minimaze.menu') }}</small>
+          <small>{{ $t('shared.minimize.menu') }}</small>
         </label>
-        <!-- <label class="ui-check ui-check-rounded my-1 d-block">
-          <input type="checkbox" name="hideAside" />
-          <i></i>
-          <small>Esconder Menu</small>
-        </label> -->
       </div>
       <div class="mb-2 text-muted">
         <strong>{{ $t('shared.translations')}}</strong>
       </div>
-      <div class="mb-3 d-flex" id="languageSettings">
-        <!-- <label class="ui-check ui-check-rounded d-block">
-          <input type="checkbox" :checked="defaultLanguage === 'en'" />
-          <i></i>
-          <small>EN</small>
-        </label> -->
+      <div class="mb-2 d-flex" id="languageSettings">
         <label class="ui-check ui-check-rounded d-block">
           <input type="checkbox" :checked="defaultLanguage === 'pt'" />
           <i></i>

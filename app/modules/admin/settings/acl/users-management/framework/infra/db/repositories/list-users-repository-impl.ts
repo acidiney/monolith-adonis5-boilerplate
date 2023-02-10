@@ -3,7 +3,7 @@ import {ListUsersUseCaseInput} from 'app/modules/admin/settings/acl/users-manage
 import {UserModel} from 'app/infra/models'
 import {UserEntity} from 'app/domain/entities/user-entity'
 import {Pagination} from 'app/core/ports'
-import {UserMapper} from 'app/infra/mappers/user-mapper'
+import {UserMapper} from 'app/modules/shared/framework/infra/mappers/user-mapper'
 
 export class ListUsersRepositoryImpl implements ListUsersRepository {
   constructor (

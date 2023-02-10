@@ -1,6 +1,6 @@
 import Env from '@ioc:Adonis/Core/Env'
 import axios, { AxiosInstance } from 'axios'
-import { HttpClient } from '../ports/http-client'
+import { HttpClient } from '../../../usecases/ports/http-client'
 
 export class HttpClientAdapterImpl implements HttpClient {
   private readonly _http: AxiosInstance = axios.create({
