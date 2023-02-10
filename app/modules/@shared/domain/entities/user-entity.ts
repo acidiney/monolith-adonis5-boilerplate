@@ -1,8 +1,8 @@
-import {StatusType} from 'app/domain/types'
+import {StatusType} from 'app/modules/@shared/domain/types'
 import {PasswordMismatchError} from 'app/modules/auth/domain'
-import {UserNameErrors} from 'app/domain/errors'
+import {UserNameErrors} from 'app/modules/@shared/domain/errors'
 import {Either, Entity, left, Options, right, UniqueEntityID} from 'app/core/domain'
-import {Email} from 'app/domain/value-objects/email'
+import {Email} from 'app/modules/@shared/domain/value-objects/email'
 
 interface UserProps {
   firstName: string,
@@ -11,7 +11,6 @@ interface UserProps {
   email: Email
   password: string
   roleId: UniqueEntityID
-  role?: string
   status?: StatusType
   slug?: string
   lastLoginAt?: Date
@@ -54,10 +53,6 @@ export class UserEntity extends Entity<UserProps> {
 
   public get roleId (): string {
     return this.props.roleId.toString()
-  }
-
-  public get role (): string | undefined {
-    return this.props.role
   }
 
   public changePassword (password: string, confirmPassword: string): Either<PasswordMismatchError, boolean> {

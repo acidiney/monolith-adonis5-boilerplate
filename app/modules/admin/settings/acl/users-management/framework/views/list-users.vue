@@ -12,11 +12,11 @@ const { t } = useI18n()
 const dialogVisible = ref(false)
 
 const content = computed(() => usePage().props.content)
+const isRoot = computed(() => usePage().props.user.role.slug === 'root')
 
 const onSortChange = (e) => {
   console.log(e)
 }
-
 </script>
 
 <style scoped>
@@ -105,8 +105,8 @@ const onSortChange = (e) => {
           </template>
         </el-table-column>
         <el-table-column fixed="right">
-          <template #default>
-            <el-dropdown split-button size="small" type="primary">
+          <template #default="scope">
+            <el-dropdown :disabled="!isRoot && scope.row.roleSlug === 'root'" split-button size="small" type="primary">
               {{ $t('shared.edit') }}
               <template #dropdown>
                 <el-dropdown-menu >

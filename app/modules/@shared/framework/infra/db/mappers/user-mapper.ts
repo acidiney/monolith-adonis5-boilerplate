@@ -1,11 +1,17 @@
-import * as luxon from 'luxon'
 import {UserModel} from 'app/modules/@shared/framework/infra/db/models'
 import {Mapper, UniqueEntityID} from 'app/core/domain'
-import {UserEntity} from 'app/domain/entities/user-entity'
-import {Email} from 'app/domain/value-objects/email'
-import {StatusEnum} from 'app/domain/types'
+import {UserEntity} from 'app/modules/@shared/domain/entities/user-entity'
+import {Email} from 'app/modules/@shared/domain/value-objects/email'
+import {StatusEnum} from 'app/modules/@shared/domain/types'
+import {DateAdapter} from 'app/modules/@shared/domain/ports'
 
 export class UserMapper extends Mapper<UserEntity, UserModel> {
+  constructor (
+    private readonly dateAdapter: DateAdapter
+  ) {
+    super()
+  }
+
   public toDomain (userModel: UserModel):UserEntity {
     const emailOrError = Email.create(userModel.email)
 
@@ -22,7 +28,6 @@ export class UserMapper extends Mapper<UserEntity, UserModel> {
       status: userModel.statusId,
       roleId: new UniqueEntityID(userModel.roleId),
       slug: userModel.slug,
-      role: userModel.role.name,
     }, {
       createdAt: userModel.createdAt.toJSDate(),
       updatedAt: userModel.updatedAt.toJSDate(),
@@ -57,7 +62,7 @@ export class UserMapper extends Mapper<UserEntity, UserModel> {
     userModel.roleId = userEntity.roleId
 
     userModel.statusId = userEntity.status || StatusEnum.ACTIVE
-    userModel.lastLoginAt = userEntity.lastLoginAt && luxon.DateTime.fromJSDate(userEntity.lastLoginAt)
+    userModel.lastLoginAt = this.dateAdapter.toDatePersistence(userEntity.lastLoginAt)
 
     return userModel
   }

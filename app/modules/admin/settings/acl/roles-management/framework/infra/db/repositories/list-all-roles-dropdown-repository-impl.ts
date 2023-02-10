@@ -1,5 +1,4 @@
 import {RoleModel} from 'app/modules/@shared/framework/infra/db/models'
-import {RoleMapper} from 'app/modules/admin/settings/acl/roles-management/framework/infra/db/mappers/role-mapper'
 import {RoleEntity} from 'app/modules/admin/settings/acl/roles-management/domain/entities/role-entity'
 import {
   ListAllRolesRepository,
@@ -7,6 +6,7 @@ import {
 import {
   ListRolesDropdownUseCaseInput,
 } from 'app/modules/admin/settings/acl/roles-management/domain/usecases/list-roles-dropdown'
+import {RoleMapper} from 'app/modules/@shared/framework/infra/db/mappers'
 
 export class ListAllRolesDropdownRepositoryImpl implements ListAllRolesRepository {
   constructor (

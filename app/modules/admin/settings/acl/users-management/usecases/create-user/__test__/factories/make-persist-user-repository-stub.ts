@@ -1,5 +1,5 @@
 import {PersistUserRepository} from 'app/modules/admin/settings/acl/users-management/usecases/create-user/ports'
-import {UserEntity} from 'app/domain/entities/user-entity'
+import {UserEntity} from 'app/modules/@shared/domain/entities/user-entity'
 
 export const makePersistUserRepositoryStub = (): PersistUserRepository => {
   return new (class implements PersistUserRepository {

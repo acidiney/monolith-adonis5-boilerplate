@@ -1,8 +1,8 @@
-import {UserEntity} from 'app/domain/entities/user-entity'
+import {UserEntity} from 'app/modules/@shared/domain/entities/user-entity'
 import {UniqueEntityID} from 'app/core/domain'
 import {FindUserIdRepository} from 'app/modules/@shared/usecases/ports/find-user-id-repository'
-import {Email} from 'app/domain/value-objects/email'
-import {StatusEnum} from 'app/domain/types'
+import {Email} from 'app/modules/@shared/domain/value-objects/email'
+import {StatusEnum} from 'app/modules/@shared/domain/types'
 
 export const makeFindUserIdRepositoryStub = (): FindUserIdRepository => {
   return new (class implements FindUserIdRepository {

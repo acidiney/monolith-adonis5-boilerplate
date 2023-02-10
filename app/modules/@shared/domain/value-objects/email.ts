@@ -1,5 +1,5 @@
 import {Either, left, right, ValueObject} from 'app/core/domain'
-import {EmailError} from 'app/domain/errors'
+import {EmailError} from 'app/modules/@shared/domain/errors'
 
 interface EmailProps {
   email: string

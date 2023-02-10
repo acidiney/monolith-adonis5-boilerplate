@@ -6,7 +6,7 @@
 import {
   CreateUserUseCaseImpl,
 } from './create-user-usecase-impl'
-import {EmailError, UserNameErrors} from 'app/domain/errors'
+import {EmailError, UserNameErrors} from 'app/modules/@shared/domain/errors'
 import {makeFindUsernameRepositoryStub} from 'app/modules/auth/__test__'
 import {FindUsernameRepository} from 'app/modules/auth/usecases'
 import {

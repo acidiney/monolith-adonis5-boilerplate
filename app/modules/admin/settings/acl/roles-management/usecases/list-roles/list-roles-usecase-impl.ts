@@ -1,7 +1,7 @@
 import {
   ListRolesRepository,
 } from './props'
-import {DateAdapter} from 'app/domain/ports'
+import {DateAdapter} from 'app/modules/@shared/domain/ports'
 import {
   ListRolesUseCaseInput,
   ListRolesUseCaseOutput,

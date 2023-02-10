@@ -1,4 +1,4 @@
-import { AddonEntity } from 'app/domain/entities/addon-entity'
+import { AddonEntity } from 'app/modules/@shared/domain/entities/addon-entity'
 
 export interface AddonService {
   findAll (): Promise<AddonEntity[]>

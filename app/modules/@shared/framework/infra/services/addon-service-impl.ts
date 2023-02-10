@@ -1,4 +1,4 @@
-import { AddonEntity } from 'app/domain/entities/addon-entity'
+import { AddonEntity } from 'app/modules/@shared/domain/entities/addon-entity'
 import { AddonService } from '../../../usecases/ports/addon-service'
 import { HttpClient } from '../../../usecases/ports/http-client'
 

@@ -6,7 +6,7 @@ import {
 import {
   ListUsersRepository,
 } from './props'
-import {DateAdapter} from 'app/domain/ports'
+import {DateAdapter} from 'app/modules/@shared/domain/ports'
 
 export class ListUsersUseCaseImpl implements ListUsersUseCase {
   constructor (
@@ -19,16 +19,17 @@ export class ListUsersUseCaseImpl implements ListUsersUseCase {
     return this.listUsersRepository.findAll(input)
       .then((pagination) => ({
         ...pagination,
-        data: pagination.data?.map(u => ({
-          updatedAt: this.dateAdapter.format(u.updatedAt),
-          updatedAtText: this.dateAdapter.toRelative(u.updatedAt),
-          fullName: u.fullName,
-          lastLoginAt: this.dateAdapter.format(u.lastLoginAt),
-          email: u.email,
-          lastLoginAtText: this.dateAdapter.toRelative(u.lastLoginAt),
-          slug: u.slug,
-          status: u.status,
-          roleText: u.role,
+        data: pagination.data?.map(uR => ({
+          updatedAt: this.dateAdapter.format(uR.user.updatedAt),
+          updatedAtText: this.dateAdapter.toRelative(uR.user.updatedAt),
+          fullName: uR.user.fullName,
+          lastLoginAt: this.dateAdapter.format(uR.user.lastLoginAt),
+          email: uR.user.email,
+          lastLoginAtText: this.dateAdapter.toRelative(uR.user.lastLoginAt),
+          slug: uR.user.slug,
+          status: uR.user.status,
+          roleText: uR.role.name,
+          roleSlug: uR.role.slug,
         }) as User),
       }))
   }

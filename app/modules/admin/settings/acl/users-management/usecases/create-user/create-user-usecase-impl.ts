@@ -3,9 +3,9 @@
  * ITGest Angola
  */
 
-import {StatusEnum} from 'app/domain/types'
-import {Email} from 'app/domain/value-objects/email'
-import {UserEntity} from 'app/domain/entities/user-entity'
+import {StatusEnum} from 'app/modules/@shared/domain/types'
+import {Email} from 'app/modules/@shared/domain/value-objects/email'
+import {UserEntity} from 'app/modules/@shared/domain/entities/user-entity'
 import {FindUsernameRepository} from 'app/modules/auth/usecases'
 import {
   CreateUserUseCase,

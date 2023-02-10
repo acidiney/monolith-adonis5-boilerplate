@@ -1,5 +1,5 @@
 import { UserModel } from 'app/modules/@shared/framework/infra/db/models'
-import { UserEntity } from 'app/domain/entities/user-entity'
+import { UserEntity } from 'app/modules/@shared/domain/entities/user-entity'
 import { FindUsernameRepository } from 'app/modules/auth/usecases'
 import { UserMapper } from '../mappers/user-mapper'
 

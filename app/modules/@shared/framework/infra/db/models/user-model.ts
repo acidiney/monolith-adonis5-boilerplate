@@ -5,7 +5,7 @@ import { DateTime } from 'luxon'
 import { RoleModel } from './role-model'
 import { StatusModel } from './status-model-model'
 import {slugify} from '@ioc:Adonis/Addons/LucidSlugify'
-import {StatusType} from 'app/domain/types'
+import {StatusType} from 'app/modules/@shared/domain/types'
 
 export class UserModel extends BaseModel {
   public static table = 'users'
