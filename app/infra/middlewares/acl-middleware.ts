@@ -4,7 +4,7 @@
  */
 
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import {RolePermissionModel} from 'app/infra/models'
+import {RolePermissionModel} from 'app/modules/shared/framework/infra/models'
 
 export default class AclMiddleware {
   public async handle (

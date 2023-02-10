@@ -1,4 +1,4 @@
-import { UserModel } from 'app/infra/models'
+import { UserModel } from 'app/modules/shared/framework/infra/models'
 import { UserEntity } from 'app/domain/entities/user-entity'
 import { UserMapper } from '../mappers/user-mapper'
 import {UniqueEntityID} from 'app/core/domain'

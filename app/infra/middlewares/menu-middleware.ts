@@ -1,6 +1,6 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { RolePermissionModel } from '../models'
-import { MenuModel } from '../models/menu-model'
+import { RolePermissionModel } from '../../modules/shared/framework/infra/models'
+import { MenuModel } from '../../modules/shared/framework/infra/models/menu-model'
 
 export default class MenuMiddleware {
   public async handle (

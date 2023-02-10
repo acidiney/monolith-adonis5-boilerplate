@@ -5,7 +5,7 @@
  * file.
  */
 
-import { UserModel } from 'app/infra/models/user-model'
+import { UserModel } from 'app/modules/shared/framework/infra/models/user-model'
 
 declare module '@ioc:Adonis/Addons/Auth' {
   /*

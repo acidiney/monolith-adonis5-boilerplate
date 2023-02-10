@@ -1,4 +1,4 @@
-import {RoleModel} from 'app/infra/models'
+import {RoleModel} from 'app/modules/shared/framework/infra/models'
 import {RoleMapper} from 'app/modules/admin/settings/acl/roles-management/framework/infra/db/mappers/role-mapper'
 import {RoleEntity} from 'app/modules/admin/settings/acl/roles-management/domain/entities/role-entity'
 import {

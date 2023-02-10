@@ -1,5 +1,5 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-import { StatusModel } from 'app/infra/models'
+import { StatusModel } from 'app/modules/shared/framework/infra/models'
 
 export default class InsertBaseStatusesSeed extends BaseSeeder {
   public async run () {
