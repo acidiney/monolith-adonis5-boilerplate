@@ -4,33 +4,21 @@
   -->
 
 <script setup>
-  import {reactive, ref} from "vue";
   import {useI18n} from "vue-i18n";
   import {router} from "@inertiajs/vue3";
+  import {computed, onMounted, reactive, ref} from "vue";
 
   import { loadRoles } from '../services/api'
 
-  defineProps({
-    dialogVisible: Boolean,
-  })
-
   const { t } = useI18n()
+
+  const ruleFormRef = ref()
 
   const state = reactive({
     loading: false,
     loadingOptions: true,
     options: []
   })
-
-  const ruleFormRef = ref()
-
-  const form = reactive({
-    firstName: '',
-    lastName: '',
-    email: '',
-    role: ''
-  })
-
   const rules = reactive({
     firstName: [
       { required: true, message: t('admin.acl.users.validation.first_name.required'), trigger: 'blur' },
@@ -62,15 +50,20 @@
       },
     ],
   })
-
-
-  loadRoles().then(({ data }) => {
-    console.log(data)
-    state.options = data
+  const form = reactive({
+    firstName: '',
+    lastName: '',
+    email: '',
+    role: ''
   })
-    .finally(() => {
-      state.loadingOptions = false
-    })
+
+  const isRoot = computed(() => {
+    if (form.role) {
+      return state.options.find((o) => o.id === form.role).slug === 'root'
+    }
+
+    return false
+  })
 
   const onSubmit = async (formEl) => {
     if (!formEl) return
@@ -86,6 +79,20 @@
     })
   }
 
+
+  onMounted(() => {
+    loadRoles().then(({ data }) => {
+      console.log(data)
+      state.options = data
+    })
+      .finally(() => {
+        state.loadingOptions = false
+      })
+  })
+
+  defineProps({
+    dialogVisible: Boolean,
+  })
   defineEmits(['update:dialogVisible'])
 </script>
 
@@ -139,16 +146,23 @@
             />
           </el-select>
         </el-form-item>
+        <el-alert
+          v-if="isRoot"
+          type="info"
+          :title="$t('shared.create.root.user')"
+          :description="$t('shared.create.root.user.warning.description')"
+          show-icon
+        />
     </el-form>
 
     <template #footer>
       <span class="dialog-footer">
-        <el-button > {{ $t('shared.cancel') }} </el-button>
+        <el-button > {{ $t('admin.acl.users.create') }} </el-button>
         <el-button
           :loading="state.loading"
           @click.prevent="onSubmit(ruleFormRef)"
           type="primary">
-          {{ $t('admin.acl.users.create') }}
+          {{ $t('admin.acl.users.create_and_close') }}
         </el-button>
       </span>
     </template>

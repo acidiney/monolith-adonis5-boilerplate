@@ -16,6 +16,7 @@ export class ListRolesDropdownUseCaseImpl implements ListRolesDropdownUseCase {
       .then((data) => data.map(r => ({
         name: r.name,
         id: r.id.toString(),
+        slug: r.slug,
       }) as RoleOptions))
   }
 }
