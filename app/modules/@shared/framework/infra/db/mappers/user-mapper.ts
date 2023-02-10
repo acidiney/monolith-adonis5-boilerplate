@@ -4,10 +4,11 @@ import {UserEntity} from 'app/modules/@shared/domain/entities/user-entity'
 import {Email} from 'app/modules/@shared/domain/value-objects/email'
 import {StatusEnum} from 'app/modules/@shared/domain/types'
 import {DateAdapter} from 'app/modules/@shared/domain/ports'
+import {DateAdapterImpl} from 'app/modules/@shared/framework/infra/adapters/date-adapter-impl'
 
 export class UserMapper extends Mapper<UserEntity, UserModel> {
   constructor (
-    private readonly dateAdapter: DateAdapter
+    private readonly dateAdapter: DateAdapter = new DateAdapterImpl()
   ) {
     super()
   }

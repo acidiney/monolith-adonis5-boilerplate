@@ -19,6 +19,7 @@ export const makeFindUserIdRepositoryStub = (): FindUserIdRepository => {
         firstName: 'valid',
         lastName: 'user',
         status: StatusEnum.ACTIVE,
+        roleId: new UniqueEntityID('valid_role_id'),
       })
 
       if (userEntity.isLeft()) {

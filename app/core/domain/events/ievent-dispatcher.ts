@@ -1,5 +1,5 @@
 import { IDomainEvent } from './idomain-event'
-import { IHandler } from './ihandle'
+import { IHandler } from './ihandler'
 
 export interface IEventDispatcher {
   eventHandlers (): any

@@ -1,5 +1,6 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-import { RoleModel, UserModel } from 'app/modules/@shared/framework/infra/db/models'
+import {RoleModel, UserModel} from 'app/modules/@shared/framework/infra/db/models'
+import {StatusEnum} from 'app/modules/@shared/domain/types'
 
 export default class InsertRootUser extends BaseSeeder {
   public async run () {
@@ -15,7 +16,7 @@ export default class InsertRootUser extends BaseSeeder {
     rootUser.lastName = 'User'
     rootUser.email = 'root@itgest.co.ao'
     rootUser.password = '12345678'
-    rootUser.statusId = 'active'
+    rootUser.statusId = StatusEnum.ACTIVE
     rootUser.roleId = role.id
     await rootUser.save()
   }
