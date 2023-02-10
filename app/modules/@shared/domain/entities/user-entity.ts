@@ -7,6 +7,7 @@ import {Email} from 'app/modules/@shared/domain/value-objects/email'
 interface UserProps {
   firstName: string,
 
+  avatar?: string
   lastName: string,
   email: Email
   password: string
@@ -43,6 +44,9 @@ export class UserEntity extends Entity<UserProps> {
     return this.props.lastLoginAt
   }
 
+  public get avatar (): string | undefined {
+    return this.props.avatar
+  }
   public get status (): StatusType | undefined {
     return this.props.status
   }

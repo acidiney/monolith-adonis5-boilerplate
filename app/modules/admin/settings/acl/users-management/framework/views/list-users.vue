@@ -17,6 +17,8 @@ const isRoot = computed(() => usePage().props.user.role.isRoot)
 const onSortChange = (e) => {
   console.log(e)
 }
+
+const errorHandler = () => true
 </script>
 
 <style scoped>
@@ -64,6 +66,13 @@ const onSortChange = (e) => {
           @sort-change="onSortChange"
       >
         <el-table-column type="selection" width="50" />
+        <el-table-column prop="avatar" width="70">
+          <template #default="scope">
+            <el-avatar :src="scope.row.avatar" :size="35" @error="errorHandler">
+              {{ scope.row.fullName[0] }}
+            </el-avatar>
+          </template>
+        </el-table-column>
         <el-table-column prop="fullName" width="280" sortable :label="$t('acl.users.list-users.full_name')">
           <template #default="scope">
             <router-link :href="`/account/profile/${scope.row.slug}`">{{ scope.row.fullName }}</router-link> <br />
@@ -112,7 +121,7 @@ const onSortChange = (e) => {
                 <el-dropdown-menu >
                   <el-dropdown-item>{{ $t('admin.acl.reset_password') }}</el-dropdown-item>
                   <el-dropdown-item divided>{{ $t('admin.acl.inactivate') }}</el-dropdown-item>
-                  <el-dropdown-item>{{ $t('admin.acl.impersonate') }}</el-dropdown-item>
+                  <el-dropdown-item :disabled="scope.row.roleSlug === 'root'">{{ $t('admin.acl.impersonate') }}</el-dropdown-item>
                   <el-dropdown-item class="text-danger" divided>{{ $t('shared.remove') }}</el-dropdown-item>
                 </el-dropdown-menu>
               </template>

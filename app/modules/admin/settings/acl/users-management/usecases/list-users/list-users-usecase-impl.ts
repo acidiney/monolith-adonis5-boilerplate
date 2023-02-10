@@ -28,6 +28,7 @@ export class ListUsersUseCaseImpl implements ListUsersUseCase {
           lastLoginAtText: this.dateAdapter.toRelative(uR.user.lastLoginAt),
           slug: uR.user.slug,
           status: uR.user.status,
+          avatar: uR.user.avatar,
           roleText: uR.role.name,
           roleSlug: uR.role.slug,
         }) as User),

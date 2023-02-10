@@ -13,7 +13,7 @@ const useLogout = () => {
       data-toggle="dropdown"
       class="nav-link d-flex align-items-center px-2 text-color user-dropdown"
     >
-      <el-avatar :size="30" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
+      <el-avatar :size="30" :src="$page.props.user.avatar" />
     </a>
     <div class="dropdown-menu dropdown-menu-right w mt-3 animate fadeIn">
       <a class="px-4 py-2">
