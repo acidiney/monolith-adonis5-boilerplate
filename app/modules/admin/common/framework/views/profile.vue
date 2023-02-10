@@ -5,7 +5,7 @@
 </script>
 
 <template>
-  <account-layout>
+  <account-layout :title="user.fullName">
     <template v-slot:header>
       <app-page-hero
       :title="$t('menu.user.profile')"
@@ -23,18 +23,16 @@
               <div class="p-4">
                 <div class="d-flex">
                   <a href="#">
-                    <span class="avatar w-64">
-                      <!-- <img src="/user-m.png" alt="." /> -->
-                      <i class="on"></i>
-                    </span>
+                    <el-avatar
+                      :src="user.avatar"
+                      :size="64"
+                      :alt="user.fullName"
+                    />
                   </a>
                   <div class="mx-3">
                     <h5 class="mt-2">{{ user.fullName }}</h5>
                     <div class="text-fade text-sm">
-                      <span class="m-r">Senior Industrial Designer</span>
-                      <small>
-                        <i class="fa fa-map-marker mr-2"></i>London, UK</small
-                      >
+                      <span class="m-r">{{ user.role.name }}</span>
                     </div>
                   </div>
                 </div>
@@ -46,23 +44,13 @@
                     href="#"
                     class="btn btn-sm btn-icon bg-dark-overlay btn-rounded"
                   >
-                    <i
-                      data-feather="phone"
-                      width="12"
-                      height="12"
-                      class="text-fade"
-                    ></i>
+                    <app-icon class="text-fade" icon="phone" :size="12" />
                   </a>
                   <a
                     href="#"
                     class="btn btn-sm btn-icon bg-dark-overlay btn-rounded"
                   >
-                    <i
-                      data-feather="more-vertical"
-                      width="12"
-                      height="12"
-                      class="text-fade"
-                    ></i>
+                    <app-icon class="text-fade" icon="more-vertical" :size="12" />
                   </a>
                 </div>
               </div>
@@ -72,23 +60,8 @@
         <div class="p-3">
           <div class="d-flex">
             <ul class="nav nav-pills">
-              <li class="nav-item">
-                <a
-                  class="nav-link active"
-                  href="#"
-                  data-toggle="tab"
-                  data-target="#tab_4"
-                  >Dados do perfil</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link"
-                  href="#"
-                  data-toggle="tab"
-                  data-target="#tab_2"
-                  >Actividades</a
-                >
+              <li class="nav-item nav-link active">
+                {{ $t('admin.common.profile_data') }}
               </li>
             </ul>
           </div>
@@ -161,108 +134,109 @@
                 </div>
               </div>
             </div>
-            <div class="tab-pane fade" id="tab_2">
-              <div class="card p-4">
-                <div class="timeline animates animates-fadeInUp">
-                  <div class="tl-item active">
-                    <div class="tl-dot"></div>
-                    <div class="tl-content">
-                      <div class="">Added to <a href="#">@TUT</a> team</div>
-                      <div class="tl-date text-muted mt-1">2 days ago</div>
-                    </div>
+          </div>
+        </div>
+        <div class="col-sm-5 col-lg-4">
+          <div class="card sticky p-4">
+            <div class="timeline animates animates-fadeInUp">
+              <div class="tl-item active">
+                <div class="tl-dot"></div>
+                <div class="tl-content">
+                  <div class="">Added to <a href="#">@TUT</a> team</div>
+                  <div class="tl-date text-muted mt-1">2 days ago</div>
+                </div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-content">
+                  <div class=""><a href="#">@Netflix</a> hackathon</div>
+                  <div class="tl-date text-muted mt-1">25/12 18</div>
+                </div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-content">
+                  <div class="">
+                    Just saw this on the <a href="#">@eBay</a> dashboard,
+                    dude is an absolute unit.
                   </div>
-                  <div class="tl-item">
-                    <div class="tl-dot"></div>
-                    <div class="tl-content">
-                      <div class=""><a href="#">@Netflix</a> hackathon</div>
-                      <div class="tl-date text-muted mt-1">25/12 18</div>
-                    </div>
+                  <div class="tl-date text-muted mt-1">1 Week ago</div>
+                </div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-content">
+                  <div class="">
+                    Prepare the documentation for the
+                    <a href="#">Fitness app</a>
                   </div>
-                  <div class="tl-item">
-                    <div class="tl-dot"></div>
-                    <div class="tl-content">
-                      <div class="">
-                        Just saw this on the <a href="#">@eBay</a> dashboard,
-                        dude is an absolute unit.
-                      </div>
-                      <div class="tl-date text-muted mt-1">1 Week ago</div>
-                    </div>
+                  <div class="tl-date text-muted mt-1">20 minutes ago</div>
+                </div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-content">
+                  <div class="">
+                    <a href="#">@NextUI</a> submit a ticket request
                   </div>
-                  <div class="tl-item">
-                    <div class="tl-dot"></div>
-                    <div class="tl-content">
-                      <div class="">
-                        Prepare the documentation for the
-                        <a href="#">Fitness app</a>
-                      </div>
-                      <div class="tl-date text-muted mt-1">20 minutes ago</div>
-                    </div>
+                  <div class="tl-date text-muted mt-1">1 hour ago</div>
+                </div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-content">
+                  <div class="">
+                    Developers of <a href="#">@iAI</a>, the AI assistant
+                    based on Free Software
                   </div>
-                  <div class="tl-item">
-                    <div class="tl-dot"></div>
-                    <div class="tl-content">
-                      <div class="">
-                        <a href="#">@NextUI</a> submit a ticket request
-                      </div>
-                      <div class="tl-date text-muted mt-1">1 hour ago</div>
-                    </div>
+                  <div class="tl-date text-muted mt-1">1 day ago</div>
+                </div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-content">
+                  <div class="">
+                    <a href="#">@WordPress</a> How To Get Started With
+                    WordPress
                   </div>
-                  <div class="tl-item">
-                    <div class="tl-dot"></div>
-                    <div class="tl-content">
-                      <div class="">
-                        Developers of <a href="#">@iAI</a>, the AI assistant
-                        based on Free Software
-                      </div>
-                      <div class="tl-date text-muted mt-1">1 day ago</div>
-                    </div>
+                  <div class="tl-date text-muted mt-1">20 minutes ago</div>
+                </div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-content">
+                  <div class="">
+                    From design to dashboard, <a href="#">@Dash</a> builds
+                    custom hardware according to on-site requirements
                   </div>
-                  <div class="tl-item">
-                    <div class="tl-dot"></div>
-                    <div class="tl-content">
-                      <div class="">
-                        <a href="#">@WordPress</a> How To Get Started With
-                        WordPress
-                      </div>
-                      <div class="tl-date text-muted mt-1">20 minutes ago</div>
-                    </div>
+                  <div class="tl-date text-muted mt-1">21 July</div>
+                </div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-content">
+                  <div class="">
+                    Fun project from this weekend. Both computer replicas
+                    are fully functional
                   </div>
-                  <div class="tl-item">
-                    <div class="tl-dot"></div>
-                    <div class="tl-content">
-                      <div class="">
-                        From design to dashboard, <a href="#">@Dash</a> builds
-                        custom hardware according to on-site requirements
-                      </div>
-                      <div class="tl-date text-muted mt-1">21 July</div>
-                    </div>
+                  <div class="tl-date text-muted mt-1">03/12 18</div>
+                </div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div class="tl-content">
+                  <div class="">
+                    We help companies deliver reliable and beautiful
+                    <a href="#">@IOSapps</a>
                   </div>
-                  <div class="tl-item">
-                    <div class="tl-dot"></div>
-                    <div class="tl-content">
-                      <div class="">
-                        Fun project from this weekend. Both computer replicas
-                        are fully functional
-                      </div>
-                      <div class="tl-date text-muted mt-1">03/12 18</div>
-                    </div>
-                  </div>
-                  <div class="tl-item">
-                    <div class="tl-dot"></div>
-                    <div class="tl-content">
-                      <div class="">
-                        We help companies deliver reliable and beautiful
-                        <a href="#">@IOSapps</a>
-                      </div>
-                      <div class="tl-date text-muted mt-1">13/12 18</div>
-                    </div>
-                  </div>
+                  <div class="tl-date text-muted mt-1">13/12 18</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-sm-5 col-lg-4">
+
+        <!-- div class="col-sm-5 col-lg-4">
           <div class="card sticky" style="z-index: 1">
             <div class="card-header">
               <strong> Pessoas do mesmo organismo </strong>
@@ -371,7 +345,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div-->
       </div>
     </template>
   </account-layout>

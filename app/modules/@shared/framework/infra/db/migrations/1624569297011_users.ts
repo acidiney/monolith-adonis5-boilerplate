@@ -11,6 +11,7 @@ export default class UsersSchema extends BaseSchema {
       table.string('slug', 255).notNullable().unique().index()
       table.string('email', 255).notNullable().unique().index()
       table.string('password', 180).notNullable()
+      table.string('avatar_url').nullable()
       table.boolean('force_change_password').defaultTo(true)
       table.string('remember_me_token').nullable()
       table.string('status_id').index()

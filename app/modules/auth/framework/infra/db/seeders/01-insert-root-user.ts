@@ -18,6 +18,7 @@ export default class InsertRootUser extends BaseSeeder {
     rootUser.password = '12345678'
     rootUser.statusId = StatusEnum.ACTIVE
     rootUser.roleId = role.id
+    rootUser.avatar = 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'
     await rootUser.save()
   }
 }

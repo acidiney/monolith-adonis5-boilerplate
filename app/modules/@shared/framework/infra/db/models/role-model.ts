@@ -1,6 +1,6 @@
 import { cuid } from '@ioc:Adonis/Core/Helpers'
 import { slugify } from '@ioc:Adonis/Addons/LucidSlugify'
-import { BaseModel, beforeSave, column, HasMany, hasMany, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
+import {BaseModel, beforeSave, column, computed, HasMany, hasMany, hasOne, HasOne} from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import { UserModel } from './user-model'
 import { PermissionModel } from './permission-model'
@@ -47,5 +47,10 @@ export class RoleModel extends BaseModel {
   @beforeSave()
   public static async setId (role: RoleModel) {
     role.id = role.id || cuid()
+  }
+
+  @computed()
+  public get isRoot (): boolean {
+    return this.slug === 'root'
   }
 }

@@ -12,7 +12,7 @@ const { t } = useI18n()
 const dialogVisible = ref(false)
 
 const content = computed(() => usePage().props.content)
-const isRoot = computed(() => usePage().props.user.role.slug === 'root')
+const isRoot = computed(() => usePage().props.user.role.isRoot)
 
 const onSortChange = (e) => {
   console.log(e)

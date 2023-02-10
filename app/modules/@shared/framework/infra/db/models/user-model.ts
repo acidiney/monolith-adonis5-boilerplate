@@ -30,6 +30,9 @@ export class UserModel extends BaseModel {
   @column()
   public email: string
 
+  @column({ columnName: 'avatar_url' })
+  public avatar: string
+
   @column({ columnName: 'role_id' })
   public roleId: string
 
