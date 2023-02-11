@@ -31,7 +31,7 @@ const redirectTo = (url) => {
     <template v-slot:header>
       <app-page-hero
         :title="$t('menu.admin.setting.acl.roles')"
-        :sub-title="$t('menu.admin.setting.acl.roles-description')"
+        :sub-title="$t('menu.admin.setting.acl.roles_description')"
       >
 
         <div class="flex"></div>
@@ -41,7 +41,7 @@ const redirectTo = (url) => {
               split-button
               type="primary"
           >
-            <router-link class="text-white" href="/admin/settings/acl/roles/new">
+            <router-link class="text-white" href="/account/admin/settings/acl/roles/new">
               {{ $t('admin.acl.roles.register') }}
             </router-link>
             <template #dropdown>
