@@ -1,4 +1,5 @@
 <script setup lang="ts" id="app-list-group">
+import 'vue-i18n'
 import {AccordionGroup} from "../interfaces/accordion-interface";
 
 defineProps<{

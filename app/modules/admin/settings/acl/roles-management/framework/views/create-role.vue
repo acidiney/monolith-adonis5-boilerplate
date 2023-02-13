@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {onMounted, reactive, ref} from "vue";
+import { onMounted, reactive, ref } from "vue";
 import AppListGroup from "@core/components/app-list-group.vue";
 
 import { api } from './services/api'
-import {AccordionGroup} from "@core/interfaces/accordion-interface";
+import { AccordionGroup } from "@core/interfaces/accordion-interface";
 
 const ruleFormRef = ref()
 const permissionsGroup = ref<AccordionGroup[]>([])
@@ -33,17 +33,17 @@ const rules = reactive({
 
 onMounted(() => {
   api.loadPermissions()
-      .then(data => {
-        permissionsGroup.value = data.map((row) => ({
-          title: row.title,
-          id: row.id,
-          type: 'checkbox',
-          children: row.permissions.map((p) => ({
-            id: p.slug,
-            title: p.display,
-          }))
+    .then(data => {
+      permissionsGroup.value = data.map((row) => ({
+        title: row.title,
+        id: row.id,
+        type: 'checkbox',
+        children: row.permissions.map((p) => ({
+          id: p.slug,
+          title: p.display,
         }))
-      })
+      }))
+    })
 })
 
 </script>
