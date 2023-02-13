@@ -10,24 +10,28 @@ export default class InsertPermissionSeed extends BaseSeeder {
           description: 'setting.marketplace.view-marketplace-description',
           id: 'admin-view-marketplace',
           group: 'menu.marketplace',
+          internal: true,
         },
         {
           display: 'setting.marketplace.install-addon-display',
           description: 'setting.marketplace.install-addon-description',
           id: 'admin-install-marketplace-addon',
           group: 'menu.marketplace',
+          internal: true,
         },
         {
           display: 'setting.marketplace.update-addon-display',
           description: 'setting.marketplace.update-addon-description',
           id: 'admin-update-marketplace-addon',
           group: 'menu.marketplace',
+          internal: true,
         },
         {
           display: 'setting.marketplace.remove-addon-display',
           description: 'setting.marketplace.remove-addon-description',
           id: 'admin-remove-marketplace-addon',
           group: 'menu.marketplace',
+          internal: true,
         },
       ])
   }

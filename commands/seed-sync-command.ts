@@ -2,6 +2,7 @@ import Application from '@ioc:Adonis/Core/Application'
 import { BaseCommand } from '@adonisjs/core/build/standalone'
 import * as lodash from 'lodash'
 import { resolve } from 'path'
+import * as process from 'process'
 
 export default class SeedSyncCommand extends BaseCommand {
   /**
@@ -19,7 +20,7 @@ export default class SeedSyncCommand extends BaseCommand {
      * Set the following value to true, if you want to load the application
      * before running the command
      */
-    loadApp: true,
+    loadApp: false,
 
     /**
      * Set the following value to true, if you want this command to keep running until
@@ -72,17 +73,21 @@ export default class SeedSyncCommand extends BaseCommand {
           for (const seedName of difference) {
             currentSeed = seedName
 
+            process.env.NODE_ENV = 'seeding'
+
             await execCommand('node', [
               'ace',
               'db:seed',
               `--files=${seedName}`,
-            ]).catch((e) => {
-              console.log(e)
-            })
-
-            await DbSyncModel.create({
-              seedName,
-            })
+            ])
+              .then(async () => {
+                await DbSyncModel.create({
+                  seedName,
+                })
+              })
+              .catch((e) => {
+                console.log(e)
+              })
           }
         } catch (e) {
           console.log(e)

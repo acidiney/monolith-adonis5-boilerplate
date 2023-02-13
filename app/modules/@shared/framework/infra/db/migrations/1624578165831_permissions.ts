@@ -9,6 +9,7 @@ export default class Permissions extends BaseSchema {
       table.string('name').notNullable()
       table.text('description').nullable()
       table.text('group').notNullable()
+      table.boolean('internal').notNullable().defaultTo(false)
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

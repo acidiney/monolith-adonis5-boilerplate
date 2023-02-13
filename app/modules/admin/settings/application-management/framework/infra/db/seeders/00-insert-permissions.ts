@@ -10,6 +10,7 @@ export default class InsertPermissionSeed extends BaseSeeder {
           group: 'permission.group.admin.setup.application',
           display: 'permission.setup.application',
           description: 'permission.setup.application.description',
+          internal: true,
         },
       ])
   }

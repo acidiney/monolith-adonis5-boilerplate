@@ -16,6 +16,9 @@ export class PermissionModel extends BaseModel {
   @column()
   public group: string
 
+  @column()
+  public internal: boolean
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
