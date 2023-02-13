@@ -2,7 +2,9 @@
   "extends": "./tsconfig.json",
   "include": [
     "**/*.vue",
-    "resources/js"
+    "resources/js/*.vue",
+    "resources/js/*.js",
+    "resources/js/*.ts"
   ],
   "exclude": [
     "cypress",

@@ -1,8 +1,12 @@
-<script setup>
-import {reactive, ref} from "vue";
-import AppAccordion from "@core/components/app-accordion.vue";
+<script setup lang="ts">
+import {onMounted, reactive, ref} from "vue";
+import AppListGroup from "@core/components/app-list-group.vue";
+
+import { api } from './services/api'
+import {AccordionGroup} from "@core/interfaces/accordion-interface";
 
 const ruleFormRef = ref()
+const permissionsGroup = ref<AccordionGroup[]>([])
 const ruleForm = reactive({
   name: '',
   description: '',
@@ -26,6 +30,22 @@ const rules = reactive({
     { required: true, message: 'Please input activity form', trigger: 'blur' },
   ],
 })
+
+onMounted(() => {
+  api.loadPermissions()
+      .then(data => {
+        permissionsGroup.value = data.map((row) => ({
+          title: row.title,
+          id: row.id,
+          type: 'checkbox',
+          children: row.permissions.map((p) => ({
+            id: p.slug,
+            title: p.display,
+          }))
+        }))
+      })
+})
+
 </script>
 
 <style scoped>
@@ -63,7 +83,13 @@ const rules = reactive({
 
       <!-- create role permissions -->
 
-        <app-accordion />
+        <app-list-group
+          :groups="permissionsGroup"
+          type="checkbox"
+          :title="$t('shared.permissions')"
+        >
+
+        </app-list-group>
 
       </el-form>
     </template>

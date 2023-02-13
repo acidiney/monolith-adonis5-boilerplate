@@ -10,8 +10,7 @@
     "build",
     "./cypress.config.ts",
     "**/*.cy.js",
-    "**/*.vue",
-    "resources/js/"
+    "**/*.vue"
   ],
   "compilerOptions": {
     "outDir": "build",
@@ -21,6 +20,9 @@
     "paths": {
       "app/*": [
         "./app/*"
+      ],
+      "@core/*": [
+        "./resources/js/core/*"
       ]
     },
     "types": [
