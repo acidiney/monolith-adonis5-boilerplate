@@ -2,15 +2,16 @@
   "extends": "adonis-preset-ts/tsconfig.json",
   "include": [
     "**/*.ts",
-    "**/*.d.ts",
-    "**/*.vue"
+    "**/*.js"
   ],
   "exclude": [
     "cypress",
     "node_modules",
     "build",
     "./cypress.config.ts",
-    "**/*.cy.js"
+    "**/*.cy.js",
+    "**/*.vue",
+    "resources/js/"
   ],
   "compilerOptions": {
     "outDir": "build",
@@ -20,9 +21,6 @@
     "paths": {
       "app/*": [
         "./app/*"
-      ],
-      "@core/*": [
-        "./resources/js/core/*"
       ]
     },
     "types": [

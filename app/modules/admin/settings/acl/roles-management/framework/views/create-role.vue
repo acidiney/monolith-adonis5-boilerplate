@@ -1,5 +1,6 @@
 <script setup>
 import {reactive, ref} from "vue";
+import AppAccordion from "@core/components/app-accordion.vue";
 
 const ruleFormRef = ref()
 const ruleForm = reactive({
@@ -60,22 +61,10 @@ const rules = reactive({
           <el-input v-model="ruleForm.description" type="textarea" />
         </el-form-item>
 
-        <h4 class="mb-4"> {{ $t('shared.permissions') }}</h4>
       <!-- create role permissions -->
-        <div class="card">
-          <el-collapse accordion>
-            <el-collapse-item title="Feedback" name="1">
-              <div>
-                Operation feedback: enable the users to clearly perceive their
-                operations by style updates and interactive effects;
-              </div>
-              <div>
-                Visual feedback: reflect current state by updating or rearranging
-                elements of the page.
-              </div>
-            </el-collapse-item>
-          </el-collapse>
-        </div>
+
+        <app-accordion />
+
       </el-form>
     </template>
   </account-layout>

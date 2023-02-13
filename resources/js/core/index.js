@@ -8,8 +8,8 @@ import { Link } from '@inertiajs/vue3'
 export const loadComponent = {
   install: (app) => {
     return app
-      .component('router-link', Link)
       .component('account-layout', AccountLayout)
+      .component('router-link', Link)
       .component('app-logo', AppLogo)
       .component('app-icon', AppIcon)
       .component('app-head', AppHead)

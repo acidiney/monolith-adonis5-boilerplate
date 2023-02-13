@@ -1,3 +1,11 @@
+<script setup lang="ts" id="app-side-content">
+import AppAsideContentItem from './app-aside-content-item.vue'
+
+defineProps<{
+  showCreateButton: boolean
+}>()
+</script>
+
 <template>
   <div class="aside aside-sm" id="content-aside">
     <div class="d-flex flex-column w-xl modal-dialog bg-body">
@@ -15,7 +23,7 @@
             required=""
           />
           <span v-if="showCreateButton" class="input-group-append">
-            <button @click="handleClickOnCreateButton" class="btn bg-primary no-border">
+            <button @click="$emit('createClick')" class="btn bg-primary no-border">
               <app-icon icon="plus" />
             </button>
           </span>
@@ -32,21 +40,3 @@
     </div>
   </div>
 </template>
-
-<script>
-import AppAsideContentItem from './app-aside-content-item.vue'
-
-export default {
-  props: {
-    showCreateButton: Boolean,
-  },
-  components: {
-    AppAsideContentItem,
-  },
-  methods: {
-    handleClickOnCreateButton () {
-      this.$emit('createClick')
-    }
-  }
-}
-</script>

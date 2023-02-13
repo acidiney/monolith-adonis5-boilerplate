@@ -1,4 +1,4 @@
-const { join, resolve } = require('path')
+const { join, resolve } = require('node:path')
 const Encore = require('@symfony/webpack-encore')
 
 /*
@@ -53,7 +53,7 @@ Encore.addEntry('app', './resources/js/app.js')
 |--------------------------------------------------------------------------
 |
 | Since the edge templates are not part of the Webpack compile lifecycle, any
-| images referenced by it will not be processed by Webpack automatically. Hence
+| images referenced by it will not be processed by Webpack automatically. Hence,
 | we must copy them manually.
 |
 */
@@ -91,7 +91,7 @@ Encore.disableSingleRuntimeChunk()
 | Cleanup output folder
 |--------------------------------------------------------------------------
 |
-| It is always nice to cleanup the build output before creating a build. It
+| It is always nice to clean up the build output before creating a build. It
 | will ensure that all unused files from the previous build are removed.
 |
 */
@@ -183,9 +183,17 @@ Encore.configureDevServerOptions((options) => {
 */
 Encore.enableVueLoader(() => {}, {
   version: 3,
-  runtimeCompilerBuild: true,
+  runtimeCompilerBuild: false,
 })
-
+  .enableTypeScriptLoader(options => {
+    options.appendTsSuffixTo = [/\.vue$/]
+  })
+  .enableForkedTypeScriptTypesChecking(options => {
+    // options.memoryLimit = 2048
+    options.typescript = {
+      configFile: 'tsconfig.vue.json',
+    }
+  })
 /*
 |--------------------------------------------------------------------------
 | Configure logging
@@ -202,7 +210,7 @@ config.infrastructureLogging = {
 }
 config.stats = 'errors-warnings'
 
-config.resolve.alias = {
+config['resolve'].alias = {
   '@core': resolve(__dirname, 'resources/js/core/'),
 }
 

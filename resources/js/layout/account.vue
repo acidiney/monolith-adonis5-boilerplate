@@ -1,11 +1,12 @@
-<script setup>
-import {onMounted, ref, nextTick, computed} from "vue";
+<script setup type="ts" id="app-account">
+import { onMounted, ref, nextTick, computed } from "vue";
+import { usePage } from "@inertiajs/vue3";
 import AppHeader from "../core/components/app-header.vue";
 import AppFooter from "../core/components/app-footer.vue";
 import AppSidebar from "../core/components/app-sidebar.vue";
-import { usePage } from "@inertiajs/vue3";
 
 const animate = ref(false);
+
 onMounted(() => {
   animate.value = true;
 

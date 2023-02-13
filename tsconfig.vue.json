@@ -1,0 +1,30 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "**/*.vue",
+    "resources/js"
+  ],
+  "exclude": [
+    "cypress",
+    "node_modules",
+    "build",
+    "./cypress.config.ts",
+    "**/*.cy.js"
+  ],
+  "files": [
+    "./vue-shims.d.ts"
+  ],
+  "compilerOptions": {
+    "outDir": "build",
+    "rootDir": "./",
+    "sourceMap": false,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "paths": {
+      "@core/*": [
+        "./resources/js/core/*"
+      ]
+    },
+    "types": []
+  }
+}
