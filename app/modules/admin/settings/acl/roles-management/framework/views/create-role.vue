@@ -1,65 +1,75 @@
-<script setup lang="ts">
-import { onMounted, reactive, ref } from "vue";
+<script setup>
+import {computed, reactive, ref} from "vue";
+import { usePage } from "@inertiajs/vue3";
+import { useI18n } from 'vue-i18n'
+
+import {apiService} from "./services/api";
 import AppListGroup from "@core/components/app-list-group.vue";
 
-import { api } from './services/api'
-import { AccordionGroup } from '@core/interfaces/accordion-interface'
-
+const { t } = useI18n()
 const ruleFormRef = ref()
-const permissionsGroup = ref<AccordionGroup[]>([])
 const ruleForm = reactive({
   name: '',
   description: '',
   permissions: []
 })
-
+const state = reactive({
+  loading: false
+})
 const rules = reactive({
   name: [
-    { required: true, message: 'Please input Activity name', trigger: 'blur' },
-    { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' },
+    { required: true, message: t('acl.role.name.required'), trigger: 'blur' },
+    { min: 3,  message: t('acl.role.name.min'), trigger: 'blur' },
   ],
   permissions: [
     {
       type: 'array',
       required: true,
-      message: 'Please select at least one activity type',
+      message: t('acl.role.permissions.required'),
       trigger: 'change',
     },
   ],
   description: [
-    { required: true, message: 'Please input activity form', trigger: 'blur' },
+    { required: true, message: t('acl.role.description.required'), trigger: 'blur' },
   ],
 })
 
-onMounted(() => {
-  api.loadPermissions()
-    .then(data => {
-      permissionsGroup.value = data.map((row) => ({
-        title: row.title,
-        id: row.id,
-        type: 'checkbox',
-        children: row.permissions.map((p) => ({
-          id: p.slug,
-          title: p.display,
-        }))
-      }))
-    })
-})
+const permissions = computed(() => usePage().props.permissions)
+const permissionsGroup = ref(permissions.value.map((p) => ({
+  id: p.id,
+  title: p.title,
+  children: p.children.map((c) => ({
+    id: c.id,
+    title: c.display,
+    description: c.description
+  }))
+})))
+
+const onSubmit = async (formEl) => {
+  if (!formEl) return
+  await formEl.validate((valid) => {
+    if (valid) {
+      state.loading = true;
+      apiService.createRole(ruleForm)
+          .finally(() => {
+            state.loading = false;
+          })
+    }
+  })
+}
+
 
 </script>
 
-<style scoped>
-
-</style>
-
 <template>
-  <account-layout>
+  <account-layout :title="$t('menu.admin.setting.acl.roles.new_role')">
     <template v-slot:header>
       <app-page-hero
         :title="$t('menu.admin.setting.acl.roles.new_role')"
         :sub-title="$t('menu.admin.setting.acl.roles.new_role_description')"
       />
     </template>
+
     <template v-slot:body>
       <p class="text-muted">
         {{ $t("admin.acl.roles.register.description") }}
@@ -73,24 +83,33 @@ onMounted(() => {
         status-icon
       >
       <!-- create role head -->
-        <el-form-item label="Activity name" prop="name">
+        <el-form-item :label="$t('acl.role.name')" prop="name">
           <el-input v-model="ruleForm.name" />
         </el-form-item>
 
-        <el-form-item label="Activity form" prop="description">
+        <el-form-item :label="$t('shared.description')" prop="description">
           <el-input v-model="ruleForm.description" type="textarea" />
         </el-form-item>
 
-      <!-- create role permissions -->
+        <el-form-item :label="$t('shared.permissions')" prop="permissions">
+          <app-list-group
+              :groups="permissionsGroup"
+              type="checkbox"
+              v-model:selected="ruleForm.permissions"
+          />
+        </el-form-item>
 
-        <app-list-group
-          :groups="permissionsGroup"
-          type="checkbox"
-          :title="$t('shared.permissions')"
-        >
-
-        </app-list-group>
-
+        <div class="d-flex justify-content-end">
+          <!-- el-button> {{ $t('admin.acl.users.create') }} </el-button -->
+          <el-button
+              native-type="submit"
+              @click.prevent="onSubmit(ruleFormRef)"
+              :loading="state.loading"
+              type="primary"
+          >
+            {{ $t('admin.acl.users.create_and_redirect') }}
+          </el-button>
+        </div>
       </el-form>
     </template>
   </account-layout>

@@ -14,6 +14,7 @@ export class RoleMapper implements Mapper<RoleEntity, RoleModel> {
       slug: roleModel.slug,
       description: roleModel.description,
       internal: Boolean(roleModel.isSystem),
+      permissions: roleModel.permissions.map((p) => new UniqueEntityID(p.id)),
     }, {
       updatedAt: roleModel.updatedAt.toJSDate(),
       createdAt: roleModel.createdAt.toJSDate(),

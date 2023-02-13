@@ -15,7 +15,9 @@ export class ListUsersRepositoryImpl implements ListUsersRepository {
     const usersPaginated = await UserModel
       .query()
       .whereNull('deleted_at')
-      .preload('role')
+      .preload('role', (b) => {
+        b.preload('permissions')
+      })
       .paginate(input.page, input.perPage)
 
     return {

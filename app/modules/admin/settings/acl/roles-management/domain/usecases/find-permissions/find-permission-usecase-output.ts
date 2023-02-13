@@ -1,5 +1,6 @@
 export interface FindPermissionUseCaseOutput {
   id: string
+  title: string
 
   children: {
     id: string,

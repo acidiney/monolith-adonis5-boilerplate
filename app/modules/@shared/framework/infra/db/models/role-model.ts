@@ -1,6 +1,6 @@
 import { cuid } from '@ioc:Adonis/Core/Helpers'
 import { slugify } from '@ioc:Adonis/Addons/LucidSlugify'
-import {BaseModel, beforeSave, column, computed, HasMany, hasMany, hasOne, HasOne} from '@ioc:Adonis/Lucid/Orm'
+import {BaseModel, beforeSave, column, computed, manyToMany, ManyToMany, hasOne, HasOne} from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import { UserModel } from './user-model'
 import { PermissionModel } from './permission-model'
@@ -33,10 +33,14 @@ export class RoleModel extends BaseModel {
   })
   public user: HasOne<typeof UserModel>
 
-  @hasMany(() => PermissionModel, {
-    serializeAs: 'role_permissions',
+  @manyToMany(() => PermissionModel, {
+    pivotTable: 'role_permissions',
+    localKey: 'id',
+    pivotForeignKey: 'role_id',
+    relatedKey: 'id',
+    pivotRelatedForeignKey: 'permission_id',
   })
-  public permissions: HasMany<typeof PermissionModel>
+  public permissions: ManyToMany<typeof PermissionModel>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

@@ -14,6 +14,7 @@ export class ListRolesRepositoryImpl implements ListRolesRepository {
   public async findAll (input: ListRolesUseCaseInput): Promise<Pagination<RoleEntity>> {
     const rolesPaginated = await RoleModel
       .query()
+      .preload('permissions')
       .whereNull('deleted_at')
       .andWhere((q) => {
         if (!input.isRoot) {

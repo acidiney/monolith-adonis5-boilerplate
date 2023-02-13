@@ -19,7 +19,7 @@ export class ListRolesController implements Controller<HttpContextContract> {
     const output = await this.listRolesUseCase.perform({
       page: page ?? 1,
       perPage: perPage ?? 10,
-      isRoot: auth.user?.role.slug === 'root',
+      isRoot: auth.user?.role.isRoot ?? false,
     })
 
     return inertia.render('admin/settings/acl/roles-management/framework/views/list-roles', {

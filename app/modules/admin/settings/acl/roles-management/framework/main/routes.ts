@@ -7,6 +7,9 @@ import {
 import {
   makeListDropdownRolesFactory,
 } from 'app/modules/admin/settings/acl/roles-management/framework/main/factories/make-list-roles-dropdown-factory'
+import {
+  makeCreateRoleViewControllerFactory,
+} from './factories/make-create-role-view-controller-factory'
 
 Route.group(() => {
   Route.get('/', routeAdapter(makeListRolesFactory(), {
@@ -15,7 +18,10 @@ Route.group(() => {
   }))
     .middleware('can:admin-acl-view-roles')
 
-  Route.inertia('/new', 'admin/settings/acl/roles-management/framework/views/create-role')
+  Route.get('/new', routeAdapter(makeCreateRoleViewControllerFactory(), {
+    operation: 'admin-acl-view-create-role-page',
+    description: '[AdminRoute] View create role page',
+  }))
 })
   .prefix('/account/admin/settings/acl/roles')
   .middleware(['auth'])

@@ -17,6 +17,7 @@ export class ListAllRolesDropdownRepositoryImpl implements ListAllRolesRepositor
   public async findAll (input: ListRolesDropdownUseCaseInput): Promise<RoleEntity[]> {
     const rolesPaginated = await RoleModel
       .query()
+      .preload('permissions')
       .whereNull('deleted_at')
       .andWhere((q) => {
         if (!input.isRoot) {

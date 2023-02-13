@@ -4,7 +4,7 @@ import {
 import {PermissionEntity} from 'app/modules/admin/settings/acl/roles-management/domain/entities/permission-entity'
 import {
   PermissionMapper,
-} from 'app/modules/admin/settings/acl/roles-management/framework/infra/db/models/permission-mapper'
+} from 'app/modules/admin/settings/acl/roles-management/framework/infra/db/mappers/permission-mapper'
 import {PermissionModel} from 'app/modules/@shared/framework/infra/db/models'
 
 export class FindPermissionsRepositoryImpl implements FindPermissionsRepository {
