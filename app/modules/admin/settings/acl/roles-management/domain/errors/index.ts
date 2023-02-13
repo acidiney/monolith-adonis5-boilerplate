@@ -3,4 +3,7 @@
  * ITGest Angola
  */
 
-export * from './user-already-exist-error'
+export * from './role-already-exist-error'
+export * from './permission-are-missing-error'
+export * from './role-description-required-error'
+export * from './role-name-required-error'

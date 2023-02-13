@@ -21,12 +21,6 @@
     "rootDir": "./",
     "sourceMap": false,
     "skipLibCheck": true,
-    "allowJs": true,
-    "paths": {
-      "@core/*": [
-        "./resources/js/core/*"
-      ]
-    },
-    "types": []
+    "allowJs": true
   }
 }

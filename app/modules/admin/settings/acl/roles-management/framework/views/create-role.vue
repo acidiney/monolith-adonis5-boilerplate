@@ -3,7 +3,7 @@ import { onMounted, reactive, ref } from "vue";
 import AppListGroup from "@core/components/app-list-group.vue";
 
 import { api } from './services/api'
-import { AccordionGroup } from "@core/interfaces/accordion-interface";
+import { AccordionGroup } from '@core/interfaces/accordion-interface'
 
 const ruleFormRef = ref()
 const permissionsGroup = ref<AccordionGroup[]>([])
