@@ -12,15 +12,23 @@ export class ListRolesRepositoryImpl implements ListRolesRepository {
   }
 
   public async findAll (input: ListRolesUseCaseInput): Promise<Pagination<RoleEntity>> {
-    const rolesPaginated = await RoleModel
+    let query = RoleModel
       .query()
-      .preload('permissions')
       .whereNull('deleted_at')
       .andWhere((q) => {
         if (!input.isRoot) {
           q.whereNot('slug', 'root')
         }
       })
+      .clone()
+
+    if (input.orderByDirection && input.orderBy) {
+      query = query
+        .orderBy(input.orderBy, input.orderByDirection)
+    }
+
+    const rolesPaginated = await query
+      .preload('permissions')
       .paginate(input.page, input.perPage)
 
     return {

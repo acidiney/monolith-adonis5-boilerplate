@@ -1,22 +1,36 @@
 <script setup>
-import {computed, ref} from "vue"
+import {computed, onMounted, reactive} from "vue"
 import { useI18n } from 'vue-i18n'
 import {usePage, router} from "@inertiajs/vue3"
 
 const { t } = useI18n()
 
+const state = reactive({
+  perPage: 10,
+  page: 1
+})
+
 const content = computed(() => usePage().props.content)
 const alert = computed(() => usePage().props.alert)
 const isRoot = computed(() => usePage().props.user.role.isRoot)
 
-const onSortChange = (e) => {
-  console.log(e)
+const onSortChange = ({ prop, order }) => {
+  const orderBy = {
+    'ascending': 'asc',
+    'descending': 'desc'
+  }
+
+  redirectTo('', { sortBy: prop, sortOrderBy: orderBy[order]})
 }
 
-const redirectTo = (url) => {
-  router.get(url)
+const redirectTo = (url, params) => {
+  router.get(url, params)
 }
 
+onMounted(() => {
+  state.perPage = usePage().props.query.perPage
+  state.page = usePage().props.query.page
+})
 </script>
 
 <style scoped>
@@ -81,10 +95,9 @@ const redirectTo = (url) => {
           stripe
           cell-class-name="bg-body text-color"
           :data="content.data"
-          @sort-change="onSortChange"
       >
         <el-table-column type="selection" width="50" />
-        <el-table-column prop="name" sortable :label="$t('acl.roles.role_name')">
+        <el-table-column prop="name" :label="$t('acl.roles.role_name')">
           <template #default="scope">
 
             <router-link :href="`/admin/settings/acl/roles/${scope.row.slug}/edit`">
@@ -97,7 +110,7 @@ const redirectTo = (url) => {
             <span  v-else class="small text-muted"> {{ scope.row.description }} </span>
           </template>
         </el-table-column>
-        <el-table-column prop="updatedAtText" sortable :label="$t('shared.updated_at')">
+        <el-table-column prop="updatedAtText" :label="$t('shared.updated_at')">
           <template #default="scope">
             <el-popover effect="light" trigger="hover" placement="top" width="auto">
               <template #default>
@@ -131,19 +144,31 @@ const redirectTo = (url) => {
         </el-table-column>
       </el-table>
       <div class="d-flex w-100 justify-content-between">
-        <el-select class="w-4" model-value="10" size="small">
+        <el-select
+            class="w-4"
+            size="small"
+            v-model="state.perPage"
+            @change="(perPage) => redirectTo('', { perPage, page: '1' })"
+        >
           <el-option
-            v-for="item in [10, 50, 100]"
+            v-for="item in [5, 10, 50, 100]"
             :key="item"
             :label="item"
             :value="item"
           />
         </el-select>
 
-        <el-pagination
-          :total="content.total"
-          layout="prev, pager, next"
-        />
+        <div class="d-flex justify-content-center align-items-center">
+          {{ $t('shared.total_records', { total: content.total }) }}
+          <el-pagination
+              :total="content.total"
+              :page-size="state.perPage"
+              :current-page="state.page"
+              layout="prev, pager, next"
+              @size-change="(perPage) => redirectTo('', { perPage, page: 1 })"
+              @currentChange="(page) => redirectTo('', { page })"
+          />
+        </div>
       </div>
     </template>
   </account-layout>
