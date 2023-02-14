@@ -5,8 +5,8 @@ import {UserModel} from 'app/modules/@shared/framework/infra/db/models'
 const pkg = require('../package.json')
 
 Inertia.share({
-  errors: (ctx) => ctx.session.flashMessages.get('errors'),
-  success: (ctx) => ctx.session.flashMessages.get('success'),
+  alert: (ctx) => ctx.session.flashMessages.get('alert'),
+  alertGlobal: (ctx) => ctx.session.flashMessages.get('alertGlobal'),
   user: async (ctx) => {
     if (ctx.auth.user) {
       const user = await UserModel.query()
