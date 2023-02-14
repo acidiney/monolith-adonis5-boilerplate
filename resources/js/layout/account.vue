@@ -12,7 +12,7 @@ onMounted(() => {
 
   nextTick(() => {
     if (window.initTheme) {
-      window.initTheme();
+      window.initTheme()
     }
   });
 });

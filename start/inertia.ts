@@ -33,7 +33,6 @@ Inertia.share({
   },
   menu: (ctx) => ctx.session.get('menu'),
   headers: (ctx) => ctx.session.get('header'),
-  today: DateTime.now().setLocale('pt-PT').toFormat('dd, LLLL yyyy'),
   version: pkg.version,
   copyright: DateTime.now().get('year'),
 })

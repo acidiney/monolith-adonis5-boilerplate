@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts" id="app-header">
 import AppUserSettings from './app-user-settings.vue'
 import AppNotifications from './app-notification.vue'
 import AppCustomApplicationSettings from './app-custom-application-settings.vue'
