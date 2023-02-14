@@ -46,12 +46,15 @@ const permissionsGroup = ref(permissions.value.map((p) => ({
   }))
 })))
 
-const onSubmit = async (formEl) => {
+const onSubmit = async (formEl, redirect) => {
   if (!formEl) return
   await formEl.validate((valid) => {
     if (valid) {
       state.loading = true;
-      apiService.createRole(ruleForm)
+      apiService.createRole(ruleForm, redirect)
+          .then(() => {
+            formEl.resetFields()
+          })
           .finally(() => {
             state.loading = false;
           })
@@ -115,10 +118,13 @@ const onSubmit = async (formEl) => {
         </el-form-item>
 
         <div class="d-flex justify-content-end">
-          <!-- el-button> {{ $t('admin.acl.users.create') }} </el-button -->
+          <el-button
+              :loading="state.loading"
+              @click.prevent="onSubmit(ruleFormRef, false)"
+          > {{ $t('admin.acl.users.create') }} </el-button>
           <el-button
               native-type="submit"
-              @click.prevent="onSubmit(ruleFormRef)"
+              @click.prevent="onSubmit(ruleFormRef, true)"
               :loading="state.loading"
               type="primary"
           >

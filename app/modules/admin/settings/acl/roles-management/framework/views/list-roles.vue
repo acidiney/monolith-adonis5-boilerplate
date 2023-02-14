@@ -6,6 +6,7 @@ import {usePage, router} from "@inertiajs/vue3"
 const { t } = useI18n()
 
 const content = computed(() => usePage().props.content)
+const alert = computed(() => usePage().props.alert)
 const isRoot = computed(() => usePage().props.user.role.isRoot)
 
 const onSortChange = (e) => {
@@ -59,6 +60,20 @@ const redirectTo = (url) => {
     </template>
 
     <template v-slot:body>
+      <p
+          v-if="alert"
+          :class="[
+            'alert',
+            {
+              'alert-success': alert.success
+            },
+            {
+              'alert-danger': !alert.success
+            }
+        ]">
+        {{ alert.message }}
+      </p>
+
       <el-table
           class="table-theme bg-body"
           header-cell-class-name="bg-body text-muted text-uppercase "

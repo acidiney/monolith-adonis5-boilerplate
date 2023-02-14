@@ -32,7 +32,6 @@ export class CreateRoleController implements Controller<HttpContextContract> {
     if (!validation) {
       return response.redirect().back()
     }
-
     const output = await this.createRoleUseCase.perform({
       name: validation.name,
       description: validation.description,
@@ -53,6 +52,10 @@ export class CreateRoleController implements Controller<HttpContextContract> {
       success: true,
       message: i18n.formatMessage('admin.acl.role.role_created'),
     })
+
+    if (validation.redirect) {
+      return response.redirect('/account/admin/settings/acl/roles')
+    }
 
     return response.redirect().back()
   }

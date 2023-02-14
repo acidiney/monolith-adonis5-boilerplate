@@ -13,6 +13,7 @@ export class CreateRoleValidation {
       rules.required(),
     ]),
     permissions: schema.array([rules.required()]).members(schema.string([])),
+    redirect: schema.boolean(),
   })
 
   public messages = {

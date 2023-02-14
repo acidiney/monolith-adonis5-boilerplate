@@ -40,7 +40,7 @@ const model = computed({
           <i data-feather="chevron-right"></i>
         </div>
       </div>
-      <div class="collapse  pb-4" :id="group.id">
+      <div class="collapse " :id="group.id">
         <div class="pointer b-t">
           <template v-for="child in group.children">
             <template v-if="type === 'checkbox'">
