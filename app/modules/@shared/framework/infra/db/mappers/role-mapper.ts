@@ -21,7 +21,21 @@ export class RoleMapper implements Mapper<RoleEntity, RoleModel> {
     })
   }
 
-  public toPersistence (_data: RoleEntity): Promise<RoleModel> | RoleModel {
-    throw new Error('need implementation')
+  public async toPersistence (roleEntity: RoleEntity): Promise<RoleModel> {
+    let roleModel: RoleModel = new RoleModel()
+    roleModel.id = roleEntity.id.toString()
+
+    const role = await RoleModel.findBy('id', roleEntity.id.toString())
+
+    if (role) {
+      roleModel = role
+    }
+
+    roleModel.name = roleEntity.name
+    roleModel.description = roleEntity.description
+    roleModel.isSystem = false
+    roleModel.createdByUser = roleEntity.user?.toString()
+
+    return roleModel
   }
 }

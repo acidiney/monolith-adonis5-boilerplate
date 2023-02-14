@@ -11,8 +11,10 @@ export interface RoleProps {
   name: string
   slug?: string
   description: string
-  internal: boolean
+  internal?: boolean
   permissions: UniqueEntityID[]
+
+  user?: UniqueEntityID
 }
 
 export class RoleEntity extends Entity<RoleProps> {
@@ -21,7 +23,7 @@ export class RoleEntity extends Entity<RoleProps> {
   }
 
   public get isInternal (): boolean {
-    return this.props.internal
+    return this.props.internal ?? false
   }
 
   public get description (): string {
@@ -34,6 +36,10 @@ export class RoleEntity extends Entity<RoleProps> {
 
   public get permissions (): UniqueEntityID[] {
     return this.props.permissions
+  }
+
+  public get user (): UniqueEntityID | undefined {
+    return this.props.user
   }
 
   public validate (): Either<Errors, boolean> {
@@ -52,11 +58,12 @@ export class RoleEntity extends Entity<RoleProps> {
     return right(true)
   }
 
-  public static create (name: string, description: string, permissions: UniqueEntityID[]): Either<Errors, RoleEntity> {
+  public static create (prop: RoleProps): Either<Errors, RoleEntity> {
     const roleEntity = new RoleEntity({
-      name,
-      description,
-      permissions,
+      name: prop.name,
+      description: prop.description,
+      permissions: prop.permissions,
+      user: prop.user,
       internal: false,
     })
 

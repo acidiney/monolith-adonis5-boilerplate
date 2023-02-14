@@ -35,6 +35,7 @@ const rules = reactive({
 })
 
 const permissions = computed(() => usePage().props.permissions)
+const alert = computed(() => usePage().props.alert)
 const permissionsGroup = ref(permissions.value.map((p) => ({
   id: p.id,
   title: p.title,
@@ -71,6 +72,20 @@ const onSubmit = async (formEl) => {
     </template>
 
     <template v-slot:body>
+      <p
+        v-if="alert"
+        :class="[
+            'alert',
+            {
+              'alert-success': alert.success
+            },
+            {
+              'alert-danger': !alert.success
+            }
+        ]">
+        {{ alert.message }}
+      </p>
+
       <p class="text-muted">
         {{ $t("admin.acl.roles.register.description") }}
       </p>

@@ -17,6 +17,7 @@ const makeInput = (): CreateRoleUseCaseInput => ({
   name: 'valid_role',
   description: 'valid_role_desc',
   permissions: ['valid_id_1'],
+  userId: 'valid_user_id',
 })
 
 interface SutTypes {

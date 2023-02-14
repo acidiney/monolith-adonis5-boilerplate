@@ -3,13 +3,10 @@ import {routeAdapter} from 'app/core/adapters/route-adapter'
 
 import {
   makeListRolesFactory,
-} from 'app/modules/admin/settings/acl/roles-management/framework/main/factories/make-list-roles-factory'
-import {
   makeListDropdownRolesFactory,
-} from 'app/modules/admin/settings/acl/roles-management/framework/main/factories/make-list-roles-dropdown-factory'
-import {
   makeCreateRoleViewControllerFactory,
-} from './factories/make-create-role-view-controller-factory'
+  makeCreateRoleControllerFactory,
+} from './factories'
 
 Route.group(() => {
   Route.get('/', routeAdapter(makeListRolesFactory(), {
@@ -22,6 +19,13 @@ Route.group(() => {
     operation: 'admin-acl-view-create-role-page',
     description: '[AdminRoute] View create role page',
   }))
+    .middleware('can:admin-acl-create-role')
+
+  Route.post('/create', routeAdapter(makeCreateRoleControllerFactory(), {
+    operation: 'admin-acl-create-role',
+    description: '[AdminRoute] Create a new role',
+  }))
+    .middleware('can:admin-acl-create-role')
 })
   .prefix('/account/admin/settings/acl/roles')
   .middleware(['auth'])

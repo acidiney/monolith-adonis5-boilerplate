@@ -28,6 +28,9 @@ export class RoleModel extends BaseModel {
   @column({ columnName: 'system' })
   public isSystem?: boolean
 
+  @column({ columnName: 'created_by_user' })
+  public createdByUser?: string
+
   @hasOne(() => UserModel, {
     foreignKey: 'roleId',
   })

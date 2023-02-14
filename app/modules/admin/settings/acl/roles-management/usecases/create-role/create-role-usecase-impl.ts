@@ -19,10 +19,12 @@ export class CreateRoleUseCaseImpl implements CreateRoleUseCase {
   }
 
   public async perform (input: CreateRoleUseCaseInput): Promise<Either<RoleAlreadyExistError, boolean>> {
-    const roleEntityOrError = RoleEntity.create(
-      input.name,
-      input.description,
-      input.permissions.map(p => new UniqueEntityID(p)))
+    const roleEntityOrError = RoleEntity.create({
+      name: input.name,
+      description: input.description,
+      permissions: input.permissions.map(p => new UniqueEntityID(p)),
+      user: new UniqueEntityID(input.userId),
+    })
 
     if (roleEntityOrError.isLeft()) {
       return left(roleEntityOrError.value)

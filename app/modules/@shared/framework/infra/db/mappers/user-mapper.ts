@@ -43,17 +43,13 @@ export class UserMapper extends Mapper<UserEntity, UserModel> {
   }
 
   public async toPersistence (userEntity: UserEntity): Promise<UserModel> {
-    let userModel
+    let userModel: UserModel = new UserModel()
+    userModel.id = userEntity.id.toString()
 
     const user = await UserModel.findBy('id', userEntity.id.toString())
 
     if (user) {
       userModel = user
-    }
-
-    if (!user) {
-      userModel = new UserModel()
-      userModel.id = userEntity.id.toString()
     }
 
     userModel.email = userEntity.email
