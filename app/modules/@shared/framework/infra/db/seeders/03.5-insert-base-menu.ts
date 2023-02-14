@@ -132,7 +132,6 @@ export default class MenuSeedSeeder extends BaseSeeder {
         url: '/account/dashboard',
         icon: 'home',
         order: 1,
-        permissionId: 'view-dashboard',
         belongsTo: 'group_main',
       },
       {

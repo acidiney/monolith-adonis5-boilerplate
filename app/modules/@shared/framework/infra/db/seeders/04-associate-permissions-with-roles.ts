@@ -12,10 +12,6 @@ export default class AssociateRoleWithPermissionSeed extends BaseSeeder {
     await RolePermissionModel.createMany([
       {
         roleId: role.id,
-        permissionId: 'view-dashboard',
-      },
-      {
-        roleId: role.id,
         permissionId: 'admin-acl-view-users',
       },
       {
