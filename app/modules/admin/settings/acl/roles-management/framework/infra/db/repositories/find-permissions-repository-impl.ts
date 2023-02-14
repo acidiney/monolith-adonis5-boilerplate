@@ -18,7 +18,7 @@ export class FindPermissionsRepositoryImpl implements FindPermissionsRepository 
       .query()
       .where((q) => {
         if (!isRoot) {
-          q.where('internal', true)
+          q.whereNot('internal', true)
         }
       })
       .exec()

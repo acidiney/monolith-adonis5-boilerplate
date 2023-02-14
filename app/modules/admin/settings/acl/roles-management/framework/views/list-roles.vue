@@ -6,6 +6,7 @@ import {usePage, router} from "@inertiajs/vue3"
 const { t } = useI18n()
 
 const content = computed(() => usePage().props.content)
+const isRoot = computed(() => usePage().props.user.role.isRoot)
 
 const onSortChange = (e) => {
   console.log(e)
@@ -99,12 +100,15 @@ const redirectTo = (url) => {
               split-button
               size="small"
               type="primary"
+              :disabled="scope.row.isInternal && !isRoot"
               @click="redirectTo(`/admin/settings/acl/roles/${scope.row.slug}/edit`)"
             >
               {{ $t('shared.edit') }}
               <template #dropdown>
                 <el-dropdown-menu >
-                  <el-dropdown-item class="text-danger">{{ $t('shared.remove') }}</el-dropdown-item>
+                  <el-dropdown-item
+                    :disabled="scope.row.isInternal"
+                    class="text-danger">{{ $t('shared.remove') }}</el-dropdown-item>
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
