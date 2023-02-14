@@ -5,14 +5,14 @@ import { router } from "@inertiajs/vue3";
 
 import AuthLayout from "./layouts/authentication.vue";
 
-const ruleFormRef = ref()
-
 const { t } = useI18n()
+
+const ruleFormRef = ref()
+const isLoading = ref(false);
 
 const state = reactive({
   username: '',
 });
-
 const rules = reactive({
   username: [
     { required: true, message: t('auth.validation.username.required'), trigger: 'blur' },
@@ -33,10 +33,6 @@ if (!formEl) return
     }
   })
 }
-
-const isLoading = ref(false);
-
-defineProps(["errors"]);
 </script>
 
 <template>

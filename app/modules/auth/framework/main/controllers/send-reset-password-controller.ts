@@ -8,10 +8,13 @@ export class SendResetPasswordController implements Controller<HttpContextContra
     private readonly sendResetPasswordUseCase: SendResetPasswordUseCase
   ) {}
 
-  public async perform ({ request, response, logger, session, i18n }: HttpContextContract) {
+  public async perform ({ request, response, session, i18n }: HttpContextContract) {
     const validation = await request.validate(SendResetPasswordLinkValidator)
       .catch((e) => {
-        session.flash('errors', e)
+        session.flash('alert', {
+          success: false,
+          message: e.message,
+        })
       })
 
     if (!validation) {
@@ -21,14 +24,17 @@ export class SendResetPasswordController implements Controller<HttpContextContra
     const result = await this.sendResetPasswordUseCase.perform({ username: validation.username })
 
     if (result.isLeft()) {
-      logger.error(result.value.errorName)
-      session.flash('errors', {
+      session.flash('alertGlobal', {
+        success: false,
         message: i18n.formatMessage(result.value.errorMessage),
       })
       return response.redirect().back()
     }
 
-    session.flash('success', i18n.formatMessage('auth.reset_password.mail_sent'))
+    session.flash('alertGlobal', {
+      success: true,
+      message: i18n.formatMessage('auth.reset_password.mail_sent'),
+    })
 
     return response.redirect().back()
   }

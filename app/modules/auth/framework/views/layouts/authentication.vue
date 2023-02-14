@@ -5,10 +5,7 @@ import { Head } from '@inertiajs/vue3'
 import AppFooter from '@core/components/app-footer.vue'
 
 const headers = computed(() => usePage().props.headers)
-const messages = computed(() => ({
-  errors: usePage().props.errors,
-  success: usePage().props.success
-}))
+const alert = computed(() => usePage().props.alertGlobal)
 
 </script>
 
@@ -61,18 +58,19 @@ main {
         </h5>
         <main class="position-relative overflow-hidden">
           <div
-            class="alert alert-danger fade show"
-            v-if="messages.errors && messages.errors.message"
+            v-if="alert"
+            :class="[
+                'alert fade show',
+                {
+                  'alert-danger': !alert.success
+                },
+                {
+                  'alert-success': alert.success
+                }
+            ]"
             role="alert"
           >
-            {{ messages.errors.message }}
-          </div>
-          <div
-            class="alert alert-success fade show"
-            v-if="messages.success"
-            role="alert"
-          >
-            {{ messages.success }}
+            {{ alert.message }}
           </div>
           <slot></slot>
         </main>

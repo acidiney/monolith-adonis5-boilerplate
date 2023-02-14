@@ -47,8 +47,6 @@ const rules = reactive({
     }
   ],
 })
-
-const errors = computed(() => usePage().props.errors)
 </script>
 
 <template>

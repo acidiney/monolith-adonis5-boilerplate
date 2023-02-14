@@ -13,7 +13,10 @@ export class ResetPasswordController implements Controller<HttpContextContract> 
   public async perform ({ session, request, response, i18n }: HttpContextContract): Promise<any> {
     const validation = await request.validate(ResetPasswordValidator)
       .catch((e) => {
-        session.flash('errors', e.messages)
+        session.flash('alert', {
+          success: false,
+          message: e.message,
+        })
       })
 
     if (!validation) {
@@ -27,14 +30,18 @@ export class ResetPasswordController implements Controller<HttpContextContract> 
     })
 
     if (output.isLeft()) {
-      session.flash('errors', {
+      session.flash('alertGlobal', {
+        success: false,
         message: i18n.formatMessage(output.value.errorMessage),
       })
 
       return response.redirect().back()
     }
 
-    session.flash('success', i18n.formatMessage('auth.reset_password.success'))
+    session.flash('alertGlobal', {
+      success: true,
+      message: i18n.formatMessage('auth.reset_password.success'),
+    })
 
     return response.redirect('/auth/login')
   }

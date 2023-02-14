@@ -14,7 +14,8 @@ export class CreateRoleController implements Controller<HttpContextContract> {
 
   public async perform ({ session, request, response, i18n, auth }: HttpContextContract): Promise<any> {
     if (!auth.user) {
-      session.flash('errors', {
+      session.flash('alertGlobal', {
+        success: false,
         message: i18n.formatMessage('auth.unauthorized'),
       })
       return response.redirect().back()

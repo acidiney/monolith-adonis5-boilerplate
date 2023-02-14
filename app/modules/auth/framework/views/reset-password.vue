@@ -1,10 +1,10 @@
 <script setup>
-import * as yup from "yup";
-import {ref, computed, reactive} from "vue";
+import {ref, reactive} from "vue";
 import { useI18n } from 'vue-i18n'
-import { router, usePage } from "@inertiajs/vue3";
+import { router } from "@inertiajs/vue3";
 
 import AuthLayout from "./layouts/authentication.vue";
+
 const props = defineProps({
   token: String
 });
@@ -12,6 +12,18 @@ const props = defineProps({
 const isLoading = ref(false);
 const showPassword = ref(false);
 
+const { t } = useI18n()
+
+const ruleFormRef = ref()
+
+const ruleForm = reactive({
+  password: '',
+  confirmPassword: '',
+})
+const rules = reactive({
+  password: [{ validator: validatePass, trigger: 'blur'}, { min: 8, message: t('auth.validation.password.minLength'), trigger: 'blur'}],
+  confirmPassword: [{ validator: validatePass2, trigger: 'blur' }],
+})
 
 async function onSubmit(form) {
   if (!form) return
@@ -32,11 +44,6 @@ async function onSubmit(form) {
     });
   })
 }
-
-const { t } = useI18n()
-
-const ruleFormRef = ref()
-
 const validatePass = (rule, value, callback) => {
   if (value === '') {
     callback(new Error(t('auth.validation.password.required')))
@@ -49,7 +56,6 @@ const validatePass = (rule, value, callback) => {
     callback()
   }
 }
-
 const validatePass2 = (rule, value, callback) => {
   if (value === '') {
     callback(new Error(t('auth.validation.password.required')))
@@ -59,19 +65,6 @@ const validatePass2 = (rule, value, callback) => {
     callback()
   }
 }
-
-const ruleForm = reactive({
-  password: '',
-  confirmPassword: '',
-})
-
-const rules = reactive({
-  password: [{ validator: validatePass, trigger: 'blur'}, { min: 8, message: t('auth.validation.password.minLength'), trigger: 'blur'}],
-  confirmPassword: [{ validator: validatePass2, trigger: 'blur' }],
-})
-
-const errors = computed(() => usePage().props.errors)
-
 </script>
 
 <template>

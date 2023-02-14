@@ -19,8 +19,9 @@ export class SignInController implements Controller<HttpContextContract> {
   }: HttpContextContract) {
     const validation = await request.validate(SignInValidator)
       .catch((e) => {
-        session.flash('errors', {
-          validation: e.messages,
+        session.flash('alert', {
+          success: false,
+          message: e.messages,
         })
       })
 
@@ -31,7 +32,8 @@ export class SignInController implements Controller<HttpContextContract> {
     const output = await this.authenticateUserUseCase.perform(validation)
 
     if (output.isLeft()) {
-      session.flash('errors', {
+      session.flash('alertGlobal', {
+        success: false,
         message: i18n.formatMessage('auth.user.mismatch'),
       })
 
