@@ -39,7 +39,8 @@ export class CaptureErrorDecorator implements Controller<HttpContextContract> {
       }
 
       input.session
-        .flash('errors', {
+        .flash('alertGlobal', {
+          success: false,
           message: input.i18n.formatMessage('shared.errors.internal_server_error'),
         })
 

@@ -13,7 +13,7 @@ export class ListRolesDropdownControllerController implements Controller<HttpCon
   public async perform ({ auth, response }: HttpContextContract): Promise<any> {
     await auth.user?.load('role')
     const output = await this.listRolesDropdownUseCase.perform({
-      isRoot: auth.user?.role.slug === 'root',
+      isRoot: auth.user?.role.isRoot ?? false,
     })
 
     return response.ok(output)

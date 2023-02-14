@@ -12,7 +12,8 @@ export class CreateUserController implements Controller<HttpContextContract> {
   public async perform ({ session, request, response, i18n }: HttpContextContract): Promise<any> {
     const validation = await request.validate(CreateUserValidator)
       .catch((e) => {
-        session.flash('errors', {
+        session.flash('alert', {
+          success: false,
           message: e.message,
         })
       })
@@ -29,14 +30,16 @@ export class CreateUserController implements Controller<HttpContextContract> {
     })
 
     if (output.isLeft()) {
-      session.flash('errors', {
-        createUser: i18n.formatMessage(output.value.errorMessage),
+      session.flash('alert', {
+        success: false,
+        message: i18n.formatMessage(output.value.errorMessage),
       })
       return response.redirect().back()
     }
 
-    session.flash('success', {
-      createUser: i18n.formatMessage('admin.acl.user.new'),
+    session.flash('alert', {
+      success: true,
+      message: i18n.formatMessage('admin.acl.user.new'),
     })
 
     return response.redirect().back()

@@ -17,10 +17,7 @@ onMounted(() => {
   });
 });
 
-const messages = computed(() => ({
-  errors: usePage().props.errors,
-  success: usePage().props.success
-}))
+const alert = computed(() => usePage().props.alertGloabl)
 
 
 const user = computed(() => (
@@ -42,18 +39,14 @@ defineProps({
   <app-head :title="title" />
 
   <div
-    class="alert alert-danger fade show mb-0"
-    v-if="messages.errors && messages.errors.message"
+    :class="['alert fade show mb-0', {
+      'alert-danger': !alert.success,
+      'alert-success': alert.success
+    }]"
+    v-if="alert"
     role="alert"
   >
-    {{ messages.errors.message }}
-  </div>
-  <div
-    class="alert alert-success fade show mb-0"
-    v-if="messages.success && messages.success.message"
-    role="alert"
-  >
-    {{ messages.success.message }}
+    {{ alert.message }}
   </div>
   <div class="layout-row">
     <app-sidebar />
