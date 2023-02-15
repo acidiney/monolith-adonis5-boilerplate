@@ -6,7 +6,7 @@ import { PermissionModel } from './permission-model'
 import { RoleModel } from './role-model'
 
 export class RolePermissionModel extends BaseModel {
-  public static table = 'role_permissions'
+  public static table = 'core_role_permissions'
   public static selfAssignPrimaryKey = true
 
   @column({ isPrimary: true })

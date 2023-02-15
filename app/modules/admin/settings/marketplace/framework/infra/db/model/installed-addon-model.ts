@@ -3,7 +3,7 @@ import { UserModel } from 'app/modules/@shared/framework/infra/db/models'
 import { DateTime } from 'luxon'
 
 export class InstalledAddonModel extends BaseModel {
-  public static table = 'system_installed_addons'
+  public static table = 'core_system_installed_addons'
 
   @column({ isPrimary: true })
   public id: number

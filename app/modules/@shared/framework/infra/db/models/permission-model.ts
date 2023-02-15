@@ -2,7 +2,7 @@ import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 
 export class PermissionModel extends BaseModel {
-  public static table = 'permissions'
+  public static table = 'core_permissions'
 
   @column({ isPrimary: true })
   public id: string

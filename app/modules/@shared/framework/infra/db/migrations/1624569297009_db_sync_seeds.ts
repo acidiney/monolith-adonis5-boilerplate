@@ -1,7 +1,7 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class AdonisSeeds extends BaseSchema {
-  protected tableName = 'internal_db_sync'
+  protected tableName = 'core_internal_db_sync'
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {

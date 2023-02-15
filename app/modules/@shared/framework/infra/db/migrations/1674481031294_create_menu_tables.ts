@@ -1,7 +1,7 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class Menus extends BaseSchema {
-  protected tableName = 'menus'
+  protected tableName = 'core_menus'
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {

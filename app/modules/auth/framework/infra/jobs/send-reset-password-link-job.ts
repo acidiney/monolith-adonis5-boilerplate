@@ -1,12 +1,13 @@
 import Env from '@ioc:Adonis/Core/Env'
 import Mail from '@ioc:Adonis/Addons/Mail'
-import { Job, JobContract } from '@ioc:Rocketseat/Bull'
-import { SendResetPasswordLinkInput } from 'app/modules/auth/usecases'
-import {JobsOptions} from 'bullmq'
-
-import {Edge} from 'edge.js'
-import {join} from 'path'
 import Encryption from '@ioc:Adonis/Core/Encryption'
+
+import {join} from 'path'
+import {Edge} from 'edge.js'
+import {JobsOptions} from 'bullmq'
+import { Job, JobContract } from '@ioc:Rocketseat/Bull'
+
+import { SendResetPasswordLinkInput } from 'app/modules/auth/usecases'
 
 export default class SendResetPasswordLinkJob implements JobContract {
   public key = 'SendResetPasswordLinkJob'

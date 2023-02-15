@@ -5,7 +5,7 @@ import { cuid } from '@ioc:Adonis/Core/Helpers'
 import { BaseModel, beforeCreate, column } from '@ioc:Adonis/Lucid/Orm'
 
 export class TokenModel extends BaseModel {
-  public static table = 'tokens'
+  public static table = 'core_tokens'
   public static selfAssignPrimaryKey = true
 
   @column({ isPrimary: true })

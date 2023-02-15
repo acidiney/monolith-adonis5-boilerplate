@@ -17,7 +17,7 @@ export class CreateRoleWithTransactionRepositoryImpl implements CreateRoleWithTr
     await Database
       .insertQuery()
       .useTransaction(trx)
-      .table('role_permissions')
+      .table('core_role_permissions')
       .insert(roleEntity.permissions.map(p => p.toString()).map((p) => ({
         id: new UniqueEntityID().toString(),
         permission_id: p,

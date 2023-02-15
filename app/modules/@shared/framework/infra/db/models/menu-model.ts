@@ -11,7 +11,7 @@ export interface Menu {
 }
 
 export class MenuModel extends BaseModel {
-  public static table = 'menus'
+  public static table = 'core_menus'
 
   @column({ isPrimary: true })
   public id: string
@@ -50,7 +50,7 @@ export class MenuModel extends BaseModel {
   public updatedAt: DateTime
 
   @beforeCreate()
-  public static async assignNanoId (menu: MenuModel) {
+  public static async setId (menu: MenuModel) {
     menu.id = menu.id || cuid()
   }
 

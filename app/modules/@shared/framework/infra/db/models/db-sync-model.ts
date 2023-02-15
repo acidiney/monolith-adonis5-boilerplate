@@ -4,7 +4,7 @@ import { cuid } from '@ioc:Adonis/Core/Helpers'
 import { BaseModel, beforeCreate, column } from '@ioc:Adonis/Lucid/Orm'
 
 export class DbSyncModel extends BaseModel {
-  public static table = 'internal_db_sync'
+  public static table = 'core_internal_db_sync'
   public static selfAssignPrimaryKey = true
 
   @column({ isPrimary: true })

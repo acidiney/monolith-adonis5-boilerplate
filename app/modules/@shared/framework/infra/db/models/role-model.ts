@@ -6,7 +6,7 @@ import { UserModel } from './user-model'
 import { PermissionModel } from './permission-model'
 
 export class RoleModel extends BaseModel {
-  public static table = 'roles'
+  public static table = 'core_roles'
   public static selfAssignPrimaryKey = true
 
   @column({ isPrimary: true })
@@ -37,7 +37,7 @@ export class RoleModel extends BaseModel {
   public user: HasOne<typeof UserModel>
 
   @manyToMany(() => PermissionModel, {
-    pivotTable: 'role_permissions',
+    pivotTable: 'core_role_permissions',
     localKey: 'id',
     pivotForeignKey: 'role_id',
     relatedKey: 'id',

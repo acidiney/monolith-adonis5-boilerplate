@@ -8,7 +8,7 @@ import {slugify} from '@ioc:Adonis/Addons/LucidSlugify'
 import {StatusType} from 'app/modules/@shared/domain/types'
 
 export class UserModel extends BaseModel {
-  public static table = 'users'
+  public static table = 'core_users'
   public static selfAssignPrimaryKey = true
 
   @column({ isPrimary: true })
