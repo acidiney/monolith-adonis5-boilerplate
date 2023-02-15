@@ -39,7 +39,7 @@ export class CreateRoleUseCaseImpl implements CreateRoleUseCase {
     }
 
     await this.transactionAdapter.useTransaction((trx) =>
-      this.createRoleWithTransactionRepository.persist(roleEntityOrError.value, trx)
+      this.createRoleWithTransactionRepository.persistWithTransaction(roleEntityOrError.value, trx)
     )
 
     await this.eventDispatcher.publish(new RoleCreatedEvent({

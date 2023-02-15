@@ -8,7 +8,7 @@ import {UniqueEntityID} from 'app/core/domain'
 
 export class CreateRoleWithTransactionRepositoryImpl implements CreateRoleWithTransactionRepository<TransactionClient> {
   constructor (private readonly roleMapper: RoleMapper) {}
-  public async persist (roleEntity: RoleEntity, trx: TransactionClient): Promise<void> {
+  public async persistWithTransaction (roleEntity: RoleEntity, trx: TransactionClient): Promise<void> {
     const roleModel = await this.roleMapper.toPersistence(roleEntity)
 
     roleModel.useTransaction(trx)
