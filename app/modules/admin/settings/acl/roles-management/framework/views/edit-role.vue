@@ -1,52 +1,17 @@
 <script setup>
-import {computed, onMounted, reactive, ref} from "vue";
-import { usePage } from "@inertiajs/vue3";
-import { useI18n } from 'vue-i18n'
+import {computed, onMounted} from "vue"
+import { usePage } from "@inertiajs/vue3"
 
-import {apiService} from "./services/api";
-import AppListGroup from "@core/components/app-list-group.vue";
+import {apiService} from "./services/api"
+import AppListGroup from "@core/components/app-list-group.vue"
 
-const { t } = useI18n()
-const ruleFormRef = ref()
-const ruleForm = reactive({
-  name: '',
-  description: '',
-  permissions: []
-})
-const state = reactive({
-  loading: false
-})
+import { useRoleForm } from './composable/use-role-form'
 
-const rules = reactive({
-  name: [
-    { required: true, message: t('acl.role.name.required'), trigger: 'blur' },
-    { min: 3,  message: t('acl.role.name.min'), trigger: 'blur' },
-  ],
-  permissions: [
-    {
-      type: 'array',
-      required: true,
-      message: t('acl.role.permissions.required'),
-      trigger: 'change',
-    },
-  ],
-  description: [
-    { required: true, message: t('acl.role.description.required'), trigger: 'blur' },
-  ],
-})
+const { t, ruleForm, permissionsGroup, ruleFormRef, state, rules } = useRoleForm()
 
 const alert = computed(() => usePage().props.alert)
-const permissions = computed(() => usePage().props.permissions)
 const role = computed(() => usePage().props.role)
-const permissionsGroup = ref(permissions.value.map((p) => ({
-  id: p.id,
-  title: p.title,
-  children: p.children.map((c) => ({
-    id: c.id,
-    title: c.display,
-    description: c.description
-  }))
-})))
+
 
 const onSubmit = async (formEl, redirect) => {
   if (!formEl) return
@@ -66,8 +31,8 @@ const onSubmit = async (formEl, redirect) => {
 
 onMounted(() => {
   if (role.value) {
-    ruleForm.name = role.value.name;
-    ruleForm.description = role.value.description;
+    ruleForm.name = role.value.internal ? t(role.value.name) : role.value.name
+    ruleForm.description = role.value.internal ? t(role.value.description) : role.value.description
     ruleForm.permissions = role.value.permissions
   }
 })

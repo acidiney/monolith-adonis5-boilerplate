@@ -1,50 +1,16 @@
 <script setup>
-import {computed, reactive, ref} from "vue";
+import { computed } from "vue";
 import { usePage } from "@inertiajs/vue3";
-import { useI18n } from 'vue-i18n'
 
-import {apiService} from "./services/api";
+import { apiService } from "./services/api";
 import AppListGroup from "@core/components/app-list-group.vue";
 
-const { t } = useI18n()
-const ruleFormRef = ref()
-const ruleForm = reactive({
-  name: '',
-  description: '',
-  permissions: []
-})
-const state = reactive({
-  loading: false
-})
-const rules = reactive({
-  name: [
-    { required: true, message: t('acl.role.name.required'), trigger: 'blur' },
-    { min: 3,  message: t('acl.role.name.min'), trigger: 'blur' },
-  ],
-  permissions: [
-    {
-      type: 'array',
-      required: true,
-      message: t('acl.role.permissions.required'),
-      trigger: 'change',
-    },
-  ],
-  description: [
-    { required: true, message: t('acl.role.description.required'), trigger: 'blur' },
-  ],
-})
 
-const permissions = computed(() => usePage().props.permissions)
+import { useRoleForm } from './composable/use-role-form'
+
+const { ruleForm, permissionsGroup, ruleFormRef, state, rules } = useRoleForm()
+
 const alert = computed(() => usePage().props.alert)
-const permissionsGroup = ref(permissions.value.map((p) => ({
-  id: p.id,
-  title: p.title,
-  children: p.children.map((c) => ({
-    id: c.id,
-    title: c.display,
-    description: c.description
-  }))
-})))
 
 const onSubmit = async (formEl, redirect) => {
   if (!formEl) return
@@ -61,7 +27,6 @@ const onSubmit = async (formEl, redirect) => {
     }
   })
 }
-
 
 </script>
 
