@@ -21,6 +21,7 @@
   "shared.background.color": "Tema",
   "shared.no_thanks": "Não, cancelar",
   "shared.ok_proceed": "Continuar",
+  "shared.total_records": "{total} Registros",
   "shared.want_to_delete": "Deseja eliminar este registro?",
   "shared.roles.root.description": "Super utilizador, com todas as permissões associadas.",
   "shared.roles.admin.description": "Utilizador com todas permissões de gestão de sistema associadas."
