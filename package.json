@@ -9,7 +9,8 @@
   "private": true,
   "scripts": {
     "prepare": "husky install",
-    "dev": "node ace serve --watch  --encore-args='--host 0.0.0.0'",
+    "dev": "node ace serve --watch",
+    "dev:global": "node ace serve --watch  --encore-args='--host 0.0.0.0'",
     "build": "node ace build --production --ignore-ts-errors",
     "start": "node server.js",
     "lint": "eslint . --ext=.ts",
