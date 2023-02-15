@@ -5,15 +5,17 @@ import {
 } from 'app/modules/admin/settings/acl/roles-management/domain/errors'
 import {RoleEntity} from 'app/modules/admin/settings/acl/roles-management/domain/entities/role-entity'
 import {
-  CreateRoleRepository,
+  CreateRoleWithTransactionRepository,
   FindRoleByNameRepository,
 } from 'app/modules/admin/settings/acl/roles-management/usecases/create-role/ports'
 import {RoleCreatedEvent} from 'app/modules/admin/settings/acl/roles-management/domain/events'
+import {TransactionAdapter} from 'app/core/ports'
 
 export class CreateRoleUseCaseImpl implements CreateRoleUseCase {
   constructor (
     private readonly findRoleByNameRepository: FindRoleByNameRepository,
-    private readonly createRoleRepository: CreateRoleRepository,
+    private readonly createRoleRepository: CreateRoleWithTransactionRepository<any>,
+    private readonly transactionAdapter: TransactionAdapter,
     private readonly eventDispatcher: IEventDispatcher
   ) {
   }
@@ -36,7 +38,9 @@ export class CreateRoleUseCaseImpl implements CreateRoleUseCase {
       return left(new RoleAlreadyExistError())
     }
 
-    await this.createRoleRepository.persist(roleEntityOrError.value)
+    await this.transactionAdapter.useTransaction((trx) =>
+      this.createRoleRepository.persist(roleEntityOrError.value, trx)
+    )
 
     await this.eventDispatcher.publish(new RoleCreatedEvent({
       roleId: roleEntityOrError.value.id,

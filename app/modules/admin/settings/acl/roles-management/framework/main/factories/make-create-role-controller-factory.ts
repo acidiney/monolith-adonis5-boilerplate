@@ -7,9 +7,10 @@ import {
 import {RoleMapper} from 'app/modules/@shared/framework/infra/db/mappers'
 import {
   FindRoleByNameRepositoryImpl,
-  CreateRoleRepositoryImpl,
+  CreateRoleWithTransactionRepositoryImpl,
 } from 'app/modules/admin/settings/acl/roles-management/framework/infra/db'
 import {EventDispatcher} from 'app/core/domain'
+import {TransactionAdapterImpl} from 'app/infra/db/adapters/transaction-adapter-impl'
 
 export const makeCreateRoleControllerFactory = (): CreateRoleController => {
   const roleMapper = new RoleMapper()
@@ -17,7 +18,8 @@ export const makeCreateRoleControllerFactory = (): CreateRoleController => {
   return new CreateRoleController(
     new CreateRoleUseCaseImpl(
       new FindRoleByNameRepositoryImpl(roleMapper),
-      new CreateRoleRepositoryImpl(roleMapper),
+      new CreateRoleWithTransactionRepositoryImpl(roleMapper),
+      new TransactionAdapterImpl(),
       EventDispatcher.getInstance()
     )
   )

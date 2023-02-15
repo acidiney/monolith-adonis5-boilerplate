@@ -2,7 +2,7 @@ import {Controller} from 'app/core/ports'
 import {HttpContextContract} from '@ioc:Adonis/Core/HttpContext'
 import {FindPermissionsUseCase} from 'app/modules/admin/settings/acl/roles-management/domain'
 
-export class CreateRoleViewController implements Controller<HttpContextContract> {
+export class ShowCreateRolePageController implements Controller<HttpContextContract> {
   constructor (
     private readonly findPermissionsUseCase: FindPermissionsUseCase
   ) {

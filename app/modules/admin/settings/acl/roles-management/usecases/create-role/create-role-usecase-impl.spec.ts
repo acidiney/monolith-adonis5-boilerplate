@@ -1,4 +1,4 @@
-import {CreateRoleRepository, FindRoleByNameRepository} from './ports'
+import {CreateRoleWithTransactionRepository, FindRoleByNameRepository} from './ports'
 import {
   CreateRoleUseCaseImpl,
 } from './create-role-usecase-impl'
@@ -10,6 +10,7 @@ import {CreateRoleUseCaseInput} from 'app/modules/admin/settings/acl/roles-manag
 import {
   makeCreateRoleRepositoryStub,
   makeFindRoleByNameRepositoryStub,
+  makeTransactionAdapterStub,
 } from 'app/modules/admin/settings/acl/roles-management/usecases/create-role/__test__'
 import {EventDispatcher} from 'app/core/domain'
 
@@ -23,13 +24,15 @@ const makeInput = (): CreateRoleUseCaseInput => ({
 interface SutTypes {
   sut: CreateRoleUseCaseImpl
   findRoleByNameRepositoryStub: FindRoleByNameRepository,
-  createRoleRepositoryStub: CreateRoleRepository
+  createRoleRepositoryStub: CreateRoleWithTransactionRepository<any>
 }
 const makeSut = (): SutTypes => {
   const findRoleByNameRepositoryStub = makeFindRoleByNameRepositoryStub()
   const createRoleRepositoryStub = makeCreateRoleRepositoryStub()
   const sut =
-    new CreateRoleUseCaseImpl(findRoleByNameRepositoryStub, createRoleRepositoryStub, EventDispatcher.getInstance())
+    new CreateRoleUseCaseImpl(findRoleByNameRepositoryStub,createRoleRepositoryStub,
+      makeTransactionAdapterStub(),
+      EventDispatcher.getInstance())
 
   return {
     sut,

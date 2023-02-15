@@ -4,8 +4,8 @@ import {routeAdapter} from 'app/core/adapters/route-adapter'
 import {
   makeListRolesFactory,
   makeListDropdownRolesFactory,
-  makeCreateRoleViewControllerFactory,
-  makeCreateRoleControllerFactory,
+  makeShowCreateRolePageControllerFactory,
+  makeCreateRoleControllerFactory, makeShowEditRolePageControllerFactory,
 } from './factories'
 import {
   makeDeleteRoleFactory,
@@ -18,7 +18,7 @@ Route.group(() => {
   }))
     .middleware('can:admin-acl-view-roles')
 
-  Route.get('/new', routeAdapter(makeCreateRoleViewControllerFactory(), {
+  Route.get('/new', routeAdapter(makeShowCreateRolePageControllerFactory(), {
     operation: 'admin-acl-view-create-role-page',
     description: '[AdminRoute] View create role page',
   }))
@@ -34,6 +34,12 @@ Route.group(() => {
     operation: 'admin-acl-delete-route',
     description: '[AdminRoute] Delete a role',
   }))
+
+  Route.get('/:roleSlug/edit', routeAdapter(makeShowEditRolePageControllerFactory(), {
+    operation: 'admin-acl-view-edit-role-page',
+    description: '[AdminRoute] View edit role page',
+  }))
+    .middleware('can:admin-acl-modify-role')
 })
   .prefix('/account/admin/settings/acl/roles')
   .middleware(['auth'])

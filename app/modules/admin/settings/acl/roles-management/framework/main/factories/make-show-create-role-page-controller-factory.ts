@@ -1,6 +1,6 @@
 import {
-  CreateRoleViewController,
-} from 'app/modules/admin/settings/acl/roles-management/framework/main/controllers/create-role-view-controller'
+  ShowCreateRolePageController,
+} from 'app/modules/admin/settings/acl/roles-management/framework/main/controllers/show-create-role-page-controller'
 import {
   FindPermissionsUseCaseImpl,
 } from 'app/modules/admin/settings/acl/roles-management/usecases/find-permissions/find-permissions-usecase-impl'
@@ -8,8 +8,8 @@ import {
 import {PermissionMapper, FindPermissionsRepositoryImpl, GenerateUniqueIdAdapterImpl}
   from 'app/modules/admin/settings/acl/roles-management/framework/infra'
 
-export const makeCreateRoleViewControllerFactory = (): CreateRoleViewController => {
-  return new CreateRoleViewController(
+export const makeShowCreateRolePageControllerFactory = (): ShowCreateRolePageController => {
+  return new ShowCreateRolePageController(
     new FindPermissionsUseCaseImpl(
       new FindPermissionsRepositoryImpl(
         new PermissionMapper()

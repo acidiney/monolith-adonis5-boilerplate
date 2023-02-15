@@ -1,5 +1,5 @@
 import { Identifier } from './identifier'
-import {cuid} from '@ioc:Adonis/Core/Helpers'
+import cuid from 'cuid'
 
 /**
  * @param id is optional as string.

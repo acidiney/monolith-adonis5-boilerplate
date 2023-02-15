@@ -107,7 +107,7 @@ onMounted(() => {
         <el-table-column prop="name" :label="$t('acl.roles.role_name')">
           <template #default="scope">
 
-            <router-link :href="`/admin/settings/acl/roles/${scope.row.slug}/edit`">
+            <router-link :href="`/account/admin/settings/acl/roles/${scope.row.slug}/edit`">
               <span v-if="scope.row.isInternal">{{ $t(scope.row.name) }}</span>
               <span v-else>{{ scope.row.name }}</span>
             </router-link>
@@ -138,7 +138,7 @@ onMounted(() => {
               size="small"
               type="primary"
               :disabled="(scope.row.isInternal && !isRoot) || state.loadingKey === scope.row.slug"
-              @click="redirectTo(`/admin/settings/acl/roles/${scope.row.slug}/edit`)"
+              @click="redirectTo(`/account/admin/settings/acl/roles/${scope.row.slug}/edit`)"
             >
               {{ $t('shared.edit') }}
               <template #dropdown>
