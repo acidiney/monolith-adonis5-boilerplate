@@ -14,7 +14,7 @@ import {TransactionAdapter} from 'app/core/ports'
 export class CreateRoleUseCaseImpl implements CreateRoleUseCase {
   constructor (
     private readonly findRoleByNameRepository: FindRoleByNameRepository,
-    private readonly createRoleRepository: CreateRoleWithTransactionRepository<any>,
+    private readonly createRoleWithTransactionRepository: CreateRoleWithTransactionRepository<any>,
     private readonly transactionAdapter: TransactionAdapter,
     private readonly eventDispatcher: IEventDispatcher
   ) {
@@ -39,7 +39,7 @@ export class CreateRoleUseCaseImpl implements CreateRoleUseCase {
     }
 
     await this.transactionAdapter.useTransaction((trx) =>
-      this.createRoleRepository.persist(roleEntityOrError.value, trx)
+      this.createRoleWithTransactionRepository.persist(roleEntityOrError.value, trx)
     )
 
     await this.eventDispatcher.publish(new RoleCreatedEvent({
