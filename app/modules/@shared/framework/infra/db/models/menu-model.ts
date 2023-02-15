@@ -6,6 +6,7 @@ export interface Menu {
   display: string
   url: string,
   icon?: string,
+  isGroup: boolean,
   children?: Menu[]
 }
 
@@ -72,6 +73,7 @@ export class MenuModel extends BaseModel {
             display: menu.display,
             icon: menu.icon,
             url: menu.url,
+            isGroup: menu.isGroup ?? false,
             children: this.createSubMenuStructure(menus, menu.slug),
           })
         })
@@ -83,6 +85,7 @@ export class MenuModel extends BaseModel {
       display: menu.display,
       url: menu.url,
       icon: menu.icon,
+      isGroup: menu.isGroup,
       children: menu.children,
     }
   }
@@ -105,6 +108,7 @@ export class MenuModel extends BaseModel {
           display: subMenu.display,
           url: subMenu.url,
           icon: subMenu.icon,
+          isGroup: subMenu.isGroup,
           children: this.createSubMenuStructure(originalMenuArray, subMenu.slug),
         })
       )
