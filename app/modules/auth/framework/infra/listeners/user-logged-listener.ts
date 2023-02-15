@@ -3,7 +3,7 @@ import Logger from '@ioc:Adonis/Core/Logger'
 import {IHandler} from 'app/core/domain'
 import {UserLoggedEvent} from 'app/modules/auth/domain/events/user-logged-event'
 import {FindUserIdRepository} from 'app/modules/@shared/usecases/ports/find-user-id-repository'
-import Database from '@ioc:Adonis/Lucid/Database'
+import {UserModel} from 'app/modules/@shared/framework/infra/db/models'
 
 export class UserLoggedListener implements IHandler<UserLoggedEvent> {
   constructor (
@@ -23,8 +23,8 @@ export class UserLoggedListener implements IHandler<UserLoggedEvent> {
 
     user.userLogged(event.dateTimeOccurred)
 
-    await Database
-      .from('users')
+    await UserModel
+      .query()
       .where('id', user.id.toString())
       .update('last_login', user.lastLoginAt)
   }
