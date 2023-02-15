@@ -1,5 +1,5 @@
-import { randomUUID } from 'crypto'
 import { Identifier } from './identifier'
+import {cuid} from '@ioc:Adonis/Core/Helpers'
 
 /**
  * @param id is optional as string.
@@ -7,6 +7,6 @@ import { Identifier } from './identifier'
  */
 export class UniqueEntityID extends Identifier<string | number> {
   constructor (id?: string | number) {
-    super(id || randomUUID())
+    super(id || cuid())
   }
 }

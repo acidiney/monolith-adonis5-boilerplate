@@ -7,6 +7,9 @@ import {
   makeCreateRoleViewControllerFactory,
   makeCreateRoleControllerFactory,
 } from './factories'
+import {
+  makeDeleteRoleFactory,
+} from 'app/modules/admin/settings/acl/roles-management/framework/main/factories/make-delete-role-factory'
 
 Route.group(() => {
   Route.get('/', routeAdapter(makeListRolesFactory(), {
@@ -26,6 +29,11 @@ Route.group(() => {
     description: '[AdminRoute] Create a new role',
   }))
     .middleware('can:admin-acl-create-role')
+
+  Route.delete('/delete', routeAdapter(makeDeleteRoleFactory(), {
+    operation: 'admin-acl-delete-route',
+    description: '[AdminRoute] Delete a role',
+  }))
 })
   .prefix('/account/admin/settings/acl/roles')
   .middleware(['auth'])

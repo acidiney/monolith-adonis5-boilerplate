@@ -45,6 +45,9 @@ export class RoleModel extends BaseModel {
   })
   public permissions: ManyToMany<typeof PermissionModel>
 
+  @column.dateTime()
+  public deletedAt?: DateTime
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

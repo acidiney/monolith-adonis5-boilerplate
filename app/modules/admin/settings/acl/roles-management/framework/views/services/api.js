@@ -12,4 +12,17 @@ export const apiService = {
         },
       }))
   },
+
+  deleteRole: async (roleId) => {
+    return new Promise((resolve) =>
+      router.delete('/account/admin/settings/acl/roles/delete', {
+        data: {
+          roleId,
+        },
+      }, {
+        onFinish: () => {
+          resolve()
+        },
+      }))
+  },
 }

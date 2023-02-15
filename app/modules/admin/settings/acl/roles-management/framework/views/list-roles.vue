@@ -1,13 +1,15 @@
 <script setup>
 import {computed, onMounted, reactive} from "vue"
 import { useI18n } from 'vue-i18n'
+import { apiService } from "./services/api";
 import {usePage, router} from "@inertiajs/vue3"
 
 const { t } = useI18n()
 
 const state = reactive({
   perPage: 10,
-  page: 1
+  page: 1,
+  loadingKey: null
 })
 
 const content = computed(() => usePage().props.content)
@@ -27,9 +29,14 @@ const redirectTo = (url, params) => {
   router.get(url, params)
 }
 
+const handleDeleteRole = (roleSlug) => {
+  apiService.deleteRole(roleSlug)
+}
+
 onMounted(() => {
   state.perPage = usePage().props.query.perPage
-  state.page = usePage().props.query.page
+  state.page = usePage().props.query.pages
+  state.loadingKey = null
 })
 </script>
 
@@ -126,17 +133,33 @@ onMounted(() => {
           <template #default="scope">
             <el-dropdown
               split-button
+              trigger="click"
+              :hide-on-click="false"
               size="small"
               type="primary"
-              :disabled="scope.row.isInternal && !isRoot"
+              :disabled="(scope.row.isInternal && !isRoot) || state.loadingKey === scope.row.slug"
               @click="redirectTo(`/admin/settings/acl/roles/${scope.row.slug}/edit`)"
             >
               {{ $t('shared.edit') }}
               <template #dropdown>
-                <el-dropdown-menu >
+                <el-dropdown-menu>
                   <el-dropdown-item
                     :disabled="scope.row.isInternal"
-                    class="text-danger">{{ $t('shared.remove') }}</el-dropdown-item>
+                    class="text-danger">
+                    <el-popconfirm
+                        :width="250"
+                        :disabled="scope.row.isInternal"
+                        @confirm="handleDeleteRole(scope.row.slug)"
+                        confirm-button-type="danger"
+                        :confirm-button-text="$t('shared.ok_proceed')"
+                        :cancel-button-text="$t('shared.no_thanks')"
+                        :title="$t('shared.want_to_delete')"
+                    >
+                      <template #reference>
+                        {{ $t('shared.remove') }}
+                      </template>
+                    </el-popconfirm>
+                  </el-dropdown-item>
                 </el-dropdown-menu>
               </template>
             </el-dropdown>

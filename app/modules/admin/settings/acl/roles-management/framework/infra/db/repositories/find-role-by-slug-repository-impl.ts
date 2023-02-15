@@ -1,18 +1,17 @@
-import { FindRoleByNameRepository } from 'app/modules/admin/settings/acl/roles-management/usecases/create-role/ports'
 import { RoleEntity } from 'app/modules/admin/settings/acl/roles-management/domain/entities/role-entity'
 import { RoleModel } from 'app/modules/@shared/framework/infra/db/models'
 import { RoleMapper } from 'app/modules/@shared/framework/infra/db/mappers'
+import {FindRoleBySlugRepository} from 'app/modules/admin/settings/acl/roles-management/usecases'
 
-export class FindRoleByNameRepositoryImpl implements FindRoleByNameRepository {
+export class FindRoleBySlugRepositoryImpl implements FindRoleBySlugRepository {
   constructor (
     private readonly roleMapper: RoleMapper
   ) {}
-  public async findByName (name: string): Promise<RoleEntity | undefined> {
+  public async find (slug: string): Promise<RoleEntity | undefined> {
     const roleModel = await RoleModel
       .query()
       .preload('permissions')
-      .where('name', name)
-      .andWhereNull('deletedAt')
+      .where('slug', slug)
       .first()
 
     if (!roleModel) {

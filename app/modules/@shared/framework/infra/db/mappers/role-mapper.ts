@@ -6,8 +6,15 @@
 import {Mapper, UniqueEntityID} from 'app/core/domain'
 import {RoleEntity} from 'app/modules/admin/settings/acl/roles-management/domain/entities/role-entity'
 import {RoleModel} from 'app/modules/@shared/framework/infra/db/models'
+import {DateAdapter} from 'app/modules/@shared/domain/ports'
+import {DateAdapterImpl} from 'app/modules/@shared/framework/infra/adapters/date-adapter-impl'
 
 export class RoleMapper implements Mapper<RoleEntity, RoleModel> {
+  constructor (
+    private readonly dateAdapter: DateAdapter = new DateAdapterImpl()
+  ) {
+  }
+
   public toDomain (roleModel: RoleModel): RoleEntity {
     return RoleEntity.hydrate(new UniqueEntityID(roleModel.id), {
       name: roleModel.name,
@@ -18,6 +25,7 @@ export class RoleMapper implements Mapper<RoleEntity, RoleModel> {
     }, {
       updatedAt: roleModel.updatedAt.toJSDate(),
       createdAt: roleModel.createdAt.toJSDate(),
+      deletedAt: roleModel.deletedAt?.toJSDate(),
     })
   }
 
@@ -35,6 +43,7 @@ export class RoleMapper implements Mapper<RoleEntity, RoleModel> {
     roleModel.description = roleEntity.description
     roleModel.isSystem = false
     roleModel.createdByUser = roleEntity.user?.toString()
+    roleModel.deletedAt = this.dateAdapter.toDatePersistence(roleEntity.deletedAt)
 
     return roleModel
   }

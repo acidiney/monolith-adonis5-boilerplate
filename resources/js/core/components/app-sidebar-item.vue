@@ -17,7 +17,7 @@ defineProps({
     <template v-if="!item.children">
       <router-link
         :href="item.url"
-        :class="{ 'text-primary': $inertia.page.url === item.url }"
+        :class="{ 'text-primary': $page.url.startsWith(item.url) }"
       >
         <span class="nav-icon" v-if="item.icon">
           <app-icon :icon="item.icon" />
