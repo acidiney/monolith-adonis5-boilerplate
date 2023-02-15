@@ -13,7 +13,6 @@ export interface RoleProps {
   description: string
   internal?: boolean
   permissions: UniqueEntityID[]
-
   user?: UniqueEntityID
 }
 

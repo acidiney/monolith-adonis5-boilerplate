@@ -1,5 +1,5 @@
 <script setup>
-import {computed, reactive, ref} from "vue";
+import {computed, onMounted, reactive, ref} from "vue";
 import { usePage } from "@inertiajs/vue3";
 import { useI18n } from 'vue-i18n'
 
@@ -64,6 +64,13 @@ const onSubmit = async (formEl, redirect) => {
   })
 }
 
+onMounted(() => {
+  if (role.value) {
+    ruleForm.name = role.value.name;
+    ruleForm.description = role.value.description;
+    ruleForm.permissions = role.value.permissions
+  }
+})
 
 </script>
 
@@ -77,7 +84,15 @@ const onSubmit = async (formEl, redirect) => {
     </template>
 
     <template v-slot:body>
-      {{ role }}
+
+      <p
+          :class="[
+            'alert',
+            'alert-warning'
+        ]">
+        {{ $t('admin.acl.role.edit', { name: role.name }) }}
+      </p>
+
       <p
         v-if="alert"
         :class="[
@@ -120,11 +135,15 @@ const onSubmit = async (formEl, redirect) => {
           />
         </el-form-item>
 
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-between">
+          <div>
+            <span v-if="role.user"> {{ role.user.fullName }}</span><br />
+            <span>{{ $t('shared.updated_at_with_date', { date: role.updatedAtText }) }}</span>
+          </div>
           <el-button
               :loading="state.loading"
               @click.prevent="onSubmit(ruleFormRef, false)"
-          > {{ $t('admin.acl.users.update') }} </el-button>
+          > {{ $t('admin.acl.role.update') }} </el-button>
         </div>
       </el-form>
     </template>
