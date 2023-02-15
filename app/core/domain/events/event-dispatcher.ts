@@ -1,4 +1,4 @@
-import { IEventDispatcher, IHandler, IDomainEvent } from 'App/core/domain'
+import { IEventDispatcher, IHandler, IDomainEvent } from 'app/core/domain'
 
 interface IEventHandlers {
   [eventName: string]: Array<IHandler<IDomainEvent>>

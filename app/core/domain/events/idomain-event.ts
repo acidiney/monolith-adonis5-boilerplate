@@ -1,4 +1,4 @@
-import { UniqueEntityID } from 'App/core/domain'
+import { UniqueEntityID } from 'app/core/domain'
 
 export interface IDomainEvent<T = any> {
   dateTimeOccurred: Date
