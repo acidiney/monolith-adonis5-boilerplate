@@ -120,11 +120,11 @@ onMounted(() => {
       >
       <!-- create role head -->
         <el-form-item :label="$t('acl.role.name')" prop="name">
-          <el-input v-model="ruleForm.name" />
+          <el-input :disabled="role.internal" v-model="ruleForm.name" />
         </el-form-item>
 
         <el-form-item :label="$t('shared.description')" prop="description">
-          <el-input v-model="ruleForm.description" type="textarea" />
+          <el-input :disabled="role.internal" v-model="ruleForm.description" type="textarea" />
         </el-form-item>
 
         <el-form-item :label="$t('shared.permissions')" prop="permissions">
