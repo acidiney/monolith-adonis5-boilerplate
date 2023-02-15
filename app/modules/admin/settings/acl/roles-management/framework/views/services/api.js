@@ -13,6 +13,16 @@ export const apiService = {
       }))
   },
 
+  updateRole: async (form) => {
+    return new Promise((resolve) => {
+      router.put('/account/admin/settings/acl/roles/edit', form, {
+        onFinish: () => {
+          resolve()
+        },
+      })
+    })
+  },
+
   deleteRole: async (roleId) => {
     return new Promise((resolve) =>
       router.delete('/account/admin/settings/acl/roles/delete', {

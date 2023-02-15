@@ -1,11 +1,11 @@
 import Route from '@ioc:Adonis/Core/Route'
-import {routeAdapter} from 'app/core/adapters/route-adapter'
+import { routeAdapter } from 'app/core/adapters/route-adapter'
 
 import {
   makeListRolesFactory,
   makeListDropdownRolesFactory,
   makeShowCreateRolePageControllerFactory,
-  makeCreateRoleControllerFactory, makeShowEditRolePageControllerFactory,
+  makeCreateRoleControllerFactory, makeShowEditRolePageControllerFactory, makeUpdateRoleControllerFactory,
 } from './factories'
 import {
   makeDeleteRoleFactory,
@@ -38,6 +38,12 @@ Route.group(() => {
   Route.get('/:roleSlug/edit', routeAdapter(makeShowEditRolePageControllerFactory(), {
     operation: 'admin-acl-view-edit-role-page',
     description: '[AdminRoute] View edit role page',
+  }))
+    .middleware('can:admin-acl-modify-role')
+
+  Route.put('/edit', routeAdapter(makeUpdateRoleControllerFactory(), {
+    operation: 'admin-acl-edit-role-page',
+    description: '[AdminRoute] Edit role page',
   }))
     .middleware('can:admin-acl-modify-role')
 })

@@ -13,12 +13,15 @@ const alert = computed(() => usePage().props.alert)
 const role = computed(() => usePage().props.role)
 
 
-const onSubmit = async (formEl, redirect) => {
+const onSubmit = async (formEl) => {
   if (!formEl) return
   await formEl.validate((valid) => {
     if (valid) {
       state.loading = true;
-      apiService.createRole(ruleForm, redirect)
+      apiService.updateRole({
+        roleSlug: role.value.slug,
+        ...ruleForm
+      })
           .then(() => {
             formEl.resetFields()
           })
@@ -107,7 +110,7 @@ onMounted(() => {
           </div>
           <el-button
               :loading="state.loading"
-              @click.prevent="onSubmit(ruleFormRef, false)"
+              @click.prevent="onSubmit(ruleFormRef)"
           > {{ $t('admin.acl.role.update') }} </el-button>
         </div>
       </el-form>

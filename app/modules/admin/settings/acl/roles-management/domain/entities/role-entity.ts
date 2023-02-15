@@ -41,6 +41,18 @@ export class RoleEntity extends Entity<RoleProps> {
     return this.props.user
   }
 
+  public changeName (name: string): void {
+    this.props.name = name
+  }
+
+  public changeDescription (description: string): void {
+    this.props.description = description
+  }
+
+  public updatePermissions (permissions: UniqueEntityID[]): void {
+    this.props.permissions = permissions
+  }
+
   public validate (): Either<Errors, boolean> {
     if (!this.props.name || !this.props.name.length) {
       return left(new RoleNameRequiredError())
