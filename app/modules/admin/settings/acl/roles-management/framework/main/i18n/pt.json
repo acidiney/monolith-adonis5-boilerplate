@@ -4,6 +4,7 @@
   "menu.admin.setting.acl.roles": "Gestão de Perfis",
   "admin.acl.roles.role_have_users_associated": "Perfil contém utlizadores associados, por favor, altere primeiro o perfil dos utilizadores",
   "admin.acl.role.role_deleted": "Perfil eliminado com sucesso.",
-  "admin.acl.role.update": "Actualizar Perfil",
-  "admin.acl.role.edit": "A actualizar perfil"
+  "admin.acl.role.update": "Editar Perfil",
+  "admin.acl.role.edit": "A editar perfil",
+  "menu.admin.setting.acl.roles.edit_role": "Editar perfil"
 }
