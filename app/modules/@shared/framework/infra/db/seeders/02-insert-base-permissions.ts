@@ -5,12 +5,6 @@ export default class InsertBasePermissionsSeed extends BaseSeeder {
   public async run () {
     await PermissionModel.fetchOrCreateMany('id', [
       {
-        id: 'view-dashboard',
-        group: 'permission.group.common.main',
-        display: 'permission.common.view.dashboard',
-        description: 'permission.common.view.dashboard.description',
-      },
-      {
         id: 'admin-acl-view-users',
         group: 'permission.group.acl.manage.users',
         display: 'permission.acl.view.users',
