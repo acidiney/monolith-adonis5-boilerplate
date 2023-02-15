@@ -16,7 +16,7 @@ export default class UsersSchema extends BaseSchema {
       table.string('remember_me_token').nullable()
       table.string('status_id').index()
       table.datetime('last_login').nullable()
-      table.foreign('status_id').references('id').inTable('statuses').onDelete('cascade')
+      table.foreign('status_id').references('id').inTable('core_statuses').onDelete('cascade')
 
       table.unique(['id', 'status_id'])
       /**

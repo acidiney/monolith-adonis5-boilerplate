@@ -10,7 +10,10 @@ export default class extends BaseSchema {
       table.string('addon_name').notNullable().index().unique()
       table.decimal('version').notNullable()
       table.string('user_id').notNullable().index()
-      table.foreign('user_id').references('id').inTable('users').onDelete('CASCADE')
+      table.foreign('user_id')
+        .references('id')
+        .inTable('core_users')
+        .onDelete('CASCADE')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

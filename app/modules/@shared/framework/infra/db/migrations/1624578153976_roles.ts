@@ -10,7 +10,7 @@ export default class Roles extends BaseSchema {
       table.string('name').notNullable()
       table.text('description').nullable()
       table.boolean('system').defaultTo(false)
-      table.string('created_by_user').references('id').inTable('users')
+      table.string('created_by_user').references('id').inTable('core_users')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

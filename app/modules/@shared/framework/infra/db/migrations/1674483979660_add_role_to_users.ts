@@ -9,7 +9,7 @@ export default class extends BaseSchema {
 
       table.foreign('role_id')
         .references('id')
-        .inTable('roles')
+        .inTable('core_roles')
         .onDelete('cascade')
     })
   }

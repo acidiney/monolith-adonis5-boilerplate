@@ -7,7 +7,10 @@ export default class ApiTokens extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.string('id').unique().primary()
 
-      table.string('user_id').references('id').inTable('users')
+      table.string('user_id')
+        .references('id')
+        .inTable('core_users')
+
       table.string('type').notNullable()
       table.boolean('is_revoked').defaultTo(false)
       table.string('token', 64).notNullable().unique()

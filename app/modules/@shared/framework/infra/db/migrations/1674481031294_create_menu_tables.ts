@@ -16,7 +16,9 @@ export default class Menus extends BaseSchema {
       table.string('group_name').nullable()
       table.integer('order')
 
-      table.foreign('permission_id').references('id').inTable('permissions')
+      table.foreign('permission_id')
+        .references('id')
+        .inTable('core_permissions')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
