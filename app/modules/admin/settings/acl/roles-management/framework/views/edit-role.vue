@@ -11,6 +11,7 @@ const { t, ruleForm, permissionsGroup, ruleFormRef, state, rules } = useRoleForm
 
 const alert = computed(() => usePage().props.alert)
 const role = computed(() => usePage().props.role)
+const isRoot = computed(() => usePage().props.user.role.isRoot)
 
 
 const onSubmit = async (formEl) => {
@@ -98,6 +99,7 @@ onMounted(() => {
         <el-form-item :label="$t('shared.permissions')" prop="permissions">
           <app-list-group
               :groups="permissionsGroup"
+              :disabled="role.internal && !isRoot"
               type="checkbox"
               v-model:selected="ruleForm.permissions"
           />
@@ -109,6 +111,7 @@ onMounted(() => {
             <span>{{ $t('shared.updated_at_with_date', { date: role.updatedAtText }) }}</span>
           </div>
           <el-button
+              :disabled="role.internal && !isRoot"
               :loading="state.loading"
               @click.prevent="onSubmit(ruleFormRef)"
           > {{ $t('admin.acl.role.update') }} </el-button>
