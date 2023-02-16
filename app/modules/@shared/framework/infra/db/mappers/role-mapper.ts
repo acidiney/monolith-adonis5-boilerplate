@@ -42,7 +42,7 @@ export class RoleMapper implements Mapper<RoleEntity, RoleModel> {
 
     roleModel.name = roleEntity.name
     roleModel.description = roleEntity.description
-    roleModel.isSystem = false
+    roleModel.isSystem = roleEntity.isInternal
     roleModel.createdByUser = roleEntity.user?.toString()
     roleModel.deletedAt = this.dateAdapter.toDatePersistence(roleEntity.deletedAt)
 
