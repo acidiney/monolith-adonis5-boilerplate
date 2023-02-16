@@ -30,8 +30,11 @@ export class UpdateRoleUseCaseImpl implements UpdateRoleUseCase {
       },
     }
 
-    roleEntity.changeDescription(input.description)
-    roleEntity.changeName(input.name)
+    if (!roleEntity.isInternal) {
+      roleEntity.changeDescription(input.description)
+      roleEntity.changeName(input.name)
+    }
+
     roleEntity.updatePermissions(input.permissions.map(p => new UniqueEntityID(p)))
 
     const validation = roleEntity.validate()
