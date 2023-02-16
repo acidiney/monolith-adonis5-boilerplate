@@ -12,6 +12,10 @@ export default class extends BaseSchema {
         .unique()
 
       table
+        .enum('type', ['email', 'plataform'])
+        .index()
+
+      table
         .string('notification_id')
         .notNullable()
         .references('id')
@@ -24,6 +28,8 @@ export default class extends BaseSchema {
         .references('id')
         .inTable('core_users')
         .onDelete('CASCADE')
+
+      table.unique(['type', 'notification_id', 'user_id'])
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
