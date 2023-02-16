@@ -14,7 +14,8 @@ export interface ControllerMetaData {
 export class CaptureErrorDecorator implements Controller<HttpContextContract> {
   constructor (
     private readonly controller: Controller<HttpContextContract>,
-    private readonly meta: ControllerMetaData
+    private readonly meta: ControllerMetaData,
+    private readonly redirectBack: boolean = true
   ) {}
 
   public async perform (input: HttpContextContract): Promise<any> {
@@ -38,13 +39,19 @@ export class CaptureErrorDecorator implements Controller<HttpContextContract> {
         Logger.error(e)
       }
 
-      input.session
-        .flash('alertGlobal', {
-          success: false,
-          message: input.i18n.formatMessage('shared.errors.internal_server_error'),
-        })
+      if (this.redirectBack) {
+        input.session
+          .flash('alertGlobal', {
+            success: false,
+            message: input.i18n.formatMessage('shared.errors.internal_server_error'),
+          })
 
-      return input.response.redirect().back()
+        return input.response.redirect().back()
+      }
+
+      return input.response.abort({
+        message: input.i18n.formatMessage('shared.errors.internal_server_error'),
+      }, 500)
     } finally {
       transaction.finish()
     }

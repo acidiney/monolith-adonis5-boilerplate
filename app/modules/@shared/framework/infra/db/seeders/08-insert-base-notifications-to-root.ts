@@ -17,7 +17,7 @@ export default class InsertBaseNotifications extends BaseSeeder {
       id: new UniqueEntityID().toString(),
       notification_id: n,
       user_id: rootUser.id,
-      type: 'plataform',
+      type: 'platform',
     }))
 
     await Database

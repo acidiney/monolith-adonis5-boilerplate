@@ -6,6 +6,7 @@ import { computed } from "vue";
 const props = defineProps<{
   groups: AccordionChild[]
   selected: string[]
+  disabled: boolean
 }>()
 const emit = defineEmits(['update:selected'])
 
@@ -29,7 +30,7 @@ const model = computed({
         <div class="flex"></div>
         <span>
           <label class="ui-switch ui-switch-md ui-switch-disabled">
-            <input type="checkbox" name="option" :value="child.id" v-model="model" />
+            <input :disabled="disabled" type="checkbox" name="option" :value="child.id" v-model="model" />
             <i></i>
           </label>
         </span>

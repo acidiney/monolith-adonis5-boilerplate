@@ -12,7 +12,7 @@ export default class extends BaseSchema {
         .unique()
 
       table
-        .enum('type', ['email', 'plataform'])
+        .enum('type', ['email', 'platform'])
         .index()
 
       table
