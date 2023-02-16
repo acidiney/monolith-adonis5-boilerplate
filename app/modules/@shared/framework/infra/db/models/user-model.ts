@@ -74,7 +74,7 @@ export class UserModel extends BaseModel {
     relatedKey: 'id',
     pivotRelatedForeignKey: 'notification_id',
   })
-  public users: ManyToMany<typeof NotificationModel>
+  public notifications: ManyToMany<typeof NotificationModel>
 
   @computed()
   public get fullName () {

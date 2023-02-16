@@ -3,7 +3,7 @@ import {computed, onMounted} from "vue"
 import { usePage } from "@inertiajs/vue3"
 
 import {apiService} from "./services/api"
-import AppListGroup from "@core/components/app-list-group.vue"
+import AppAccordion from "@core/components/app-accordion.vue";
 
 import { useRoleForm } from './composable/use-role-form'
 
@@ -97,7 +97,7 @@ onMounted(() => {
         </el-form-item>
 
         <el-form-item :label="$t('shared.permissions')" prop="permissions">
-          <app-list-group
+          <app-accordion
               :groups="permissionsGroup"
               :disabled="role.internal && !isRoot"
               type="checkbox"

@@ -1,5 +1,18 @@
 <script setup>
-import { router } from "@inertiajs/vue3";
+import { computed } from "vue";
+import { router, usePage } from "@inertiajs/vue3";
+import AppListGroup from "@core/components/app-list-group.vue";
+
+const props = computed(() => ({
+  activeNotifications: usePage().props.activeNotifications,
+  notifications: usePage().props.notifications
+}))
+
+const selectedNotifications = (notifications, type) => {
+  return notifications
+    .filter((n) => n.type === type)
+    .map((n) => n.id)
+}
 
 const useLogout = () => {
   router.post("/auth/logout");
@@ -8,10 +21,7 @@ const useLogout = () => {
 <template>
   <account-layout :title="$t('menu.settings')">
     <template v-slot:header>
-      <app-page-hero
-        :title="$t('menu.settings')"
-        :sub-title="$t('menu.settings.subtitle')"
-      />
+      <app-page-hero :title="$t('menu.settings')" :sub-title="$t('menu.settings.subtitle')" />
     </template>
     <template v-slot:body>
       <div id="accordion">
@@ -19,18 +29,11 @@ const useLogout = () => {
           <strong>{{ $t('shared.account') }}</strong>
         </p>
         <div class="card">
-          <div
-            class="d-flex align-items-center px-4 py-3 pointer"
-            data-toggle="collapse"
-            data-parent="#accordion"
-            data-target="#c_1"
-          >
+          <div class="d-flex align-items-center px-4 py-3 pointer" data-toggle="collapse" data-parent="#accordion"
+            data-target="#c_1">
             <div>
-              <span
-                class="w-48 avatar circle bg-info-lt"
-                data-toggle-class="loading"
-              >
-                <!-- <img src="/user-m.png" alt="." /> -->
+              <span class="w-48 avatar circle bg-info-lt" data-toggle-class="loading">
+                <img :src="$page.props.user.avatar" :alt="$page.props.user.fullName" />
               </span>
             </div>
             <div class="mx-3 d-none d-md-block">
@@ -42,7 +45,7 @@ const useLogout = () => {
               <i data-feather="chevron-right"></i>
             </div>
             <div>
-              <a @click="useLogout" class="text-prmary text-sm">{{ $t('shared.logout')}}</a>
+              <a @click="useLogout" class="text-prmary text-sm">{{ $t('shared.logout') }}</a>
             </div>
           </div>
           <div class="collapse p-4" id="c_1">
@@ -50,43 +53,25 @@ const useLogout = () => {
               <div class="form-group">
                 <label>{{ $t('shared.profile.picture') }}</label>
                 <div class="custom-file">
-                  <input
-                    type="file"
-                    class="custom-file-input"
-                    id="customFile"
-                  />
-                  <label class="custom-file-label" for="customFile"
-                    >{{ $t('shared.picture.choose') }}</label
-                  >
+                  <input type="file" class="custom-file-input" id="customFile" />
+                  <label class="custom-file-label" for="customFile">{{ $t('shared.picture.choose') }}</label>
                 </div>
               </div>
               <div class="form-group">
                 <label>{{ $t('shared.user.firsname') }}</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  :value="$page.props.user.first_name"
-                />
+                <input type="text" class="form-control" :value="$page.props.user.first_name" />
               </div>
               <div class="form-group">
                 <label>{{ $t('shared.user.lastname') }}</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  :value="$page.props.user.last_name"
-                />
+                <input type="text" class="form-control" :value="$page.props.user.last_name" />
               </div>
               <button type="submit" class="btn btn-primary mt-2">
                 {{ $t('shared.update') }}
               </button>
             </form>
           </div>
-          <div
-            class="d-flex align-items-center px-4 py-3 b-t pointer"
-            data-toggle="collapse"
-            data-parent="#accordion"
-            data-target="#c_2"
-          >
+          <div class="d-flex align-items-center px-4 py-3 b-t pointer" data-toggle="collapse" data-parent="#accordion"
+            data-target="#c_2">
             <i data-feather="lock"></i>
             <div class="px-3">
               <div>{{ $t('shared.password') }}</div>
@@ -115,195 +100,25 @@ const useLogout = () => {
           </div>
 
         </div>
+
+        <!-- NOTIFICATION BY PLATAFORM -->
         <p class="text-muted">
           <strong>{{ $t('shared.notifications') }}</strong>
         </p>
-        <div class="card">
-          <div class="d-flex align-items-center px-4 py-3">
-            <div>{{ $t('notifications.new.submissions') }}</div>
-            <div class="flex"></div>
-            <span>
-              <label class="ui-switch ui-switch-md">
-                <input type="checkbox" />
-                <i></i>
-              </label>
-            </span>
-          </div>
-          <div class="d-flex align-items-center px-4 py-3 b-t">
-            <div>{{ $t('notifications.submission.window.expired') }}</div>
-            <div class="flex"></div>
-            <span>
-              <label class="ui-switch ui-switch-md">
-                <input type="checkbox" />
-                <i></i>
-              </label>
-            </span>
-          </div>
-          <div class="d-flex align-items-center px-4 py-3 b-t">
-            <div>{{ $t('notifications.submission.window.will.expire') }}</div>
-            <div class="flex"></div>
-            <span>
-              <label class="ui-switch ui-switch-md">
-                <input type="checkbox" />
-                <i></i>
-              </label>
-            </span>
-          </div>
-          <div class="d-flex align-items-center px-4 py-3 b-t">
-            <div>{{ $t('notifications.organism.transfered') }}</div>
-            <div class="flex"></div>
-            <span>
-              <label class="ui-switch ui-switch-md">
-                <input type="checkbox" />
-                <i></i>
-              </label>
-            </span>
-          </div>
-          <div class="d-flex align-items-center px-4 py-3 b-t">
-            <div>{{ $t('notifications.new.message') }}</div>
-            <div class="flex"></div>
-            <span>
-              <label class="ui-switch ui-switch-md">
-                <input type="checkbox" />
-                <i></i>
-              </label>
-            </span>
-          </div>
-          <div class="d-flex align-items-center px-4 py-3 b-t">
-            <div>{{ $t('notifications.template.published') }}</div>
-            <div class="flex"></div>
-            <span>
-              <label class="ui-switch ui-switch-md">
-                <input type="checkbox" />
-                <i></i>
-              </label>
-            </span>
-          </div>
-          <div class="d-flex align-items-center px-4 py-3 b-t">
-            <div>{{ $t('notifications.submission.validated') }}</div>
-            <div class="flex"></div>
-            <span>
-              <label class="ui-switch ui-switch-md">
-                <input type="checkbox" />
-                <i></i>
-              </label>
-            </span>
-          </div>
-          <div class="d-flex align-items-center px-4 py-3 b-t">
-            <div>{{ $t('notifications.new.login') }}</div>
-            <div class="flex"></div>
-            <span>
-              <label class="ui-switch ui-switch-md">
-                <input type="checkbox" checked />
-                <i></i>
-              </label>
-            </span>
-          </div>
-          <div class="d-flex align-items-center px-4 py-3 b-t">
-            <div>{{ $t('notifications.user.updated') }}</div>
-            <div class="flex"></div>
-            <span>
-              <label class="ui-switch ui-switch-md">
-                <input type="checkbox" checked />
-                <i></i>
-              </label>
-            </span>
-          </div>
-        </div>
+        <app-list-group
+          :selected="selectedNotifications(props.activeNotifications, 'plataform')"
+          :groups="props.notifications"
+        />
+
+        <!-- NOTIFICATION BY E-MAIL -->
         <p class="text-muted">
           <strong>{{ $t('shared.notifications.email') }}</strong>
         </p>
-        <div class="d-flex align-items-center px-4 py-3">
-            <div>{{ $t('notifications.new.submissions') }}</div>
-            <div class="flex"></div>
-            <span>
-              <label class="ui-switch ui-switch-md">
-                <input type="checkbox" />
-                <i></i>
-              </label>
-            </span>
-          </div>
-          <div class="d-flex align-items-center px-4 py-3 b-t">
-            <div>{{ $t('notifications.submission.window.expired') }}</div>
-            <div class="flex"></div>
-            <span>
-              <label class="ui-switch ui-switch-md">
-                <input type="checkbox" />
-                <i></i>
-              </label>
-            </span>
-          </div>
-          <div class="d-flex align-items-center px-4 py-3 b-t">
-            <div>{{ $t('notifications.submission.window.will.expire') }}</div>
-            <div class="flex"></div>
-            <span>
-              <label class="ui-switch ui-switch-md">
-                <input type="checkbox" />
-                <i></i>
-              </label>
-            </span>
-          </div>
-          <div class="d-flex align-items-center px-4 py-3 b-t">
-            <div>{{ $t('notifications.organism.transfered') }}</div>
-            <div class="flex"></div>
-            <span>
-              <label class="ui-switch ui-switch-md">
-                <input type="checkbox" />
-                <i></i>
-              </label>
-            </span>
-          </div>
-          <div class="d-flex align-items-center px-4 py-3 b-t">
-            <div>{{ $t('notifications.new.message') }}</div>
-            <div class="flex"></div>
-            <span>
-              <label class="ui-switch ui-switch-md">
-                <input type="checkbox" />
-                <i></i>
-              </label>
-            </span>
-          </div>
-          <div class="d-flex align-items-center px-4 py-3 b-t">
-            <div>{{ $t('notifications.template.published') }}</div>
-            <div class="flex"></div>
-            <span>
-              <label class="ui-switch ui-switch-md">
-                <input type="checkbox" />
-                <i></i>
-              </label>
-            </span>
-          </div>
-          <div class="d-flex align-items-center px-4 py-3 b-t">
-            <div>{{ $t('notifications.submission.validated') }}</div>
-            <div class="flex"></div>
-            <span>
-              <label class="ui-switch ui-switch-md">
-                <input type="checkbox" />
-                <i></i>
-              </label>
-            </span>
-          </div>
-          <div class="d-flex align-items-center px-4 py-3 b-t">
-            <div>{{ $t('notifications.new.login') }}</div>
-            <div class="flex"></div>
-            <span>
-              <label class="ui-switch ui-switch-md">
-                <input type="checkbox" checked />
-                <i></i>
-              </label>
-            </span>
-          </div>
-          <div class="d-flex align-items-center px-4 py-3 b-t">
-            <div>{{ $t('notifications.user.updated') }}</div>
-            <div class="flex"></div>
-            <span>
-              <label class="ui-switch ui-switch-md">
-                <input type="checkbox" checked />
-                <i></i>
-              </label>
-            </span>
-          </div>
+        <app-list-group
+          :selected="selectedNotifications(props.activeNotifications, 'email')"
+          :groups="props.notifications"
+        />
       </div>
     </template>
-  </account-layout>
+</account-layout>
 </template>
