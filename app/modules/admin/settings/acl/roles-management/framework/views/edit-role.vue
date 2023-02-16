@@ -44,7 +44,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <account-layout :title="$t('menu.admin.setting.acl.roles.new_role')">
+  <account-layout :title="$t('menu.admin.setting.acl.roles.edit_role')">
     <template v-slot:header>
       <app-page-hero
         :title="$t('menu.admin.setting.acl.roles.edit_role')"
