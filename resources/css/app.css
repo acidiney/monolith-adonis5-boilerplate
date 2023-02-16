@@ -24,6 +24,14 @@
   color: #fff !important;
 }
 
+.bg-dark .el-dialog {
+  background: #1c233f !important;
+}
+
+.bg-dark .el-dialog .el-form-item__label, .bg-dark .el-dialog .el-dialog__title {
+  color: #b9c0d3 !important;
+}
+
 .bg-dark .el-form-item__label {
   color: unset !important;
 }
