@@ -29,9 +29,12 @@ export class DeleteRoleController implements Controller<HttpContextContract> {
 
     const userId = auth.user.id
 
+    await auth.user.load('role')
+
     const output = await this.deleteRoleUseCase.perform({
       roleId: validation.roleId,
       userId,
+      isRoot: auth.user.role.isRoot ?? false,
     })
 
     if (output.isLeft()) {

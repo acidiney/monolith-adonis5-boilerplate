@@ -29,7 +29,10 @@ const redirectTo = (url, params) => {
   router.get(url, params)
 }
 
-const handleDeleteRole = (roleSlug) => {
+const handleDeleteRole = (roleSlug, isInternal) => {
+
+  if (isInternal && !isRoot.value) return
+
   apiService.deleteRole(roleSlug)
 }
 
@@ -149,7 +152,7 @@ onMounted(() => {
                     <el-popconfirm
                         :width="250"
                         :disabled="scope.row.isInternal"
-                        @confirm="handleDeleteRole(scope.row.slug)"
+                        @confirm="handleDeleteRole(scope.row.slug, scope.row.isInternal)"
                         confirm-button-type="danger"
                         :confirm-button-text="$t('shared.ok_proceed')"
                         :cancel-button-text="$t('shared.no_thanks')"

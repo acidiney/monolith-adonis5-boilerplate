@@ -1,5 +1,6 @@
 import {Either, IEventDispatcher, left, right, UniqueEntityID} from 'app/core/domain'
 import {
+  NonRootCannotModifyError,
   RoleHaveAssociatedUsersError,
   RoleNotFoundError,
 } from 'app/modules/admin/settings/acl/roles-management/domain/errors'
@@ -21,11 +22,15 @@ export class DeleteRoleUseCaseImpl implements DeleteRoleUseCase {
   }
 
   public async perform (input: DeleteRoleUseCaseInput):
-  Promise<Either<RoleNotFoundError | RoleHaveAssociatedUsersError, boolean>> {
+  Promise<Either<RoleNotFoundError | RoleHaveAssociatedUsersError | NonRootCannotModifyError, boolean>> {
     const roleEntity = await this.findRoleBySlugRepository.find(input.roleId)
 
     if (!roleEntity) {
       return left(new RoleNotFoundError())
+    }
+
+    if (roleEntity.isInternal && !input.isRoot) {
+      return left(new NonRootCannotModifyError())
     }
 
     const associatedUsers = await this.findAssociatedUsersRepository.findAssociatedUsers(roleEntity.id)

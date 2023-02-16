@@ -1,7 +1,7 @@
 import { Either, IEventDispatcher, left, right, UniqueEntityID } from 'app/core/domain'
 import { TransactionAdapter } from 'app/core/ports'
 import { UpdateRoleUseCase, UpdateRoleUseCaseInput } from '../../domain'
-import { RoleNotFoundError } from '../../domain/errors'
+import { NonRootCannotModifyError, RoleNotFoundError } from '../../domain/errors'
 import { RoleUpdatedEvent, RoleUpdatedProps } from '../../domain/events'
 import { FindRoleBySlugRepository, UpdateRoleWithTransactionRepository } from './ports'
 
@@ -13,11 +13,16 @@ export class UpdateRoleUseCaseImpl implements UpdateRoleUseCase {
     private readonly eventDispatcher: IEventDispatcher
   ) { }
 
-  public async perform (input: UpdateRoleUseCaseInput): Promise<Either<RoleNotFoundError, boolean>> {
+  public async perform (input: UpdateRoleUseCaseInput):
+  Promise<Either<RoleNotFoundError | NonRootCannotModifyError, boolean>> {
     const roleEntity = await this.findRoleBySlugRepository.find(input.roleSlug)
 
     if (!roleEntity) {
       return left(new RoleNotFoundError())
+    }
+
+    if (roleEntity.isInternal && !input.isRoot) {
+      return left(new NonRootCannotModifyError())
     }
 
     const roleEventProps: RoleUpdatedProps = {
