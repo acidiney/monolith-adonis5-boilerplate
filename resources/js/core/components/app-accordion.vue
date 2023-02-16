@@ -1,4 +1,4 @@
-<script setup lang="ts" id="app-list-group">
+<script setup lang="ts" id="app-accordion">
 import 'vue-i18n'
 import { AccordionGroup } from "../interfaces/accordion-interface";
 import { computed } from "vue";
