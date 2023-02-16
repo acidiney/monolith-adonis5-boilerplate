@@ -1,11 +1,13 @@
 import { cuid } from '@ioc:Adonis/Core/Helpers'
 import Hash from '@ioc:Adonis/Core/Hash'
-import {BaseModel, BelongsTo, beforeSave, belongsTo, column, computed, HasOne, hasOne} from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, beforeSave, belongsTo, column, computed, HasOne, hasOne, ManyToMany, manyToMany }
+  from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import { RoleModel } from './role-model'
 import { StatusModel } from './status-model-model'
 import {slugify} from '@ioc:Adonis/Addons/LucidSlugify'
 import {StatusType} from 'app/modules/@shared/domain/types'
+import { NotificationModel } from './notification-model'
 
 export class UserModel extends BaseModel {
   public static table = 'core_users'
@@ -64,6 +66,15 @@ export class UserModel extends BaseModel {
     foreignKey: 'roleId',
   })
   public role: BelongsTo<typeof RoleModel>
+
+  @manyToMany(() => NotificationModel, {
+    pivotTable: 'core_notifications_users',
+    localKey: 'id',
+    pivotForeignKey: 'user_id',
+    relatedKey: 'id',
+    pivotRelatedForeignKey: 'notification_id',
+  })
+  public users: ManyToMany<typeof NotificationModel>
 
   @computed()
   public get fullName () {
