@@ -1,7 +1,7 @@
 <template>
   <li class="nav-item dropdown">
-    <a class="nav-link px-2 mr-lg-2" data-toggle="dropdown">
-      <i data-feather="bell"></i>
+    <a class="nav-link px-2 pt-3 mr-lg-2" data-toggle="dropdown">
+      <app-icon icon="bell" :size="18" />
       <span class="badge badge-pill badge-up bg-primary">1</span>
     </a>
     <!-- dropdown -->
