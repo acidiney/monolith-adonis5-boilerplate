@@ -4,25 +4,30 @@ import { useI18n } from 'vue-i18n'
 import { router } from "@inertiajs/vue3";
 
 import AuthLayout from "./layouts/authentication.vue";
+import { usePasswordValidator } from '@core/composables/password-validator'
 
 const props = defineProps({
   token: String
 });
 
 const isLoading = ref(false);
-const showPassword = ref(false);
+
 
 const { t } = useI18n()
 
 const ruleFormRef = ref()
 
+
 const ruleForm = reactive({
   password: '',
   confirmPassword: '',
 })
+
+const { newPasswordValidator, confirmPasswordValidator } = usePasswordValidator(ruleForm, ruleFormRef)
+
 const rules = reactive({
-  password: [{ validator: validatePass, trigger: 'blur'}, { min: 8, message: t('auth.validation.password.minLength'), trigger: 'blur'}],
-  confirmPassword: [{ validator: validatePass2, trigger: 'blur' }],
+  password: [{ validator: newPasswordValidator, trigger: 'blur'}, { min: 8, message: t('auth.validation.password.minLength'), trigger: 'blur'}],
+  confirmPassword: [{ validator: confirmPasswordValidator, trigger: 'blur' }],
 })
 
 async function onSubmit(form) {
@@ -44,27 +49,7 @@ async function onSubmit(form) {
     });
   })
 }
-const validatePass = (rule, value, callback) => {
-  if (value === '') {
-    callback(new Error(t('auth.validation.password.required')))
-  } else {
-    if (ruleForm.confirmPassword !== '') {
-      if (!ruleFormRef.value) return
-      ruleFormRef.value.validateField('confirmPassword', () => null)
-    }
-    // t('auth.validation.password.minLength')
-    callback()
-  }
-}
-const validatePass2 = (rule, value, callback) => {
-  if (value === '') {
-    callback(new Error(t('auth.validation.password.required')))
-  } else if (value !== ruleForm.password) {
-    callback(new Error(t('auth.validation.password.mismatch')))
-  } else {
-    callback()
-  }
-}
+
 </script>
 
 <template>

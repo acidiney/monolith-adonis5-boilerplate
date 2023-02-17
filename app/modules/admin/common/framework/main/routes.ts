@@ -4,6 +4,7 @@ import { makeShowSettingsPageControllerFactory } from './factories/make-show-set
 import {
   makeUpdateUserNotificationsController,
 } from 'app/modules/admin/common/framework/main/factories/make-update-user-notifications-controller'
+import { makeUpdatePasswordControllerFactory } from './factories/make-update-password-controller-factory'
 
 Route.group(() => {
   Route.get('/', ({ response }) => {
@@ -16,6 +17,11 @@ Route.group(() => {
   Route.get('/settings', routeAdapter(makeShowSettingsPageControllerFactory(), {
     operation: 'account-view-settings-page',
     description: 'View Account Setting Page',
+  }))
+
+  Route.put('/settings/password', routeAdapter(makeUpdatePasswordControllerFactory(), {
+    operation: 'update-my-password',
+    description: 'Update my password',
   }))
 })
   .prefix('account')

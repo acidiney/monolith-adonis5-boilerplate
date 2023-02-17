@@ -1,4 +1,4 @@
-export * from './user-not-found-error'
+export * from '../../../@shared/domain/errors/user-not-found-error'
 export {
   PasswordMismatchError,
 } from '../../../@shared/domain/errors'

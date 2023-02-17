@@ -14,7 +14,7 @@ import {
   TokenTypes,
 } from '../../domain'
 import {makeFindUserIdRepositoryStub} from 'app/modules/auth/__test__'
-import {PasswordChangedEvent} from 'app/modules/auth/domain/events/password-changed-event'
+import {PasswordChangedEvent} from 'app/modules/@shared/domain/events/password-changed-event'
 
 interface SutTypes {
   sut: ResetPasswordUseCase,

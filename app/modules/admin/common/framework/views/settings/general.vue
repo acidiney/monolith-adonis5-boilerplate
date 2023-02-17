@@ -4,17 +4,24 @@ import { router, usePage } from "@inertiajs/vue3";
 import { ElNotification } from 'element-plus'
 import { useI18n } from 'vue-i18n'
 import AppListGroup from "@core/components/app-list-group.vue";
+import AppUpdatePassword from './components/app-update-password-component.vue'
 
 import { apiService } from "../services/api";
 
 const props = computed(() => ({
   activeNotifications: usePage().props.activeNotifications,
-  notifications: usePage().props.notifications
+  notifications: usePage().props.notifications,
+  alert: usePage().props.alert
 }))
 
 const state = reactive({
   loading: null,
-  activeNotifications: props.value.activeNotifications
+  activeNotifications: props.value.activeNotifications,
+  changePassword: {
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: ''
+  }
 })
 
 const selectedNotifications = (notifications, type) => {
@@ -69,6 +76,20 @@ const useLogout = () => {
       <app-page-hero :title="$t('menu.settings')" :sub-title="$t('menu.settings.subtitle')" />
     </template>
     <template v-slot:body>
+      <p
+          v-if="props.alert"
+          :class="[
+            'alert',
+            {
+              'alert-success': props.alert.success
+            },
+            {
+              'alert-danger': !props.alert.success
+            }
+        ]">
+        {{ props.alert.message }}
+      </p>
+
       <div id="accordion">
         <p class="text-muted">
           <strong>{{ $t('shared.account') }}</strong>
@@ -115,35 +136,8 @@ const useLogout = () => {
               </button>
             </form>
           </div>
-          <div class="d-flex align-items-center px-4 py-3 b-t pointer" data-toggle="collapse" data-parent="#accordion"
-            data-target="#c_2">
-            <i data-feather="lock"></i>
-            <div class="px-3">
-              <div>{{ $t('shared.password') }}</div>
-            </div>
-            <div class="flex"></div>
-            <div>
-              <i data-feather="chevron-right"></i>
-            </div>
-          </div>
-          <div class="collapse p-4" id="c_2">
-            <form role="form">
-              <div class="form-group">
-                <label>{{ $t('shared.old.password') }}</label>
-                <input type="password" class="form-control" />
-              </div>
-              <div class="form-group">
-                <label>{{ $t('shared.new.password') }}</label>
-                <input type="password" class="form-control" />
-              </div>
-              <div class="form-group">
-                <label>{{ $t('shared.confirm.new.password') }}</label>
-                <input type="password" class="form-control" />
-              </div>
-              <button type="submit" class="btn btn-primary mt-2">{{ $t('shared.update') }}</button>
-            </form>
-          </div>
-
+          
+          <app-update-password />
         </div>
 
         <!-- NOTIFICATION BY PLATAFORM -->

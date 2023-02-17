@@ -1,9 +1,9 @@
 import {Controller} from 'app/core/ports'
 import {HttpContextContract} from '@ioc:Adonis/Core/HttpContext'
-import {
-  UpdateUserNotificationsValidator,
-} from 'app/modules/admin/common/framework/main/validators/update-user-notifications-validator'
 import {UpdateUserNotificationsUseCase} from 'app/modules/admin/common/domain'
+
+import {UpdateUserNotificationsValidator}
+  from 'app/modules/admin/common/framework/main/validators/update-user-notifications-validator'
 
 export class UpdateUserNotificationsController implements Controller<HttpContextContract> {
   constructor (

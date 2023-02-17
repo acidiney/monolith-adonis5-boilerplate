@@ -5,9 +5,8 @@ import {Either, Entity, left, Options, right, UniqueEntityID} from 'app/core/dom
 import {Email} from 'app/modules/@shared/domain/value-objects/email'
 
 interface UserProps {
-  firstName: string,
-
   avatar?: string
+  firstName: string,
   lastName: string,
   email: Email
   password: string
@@ -71,6 +70,10 @@ export class UserEntity extends Entity<UserProps> {
 
   public userLogged (loggedAt: Date): void {
     this.props.lastLoginAt = loggedAt
+  }
+
+  public changeAvatar (avatar: string): void {
+    this.props.avatar = avatar
   }
 
   private validate (): Either<

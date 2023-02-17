@@ -11,7 +11,7 @@ import {
   TokenRevokedError, UserNotFoundError,
 } from 'app/modules/auth/domain/errors'
 import {TokenEntity} from 'app/modules/auth/domain'
-import {PasswordChangedEvent} from 'app/modules/auth/domain/events/password-changed-event'
+import {PasswordChangedEvent} from 'app/modules/@shared/domain/events/password-changed-event'
 import {TokenRevokedEvent} from 'app/modules/auth/domain/events/token-revoked-event'
 
 export class ResetPasswordUseCaseImpl implements ResetPasswordUseCase {
