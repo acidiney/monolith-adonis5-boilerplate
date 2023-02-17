@@ -1,6 +1,9 @@
 import Route from '@ioc:Adonis/Core/Route'
 import { routeAdapter } from 'app/core/adapters/route-adapter'
 import { makeShowSettingsPageControllerFactory } from './factories/make-show-settings-page-controller-factory'
+import {
+  makeUpdateUserNotificationsController,
+} from 'app/modules/admin/common/framework/main/factories/make-update-user-notifications-controller'
 
 Route.group(() => {
   Route.get('/', ({ response }) => {
@@ -16,4 +19,13 @@ Route.group(() => {
   }))
 })
   .prefix('account')
+  .middleware(['auth'])
+
+Route.group(() => {
+  Route.put('/notifications', routeAdapter(makeUpdateUserNotificationsController(), {
+    operation: 'update-user-notifications',
+    description: '[Api] Update User Notifications',
+  }, false))
+})
+  .prefix('api/account')
   .middleware(['auth'])

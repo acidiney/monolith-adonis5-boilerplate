@@ -8,7 +8,7 @@ export class NotificationMapper implements Mapper<NotificationEntity, Notificati
       name: notificationModel.notificationKey,
     })
   }
-  public toPersistence (notificationEntity: NotificationEntity): NotificationModel | Promise<NotificationModel> {
+  public toPersistence (_notificationEntity: NotificationEntity): NotificationModel | Promise<NotificationModel> {
     throw new Error('(toPersistence) Method not implemented.')
   }
 }

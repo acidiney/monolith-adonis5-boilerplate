@@ -17,7 +17,7 @@ Route.group(() => {
   Route.post('/user', routeAdapter(makeCreateUserFactory(), {
     operation: 'admin-acl-create-user',
     description: '[AdminRoute] Create a user',
-  }))
+  }, false))
     .middleware('can:admin-acl-create-user')
 })
   .prefix('/account/admin/settings/acl')

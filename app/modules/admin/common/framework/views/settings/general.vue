@@ -1,17 +1,62 @@
 <script setup>
-import { computed } from "vue";
+import {computed, reactive} from "vue";
 import { router, usePage } from "@inertiajs/vue3";
+import { ElNotification } from 'element-plus'
+import { useI18n } from 'vue-i18n'
 import AppListGroup from "@core/components/app-list-group.vue";
+
+import { apiService } from "../services/api";
 
 const props = computed(() => ({
   activeNotifications: usePage().props.activeNotifications,
   notifications: usePage().props.notifications
 }))
 
+const state = reactive({
+  loading: null,
+  activeNotifications: props.value.activeNotifications
+})
+
 const selectedNotifications = (notifications, type) => {
   return notifications
     .filter((n) => n.type === type)
     .map((n) => n.id)
+}
+
+const { t } = useI18n()
+const handleSelect = async (notificationId, type) => {
+
+  if (state.loading) return
+
+  state.loading = notificationId
+
+  await apiService.updateNotifications({ notificationId, type })
+      .then(({ data }) => {
+        ElNotification({
+          title: t('shared.success'),
+          message: t(data.message),
+          type: 'success',
+        })
+
+        state.activeNotifications = state.activeNotifications.filter((n) => n.type !== type)
+        state.activeNotifications = [
+            ...state.activeNotifications,
+            ...notificationId.map((p) => ({
+                id: p,
+                type
+              }))
+        ]
+      })
+      .catch(({ response }) => {
+        ElNotification({
+          title: t('shared.error'),
+          message: t(response.data.message),
+          type: 'error',
+        })
+      })
+      .finally(() => {
+        state.loading = null
+      })
 }
 
 const useLogout = () => {
@@ -45,7 +90,7 @@ const useLogout = () => {
               <i data-feather="chevron-right"></i>
             </div>
             <div>
-              <a @click="useLogout" class="text-prmary text-sm">{{ $t('shared.logout') }}</a>
+              <a @click="useLogout" class="text-primary text-sm">{{ $t('shared.logout') }}</a>
             </div>
           </div>
           <div class="collapse p-4" id="c_1">
@@ -58,7 +103,7 @@ const useLogout = () => {
                 </div>
               </div>
               <div class="form-group">
-                <label>{{ $t('shared.user.firsname') }}</label>
+                <label>{{ $t('shared.user.firstname') }}</label>
                 <input type="text" class="form-control" :value="$page.props.user.first_name" />
               </div>
               <div class="form-group">
@@ -106,8 +151,10 @@ const useLogout = () => {
           <strong>{{ $t('shared.notifications') }}</strong>
         </p>
         <app-list-group
-          :selected="selectedNotifications(props.activeNotifications, 'plataform')"
+          :selected="selectedNotifications(state.activeNotifications, 'platform')"
           :groups="props.notifications"
+          :disabled="!!state.loading"
+          @update:selected="(n) => handleSelect(n, 'platform')"
         />
 
         <!-- NOTIFICATION BY E-MAIL -->
@@ -115,8 +162,10 @@ const useLogout = () => {
           <strong>{{ $t('shared.notifications.email') }}</strong>
         </p>
         <app-list-group
-          :selected="selectedNotifications(props.activeNotifications, 'email')"
+          :selected="selectedNotifications(state.activeNotifications, 'email')"
+          :disabled="!!state.loading"
           :groups="props.notifications"
+          @update:selected="(n) => handleSelect(n, 'email')"
         />
       </div>
     </template>
