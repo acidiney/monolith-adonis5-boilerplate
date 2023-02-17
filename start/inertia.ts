@@ -2,6 +2,7 @@ import { DateTime } from 'luxon'
 
 import Inertia from '@ioc:EidelLev/Inertia'
 import {UserModel} from 'app/modules/@shared/framework/infra/db/models'
+import { DateAdapterImpl } from 'app/modules/@shared/framework/infra/adapters/date-adapter-impl'
 const pkg = require('../package.json')
 
 Inertia.share({
@@ -21,6 +22,8 @@ Inertia.share({
         firstName: user.firstName,
         lastName: user.lastName,
         avatar: user.avatar,
+        lastLoginText: user.lastLoginAt && new DateAdapterImpl().toRelative(user.lastLoginAt.toJSDate()),
+        lastLoginAt:  user.lastLoginAt && new DateAdapterImpl().format(user.lastLoginAt.toJSDate()),
         status: user.status,
         role: {
           isRoot: user.role.isRoot,
