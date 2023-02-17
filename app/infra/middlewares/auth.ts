@@ -31,10 +31,10 @@ export default class AuthMiddleware {
      * it can decide the correct response behavior based upon the guard
      * driver
      */
-    let guardLastAttempted: string | undefined
+    // let guardLastAttempted: string | undefined
 
     for (let guard of guards) {
-      guardLastAttempted = guard
+      // guardLastAttempted = guard
 
       if (await auth.use(guard).check()) {
         /**
