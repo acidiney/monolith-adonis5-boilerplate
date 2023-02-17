@@ -1,4 +1,9 @@
 <script setup>
+import { router } from "@inertiajs/vue3";
+
+const useLogout = () => {
+  router.post("/auth/logout");
+};
 </script>
 <template>
     <div class="d-flex align-items-center px-4 py-3 pointer" data-toggle="collapse" data-parent="#accordion"
@@ -33,11 +38,11 @@
             </div>
             <div class="form-group">
                 <label>{{ $t('shared.user.firstname') }}</label>
-                <input type="text" class="form-control" :value="$page.props.user.first_name" />
+                <input type="text" class="form-control" :value="$page.props.user.firstName" />
             </div>
             <div class="form-group">
                 <label>{{ $t('shared.user.lastname') }}</label>
-                <input type="text" class="form-control" :value="$page.props.user.last_name" />
+                <input type="text" class="form-control" :value="$page.props.user.lastName" />
             </div>
             <button type="submit" class="btn btn-primary mt-2">
                 {{ $t('shared.update') }}

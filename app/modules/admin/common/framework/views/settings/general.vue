@@ -1,6 +1,6 @@
 <script setup>
 import {computed, reactive} from "vue";
-import { router, usePage } from "@inertiajs/vue3";
+import { usePage } from "@inertiajs/vue3";
 import { ElNotification } from 'element-plus'
 import { useI18n } from 'vue-i18n'
 import AppListGroup from "@core/components/app-list-group.vue";
@@ -67,9 +67,7 @@ const handleSelect = async (notificationId, type) => {
       })
 }
 
-const useLogout = () => {
-  router.post("/auth/logout");
-};
+
 </script>
 <template>
   <account-layout :title="$t('menu.settings')">

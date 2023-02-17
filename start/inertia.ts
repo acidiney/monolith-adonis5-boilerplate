@@ -16,6 +16,7 @@ Inertia.share({
 
       return {
         slug: user.slug,
+        email: user.email,
         fullName: user.fullName,
         firstName: user.firstName,
         lastName: user.lastName,
