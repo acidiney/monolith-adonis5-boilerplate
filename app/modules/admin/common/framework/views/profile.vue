@@ -17,7 +17,9 @@ defineProps({
               <div class="p-4">
                 <div class="d-flex">
                   <a href="#">
-                    <el-avatar :src="user.avatar" :size="64" :alt="user.fullName" />
+                    <el-avatar :src="user.avatar" :size="64" @error="() => true">
+                      {{ user.fullName[0] }}
+                    </el-avatar>
                   </a>
                   <div class="mx-3">
                     <h5 class="mt-2">{{ user.fullName }}</h5>
@@ -31,11 +33,11 @@ defineProps({
               <div class="align-items-center d-flex p-4">
                 <div class="toolbar">
                   <!-- <a href="#" class="btn btn-sm btn-icon bg-dark-overlay btn-rounded">
-                    <app-icon class="text-fade" icon="phone" :size="12" />
-                  </a> -->
+                      <app-icon class="text-fade" icon="phone" :size="12" />
+                    </a> -->
                   <!-- <a href="#" class="btn btn-sm btn-icon bg-dark-overlay btn-rounded">
-                    <app-icon class="text-fade" icon="more-vertical" :size="12" />
-                  </a> -->
+                      <app-icon class="text-fade" icon="more-vertical" :size="12" />
+                    </a> -->
                 </div>
               </div>
             </div>
