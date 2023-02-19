@@ -33,7 +33,7 @@ export class UserModel extends BaseModel {
   public email: string
 
   @column({ columnName: 'avatar_url' })
-  public avatar: string
+  public avatar?: string
 
   @column({ columnName: 'role_id' })
   public roleId: string

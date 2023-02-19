@@ -56,6 +56,7 @@ export class UserMapper extends Mapper<UserEntity, UserModel> {
     userModel.password = userEntity.password
     userModel.firstName = userEntity.firstName
     userModel.lastName = userEntity.lastName
+    userModel.avatar = userEntity.avatar
 
     userModel.roleId = userEntity.roleId
 

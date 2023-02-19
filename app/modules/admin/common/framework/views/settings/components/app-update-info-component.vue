@@ -14,7 +14,7 @@ const user = computed(() => usePage().props.user)
 
 
 const updateUserForm = reactive({
-    avatar: user.value.avatar,
+    avatar: null,
     firstName: user.value.firstName,
     lastName: user.value.lastName,
 })
@@ -33,7 +33,12 @@ const onSubmit = async (form) => {
         isLoading.value = true
 
         const formData = new FormData()
-        formData.append('avatar', updateUserForm.avatar)
+
+        formData.append('avatar', null)
+        if (updateUserForm.avatar) {
+            formData.set('avatar', updateUserForm.avatar)
+        }
+
         formData.append('firstName', updateUserForm.firstName)
         formData.append('lastName', updateUserForm.lastName)
 

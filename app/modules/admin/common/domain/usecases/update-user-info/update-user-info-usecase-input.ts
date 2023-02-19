@@ -1,6 +1,6 @@
 export interface UpdateUserInfoUseCaseInput {
   userId: string
-  avatarUrl: string
+  avatarUrl?: string
   firstName: string
   lastName: string
 }

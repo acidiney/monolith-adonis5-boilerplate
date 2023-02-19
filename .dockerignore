@@ -7,6 +7,7 @@ coverage
 .env
 tmp
 
+resources/storage
 # Additional .gitignore ignores (any custom file you wish)
 .idea
 

@@ -28,15 +28,22 @@ export class UpdateUserInfoController implements Controller<HttpContextContract>
       return response.redirect().back()
     }
 
+    const avatar = request.file('avatar', {
+      size: '2mb',
+      extnames: ['jpg', 'png'],
+    })
+
     const userId = auth.user.id
 
-    const avatarUrl = await this.uploadAvatarService.upload(validation.avatar, auth.user.slug)
+    let avatarUrl: string | undefined
 
-    console.log(avatarUrl)
+    if (avatar) {
+      avatarUrl = await this.uploadAvatarService.upload(avatar, auth.user.slug, `profile.${avatar.extname}`)
+    }
 
     const output = await this.updateUserInfoUseCase.perform({
       userId,
-      avatarUrl,
+      avatarUrl: avatarUrl,
       firstName: validation.firstName,
       lastName: validation.lastName,
     })
