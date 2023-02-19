@@ -8,7 +8,7 @@ export interface UserInfoUpdatedProps {
     lastName: string
   },
   new: {
-    avatarUrl: string,
+    avatarUrl?: string,
     firstName: string,
     lastName: string
   }
