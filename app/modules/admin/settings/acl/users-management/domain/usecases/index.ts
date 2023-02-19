@@ -1,2 +1,6 @@
 export * from './list-users'
 export * from './create-user'
+export * from './block-user'
+export * from './unblock-user'
+export * from './delete-user'
+export * from './redefine-password'
