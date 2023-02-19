@@ -1,5 +1,4 @@
 <script setup>
-import { router } from '@inertiajs/vue3'
 import { apiService } from '../../services/api'
 import { ref, reactive } from 'vue'
 import { usePasswordValidator } from '@core/composables/password-validator'

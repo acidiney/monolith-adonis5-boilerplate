@@ -1,1 +1,2 @@
-export * from './upload-avatar-service'
+export * from '../../../../../@shared/usecases/ports/find-user-id-repository'
+export * from '../../../../../@shared/usecases/ports/update-user-repository'

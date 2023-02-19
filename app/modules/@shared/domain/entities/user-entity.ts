@@ -76,7 +76,15 @@ export class UserEntity extends Entity<UserProps> {
     this.props.avatar = avatar
   }
 
-  private validate (): Either<
+  public changeFirstName (firstName: string): void {
+    this.props.firstName = firstName
+  }
+
+  public changeLastName (lastName: string): void {
+    this.props.lastName = lastName
+  }
+
+  public validate (): Either<
     UserEntityError
   , boolean> {
     if (!this.props.firstName || !this.props.firstName.trim().length) {

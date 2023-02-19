@@ -13,5 +13,15 @@ export const apiService = {
                 },
             })
         })
+    },
+    updateUserInfo: async (form) => {
+        return new Promise((resolve) => {
+            return router.put('/account/settings/user/info', form, {
+                headers: { 'Content-Type': 'multipart/form-data' },
+                onFinish: () => {
+                    resolve()
+                },
+            })
+        })
     }
 }

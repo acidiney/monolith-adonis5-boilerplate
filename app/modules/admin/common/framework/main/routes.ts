@@ -5,6 +5,7 @@ import {
   makeUpdateUserNotificationsController,
 } from 'app/modules/admin/common/framework/main/factories/make-update-user-notifications-controller'
 import { makeUpdatePasswordControllerFactory } from './factories/make-update-password-controller-factory'
+import { makeUpdateUserInfoControllerFactory } from './factories/make-update-user-info-controller-factory'
 
 Route.group(() => {
   Route.get('/', ({ response }) => {
@@ -22,6 +23,11 @@ Route.group(() => {
   Route.put('/settings/password', routeAdapter(makeUpdatePasswordControllerFactory(), {
     operation: 'update-my-password',
     description: 'Update my password',
+  }))
+
+  Route.put('/settings/user/info', routeAdapter(makeUpdateUserInfoControllerFactory(), {
+    operation: 'update-user-info',
+    description: 'Update user info',
   }))
 })
   .prefix('account')

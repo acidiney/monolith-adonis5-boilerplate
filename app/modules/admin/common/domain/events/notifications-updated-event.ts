@@ -1,4 +1,4 @@
-import {IDomainEvent, UniqueEntityID} from 'app/core/domain'
+import {DomainEvent, UniqueEntityID} from 'app/core/domain'
 import {NotificationType} from 'app/modules/@shared/domain/types'
 
 interface NotificationUpdatedProps {
@@ -7,18 +7,4 @@ interface NotificationUpdatedProps {
   type: NotificationType
 }
 
-export class NotificationsUpdatedEvent implements IDomainEvent<NotificationUpdatedProps> {
-  public readonly dateTimeOccurred: Date
-  public readonly eventData: NotificationUpdatedProps
-
-  constructor (
-    _eventData: NotificationUpdatedProps
-  ) {
-    this.eventData = _eventData
-    this.dateTimeOccurred = new Date()
-  }
-
-  public eventId (): UniqueEntityID {
-    return new UniqueEntityID()
-  }
-}
+export class NotificationsUpdatedEvent extends DomainEvent<NotificationUpdatedProps> {}
