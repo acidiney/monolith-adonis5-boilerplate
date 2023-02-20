@@ -1,8 +1,8 @@
 import { Either, IEventDispatcher, left, right} from 'app/core/domain'
 import { UserNotFoundError } from 'app/modules/@shared/domain/errors'
-import { UserBlockedEvent } from '../../domain/events/user-blocked-event'
 import { BlockUserUseCase, BlockUserUseCaseInput } from '../../domain'
 import { FindUsernameRepository, UpdateUserRepository } from './ports'
+import { UserRestoredEvent } from '../../domain/events/user-restored-event'
 
 export class BlockUserUseCaseImpl implements BlockUserUseCase{
   constructor (
@@ -22,7 +22,7 @@ export class BlockUserUseCaseImpl implements BlockUserUseCase{
 
     await this.updateUserRepository.update(userEntity)
 
-    this.eventDispatcher.publish(new UserBlockedEvent({
+    this.eventDispatcher.publish(new UserRestoredEvent({
       userId: userEntity.id,
     }))
 

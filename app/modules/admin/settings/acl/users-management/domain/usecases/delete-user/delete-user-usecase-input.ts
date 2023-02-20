@@ -1,4 +1,4 @@
-export interface DeleteUserUseCaseImpl {
-  userId: string,
+export interface DeleteUserUseCaseInput {
+  username: string,
   motivation: string
 }
