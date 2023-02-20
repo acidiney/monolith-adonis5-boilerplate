@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n'
 const statusTheme = {
   approved: "success",
   active: "success",
+  inactive: 'danger',
   canceled: "light",
   pending: "warning",
   wait_human_validation: "warning",
@@ -16,6 +17,7 @@ const { t } = useI18n()
 const fallbackStatusText = {
   approved: t('shared.status.approved'),
   active: t('shared.status.active'),
+  inactive: t('shared.status.inactive'),
   canceled: t('shared.status.canceled'),
   pending: t('shared.status.pending'),
   wait_human_validation: t('shared.status.wait_human_validation'),

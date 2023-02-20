@@ -4,7 +4,7 @@ import {
 import {
   CreateUserUseCaseImpl,
 } from 'app/modules/admin/settings/acl/users-management/usecases/create-user/create-user-usecase-impl'
-import {FindUsernameRepositoryImpl} from 'app/modules/auth/framework/infra/db/repositories'
+import { FindUsernameEmailRepositoryImpl } from 'app/modules/auth/framework/infra/db/repositories'
 import {
   GenerateRandomPasswordServiceImpl,
 } from 'app/modules/admin/settings/acl/users-management/framework/infra/services/generate-random-password-service'
@@ -16,7 +16,7 @@ import {EventDispatcher} from 'app/core/domain'
 export const makeCreateUserFactory = (): CreateUserController => {
   return new CreateUserController(
     new CreateUserUseCaseImpl(
-      new FindUsernameRepositoryImpl(),
+      new FindUsernameEmailRepositoryImpl(),
       new GenerateRandomPasswordServiceImpl(),
       new PersistUserRepositoryImpl(),
       EventDispatcher.getInstance()

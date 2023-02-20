@@ -1,4 +1,4 @@
 export interface DeleteUserUseCaseInput {
   username: string,
-  motivation: string
+  motivation?: string
 }

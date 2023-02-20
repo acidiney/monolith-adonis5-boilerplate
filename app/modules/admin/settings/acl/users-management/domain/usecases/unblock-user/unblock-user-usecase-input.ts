@@ -1,4 +1,4 @@
 export interface UnblockUserUseCaseInput {
-  userId: string
-  motivation: string
+  username: string
+  motivation?: string
 }

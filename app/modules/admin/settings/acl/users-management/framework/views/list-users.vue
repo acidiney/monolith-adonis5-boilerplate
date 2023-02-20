@@ -1,21 +1,46 @@
 <script setup>
 import {computed, ref} from 'vue'
-import { useI18n } from 'vue-i18n'
 import {usePage} from "@inertiajs/vue3"
-
+import { apiService } from './services/api'
 import AppStatus from '@core/components/app-status.vue'
 import AppCreateUserDialog
   from './components/app-create-user-dialog.vue'
 
-
-const { t } = useI18n()
 const dialogVisible = ref(false)
 
 const content = computed(() => usePage().props.content)
+const alert = computed(() => usePage().props.alert)
 const isRoot = computed(() => usePage().props.user.role.isRoot)
 
 const onSortChange = (e) => {
   console.log(e)
+}
+
+const onBlockUser =  async (username) => {
+  await apiService.blockUser({
+    username,
+    motivation: null
+  })
+}
+
+const onUnblockUser =  async (username) => {
+  await apiService.unblockUser({
+    username,
+    motivation: null
+  })
+}
+
+const onDeleteUser =  async (username) => {
+  await apiService.deleteUser({
+    username,
+    motivation: null
+  })
+}
+
+const onRedefineUserPassword =  async (username) => {
+  await apiService.deleteUser({
+    username,
+  })
 }
 
 const errorHandler = () => true
@@ -56,6 +81,20 @@ const errorHandler = () => true
     </template>
 
     <template v-slot:body>
+          <p
+          v-if="alert"
+          :class="[
+            'alert',
+            {
+              'alert-success': alert.success
+            },
+            {
+              'alert-danger': !alert.success
+            }
+        ]">
+        {{ alert.message }}
+      </p>
+
       <el-table
           class="table-theme bg-body"
           header-cell-class-name="bg-body text-muted text-uppercase "
@@ -120,9 +159,12 @@ const errorHandler = () => true
               <template #dropdown>
                 <el-dropdown-menu >
                   <el-dropdown-item>{{ $t('admin.acl.reset_password') }}</el-dropdown-item>
-                  <el-dropdown-item divided>{{ $t('admin.acl.inactivate') }}</el-dropdown-item>
+                  <el-dropdown-item v-if="scope.row.status === 'active'"
+                  @click.prevent="onBlockUser(scope.row.slug)" divided>{{ $t('admin.acl.inactivate') }}</el-dropdown-item>
+                  <el-dropdown-item v-if="scope.row.status === 'inactive'"
+                  @click.prevent="onUnblockUser(scope.row.slug)" divided>{{ $t('admin.acl.activate') }}</el-dropdown-item>
                   <el-dropdown-item :disabled="scope.row.roleSlug === 'root'">{{ $t('admin.acl.impersonate') }}</el-dropdown-item>
-                  <el-dropdown-item class="text-danger" divided>{{ $t('shared.remove') }}</el-dropdown-item>
+                  <el-dropdown-item  @click="onDeleteUser(scope.row.slug)" class="text-danger" divided>{{ $t('shared.remove') }}</el-dropdown-item>
                 </el-dropdown-menu>
               </template>
             </el-dropdown>

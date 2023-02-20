@@ -1,8 +1,8 @@
 import {AuthenticateUserUseCaseImpl} from 'app/modules/auth/usecases'
 
 import {
-  FindUsernameRepositoryImpl,
-} from 'app/modules/@shared/framework/infra/db/repositories/find-username-repository-impl'
+  FindUsernameEmailRepositoryImpl,
+} from 'app/modules/@shared/framework/infra/db'
 import { VerifyPasswordMatchAdapterImpl } from 'app/modules/auth/framework/infra/adapters'
 
 import { SignInController } from '../controllers/sign-in-controller'
@@ -11,7 +11,7 @@ import {EventDispatcher} from 'app/core/domain'
 export const makeSignInController = (): SignInController =>
   new SignInController(
     new AuthenticateUserUseCaseImpl(
-      new FindUsernameRepositoryImpl(),
+      new FindUsernameEmailRepositoryImpl(),
       new VerifyPasswordMatchAdapterImpl(),
       EventDispatcher.getInstance()
     )
