@@ -39,6 +39,7 @@ export const appKey: string = Env.get('APP_KEY')
 |
 */
 export const http: ServerConfig = {
+  useAsyncLocalStorage: true,
   /*
   |--------------------------------------------------------------------------
   | Allow method spoofing
@@ -160,7 +161,7 @@ export const logger: LoggerConfig = {
   | Pretty print
   |--------------------------------------------------------------------------
   |
-  | It is highly advised NOT to use `prettyPrint` in production, since it
+  | It is highly advised NOT to use `prettyPArint` in production, since it
   | can have huge impact on performance.
   |
   */

@@ -26,7 +26,6 @@ export class UpdateRoleUseCaseImpl implements UpdateRoleUseCase {
     }
 
     const roleEventProps: RoleUpdatedProps = {
-      userId: new UniqueEntityID(input.userId),
       roleId: roleEntity.id,
       older: {
         name: roleEntity.name,

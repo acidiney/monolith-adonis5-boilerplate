@@ -38,7 +38,6 @@ export class UpdateUserNotificationsUseCaseImpl implements UpdateUserNotificatio
     })
 
     await this.eventDispatcher.publish(new NotificationsUpdatedEvent({
-      userId: new UniqueEntityID(input.userId),
       action: !input.selectedNotificationIds.length ? 'removeAll' : 'sync',
       type: input.type,
     }))

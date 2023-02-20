@@ -1,1 +1,3 @@
-export interface RedefinePasswordUseCaseInput {}
+export interface RedefinePasswordUseCaseInput {
+  userId: string
+}

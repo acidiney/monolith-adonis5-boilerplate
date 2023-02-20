@@ -7,7 +7,6 @@ export interface RoleUpdatedProps {
     permissions: UniqueEntityID[]
   },
   roleId: UniqueEntityID
-  userId: UniqueEntityID
 }
 
 export class RoleUpdatedEvent extends DomainEvent<RoleUpdatedProps> {}

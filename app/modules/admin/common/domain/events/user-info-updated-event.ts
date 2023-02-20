@@ -1,7 +1,6 @@
-import {DomainEvent, UniqueEntityID} from 'app/core/domain'
+import { DomainEvent } from 'app/core/domain'
 
 export interface UserInfoUpdatedProps {
-  userId: UniqueEntityID
   old: {
     avatarUrl?: string,
     firstName: string

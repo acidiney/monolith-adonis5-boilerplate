@@ -45,7 +45,6 @@ export class DeleteRoleUseCaseImpl implements DeleteRoleUseCase {
 
     this.eventDispatcher.publish(new RoleDeleted({
       roleId: new UniqueEntityID(input.roleId),
-      userId: new UniqueEntityID(input.userId),
     }))
 
     return right(true)

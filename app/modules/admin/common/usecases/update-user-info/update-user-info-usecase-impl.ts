@@ -23,7 +23,6 @@ export class UpdateUserInfoUseCaseImpl implements UpdateUserInfoUseCase {
     }
 
     const eventProps: UserInfoUpdatedProps = {
-      userId: userEntity.id,
       old: {
         avatarUrl: userEntity.avatar,
         firstName: userEntity.firstName,
