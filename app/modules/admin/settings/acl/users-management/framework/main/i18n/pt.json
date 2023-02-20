@@ -10,5 +10,9 @@
   "admin.acl.inactivate": "Bloquear",
   "admin.acl.activate": "Desbloquear",
   "admin.acl.impersonate": "Impersonar",
-  "admin.acl.reset_password": "Redefinir Password"
+  "admin.acl.reset_password": "Redefinir Password",
+  "admin.acl.user.cannot_modify_root": "Utilizador 'root' não pode ser modificado!",
+  "admin.acl.users.deleted": "Utilizador eliminado!",
+  "admin.acl.user.password.reseted": "A nova senha deste utilizador é: {newPassword}",
+  "admin.acl.user.password.reseted.title": "Senha alterada"
 }

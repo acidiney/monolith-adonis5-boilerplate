@@ -17,11 +17,15 @@ export const apiService = {
   },
   deleteUser: (form) => {
     return new Promise((resolve) => {
-      return router.delete("/account/admin/settings/acl/user", form, {
-        onFinish: (data) => {
-          resolve(data);
-        },
-      });
+      return router.delete(
+        "/account/admin/settings/acl/user",
+        { data: form },
+        {
+          onFinish: (data) => {
+            resolve(data);
+          },
+        }
+      );
     });
   },
   redefinePassword: (form) => {

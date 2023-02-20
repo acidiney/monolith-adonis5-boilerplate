@@ -58,6 +58,8 @@ export class UserMapper extends Mapper<UserEntity, UserModel> {
     userModel.lastName = userEntity.lastName
     userModel.avatar = userEntity.avatar
 
+    userModel.deletedAt = this.dateAdapter.toDatePersistence(userEntity.deletedAt)
+
     userModel.roleId = userEntity.roleId
 
     userModel.statusId = userEntity.status || StatusEnum.ACTIVE

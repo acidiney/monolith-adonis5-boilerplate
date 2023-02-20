@@ -56,6 +56,9 @@ export class UserModel extends BaseModel {
   @column.dateTime({ columnName: 'last_login' })
   public lastLoginAt?: DateTime
 
+  @column.dateTime()
+  public deletedAt?: DateTime
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

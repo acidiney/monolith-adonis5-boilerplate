@@ -13,10 +13,12 @@ export class DeleteUserController implements Controller<HttpContextContract> {
     const validation = await request.validate({
       schema: schema.create({
         username: schema.string({ trim: true }, [ rules.required() ]),
-        motivation: schema.string({ trim: true }, [ rules.nullable() ]),
+        motivation: schema.string.optional({ trim: true }, [ rules.nullable() ]),
       }),
     })
-      .catch(() => {})
+      .catch((e) => {
+        console.log(e.messages)
+      })
 
     if(!validation) {
       session.flash('alert', {

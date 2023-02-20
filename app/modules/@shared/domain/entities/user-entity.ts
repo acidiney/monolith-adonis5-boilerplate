@@ -68,6 +68,10 @@ export class UserEntity extends Entity<UserProps> {
     return right(true)
   }
 
+  public get isRoot (): boolean {
+    return this.props.email.value === 'root@itgest.co.ao'
+  }
+
   public userLogged (loggedAt: Date): void {
     this.props.lastLoginAt = loggedAt
   }
@@ -104,6 +108,11 @@ export class UserEntity extends Entity<UserProps> {
     }
 
     return right(true)
+  }
+
+  public delete (): void {
+    this._deletedAt = new Date()
+    this.props.status = StatusEnum.DELETED
   }
 
   public static create (props: UserProps): Either<UserEntityError, UserEntity> {

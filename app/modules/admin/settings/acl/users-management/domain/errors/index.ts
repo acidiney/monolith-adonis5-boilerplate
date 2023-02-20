@@ -4,3 +4,4 @@
  */
 
 export * from './user-already-exist-error'
+export * from './root-user-cannot-be-modified'

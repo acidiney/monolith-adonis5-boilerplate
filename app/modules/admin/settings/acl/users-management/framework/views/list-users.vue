@@ -1,17 +1,26 @@
 <script setup>
-import {computed, ref} from 'vue'
+import {computed, ref, watch} from 'vue'
 import {usePage} from "@inertiajs/vue3"
 import { apiService } from './services/api'
 import AppStatus from '@core/components/app-status.vue'
 import AppCreateUserDialog
   from './components/app-create-user-dialog.vue'
-
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { useI18n } from 'vue-i18n'
 const dialogVisible = ref(false)
 
 const content = computed(() => usePage().props.content)
 const alert = computed(() => usePage().props.alert)
 const isRoot = computed(() => usePage().props.user.role.isRoot)
 
+const { t } = useI18n()
+watch(alert, () => {
+  if (alert.value.successWithModal) {
+    ElMessageBox.alert(t('admin.acl.user.password.reseted', { newPassword: alert.value.payload.newPassword}), t('admin.acl.user.password.reseted.title'), {
+    confirmButtonText: t('shared.ok'),
+  })
+  }
+})
 const onSortChange = (e) => {
   console.log(e)
 }
@@ -38,7 +47,7 @@ const onDeleteUser =  async (username) => {
 }
 
 const onRedefineUserPassword =  async (username) => {
-  await apiService.deleteUser({
+  await apiService.redefinePassword({
     username,
   })
 }
@@ -82,7 +91,7 @@ const errorHandler = () => true
 
     <template v-slot:body>
           <p
-          v-if="alert"
+          v-if="alert && !alert.successWithModal"
           :class="[
             'alert',
             {
@@ -158,12 +167,14 @@ const errorHandler = () => true
               {{ $t('shared.edit') }}
               <template #dropdown>
                 <el-dropdown-menu >
-                  <el-dropdown-item>{{ $t('admin.acl.reset_password') }}</el-dropdown-item>
+                  <el-dropdown-item
+                    @click.prevent="onRedefineUserPassword(scope.row.slug)"
+                  >{{ $t('admin.acl.reset_password') }}</el-dropdown-item>
                   <el-dropdown-item v-if="scope.row.status === 'active'"
                   @click.prevent="onBlockUser(scope.row.slug)" divided>{{ $t('admin.acl.inactivate') }}</el-dropdown-item>
                   <el-dropdown-item v-if="scope.row.status === 'inactive'"
                   @click.prevent="onUnblockUser(scope.row.slug)" divided>{{ $t('admin.acl.activate') }}</el-dropdown-item>
-                  <el-dropdown-item :disabled="scope.row.roleSlug === 'root'">{{ $t('admin.acl.impersonate') }}</el-dropdown-item>
+                  <!-- el-dropdown-item :disabled="scope.row.roleSlug === 'root'">{{ $t('admin.acl.impersonate') }}</el-dropdown-item -->
                   <el-dropdown-item  @click="onDeleteUser(scope.row.slug)" class="text-danger" divided>{{ $t('shared.remove') }}</el-dropdown-item>
                 </el-dropdown-menu>
               </template>

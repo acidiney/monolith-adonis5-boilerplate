@@ -1,5 +1,6 @@
 import { Either, IEventDispatcher, left, right} from 'app/core/domain'
 import { UserNotFoundError } from 'app/modules/@shared/domain/errors'
+import { RootUserCannotBeModified } from '../../domain/errors'
 import { UserBlockedEvent } from '../../domain/events/user-blocked-event'
 import { BlockUserUseCase, BlockUserUseCaseInput } from './../../domain'
 import { FindUsernameRepository, UpdateUserRepository } from './ports'
@@ -11,11 +12,17 @@ export class BlockUserUseCaseImpl implements BlockUserUseCase{
     private readonly eventDispatcher: IEventDispatcher
   ) {}
 
-  public async perform (input: BlockUserUseCaseInput): Promise<Either<UserNotFoundError, boolean>> {
+  public async perform (input: BlockUserUseCaseInput): Promise<Either<
+  UserNotFoundError | RootUserCannotBeModified, boolean>
+  > {
     const userEntity = await this.findUserNameRepository.findUsername(input.username)
 
     if (!userEntity) {
       return left(new UserNotFoundError())
+    }
+
+    if (userEntity.isRoot) {
+      return left(new RootUserCannotBeModified())
     }
 
     userEntity.block()
