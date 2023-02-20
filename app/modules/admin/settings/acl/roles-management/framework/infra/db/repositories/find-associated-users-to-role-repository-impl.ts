@@ -11,6 +11,7 @@ export class FindAssociatedUsersToRoleRepositoryImpl implements FindAssociatedUs
     const users = await UserModel
       .query()
       .where('roleId', roleId.toString())
+      .andWhereNull('deleted_at')
       .exec()
 
     return users.map(this.userMapper.toDomain)
