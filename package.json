@@ -86,6 +86,7 @@
     "@vue/server-renderer": "3.2.45",
     "element-plus": "^2.2.29",
     "execa": "^5.1.1",
+    "feather-icons": "^4.29.0",
     "get-port": "^5.1.1",
     "luxon": "3.2.1",
     "module-alias": "^2.2.2",
