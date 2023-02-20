@@ -20,8 +20,6 @@ export class UserLoggedListener extends Handler<UserLoggedEvent> {
       return
     }
 
-    console.log(super.userId())
-
     Logger.info(`User "${user.fullName}" logged!`)
 
     user.userLogged(event.dateTimeOccurred)
