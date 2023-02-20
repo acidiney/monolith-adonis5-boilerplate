@@ -2,7 +2,9 @@ export enum StatusEnum{
   APPROVED = 'approved',
   CANCELED = 'canceled',
   ACTIVE = 'active',
-  PENDING = 'pending'
+  PENDING = 'pending',
+  INACTIVE = 'inactive'
 }
 
-export type StatusType = StatusEnum.ACTIVE | StatusEnum.APPROVED | StatusEnum.PENDING | StatusEnum.CANCELED
+export type StatusType = StatusEnum.ACTIVE | StatusEnum.APPROVED |
+StatusEnum.PENDING | StatusEnum.CANCELED | StatusEnum.INACTIVE

@@ -1,4 +1,4 @@
-import {StatusType} from 'app/modules/@shared/domain/types'
+import {StatusEnum, StatusType} from 'app/modules/@shared/domain/types'
 import {PasswordMismatchError} from 'app/modules/auth/domain'
 import {UserNameErrors} from 'app/modules/@shared/domain/errors'
 import {Either, Entity, left, Options, right, UniqueEntityID} from 'app/core/domain'
@@ -82,6 +82,14 @@ export class UserEntity extends Entity<UserProps> {
 
   public changeLastName (lastName: string): void {
     this.props.lastName = lastName
+  }
+
+  public block () {
+    this.props.status = StatusEnum.INACTIVE
+  }
+
+  public restore () {
+    this.props.status = StatusEnum.ACTIVE
   }
 
   public validate (): Either<

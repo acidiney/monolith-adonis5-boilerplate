@@ -1,4 +1,4 @@
 export interface BlockUserUseCaseInput {
-  userId: string
+  username: string
   motivation: string
 }
