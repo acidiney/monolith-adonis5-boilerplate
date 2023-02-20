@@ -1,7 +1,7 @@
-import {IHandler} from 'app/core/domain'
+import { Handler } from 'app/infra/listeners/handler'
 import { RoleUpdatedEvent } from '../../../domain/events'
 
-export class RoleUpdatedListener implements IHandler<RoleUpdatedEvent> {
+export class RoleUpdatedListener extends Handler<RoleUpdatedEvent> {
   public handle (event: RoleUpdatedEvent): void {
     console.log(event)
   }

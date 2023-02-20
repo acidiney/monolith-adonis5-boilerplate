@@ -1,6 +1,5 @@
 import Logger from '@ioc:Adonis/Core/Logger'
 
-import {IHandler} from 'app/core/domain'
 import {UserLoggedEvent} from 'app/modules/auth/domain/events/user-logged-event'
 import {FindUserIdRepository} from 'app/modules/@shared/usecases/ports/find-user-id-repository'
 import {UserModel} from 'app/modules/@shared/framework/infra/db/models'

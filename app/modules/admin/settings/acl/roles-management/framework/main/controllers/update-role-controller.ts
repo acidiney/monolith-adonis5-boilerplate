@@ -31,7 +31,6 @@ export class UpdateRoleController implements Controller<HttpContextContract> {
     }
 
     const output = await this.updateRoleUseCase.perform({
-      userId,
       isRoot: auth.user?.role.isRoot ?? false,
       roleSlug: validation.roleSlug,
       name: validation.name,
