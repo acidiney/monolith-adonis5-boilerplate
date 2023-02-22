@@ -1,5 +1,5 @@
 import { IEventDispatcher, Either, left, right } from 'app/core/domain'
-import { UserNotFoundError } from 'app/modules/@shared/domain/errors'
+import { UserNotFoundError, UserInactiveError } from 'app/modules/@shared/domain/errors'
 import { RedefinePasswordUseCase, RedefinePasswordUseCaseInput } from '../../domain'
 import { UserPasswordRestoredEvent } from '../../domain/events/user-password-restored-event'
 import { FindUsernameRepository, UpdateUserRepository } from '../block-user'
@@ -13,11 +13,16 @@ export class RedefinePasswordUseCaseImpl implements RedefinePasswordUseCase {
     private readonly eventDispatcher: IEventDispatcher
   ) {}
 
-  public async perform (input: RedefinePasswordUseCaseInput): Promise<Either<UserNotFoundError, string>> {
+  public async perform (input: RedefinePasswordUseCaseInput):
+  Promise<Either<UserNotFoundError | UserInactiveError, string>> {
     const userEntity = await this.findUserNameRepository.findUsername(input.username)
 
     if (!userEntity) {
       return left(new UserNotFoundError())
+    }
+
+    if (userEntity.isInactive) {
+      return left(new UserInactiveError())
     }
 
     const newPassword = await this.generateRandomPasswordService.generate(userEntity.slug)
