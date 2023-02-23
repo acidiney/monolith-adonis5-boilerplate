@@ -1,11 +1,11 @@
 <script setup>
-import {computed, ref, watch} from 'vue'
+import {computed, ref, watch, h} from 'vue'
 import {usePage} from "@inertiajs/vue3"
 import { apiService } from './services/api'
 import AppStatus from '@core/components/app-status.vue'
 import AppCreateUserDialog
   from './components/app-create-user-dialog.vue'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElInput, ElMessageBox } from 'element-plus'
 import { useI18n } from 'vue-i18n'
 const dialogVisible = ref(false)
 
@@ -15,9 +15,13 @@ const isRoot = computed(() => usePage().props.user.role.isRoot)
 
 const { t } = useI18n()
 watch(alert, () => {
+
   if (alert.value.successWithModal) {
-    ElMessageBox.alert(t('admin.acl.user.password.reseted', { newPassword: alert.value.payload.newPassword}), t('admin.acl.user.password.reseted.title'), {
-    confirmButtonText: t('shared.ok'),
+    ElMessageBox.alert(h('div', null, [
+      h('p', null, t('admin.acl.user.password.reseted')),
+      h(ElInput, { disabled: true, modelValue: alert.value.payload.newPassword })
+    ]), t('admin.acl.user.password.reseted.title'), {
+    confirmButtonText: t('shared.ok_proceed'),
   })
   }
 })
@@ -163,19 +167,88 @@ const errorHandler = () => true
         </el-table-column>
         <el-table-column fixed="right">
           <template #default="scope">
-            <el-dropdown :disabled="!isRoot && scope.row.roleSlug === 'root'" split-button size="small" type="primary">
+            <el-dropdown
+            trigger="click"
+            :hide-on-click="false"
+            :disabled="!isRoot && scope.row.roleSlug === 'root'" split-button size="small" type="primary">
               {{ $t('shared.edit') }}
               <template #dropdown>
-                <el-dropdown-menu >
+                <el-dropdown-menu>
+                  <el-dropdown-item>
+                  <el-popconfirm
+                        :width="250"
+                        :disabled="scope.row.isInternal"
+                        @confirm="onRedefineUserPassword(scope.row.slug)"
+                        confirm-button-type="warning"
+                        :confirm-button-text="$t('shared.ok_proceed')"
+                        :cancel-button-text="$t('shared.no_thanks')"
+                        :title="$t('admin.acl.users.want_to_reset_password')"
+                    >
+                      <template #reference>
+                        {{ $t('admin.acl.reset_password') }}
+                      </template>
+                    </el-popconfirm>
+
+
+                </el-dropdown-item>
                   <el-dropdown-item
-                    @click.prevent="onRedefineUserPassword(scope.row.slug)"
-                  >{{ $t('admin.acl.reset_password') }}</el-dropdown-item>
-                  <el-dropdown-item v-if="scope.row.status === 'active'"
-                  @click.prevent="onBlockUser(scope.row.slug)" divided>{{ $t('admin.acl.inactivate') }}</el-dropdown-item>
-                  <el-dropdown-item v-if="scope.row.status === 'inactive'"
-                  @click.prevent="onUnblockUser(scope.row.slug)" divided>{{ $t('admin.acl.activate') }}</el-dropdown-item>
+                  :disabled="scope.row.roleSlug === 'root'"
+                  
+                  v-if="scope.row.status === 'active'" divided>
+                  <el-popconfirm
+                        :width="250"
+                        :disabled="scope.row.roleSlug === 'root'"
+                        @confirm="onBlockUser(scope.row.slug)"
+                        confirm-button-type="warning"
+                        :confirm-button-text="$t('shared.ok_proceed')"
+                        :cancel-button-text="$t('shared.no_thanks')"
+                        :title="$t('admin.acl.users.want_to_deactivate')"
+                    >
+                      <template #reference>
+                        {{ $t('admin.acl.inactivate') }}
+                      </template>
+                    </el-popconfirm>
+                  
+                  </el-dropdown-item>
+                  <el-dropdown-item
+                  :disabled="scope.row.roleSlug === 'root'"
+                   
+                  v-if="scope.row.status === 'inactive'" divided>
+                  <el-popconfirm
+                        :width="250"
+                        :disabled="scope.row.roleSlug === 'root'"
+                        @confirm="onUnblockUser(scope.row.slug)"
+                        confirm-button-type="success"
+                        :confirm-button-text="$t('shared.ok_proceed')"
+                        :cancel-button-text="$t('shared.no_thanks')"
+                        :title="$t('admin.acl.users.want_to_activate')"
+                    >
+                      <template #reference>
+                        {{ $t('admin.acl.activate') }}
+                      </template>
+                    </el-popconfirm>
+                  
+                  </el-dropdown-item>
                   <!-- el-dropdown-item :disabled="scope.row.roleSlug === 'root'">{{ $t('admin.acl.impersonate') }}</el-dropdown-item -->
-                  <el-dropdown-item  @click="onDeleteUser(scope.row.slug)" class="text-danger" divided>{{ $t('shared.remove') }}</el-dropdown-item>
+                  <el-dropdown-item
+                    :disabled="scope.row.roleSlug === 'root'"
+                    class="text-danger"
+                    divided>
+                    <el-popconfirm
+                        :width="250"
+                        :disabled="scope.row.roleSlug === 'root'"
+                        @confirm="onDeleteUser(scope.row.slug)"
+                        confirm-button-type="danger"
+                        :confirm-button-text="$t('shared.ok_proceed')"
+                        :cancel-button-text="$t('shared.no_thanks')"
+                        :title="$t('shared.want_to_delete')"
+                    >
+                      <template #reference>
+                        {{ $t('shared.remove') }}
+                      </template>
+                    </el-popconfirm>
+                  
+                  </el-dropdown-item>
                 </el-dropdown-menu>
               </template>
             </el-dropdown>

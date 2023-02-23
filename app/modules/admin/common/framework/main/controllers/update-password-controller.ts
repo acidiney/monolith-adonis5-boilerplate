@@ -31,7 +31,7 @@ export class UpdatePasswordController implements Controller<HttpContextContract>
       passwordOptions: {
         currentPassword: validations.currentPassword,
         newPassword: validations.newPassword,
-        confirmPassword: validations.currentPassword,
+        confirmPassword: validations.confirmPassword,
       },
     })
 

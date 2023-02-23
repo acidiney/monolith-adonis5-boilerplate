@@ -1,3 +1,10 @@
 {
-  "menu.admin.setting.setup.addons": "Marketplace"
+  "menu.admin.setting.setup.addons": "Marketplace",
+  "marketplace.addon.install": "Instalar",
+  "markeplace.addon.update": "Actualização disponível",
+  "marketplace.addon.installed": "Instalado e actualizado",
+  "admin.acl.users.want_to_deactivate": "Inactivar utilizador",
+  "admin.acl.users.want_to_activate": "Activar utilizador",
+  "admin.acl.users.want_to_reset_password": "Redefinir senha de utilizador"
+
 }

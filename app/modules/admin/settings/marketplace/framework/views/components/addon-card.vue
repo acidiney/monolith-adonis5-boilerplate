@@ -3,6 +3,8 @@ import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { router } from '@inertiajs/vue3'
 
+import { ElMessageBox } from 'element-plus'
+
 const props = defineProps({
   name: String,
   version: Number,
@@ -16,13 +18,14 @@ const props = defineProps({
 const { t } = useI18n()
 
 function loadInstallText () {
+  if (props.update) {
+    return t('markeplace.addon.update')
+  }
+  
   if (props.canInstall) {
     return t('marketplace.addon.install')
   }
 
-  if (props.update) {
-    return t('markeplace.addon.update')
-  }
 
   return t('marketplace.addon.installed')
 }
@@ -30,14 +33,26 @@ function loadInstallText () {
 const isLoading = ref(false)
 
 function installOrUpdatePackage (addonName, version) {
-  isLoading.value = true
-  router.post('/account/admin/settings/marketplace/addon/install', {
-    addonName,
-    version
-  }, {
-    onFinish: () => {
-      isLoading.value = false
+  
+
+  ElMessageBox.confirm(
+    t('marketplace.confirm_want_to_install_addon', { addonName, version }),
+    t('shared.alert'),
+    {
+      confirmButtonText: t('shared.ok_proceed'),
+      cancelButtonText: t('shared.no_thanks'),
+      type: 'warning',
     }
+  ).then(() => {
+    isLoading.value = true
+    router.post('/account/admin/settings/marketplace/addon/install', {
+      addonName,
+      version
+    }, {
+      onFinish: () => {
+        isLoading.value = false
+      }
+    })
   })
 }
 
@@ -81,7 +96,7 @@ const type = computed(() => {
         :type="type"
         @click="installOrUpdatePackage(name, version)"
         :disabled="!canInstall"
-        :is-loading="isLoading"
+        :loading="isLoading"
       >
         {{ loadInstallText() }}
       </el-button>
