@@ -13,7 +13,7 @@
     "dev:global": "node ace serve --watch  --encore-args='--host 0.0.0.0'",
     "build": "node ace build --production --ignore-ts-errors",
     "start": "node server.js",
-    "lint": "eslint . --ext=.ts",
+    "lint": "eslint . --ext=.ts --fix",
     "test": "jest --runInBand --silent --passWithNoTests",
     "test:japa": "node ace test",
     "t:j": "npm run test:japa",
