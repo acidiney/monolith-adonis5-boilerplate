@@ -26,5 +26,6 @@
   "shared.want_to_delete": "Deseja eliminar este registro?",
   "shared.roles.root.description": "Super utilizador, com todas as permissões associadas.",
   "shared.roles.admin.description": "Utilizador com todas permissões de gestão de sistema associadas.",
-  "shared.updated_at_with_date": "Ultima actualização: { date }"
+  "shared.updated_at_with_date": "Ultima actualização: { date }",
+  "admin.shared.user.inactive": "🛑 [ Utilizador Bloqueado ] - Não pode realizar essa operação, reactive-o primeiro!"
 }

@@ -1,6 +1,6 @@
 import { SendResetPasswordUseCaseImpl } from 'app/modules/auth/usecases'
 import { HashDriverAdapterImpl } from 'app/modules/auth/framework/infra/adapters'
-import { FindUsernameEmailRepositoryImpl, PersistResetPasswordTokenRepositoryImpl}
+import { FindUserToAuthenticateRepositoryImpl, PersistResetPasswordTokenRepositoryImpl}
   from 'app/modules/auth/framework/infra/db/repositories'
 
 import { SendResetPasswordServiceImpl } from '../../infra/services'
@@ -10,7 +10,7 @@ import {EventDispatcher} from 'app/core/domain'
 export const makeSendResetPasswordController = (): SendResetPasswordController =>
   new SendResetPasswordController(
     new SendResetPasswordUseCaseImpl(
-      new FindUsernameEmailRepositoryImpl(),
+      new FindUserToAuthenticateRepositoryImpl(),
       new HashDriverAdapterImpl(),
       new PersistResetPasswordTokenRepositoryImpl(),
       new SendResetPasswordServiceImpl(),

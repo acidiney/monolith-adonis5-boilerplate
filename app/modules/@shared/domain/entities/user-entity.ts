@@ -58,6 +58,10 @@ export class UserEntity extends Entity<UserProps> {
     return this.props.roleId.toString()
   }
 
+  public get isInactive (): boolean {
+    return this.props.status === StatusEnum.INACTIVE
+  }
+
   public changePassword (password: string, confirmPassword: string): Either<PasswordMismatchError, boolean> {
     if (password !== confirmPassword) {
       return left(new PasswordMismatchError())
