@@ -22,6 +22,8 @@ export class CreateUserController implements Controller<HttpContextContract> {
       return response.redirect().back()
     }
 
+    const { isModal } = request.all()
+
     const output = await this.createUserUseCase.perform({
       lastName: validation.lastName,
       firstName: validation.firstName,
@@ -29,9 +31,12 @@ export class CreateUserController implements Controller<HttpContextContract> {
       role: validation.role,
     })
 
+    console.log(isModal)
+
     if (output.isLeft()) {
       session.flash('alert', {
         success: false,
+        successWithModal: isModal,
         message: i18n.formatMessage(output.value.errorMessage),
       })
       return response.redirect().back()
@@ -39,6 +44,7 @@ export class CreateUserController implements Controller<HttpContextContract> {
 
     session.flash('alert', {
       success: true,
+      successWithModal: isModal,
       message: i18n.formatMessage('admin.acl.user.new'),
     })
 

@@ -9,7 +9,7 @@ const VALIDATE_EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
 
 export class Email extends ValueObject<EmailProps> {
   public get value (): string {
-    return this.props.email.trim()
+    return this.props.email.trim().toLowerCase()
   }
   private validate (): Either<EmailError.EmailInvalidError | EmailError.EmailRequiredError, boolean> {
     if (!this.props.email) {

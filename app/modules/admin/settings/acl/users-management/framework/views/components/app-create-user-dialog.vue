@@ -5,9 +5,16 @@
 
 <script setup>
   import {useI18n} from "vue-i18n";
+  import {usePage} from "@inertiajs/vue3"
   import {computed, onMounted, reactive, ref} from "vue";
 
   import {apiService} from '../services/api'
+
+  defineProps({
+    dialogVisible: Boolean,
+  })
+
+  const emit = defineEmits(['update:dialogVisible'])
 
   const { t } = useI18n()
 
@@ -49,6 +56,7 @@
       },
     ],
   })
+
   const form = reactive({
     firstName: '',
     lastName: '',
@@ -64,12 +72,21 @@
     return false
   })
 
-  const onSubmit = async (formEl) => {
+  const alert = computed(() => usePage().props.alert)
+
+  const onSubmit = async (formEl, createAndContinue) => {
     if (!formEl) return
     await formEl.validate((valid) => {
       if (valid) {
         state.loading = true;
-        apiService.createUser(form)
+        apiService.createUser({...form, isModal: true})
+          .then(() => {
+            formEl.resetFields()
+
+            if (!createAndContinue) {
+              emit('update:dialogVisible', false)
+            }
+          })
           .finally(() => {
             state.loading = false;
           })
@@ -80,7 +97,6 @@
 
   onMounted(() => {
     apiService.loadRoles().then(({ data }) => {
-      console.log(data)
       state.options = data
     })
       .finally(() => {
@@ -88,10 +104,7 @@
       })
   })
 
-  defineProps({
-    dialogVisible: Boolean,
-  })
-  defineEmits(['update:dialogVisible'])
+ 
 </script>
 
 <style scoped>
@@ -105,6 +118,20 @@
     :title="$t('admin.acl.users.register')"
     width="35%"
   >
+    <p
+        v-if="alert && alert.successWithModal"
+        :class="[
+          'alert',
+          {
+            'alert-success': alert.success
+          },
+          {
+            'alert-danger': !alert.success
+          }
+      ]">
+      {{ alert.message }}
+    </p>
+      
     <el-form
       ref="ruleFormRef"
       :rules="rules"
@@ -169,10 +196,13 @@
 
     <template #footer>
       <span class="dialog-footer">
-        <el-button > {{ $t('admin.acl.users.create') }} </el-button>
         <el-button
           :loading="state.loading"
-          @click.prevent="onSubmit(ruleFormRef)"
+          @click.prevent="onSubmit(ruleFormRef, true)"
+        > {{ $t('admin.acl.users.create') }} </el-button>
+        <el-button
+          :loading="state.loading"
+          @click.prevent="onSubmit(ruleFormRef, false)"
           type="primary">
           {{ $t('admin.acl.users.create_and_close') }}
         </el-button>

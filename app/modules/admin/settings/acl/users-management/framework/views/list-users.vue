@@ -13,10 +13,10 @@ const content = computed(() => usePage().props.content)
 const alert = computed(() => usePage().props.alert)
 const isRoot = computed(() => usePage().props.user.role.isRoot)
 
-const { t } = useI18n()
+const { t } = useI18n()
 watch(alert, () => {
 
-  if (alert.value.successWithModal) {
+  if (alert.value.successWithModal && alert.value.payload) {
     ElMessageBox.alert(h('div', null, [
       h('p', null, t('admin.acl.user.password.reseted')),
       h(ElInput, { disabled: true, modelValue: alert.value.payload.newPassword })
@@ -94,7 +94,7 @@ const errorHandler = () => true
     </template>
 
     <template v-slot:body>
-          <p
+      <p
           v-if="alert && !alert.successWithModal"
           :class="[
             'alert',

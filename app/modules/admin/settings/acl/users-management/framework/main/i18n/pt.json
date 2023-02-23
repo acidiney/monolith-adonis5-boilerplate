@@ -14,5 +14,7 @@
   "admin.acl.user.cannot_modify_root": "Utilizador 'root' não pode ser modificado!",
   "admin.acl.users.deleted": "Utilizador eliminado!",
   "admin.acl.user.password.reseted": "A nova senha deste utilizador é: {newPassword}",
-  "admin.acl.user.password.reseted.title": "Senha alterada"
+  "admin.acl.user.password.reseted.title": "Senha alterada",
+  "admin.acl.users.create": "Criar utilizador e continuar",
+  "admin.acl.users.create_and_close": "Criar utilizador"
 }
