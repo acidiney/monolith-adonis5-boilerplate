@@ -1,7 +1,8 @@
+import { resolve } from 'path'
+
+import { loadApplicationEvents } from './global-socket-events'
 import { WsService } from 'app/infra/services/ws-service'
 import { loadContext as context } from 'app/infra/utils'
-
-import { resolve } from 'path'
 
 const ws = WsService.create()
 
@@ -15,4 +16,6 @@ ws.io.on('connection', (socket) => {
       void m(socket)
     }
   })
+
+  void loadApplicationEvents(socket)
 })
