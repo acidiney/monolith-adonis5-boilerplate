@@ -95,11 +95,11 @@ const handleSelect = async (notificationId, type) => {
         </p>
         <div class="card">
           <app-update-info />
-          
+
           <app-update-password />
         </div>
 
-        <!-- NOTIFICATION BY PLATAFORM -->
+        <!-- NOTIFICATION BY PLATFORM -->
         <p class="text-muted">
           <strong>{{ $t('shared.notifications') }}</strong>
         </p>

@@ -22,6 +22,12 @@ const showBackOnline = ref(false);
 
 const { t } = useI18n()
 
+
+
+const alert = computed(() => usePage().props.alertGlobal);
+
+const user = computed(() => usePage().props.user);
+
 onMounted(() => {
   animate.value = true;
   window.addEventListener("online", updateOnlineStatus);
@@ -34,6 +40,11 @@ onMounted(() => {
 
     SocketioService.setupSocketConnection()
 
+    SocketioService.socket.emit('user-logged', {
+      userId: user.value.slug,
+      isRoot: user.value.role.isRoot,
+    })
+
     SocketioService.socket.on('alert', (data) => {
       ElNotification({
         title: t(data.title),
@@ -45,10 +56,6 @@ onMounted(() => {
     })
   });
 });
-
-const alert = computed(() => usePage().props.alertGlobal);
-
-const user = computed(() => usePage().props.user);
 
 function updateOnlineStatus(e) {
   const { type } = e;
@@ -88,6 +95,7 @@ defineProps({
       },
     ]"
     v-if="alert"
+
     role="alert"
   >
     {{ alert.message }}

@@ -10,9 +10,9 @@ ws.boot()
 ws.io.on('connection', (socket) => {
   ;['../app/modules'].forEach(async (path) => {
     const req = context(resolve(__dirname, path), true, /main\/socket\.(ts|js)$/)
-    await req.keys().forEach(async (filename) => {
+    for (const filename of req.keys()) {
       const m = (await require(filename)).default
       void m(socket)
-    })
+    }
   })
 })
