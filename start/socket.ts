@@ -16,6 +16,5 @@ ws.io.on('connection', (socket) => {
       void m(socket)
     }
   })
-
   void loadApplicationEvents(socket)
 })

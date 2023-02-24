@@ -1,3 +1,5 @@
+import {Broadcast, BroadcastOnly} from '../start/global-socket-events'
+
 /**
  * Contract source: https://git.io/JfefG
  *
@@ -25,7 +27,9 @@ declare module '@ioc:Adonis/Core/Event' {
   | an instance of the the UserModel only.
   |
   */
+
   interface EventsList {
-    //
+    'alert:realtime:broadcast:only': BroadcastOnly,
+    'alert:realtime:broadcast:all': Broadcast,
   }
 }

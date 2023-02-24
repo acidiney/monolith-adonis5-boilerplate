@@ -8,6 +8,7 @@ import {
   watch,
 } from "vue";
 import { usePage } from "@inertiajs/vue3";
+import emitter from '../core/event-bus'
 import AppHeader from "../core/components/app-header.vue";
 import AppFooter from "../core/components/app-footer.vue";
 import AppSidebar from "../core/components/app-sidebar.vue";
@@ -21,8 +22,6 @@ const online = ref(navigator.onLine);
 const showBackOnline = ref(false);
 
 const { t } = useI18n()
-
-
 
 const alert = computed(() => usePage().props.alertGlobal);
 
@@ -40,9 +39,8 @@ onMounted(() => {
 
     SocketioService.setupSocketConnection()
 
-    SocketioService.socket.emit('user-logged', {
-      userId: user.value.slug,
-      isRoot: user.value.role.isRoot,
+    SocketioService.socket.emit('connected', {
+      username: user.value.slug,
     })
 
     SocketioService.socket.on('alert', (data) => {
@@ -53,6 +51,10 @@ onMounted(() => {
         icon: data.icon,
         position: 'bottom-right',
       })
+
+      if (data.eventName === 'USER_BLOCKED') {
+        emitter.emit('logout')
+      }
     })
   });
 });

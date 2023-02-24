@@ -1,6 +1,10 @@
 <script setup>
 import { router } from "@inertiajs/vue3";
+import emitter from '../event-bus'
 
+emitter.on('logout', () => {
+  useLogout()
+})
 const useLogout = () => {
   router.post("/auth/logout");
 };
