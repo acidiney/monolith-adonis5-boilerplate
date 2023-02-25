@@ -50,7 +50,7 @@ onMounted(() => {
         type: data.type,
         icon: data.icon,
         position: 'bottom-right',
-        duration: data.type === 'error' ? 0 : 5000,
+        duration: 0,
       })
 
       if (data.eventName === 'USER_BLOCKED') {

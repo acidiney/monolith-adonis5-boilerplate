@@ -6,5 +6,7 @@
   "admin.acl.role.role_deleted": "Perfil eliminado com sucesso.",
   "admin.acl.role.update": "Editar Perfil",
   "admin.acl.role.edit": "A editar perfil",
-  "menu.admin.setting.acl.roles.edit_role": "Editar perfil"
+  "menu.admin.setting.acl.roles.edit_role": "Editar perfil",
+  "admin.acl.role.updated": "🚶🏽‍♀️ Passando para avisar que as suas permissões foram modificadas!",
+  "admin.acl.role.updated-description": "Actualize a página para as receber, e bom trabalho 😊."
 }

@@ -1,5 +1,3 @@
-import HttpContext from '@ioc:Adonis/Core/HttpContext'
-
 import { Handler } from 'app/infra/listeners/handler'
 import { UserBlockedEvent } from '../../../domain/events/user-blocked-event'
 import Event from '@ioc:Adonis/Core/Event'
@@ -8,14 +6,14 @@ import { UserModel } from 'app/modules/@shared/framework/infra/db/models'
 export class UserBlockedListener extends Handler<UserBlockedEvent> {
   public async handle (event: UserBlockedEvent): Promise<void> {
     // do something, like, send e-mail or log
-    const ctx = HttpContext.get()
+    const ctx = super.ctx()
 
     if (!ctx) {
       return
     }
 
     const user = await UserModel.findOrFail(event.eventData.userId.toString())
-    const adminUser = await UserModel.findOrFail(super.userId()?.toString())
+    const adminUser = await UserModel.findOrFail(ctx.auth.user?.id)
 
     // send a realtime notification
     await Event.emit('alert:realtime:broadcast:only', {
