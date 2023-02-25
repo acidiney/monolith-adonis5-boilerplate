@@ -1,5 +1,6 @@
 import { GuardsList } from '@ioc:Adonis/Addons/Auth'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { StatusEnum } from 'app/modules/@shared/domain/types'
 
 /**
  * Auth middleware is meant to restrict un-authenticated access to a given route
@@ -23,7 +24,11 @@ export default class AuthMiddleware {
    * during the current request.
    */
   protected async authenticate (
-    auth: HttpContextContract['auth'], response: HttpContextContract['response'], guards: (keyof GuardsList)[]
+    auth: HttpContextContract['auth'],
+    response: HttpContextContract['response'],
+    session: HttpContextContract['session'],
+    i18n: HttpContextContract['i18n'],
+    guards: (keyof GuardsList)[]
   ) {
     /**
      * Hold reference to the guard last attempted within the for loop. We pass
@@ -35,6 +40,15 @@ export default class AuthMiddleware {
 
     for (let guard of guards) {
       // guardLastAttempted = guard
+
+      if (auth.user?.statusId !== StatusEnum.ACTIVE || auth.user?.deletedAt) {
+        session.flash('alertGlobal', {
+          success: false,
+          message: i18n.formatMessage('auth.login_revoked'),
+        })
+
+        await response.redirect(this.redirectTo)
+      }
 
       if (await auth.use(guard).check()) {
         /**
@@ -60,7 +74,7 @@ export default class AuthMiddleware {
    * Handle request
    */
   public async handle (
-    { auth, response }: HttpContextContract,
+    { auth, response, session, i18n }: HttpContextContract,
     next: () => Promise<void>,
     customGuards: (keyof GuardsList)[]
   ) {
@@ -69,7 +83,7 @@ export default class AuthMiddleware {
      * the config file
      */
     const guards = customGuards.length ? customGuards : [auth.name]
-    const output = await this.authenticate(auth, response, guards)
+    const output = await this.authenticate(auth, response, session, i18n, guards)
 
     if (output) {
       await next()
