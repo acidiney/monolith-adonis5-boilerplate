@@ -42,7 +42,7 @@ onMounted(() => {
     SocketioService.socket.emit('connected', {
       username: user.value.slug,
     })
-
+    
     SocketioService.socket.on('alert', (data) => {
       ElNotification({
         title: t(data.title),

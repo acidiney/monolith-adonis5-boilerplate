@@ -16,6 +16,7 @@ export default class SilentAuthMiddleware {
      * set to the instance of the currently logged in user.
      */
     await auth.check()
+
     await next()
   }
 }

@@ -8,7 +8,6 @@ import {UserModel} from 'app/modules/@shared/framework/infra/db/models'
 export class UserBlockedListener extends Handler<UserBlockedEvent> {
   public async handle (event: UserBlockedEvent): Promise<void> {
     // do something, like, send e-mail or log
-
     const ctx = HttpContext.get()
 
     if (!ctx) {
@@ -18,7 +17,7 @@ export class UserBlockedListener extends Handler<UserBlockedEvent> {
     const user = await UserModel.findOrFail(event.eventData.userId.toString())
 
     // send a realtime notification
-    void Event.emit('alert:realtime:broadcast:only', {
+    await Event.emit('alert:realtime:broadcast:only', {
       users: [
         user.slug,
       ],

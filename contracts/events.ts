@@ -1,4 +1,4 @@
-import {Broadcast, BroadcastOnly} from '../start/global-socket-events'
+import {Broadcast, BroadcastOnly} from '../start/application-socket-events-registry'
 
 /**
  * Contract source: https://git.io/JfefG
