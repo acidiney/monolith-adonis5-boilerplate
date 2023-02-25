@@ -20,7 +20,6 @@ export class UpdateRoleWithTransactionRepositoryImpl implements UpdateRoleWithTr
       .query()
       .useTransaction(trx)
       .from('core_role_permissions')
-      .whereIn('permission_id', roleEntity.permissions.map((p) => p.toString()))
       .andWhere('role_id', roleEntity.id.toString())
       .delete()
 
