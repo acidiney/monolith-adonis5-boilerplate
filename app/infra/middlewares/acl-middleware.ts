@@ -13,7 +13,8 @@ export default class AclMiddleware {
     guards: string[]
   ) {
     if (!auth.user) {
-      session.flash('errors', {
+      session.flash('alertGlobal', {
+        success: false,
         message: i18n.formatMessage('auth.user.not.authenticated'),
       })
 
@@ -29,7 +30,8 @@ export default class AclMiddleware {
     })
 
     if (!haveAllPermissions) {
-      session.flash('errors', {
+      session.flash('alertGlobal', {
+        success: false,
         message: i18n.formatMessage('shared.missing.permissions'),
       })
 
