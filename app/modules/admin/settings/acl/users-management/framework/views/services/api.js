@@ -60,3 +60,48 @@ export const apiService = {
     });
   },
 };
+
+export const useApiService = () => {
+
+  const onSortChange = (e) => {
+    console.log(e)
+  }
+
+  const onBlockUser = async (username) => {
+    await apiService.blockUser({
+      username,
+      motivation: null
+    })
+  }
+
+  const onUnblockUser = async (username) => {
+    await apiService.unblockUser({
+      username,
+      motivation: null
+    })
+  }
+
+  const onDeleteUser = async (username) => {
+    await apiService.deleteUser({
+      username,
+      motivation: null
+    })
+  }
+
+  const onRedefineUserPassword = async (username) => {
+    await apiService.redefinePassword({
+      username,
+    })
+  }
+
+  const errorHandler = () => true
+
+  return {
+    errorHandler,
+    onRedefineUserPassword,
+    onDeleteUser,
+    onBlockUser,
+    onSortChange,
+    onUnblockUser
+  }
+}

@@ -94,7 +94,6 @@
     })
   }
 
-
   onMounted(() => {
     apiService.loadRoles().then(({ data }) => {
       state.options = data

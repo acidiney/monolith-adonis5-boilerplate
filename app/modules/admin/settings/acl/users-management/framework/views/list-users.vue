@@ -1,21 +1,25 @@
 <script setup>
 import {computed, ref, watch, h} from 'vue'
+
+import { useI18n } from 'vue-i18n'
 import {usePage} from "@inertiajs/vue3"
-import { apiService } from './services/api'
+import { ElInput, ElMessageBox } from 'element-plus'
+
 import AppStatus from '@core/components/app-status.vue'
+import {useHasPermission } from '@core/composables/has-permission'
+import { useApiService } from './services/api'
 import AppCreateUserDialog
   from './components/app-create-user-dialog.vue'
-import { ElInput, ElMessageBox } from 'element-plus'
-import { useI18n } from 'vue-i18n'
+
 const dialogVisible = ref(false)
 
 const content = computed(() => usePage().props.content)
 const alert = computed(() => usePage().props.alert)
+const selfUsername = computed(() => usePage().props.user.slug)
 const isRoot = computed(() => usePage().props.user.role.isRoot)
 
 const { t } = useI18n()
 watch(alert, () => {
-
   if (alert.value.successWithModal && alert.value.payload) {
     ElMessageBox.alert(h('div', null, [
       h('p', null, t('admin.acl.user.password.reseted')),
@@ -25,38 +29,12 @@ watch(alert, () => {
   })
   }
 })
-const onSortChange = (e) => {
-  console.log(e)
-}
+const { checkPermission } = useHasPermission()
+const { errorHandler, onBlockUser, onDeleteUser, onRedefineUserPassword, onSortChange, onUnblockUser } = useApiService()
 
-const onBlockUser =  async (username) => {
-  await apiService.blockUser({
-    username,
-    motivation: null
-  })
+const disableOnSelf = (username) => {
+  return selfUsername.value === username
 }
-
-const onUnblockUser =  async (username) => {
-  await apiService.unblockUser({
-    username,
-    motivation: null
-  })
-}
-
-const onDeleteUser =  async (username) => {
-  await apiService.deleteUser({
-    username,
-    motivation: null
-  })
-}
-
-const onRedefineUserPassword =  async (username) => {
-  await apiService.redefinePassword({
-    username,
-  })
-}
-
-const errorHandler = () => true
 </script>
 
 <style scoped>
@@ -78,7 +56,10 @@ const errorHandler = () => true
 
         <div class="flex"></div>
         <div class="user-management-options">
-          <el-dropdown @click="dialogVisible = true" split-button type="primary">
+          <el-dropdown :disabled="!checkPermission('admin-acl-create-user')"
+          @click="dialogVisible = true"
+          split-button
+          type="primary">
             {{ $t('admin.acl.users.register') }}
             <template #dropdown>
               <el-dropdown-menu>
@@ -170,14 +151,19 @@ const errorHandler = () => true
             <el-dropdown
             trigger="click"
             :hide-on-click="false"
-            :disabled="!isRoot && scope.row.roleSlug === 'root'" split-button size="small" type="primary">
+            :disabled="!checkPermission('admin-acl-modify-user') || (!isRoot && scope.row.roleSlug === 'root') || disableOnSelf(scope.row.slug)"
+            split-button
+            size="small"
+            type="primary">
               {{ $t('shared.edit') }}
               <template #dropdown>
                 <el-dropdown-menu>
-                  <el-dropdown-item>
+                  <el-dropdown-item
+                  :disabled="!checkPermission('admin-acl-reset-user') || scope.row.isInternal"
+                  >
                   <el-popconfirm
                         :width="250"
-                        :disabled="scope.row.isInternal"
+                        :disabled="!checkPermission('admin-acl-reset-user') || scope.row.isInternal"
                         @confirm="onRedefineUserPassword(scope.row.slug)"
                         confirm-button-type="warning"
                         :confirm-button-text="$t('shared.ok_proceed')"
@@ -192,12 +178,12 @@ const errorHandler = () => true
 
                 </el-dropdown-item>
                   <el-dropdown-item
-                  :disabled="scope.row.roleSlug === 'root'"
-                  
-                  v-if="scope.row.status === 'active'" divided>
+                  :disabled="!checkPermission('admin-acl-inactive-user') || scope.row.roleSlug === 'root'"
+                  v-if="scope.row.status === 'active'"
+                  divided>
                   <el-popconfirm
                         :width="250"
-                        :disabled="scope.row.roleSlug === 'root'"
+                        :disabled="!checkPermission('admin-acl-inactive-user') || scope.row.roleSlug === 'root'"
                         @confirm="onBlockUser(scope.row.slug)"
                         confirm-button-type="warning"
                         :confirm-button-text="$t('shared.ok_proceed')"
@@ -211,12 +197,12 @@ const errorHandler = () => true
                   
                   </el-dropdown-item>
                   <el-dropdown-item
-                  :disabled="scope.row.roleSlug === 'root'"
-                   
-                  v-if="scope.row.status === 'inactive'" divided>
+                  :disabled="!checkPermission('admin-acl-active-user') || scope.row.roleSlug === 'root'"
+                  v-if="scope.row.status === 'inactive'"
+                  divided>
                   <el-popconfirm
                         :width="250"
-                        :disabled="scope.row.roleSlug === 'root'"
+                        :disabled="!checkPermission('admin-acl-active-user') || scope.row.roleSlug === 'root'"
                         @confirm="onUnblockUser(scope.row.slug)"
                         confirm-button-type="success"
                         :confirm-button-text="$t('shared.ok_proceed')"
@@ -231,12 +217,12 @@ const errorHandler = () => true
                   </el-dropdown-item>
                   <!-- el-dropdown-item :disabled="scope.row.roleSlug === 'root'">{{ $t('admin.acl.impersonate') }}</el-dropdown-item -->
                   <el-dropdown-item
-                    :disabled="scope.row.roleSlug === 'root'"
-                    class="text-danger"
+                    :disabled="!checkPermission('admin-acl-delete-user') || scope.row.roleSlug === 'root'"
+                    :class="{'text-danger': !(!checkPermission('admin-acl-delete-user') || scope.row.roleSlug === 'root')}"
                     divided>
                     <el-popconfirm
                         :width="250"
-                        :disabled="scope.row.roleSlug === 'root'"
+                        :disabled="!checkPermission('admin-acl-delete-user') || scope.row.roleSlug === 'root'"
                         @confirm="onDeleteUser(scope.row.slug)"
                         confirm-button-type="danger"
                         :confirm-button-text="$t('shared.ok_proceed')"

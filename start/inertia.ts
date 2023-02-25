@@ -11,7 +11,9 @@ Inertia.share({
   user: async (ctx) => {
     if (ctx.auth.user) {
       const user = await UserModel.query()
-        .preload('role')
+        .preload('role', (builder) => {
+          builder.preload('permissions')
+        })
         .where('id', ctx.auth.user.id)
         .firstOrFail()
 
@@ -31,6 +33,7 @@ Inertia.share({
           slug: user.role.slug,
           description: user.role.isSystem ? ctx.i18n.formatMessage(user.role.description) : user.role.description,
         },
+        permissions: user.role.permissions?.map((p) => p.id),
       }
     }
     return
