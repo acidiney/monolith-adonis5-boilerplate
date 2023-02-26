@@ -14,6 +14,7 @@
         self[plugin].apply(self, getOpts(opts, plugin))
         loading.remove()
       } else {
+        if (!MODULE_CONFIG[plugin]) return
         // load the plugin
         lazyload.load(MODULE_CONFIG[plugin]).then(function () {
           // init plugin with the potion on it's attribute

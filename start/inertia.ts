@@ -26,7 +26,7 @@ Inertia.share({
         avatar: user.avatar,
         lastLoginText: user.lastLoginAt && new DateAdapterImpl().toRelative(user.lastLoginAt.toJSDate()),
         lastLoginAt:  user.lastLoginAt && new DateAdapterImpl().format(user.lastLoginAt.toJSDate()),
-        status: user.status,
+        status: user.statusId,
         role: {
           isRoot: user.role.isRoot,
           name: user.role.name,
