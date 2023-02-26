@@ -7,7 +7,18 @@
 
 import Env from '@ioc:Adonis/Core/Env'
 import { driveConfig } from '@adonisjs/core/build/config'
-import Application from '@ioc:Adonis/Core/Application'
+import { join } from 'node:path'
+import { userInfo } from 'node:os'
+import { existsSync, mkdirSync } from 'node:fs'
+const userHomeDir = userInfo().homedir
+const appName = Env.get('APP_NAME')
+const rootDir = join(userHomeDir, appName)
+const uploadDir = join(rootDir, 'uploads')
+
+if (!existsSync(rootDir)) {
+  mkdirSync(rootDir)
+  mkdirSync(uploadDir)
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -53,7 +64,7 @@ export default driveConfig({
       | files.
       |
       */
-      root: Application.resourcesPath('storage'),
+      root: uploadDir,
 
       /*
       |--------------------------------------------------------------------------
