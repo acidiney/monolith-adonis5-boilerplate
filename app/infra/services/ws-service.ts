@@ -1,6 +1,6 @@
 import { Server } from 'socket.io'
 import AdonisServer from '@ioc:Adonis/Core/Server'
-
+import Env from '@ioc:Adonis/Core/Env'
 export class WsService {
   public io: Server
   private booted = false
@@ -17,7 +17,7 @@ export class WsService {
 
     this.io = new Server(AdonisServer.instance!, {
       cors: {
-        origin: true,
+        origin: [Env.get('APP_INTERNAL')],
       },
     })
   }
