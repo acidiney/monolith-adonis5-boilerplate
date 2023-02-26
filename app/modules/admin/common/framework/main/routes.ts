@@ -13,7 +13,7 @@ Route.group(() => {
   })
 
   Route.inertia('/dashboard', 'admin/common/framework/views/dashboard')
-  Route.inertia('/profile/:slug', 'admin/common/framework/views/profile')
+  Route.inertia('/profile', 'admin/common/framework/views/profile')
 
   Route.get('/settings', routeAdapter(makeShowSettingsPageControllerFactory(), {
     operation: 'account-view-settings-page',

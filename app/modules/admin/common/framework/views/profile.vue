@@ -1,30 +1,35 @@
 <script setup>
-defineProps({
-  user: Object
+import { computed } from 'vue'
+
+const props = defineProps({
+  user: Object,
+  data: Object
 })
+
+const info = computed(() => props.data ?? props.user)
 </script>
 
 <template>
-  <account-layout :title="user.fullName">
+  <account-layout :title="info.fullName">
     <template v-slot:header>
       <app-page-hero :title="$t('menu.user.profile')" :sub-title="$t('menu.user.profile.subtitle')" />
     </template>
     <template v-slot:body>
       <div class="card">
-        <div class="card-header bg-dark bg-img p-0 no-border" data-stellar-background-ratio="0.1" data-plugin="stellar">
+        <div class="card-header bg-dark bg-img p-0 no-border">
           <div class="bg-dark-overlay r-2x no-r-b">
             <div class="d-md-flex">
               <div class="p-4">
                 <div class="d-flex">
                   <a href="#">
-                    <el-avatar :src="user.avatar" :size="64" @error="() => true">
-                      {{ user.fullName[0] }}
+                    <el-avatar :src="info.avatar" :size="64" @error="() => true">
+                      {{ info.fullName[0] }}
                     </el-avatar>
                   </a>
                   <div class="mx-3">
-                    <h5 class="mt-2">{{ user.fullName }}</h5>
+                    <h5 class="mt-2">{{ info.fullName }}</h5>
                     <div class="text-fade text-sm">
-                      <span class="m-r">{{ user.role.description }}</span>
+                      <span class="m-r">{{ info.role.internal ? $t(info.role.description) : info.role.description }}</span>
                     </div>
                   </div>
                 </div>
@@ -63,7 +68,7 @@ defineProps({
                     <div class="col-6">
                       <small class="text-muted">{{ $t('shared.email') }}</small>
                       <div class="my-2">
-                        <a class="text-color" :href="`mailto:${user.email}`">{{ user.email }}</a>
+                        <a class="text-color" :href="`mailto:${info.email}`">{{ info.email }}</a>
                       </div>
                     </div>
                     <div class="col-6">
@@ -72,11 +77,11 @@ defineProps({
                         <el-popover effect="light" trigger="hover" placement="top" width="auto">
                           <template #default>
                             <div>
-                              {{ user.lastLoginAt }}
+                              {{ info.lastLoginAt }}
                             </div>
                           </template>
                           <template #reference>
-                            {{ user.lastLoginText }}
+                            {{ info.lastLoginText }}
                           </template>
                         </el-popover>
                       </div>
@@ -85,7 +90,7 @@ defineProps({
                   <div>
                     <small class="text-muted">{{ $t('shared.bio') }}</small>
                     <div class="my-2">
-                      {{ user.bio || $t('shared.no_bio') }}
+                      {{ info.bio || $t('shared.no_bio') }}
                     </div>
                   </div>
                 </div>

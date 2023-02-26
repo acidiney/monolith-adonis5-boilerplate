@@ -26,7 +26,7 @@ const useLogout = () => {
         <span>{{ $page.props.user.fullName }}</span>
       </a>
       <div class="dropdown-divider"></div>
-      <router-link class="dropdown-item" :href="`/account/profile/${$page.props.user.slug}`">
+      <router-link class="dropdown-item" :href="`/account/profile`">
         <span>{{ $t('menu.user.profile') }}</span>
       </router-link>
       <router-link class="dropdown-item" href="/account/settings">

@@ -10,11 +10,18 @@ import { makeDeleteUserControllerFactory } from './factories/make-delete-user-co
 import { makeRedefineUserPasswordControllerFactory } from './factories/make-redefine-user-password-controller-factory'
 import { makeUnblockUserControllerFactory } from './factories/make-unblock-user-controller-factory'
 import { makeBlockUserControllerFactory } from './factories/make-block-user-controller-factory'
+import { makeViewUserControllerFactory } from './factories/make-view-user-controller-factory'
 
 Route.group(() => {
   Route.get('/users', routeAdapter(makeListUsersFactory(), {
     operation: 'admin-acl-list-users',
     description: '[AdminRoute] List all users',
+  }))
+    .middleware('can:admin-acl-view-users')
+
+  Route.get('/users/:username', routeAdapter(makeViewUserControllerFactory(), {
+    operation: 'admin-acl-view-a-user-profile',
+    description: '[AdminRoute] View a user profile',
   }))
     .middleware('can:admin-acl-view-users')
 

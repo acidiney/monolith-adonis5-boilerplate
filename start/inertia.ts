@@ -29,9 +29,10 @@ Inertia.share({
         status: user.status,
         role: {
           isRoot: user.role.isRoot,
-          name: user.role.isSystem ? ctx.i18n.formatMessage(user.role.name) : user.role.name,
+          name: user.role.name,
           slug: user.role.slug,
-          description: user.role.isSystem ? ctx.i18n.formatMessage(user.role.description) : user.role.description,
+          internal: user.role.isSystem,
+          description: user.role.description,
         },
         permissions: user.role.permissions?.map((p) => p.id),
       }

@@ -80,7 +80,7 @@ const useLogout = () => {
             <el-form-item :label="$t('shared.profile.picture')" prop="avatar">
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" id="customFile" @change="uploadFile" ref="fileRef"/>
-                    <label class="custom-file-label" for="customFile">{{ $t('shared.picture.choose') }}</label>
+                    <label class="custom-file-label" for="customFile">{{ updateUserForm.avatar ? updateUserForm.avatar.name: $t('shared.picture.choose') }}</label>
                 </div>
             </el-form-item>
             <el-form-item :label="$t('shared.user.firstname')" prop="firstName">

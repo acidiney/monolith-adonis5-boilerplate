@@ -108,7 +108,7 @@ const disableOnSelf = (username) => {
         </el-table-column>
         <el-table-column prop="fullName" :min-width="180" sortable :label="$t('acl.users.list-users.full_name')">
           <template #default="scope">
-            <router-link :href="`/account/profile/${scope.row.slug}`">{{ scope.row.fullName }}</router-link> <br />
+            <router-link :href="`/account/admin/settings/acl/users/${scope.row.slug}`">{{ scope.row.fullName }}</router-link> <br />
             <a :href="`mailto:${scope.row.email}`" class="small text-muted">{{ scope.row.email }}</a>
           </template>
         </el-table-column>
