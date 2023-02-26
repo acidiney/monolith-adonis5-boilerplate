@@ -11,6 +11,7 @@ import { makeRedefineUserPasswordControllerFactory } from './factories/make-rede
 import { makeUnblockUserControllerFactory } from './factories/make-unblock-user-controller-factory'
 import { makeBlockUserControllerFactory } from './factories/make-block-user-controller-factory'
 import { makeViewUserControllerFactory } from './factories/make-view-user-controller-factory'
+import { makeUpdateUserControllerFactory } from './factories/make-update-user-controller-factory'
 
 Route.group(() => {
   Route.get('/users', routeAdapter(makeListUsersFactory(), {
@@ -54,6 +55,12 @@ Route.group(() => {
     description: '[AdminRoute] Reactive a user',
   }))
     .middleware(['can:admin-acl-active-user'])
+
+  Route.put('/user/:username', routeAdapter(makeUpdateUserControllerFactory(), {
+    operation: 'admin-acl-update-a-user',
+    description: '[AdminRoute] Update a user',
+  }))
+    .middleware('can:admin-acl-modify-user')
 })
   .prefix('/account/admin/settings/acl')
   .middleware(['auth'])

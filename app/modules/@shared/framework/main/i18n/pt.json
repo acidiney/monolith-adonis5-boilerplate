@@ -27,5 +27,5 @@
   "shared.roles.root.description": "Super utilizador, com todas as permissões associadas.",
   "shared.roles.admin.description": "Utilizador com todas permissões de gestão de sistema associadas.",
   "shared.updated_at_with_date": "Ultima actualização: { date }",
-  "admin.shared.user.inactive": "🛑 [ Utilizador Bloqueado ] - Não pode realizar essa operação, reactive-o primeiro!"
+  "shared.please_reload_page": "🌀 Actualize a página para receber as novas actualizações."
 }

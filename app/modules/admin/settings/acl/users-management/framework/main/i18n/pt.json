@@ -18,5 +18,7 @@
   "admin.acl.users.create": "Criar utilizador e continuar",
   "admin.acl.users.create_and_close": "Criar utilizador",
   "admin.acl.users.realtime.user.blocked": "✋🏾 O seu utilizador foi bloqueado!",
-  "admin.acl.users.realtime.user.blocked_description": "O seu utilizador foi bloqueado por { adminName }, e neste momento estamos a retirar todas as suas permissões nesse momento. Entre em contacto caso tenha sido engano!"
+  "admin.acl.users.realtime.user.blocked_description": "O seu utilizador foi bloqueado por { adminName }, e neste momento estamos a retirar todas as suas permissões nesse momento. Entre em contacto caso tenha sido engano!",
+  "admin.acl.users.realtime.user.updated": "🚶🏽‍♀️ Passando para avisar que o seu utilizador foi actualizado.",
+  "admin.shared.user.inactive": "🛑 [ Utilizador Bloqueado ] - Não pode realizar essa operação, reactive-o primeiro!"
 }

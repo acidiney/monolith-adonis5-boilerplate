@@ -1,13 +1,14 @@
 import {EventDispatcher} from 'app/core/domain'
 import {
   UserBlockedListener,
-  UserCreatedListener, UserDeletedListener, UserPasswordRestoredListener, UserRestoredListener,
+  UserCreatedListener, UserDeletedListener, UserPasswordRestoredListener, UserRestoredListener, UserUpdatedListener,
 } from 'app/modules/admin/settings/acl/users-management/framework/infra/listeners'
 import {UserCreatedEvent} from 'app/modules/admin/settings/acl/users-management/domain/events/user-created-event'
 import { UserDeletedEvent } from '../../domain/events/user-deleted-event'
 import { UserRestoredEvent } from '../../domain/events/user-restored-event'
 import { UserBlockedEvent } from '../../domain/events/user-blocked-event'
 import { UserPasswordRestoredEvent } from '../../domain/events/user-password-restored-event'
+import { UserUpdatedEvent } from '../../domain/events/user-updated-event'
 
 EventDispatcher
   .getInstance()
@@ -16,3 +17,4 @@ EventDispatcher
   .register(UserRestoredEvent.name, new UserRestoredListener())
   .register(UserBlockedEvent.name, new UserBlockedListener())
   .register(UserPasswordRestoredEvent.name, new UserPasswordRestoredListener())
+  .register(UserUpdatedEvent.name, new UserUpdatedListener())

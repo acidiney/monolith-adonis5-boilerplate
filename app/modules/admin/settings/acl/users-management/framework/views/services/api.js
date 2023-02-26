@@ -15,6 +15,20 @@ export const apiService = {
       });
     });
   },
+
+  updateUser: (username, form) => {
+    return new Promise((resolve) => {
+      return router.put(
+        `/account/admin/settings/acl/user/${username}`,
+        form,
+        {
+          onSuccess: (data) => {
+            resolve(data);
+          },
+        }
+      );
+    });
+  },
   deleteUser: (form) => {
     return new Promise((resolve) => {
       return router.delete(

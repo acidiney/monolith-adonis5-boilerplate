@@ -92,6 +92,14 @@ export class UserEntity extends Entity<UserProps> {
     this.props.lastName = lastName
   }
 
+  public updatePermissions (roleId: UniqueEntityID): void {
+    this.props.roleId = roleId
+  }
+
+  public alterEmail (email: Email) : void {
+    this.props.email = email
+  }
+
   public block () {
     this.props.status = StatusEnum.INACTIVE
   }

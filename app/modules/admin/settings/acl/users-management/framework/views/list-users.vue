@@ -1,5 +1,5 @@
 <script setup>
-import {computed, ref, watch, h} from 'vue'
+import {computed, ref, watch, h, reactive} from 'vue'
 
 import { useI18n } from 'vue-i18n'
 import {usePage} from "@inertiajs/vue3"
@@ -12,6 +12,14 @@ import AppCreateUserDialog
   from './components/app-create-user-dialog.vue'
 
 const dialogVisible = ref(false)
+const selectUserToUpdate = reactive({
+  username: null,
+  email: null,
+  email: null,
+  firstName: null,
+  lastName: null,
+  roleId: null
+})
 
 const content = computed(() => usePage().props.content)
 const alert = computed(() => usePage().props.alert)
@@ -29,11 +37,28 @@ watch(alert, () => {
   })
   }
 })
+
+watch(dialogVisible, (value) => {
+  if (value === false) {
+    selectUserToUpdate.username = null
+  }
+})
 const { checkPermission } = useHasPermission()
 const { errorHandler, onBlockUser, onDeleteUser, onRedefineUserPassword, onSortChange, onUnblockUser } = useApiService()
 
 const disableOnSelf = (username) => {
   return selfUsername.value === username
+}
+
+const onEditUser = (user) => {
+  selectUserToUpdate.username = user.slug,
+  selectUserToUpdate.email = user.email,
+  selectUserToUpdate.email = user.email,
+  selectUserToUpdate.firstName = user.firstName,
+  selectUserToUpdate.lastName = user.lastName
+  selectUserToUpdate.roleId = user.roleId
+
+  dialogVisible.value = true
 }
 </script>
 
@@ -152,6 +177,7 @@ const disableOnSelf = (username) => {
             trigger="click"
             :hide-on-click="false"
             :disabled="!checkPermission('admin-acl-modify-user') || (!isRoot && scope.row.roleSlug === 'root') || disableOnSelf(scope.row.slug)"
+            @click="onEditUser(scope.row)"
             split-button
             size="small"
             type="primary">
@@ -260,7 +286,9 @@ const disableOnSelf = (username) => {
 
       <app-create-user-dialog
         v-if="dialogVisible"
-        v-model:dialog-visible="dialogVisible" />
+        v-model:dialog-visible="dialogVisible"
+        :selected-user="selectUserToUpdate"
+        />
     </template>
   </account-layout>
 </template>

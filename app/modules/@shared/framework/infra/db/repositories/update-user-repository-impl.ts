@@ -4,7 +4,7 @@ import {UpdateUserRepository} from 'app/modules/auth/usecases/reset-password/por
 
 export class UpdateUserRepositoryImpl implements UpdateUserRepository {
   constructor (
-    private readonly userMapper: UserMapper
+    private readonly userMapper: UserMapper = new UserMapper()
   ) {
   }
   public async update (user: UserEntity): Promise<void> {
