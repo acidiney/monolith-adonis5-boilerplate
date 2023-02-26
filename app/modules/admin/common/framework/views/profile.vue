@@ -1,5 +1,6 @@
-<script setup>
+<script setup id="app-profile">
 import { computed } from 'vue'
+import AppStatus from '@core/components/app-status.vue'
 
 const props = defineProps({
   user: Object,
@@ -16,7 +17,7 @@ const info = computed(() => props.data ?? props.user)
     </template>
     <template v-slot:body>
       <div class="card">
-        <div class="card-header bg-dark bg-img p-0 no-border">
+        <div class="card-header bg-dark bg-img p-0 no-border" data-stellar-background-ratio="0.1" data-plugin="stellar">
           <div class="bg-dark-overlay r-2x no-r-b">
             <div class="d-md-flex">
               <div class="p-4">
@@ -37,6 +38,7 @@ const info = computed(() => props.data ?? props.user)
               <span class="flex"></span>
               <div class="align-items-center d-flex p-4">
                 <div class="toolbar">
+                  <app-status :status="info.status"  />
                   <!-- <a href="#" class="btn btn-sm btn-icon bg-dark-overlay btn-rounded">
                       <app-icon class="text-fade" icon="phone" :size="12" />
                     </a> -->
