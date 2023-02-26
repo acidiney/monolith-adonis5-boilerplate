@@ -26,7 +26,6 @@ export class UserModel extends BaseModel {
   @slugify({
     strategy: 'dbIncrement',
     fields: ['firstName', 'lastName'],
-    allowUpdates: true,
   })
   public slug: string
 
