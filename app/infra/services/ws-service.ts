@@ -17,8 +17,11 @@ export class WsService {
 
     this.io = new Server(AdonisServer.instance!, {
       cors: {
-        origin: [Env.get('APP_INTERNAL')],
+        origin: Env.get('APP_INTERNAL'),
+        methods: ['GET', 'POST', 'OPTIONS'],
+        credentials: true,
       },
+      allowEIO3: true,
     })
   }
 
