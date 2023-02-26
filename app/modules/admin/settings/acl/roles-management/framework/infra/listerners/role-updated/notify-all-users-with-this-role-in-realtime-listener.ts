@@ -1,10 +1,10 @@
 import { Handler } from 'app/infra/listeners/handler'
 import { RoleModel } from 'app/modules/@shared/framework/infra/db/models'
-import { RoleUpdatedEvent } from '../../../domain/events'
+import { RoleUpdatedEvent } from '../../../../domain/events'
 
 import Event from '@ioc:Adonis/Core/Event'
 
-export class RoleUpdatedListener extends Handler<RoleUpdatedEvent> {
+export class NotifyAllUsersWithThisRoleInRealtimeListener extends Handler<RoleUpdatedEvent> {
   public async handle (event: RoleUpdatedEvent): Promise<void> {
     const role = await RoleModel
       .query()
