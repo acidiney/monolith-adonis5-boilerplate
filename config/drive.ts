@@ -8,11 +8,14 @@
 import Env from '@ioc:Adonis/Core/Env'
 import { driveConfig } from '@adonisjs/core/build/config'
 import { join } from 'node:path'
+import Application from '@ioc:Adonis/Core/Application'
 import { userInfo } from 'node:os'
 import { existsSync, mkdirSync } from 'node:fs'
-const userHomeDir = userInfo().homedir
+
+const applicationInSystemRootDir = Application.inDev ? userInfo().homedir : '/var'
+
 const appName = Env.get('APP_NAME')
-const rootDir = join(userHomeDir, appName)
+const rootDir = join(applicationInSystemRootDir, appName)
 const uploadDir = join(rootDir, 'uploads')
 
 if (!existsSync(rootDir)) {
