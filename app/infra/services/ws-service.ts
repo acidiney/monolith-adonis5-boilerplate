@@ -19,6 +19,7 @@ export class WsService {
       cors: {
         origin: Env.get('APP_INTERNAL'),
       },
+      transports: ['polling'],
     })
   }
 

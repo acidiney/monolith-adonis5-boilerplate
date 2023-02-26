@@ -6,7 +6,7 @@ class SocketioService {
   constructor() {}
 
   setupSocketConnection() {
-    this.socket = io(process.env.APP_INTERNAL);
+    this.socket = io();
   }
 
   disconnect() {
