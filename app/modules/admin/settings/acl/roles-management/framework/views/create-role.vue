@@ -4,11 +4,12 @@ import { usePage } from "@inertiajs/vue3";
 
 import { apiService } from "./services/api";
 import AppAccordion from "@core/components/app-accordion.vue";
-
+import { useHasPermission } from '@core/composables/has-permission'
 
 import { useRoleForm } from './composable/use-role-form'
 
 const { ruleForm, permissionsGroup, ruleFormRef, state, rules } = useRoleForm()
+const { checkPermission } = useHasPermission()
 
 const alert = computed(() => usePage().props.alert)
 
@@ -85,10 +86,12 @@ const onSubmit = async (formEl, redirect) => {
         <div class="d-flex justify-content-end">
           <el-button
               :loading="state.loading"
+              :disabled="!checkPermission('admin-acl-create-role')"
               @click.prevent="onSubmit(ruleFormRef, false)"
           > {{ $t('admin.acl.users.create') }} </el-button>
           <el-button
               native-type="submit"
+              :disabled="!checkPermission('admin-acl-create-role')"
               @click.prevent="onSubmit(ruleFormRef, true)"
               :loading="state.loading"
               type="primary"

@@ -4,7 +4,9 @@ import { useI18n } from 'vue-i18n'
 import { apiService } from "./services/api";
 import {usePage, router} from "@inertiajs/vue3"
 
+import { useHasPermission } from '@core/composables/has-permission'
 const { t } = useI18n()
+const { checkPermission } = useHasPermission()
 
 const state = reactive({
   perPage: 10,
@@ -63,7 +65,7 @@ onMounted(() => {
         <div class="flex"></div>
         <div class="user-management-options">
           <el-dropdown
-
+              :disabled="!checkPermission('admin-acl-create-role')"
               split-button
               type="primary"
           >
@@ -140,18 +142,21 @@ onMounted(() => {
               :hide-on-click="false"
               size="small"
               type="primary"
-              :disabled="(scope.row.isInternal && !isRoot) || state.loadingKey === scope.row.slug"
+              :disabled="!checkPermission('admin-acl-modify-role') || (scope.row.isInternal && !isRoot) || state.loadingKey === scope.row.slug"
               @click="redirectTo(`/account/admin/settings/acl/roles/${scope.row.slug}/edit`)"
             >
               {{ $t('shared.edit') }}
               <template #dropdown>
                 <el-dropdown-menu>
                   <el-dropdown-item
-                    :disabled="scope.row.isInternal"
-                    class="text-danger">
+                    :disabled="!checkPermission('admin-acl-delete-role') || scope.row.isInternal"
+                    :class="{
+                      'text-danger': !(!checkPermission('admin-acl-delete-role') || scope.row.isInternal)
+                    }
+                    ">
                     <el-popconfirm
                         :width="250"
-                        :disabled="scope.row.isInternal"
+                        :disabled="!checkPermission('admin-acl-delete-role') || scope.row.isInternal"
                         @confirm="handleDeleteRole(scope.row.slug, scope.row.isInternal)"
                         confirm-button-type="danger"
                         :confirm-button-text="$t('shared.ok_proceed')"

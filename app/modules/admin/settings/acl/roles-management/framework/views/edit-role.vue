@@ -6,9 +6,11 @@ import {apiService} from "./services/api"
 import AppAccordion from "@core/components/app-accordion.vue";
 
 import { useRoleForm } from './composable/use-role-form'
+import { useHasPermission } from '@core/composables/has-permission'
 
 const { t, ruleForm, permissionsGroup, ruleFormRef, state, rules } = useRoleForm()
 
+const { checkPermission } = useHasPermission()
 const alert = computed(() => usePage().props.alert)
 const role = computed(() => usePage().props.role)
 const isRoot = computed(() => usePage().props.user.role.isRoot)
@@ -111,7 +113,7 @@ onMounted(() => {
             <span>{{ $t('shared.updated_at_with_date', { date: role.updatedAtText }) }}</span>
           </div>
           <el-button
-              :disabled="role.internal && !isRoot"
+              :disabled="!checkPermission('admin-acl-modify-role') || (role.internal && !isRoot)"
               :loading="state.loading"
               @click.prevent="onSubmit(ruleFormRef)"
           > {{ $t('admin.acl.role.update') }} </el-button>

@@ -10,6 +10,8 @@
 
   import {apiService} from '../services/api'
 
+  import { useHasPermission } from '@core/composables/has-permission'
+
   defineProps({
     dialogVisible: Boolean,
   })
@@ -17,6 +19,7 @@
   const emit = defineEmits(['update:dialogVisible'])
 
   const { t } = useI18n()
+  const { checkPermission } = useHasPermission()
 
   const ruleFormRef = ref()
 
@@ -197,10 +200,12 @@
       <span class="dialog-footer">
         <el-button
           :loading="state.loading"
+          :disabled="!checkPermission('admin.acl.create.user')"
           @click.prevent="onSubmit(ruleFormRef, true)"
         > {{ $t('admin.acl.users.create') }} </el-button>
         <el-button
           :loading="state.loading"
+          :disabled="!checkPermission('admin.acl.create.user')"
           @click.prevent="onSubmit(ruleFormRef, false)"
           type="primary">
           {{ $t('admin.acl.users.create_and_close') }}
