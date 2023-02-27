@@ -8,5 +8,7 @@
   "admin.acl.role.edit": "A editar perfil",
   "menu.admin.setting.acl.roles.edit_role": "Editar perfil",
   "admin.acl.role.updated": "🚶🏽‍♀️ Passando para avisar que as suas permissões foram modificadas!",
-  "admin.acl.role.updated-description": "Actualize a página para as receber, e bom trabalho 😊."
+  "admin.acl.role.updated-description": "Actualize a página para as receber, e bom trabalho 😊.",
+  "acl.role.name": "Nome do perfil",
+  "menu.admin.setting.acl.roles.new_role": "Criar novo perfil"
 }
