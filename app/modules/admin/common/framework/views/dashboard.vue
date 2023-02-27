@@ -1,6 +1,6 @@
 <script setup>
-import {computed, reactive, ref} from "vue";
-import {usePage} from "@inertiajs/vue3";
+import { computed, reactive, ref } from "vue";
+import { usePage } from "@inertiajs/vue3";
 
 const dashboardListOptions = ref([
   {
@@ -26,40 +26,24 @@ const errors = computed(() => usePage().props.errors)
 </script>
 
 <template>
-  <account-layout
-  :title="$t('menu.main.dashboard')"
-  >
+  <account-layout :title="$t('menu.main.dashboard')">
     <template v-slot:header>
-      <app-page-hero
-        :title="$t('menu.main.dashboard')"
-        :sub-title="
-          $t('admin.page_hero.common.dashboard.subtitle', {
-            name: $page.props.user.fullName,
-          })
-        "
-      >
+      <app-page-hero :title="$t('menu.main.dashboard')" :sub-title="
+        $t('admin.page_hero.common.dashboard.subtitle', {
+          name: $page.props.user.fullName,
+        })
+      ">
         <div class="flex"></div>
         <div class="refresh-dashboard-timer mr-2">
-          <el-select v-model="state.dashboard" class="m-2"
-                     :placeholder="$t('common.dashboard.select_dashboard')"
-                     size="default">
-            <el-option
-              v-for="item in dashboardListOptions"
-              :key="item.id"
-              :label="item.display"
-              :value="item.id"
-            />
+          <el-select v-model="state.dashboard" class="m-2" :placeholder="$t('common.dashboard.select_dashboard')"
+            size="default">
+            <el-option v-for="item in dashboardListOptions" :key="item.id" :label="item.display" :value="item.id" />
           </el-select>
         </div>
         <div>
           <el-select v-model="state.refreshInterval" class="m-2"
-                  :placeholder="$t('common.dashboard.select_refresh_interval')" size="default">
-            <el-option
-              v-for="item in refreshIntervalOptions"
-              :key="item"
-              :label="item"
-              :value="item"
-            />
+            :placeholder="$t('common.dashboard.select_refresh_interval')" size="default">
+            <el-option v-for="item in refreshIntervalOptions" :key="item" :label="item" :value="item" />
           </el-select>
         </div>
       </app-page-hero>
@@ -75,12 +59,8 @@ const errors = computed(() => usePage().props.errors)
             <div class="row no-gutters">
               <div class="col-sm-6">
                 <div class="p-4">
-                  <div
-                    id="jqvmap-world"
-                    data-plugin="vectorMap"
-                    style="height: 240px"
-                    class="d-flex align-items-center justify-content-center"
-                  >
+                  <div id="jqvmap-world" data-plugin="vectorMap" style="height: 240px"
+                    class="d-flex align-items-center justify-content-center">
                     <div class="loading"></div>
                   </div>
                 </div>
@@ -90,30 +70,21 @@ const errors = computed(() => usePage().props.errors)
                   <div class="my-2">
                     <small class="text-muted"> North America </small>
                     <div class="progress no-bg align-items-center mt-2 circle">
-                      <div
-                        class="progress-bar bg-primary"
-                        style="width: 45%"
-                      ></div>
+                      <div class="progress-bar bg-primary" style="width: 45%"></div>
                       <span class="ml-2 text-muted">45%</span>
                     </div>
                   </div>
                   <div class="my-2">
                     <small class="text-muted"> Europe </small>
                     <div class="progress no-bg align-items-center mt-2 circle">
-                      <div
-                        class="progress-bar bg-success"
-                        style="width: 25%"
-                      ></div>
+                      <div class="progress-bar bg-success" style="width: 25%"></div>
                       <span class="ml-2 text-muted">30%</span>
                     </div>
                   </div>
                   <div class="my-2">
                     <small class="text-muted"> Asia </small>
                     <div class="progress no-bg align-items-center mt-2 circle">
-                      <div
-                        class="progress-bar bg-info"
-                        style="width: 10%"
-                      ></div>
+                      <div class="progress-bar bg-info" style="width: 10%"></div>
                       <span class="ml-2 text-muted">10%</span>
                     </div>
                   </div>
@@ -145,11 +116,7 @@ const errors = computed(() => usePage().props.errors)
           <div class="card">
             <div class="card-header">Bar chart</div>
             <div class="card-body">
-              <div
-                id="chartist-bar"
-                class="pos-rlt"
-                style="height: 240px"
-              ></div>
+              <div id="chartist-bar" class="pos-rlt" style="height: 240px"></div>
             </div>
           </div>
         </div>
@@ -157,11 +124,7 @@ const errors = computed(() => usePage().props.errors)
           <div class="card">
             <div class="card-header">Horizental bar chart</div>
             <div class="card-body">
-              <div
-                id="chartist-h-bar"
-                class="pos-rlt"
-                style="height: 240px"
-              ></div>
+              <div id="chartist-h-bar" class="pos-rlt" style="height: 240px"></div>
             </div>
           </div>
         </div>
@@ -169,11 +132,7 @@ const errors = computed(() => usePage().props.errors)
           <div class="card">
             <div class="card-header">Pie chart</div>
             <div class="card-body">
-              <div
-                id="chartist-pie"
-                class="pos-rlt"
-                style="height: 240px"
-              ></div>
+              <div id="chartist-pie" class="pos-rlt" style="height: 240px"></div>
             </div>
           </div>
         </div>
@@ -181,11 +140,7 @@ const errors = computed(() => usePage().props.errors)
           <div class="card">
             <div class="card-header">Dougnut chart</div>
             <div class="card-body">
-              <div
-                id="chartist-dougnut"
-                class="pos-rlt"
-                style="height: 240px"
-              ></div>
+              <div id="chartist-dougnut" class="pos-rlt" style="height: 240px"></div>
             </div>
           </div>
         </div>

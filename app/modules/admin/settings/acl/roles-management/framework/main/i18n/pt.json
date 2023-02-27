@@ -1,9 +1,12 @@
 {
   "acl.roles.role_name": "Nome do perfil",
-  "acl.role.name": "Nome do perfil",
+  "acl.role.permissions.required":"Tem de selecionar uma permissão",
+    "acl.role.name": "Nome do perfil",
   "acl.role.name.required": "Nome do perfil obrigatório",
   "acl.role.description.required":"Descrição do perfil obrigatório",
+  "admin.acl.role.role_created":"Perfil criado",
   "admin.acl.roles.register": "Criar novo perfil",
+  "admin.acl.roles.updated":"Perfil actualizado",
   "admin.acl.roles.register.description":"Descrição de registro",
   "admin.acl.roles.role_have_users_associated": "Perfil contém utlizadores associados, por favor, altere primeiro o perfil dos utilizadores",
   "admin.acl.role.role_deleted": "Perfil eliminado com sucesso.",
