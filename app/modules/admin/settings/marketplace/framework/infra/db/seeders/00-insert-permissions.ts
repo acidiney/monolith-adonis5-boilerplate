@@ -6,31 +6,31 @@ export default class InsertPermissionSeed extends BaseSeeder {
     await PermissionModel
       .createMany([
         {
-          display: 'setting.marketplace.view-marketplace-display',
-          description: 'setting.marketplace.view-marketplace-description',
+          display: 'permission.setting.marketplace.view-marketplace-display',
+          description: 'permission.setting.marketplace.view-marketplace-description',
           id: 'admin-view-marketplace',
-          group: 'menu.marketplace',
+          group: 'permission.menu.marketplace',
           internal: true,
         },
         {
-          display: 'setting.marketplace.install-addon-display',
-          description: 'setting.marketplace.install-addon-description',
+          display: 'permission.setting.marketplace.install-addon-display',
+          description: 'permission.setting.marketplace.install-addon-description',
           id: 'admin-install-marketplace-addon',
-          group: 'menu.marketplace',
+          group: 'permission.menu.marketplace',
           internal: true,
         },
         {
-          display: 'setting.marketplace.update-addon-display',
-          description: 'setting.marketplace.update-addon-description',
+          display: 'permission.setting.marketplace.update-addon-display',
+          description: 'permission.setting.marketplace.update-addon-description',
           id: 'admin-update-marketplace-addon',
-          group: 'menu.marketplace',
+          group: 'permission.menu.marketplace',
           internal: true,
         },
         {
-          display: 'setting.marketplace.remove-addon-display',
-          description: 'setting.marketplace.remove-addon-description',
+          display: 'permission.setting.marketplace.remove-addon-display',
+          description: 'permission.setting.marketplace.remove-addon-description',
           id: 'admin-remove-marketplace-addon',
-          group: 'menu.marketplace',
+          group: 'permission.menu.marketplace',
           internal: true,
         },
       ])
