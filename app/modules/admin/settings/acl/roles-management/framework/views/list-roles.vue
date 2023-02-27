@@ -39,7 +39,7 @@ const handleDeleteRole = (roleSlug, isInternal) => {
 }
 
 const canSelect = (row) => {
-  return (row.isInternal && !isRoot.value)
+  return !row.isInternal
 }
 
 onMounted(() => {
