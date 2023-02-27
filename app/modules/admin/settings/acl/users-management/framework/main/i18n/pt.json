@@ -1,12 +1,11 @@
 {
-  "menu.acl.view-users": "Utilizadores",
-  "menu.admin.setting.acl.users": "Gestão de utilizadores",
   "acl.users.list-users.id": "#",
   "acl.users.list-users.full_name": "Nome Completo",
   "acl.users.list-users.email": "E-mail",
   "acl.users.list-users.last_login": "Último Login",
   "acl.users.list-users.role": "Perfil",
   "admin.acl.users.register": "Adicionar novo utilizador",
+  "admin.acl.users.register.description":"Dados do utilizador",
   "admin.acl.inactivate": "Bloquear",
   "admin.acl.activate": "Desbloquear",
   "admin.acl.impersonate": "Impersonar",
@@ -20,5 +19,13 @@
   "admin.acl.users.realtime.user.blocked": "✋🏾 O seu utilizador foi bloqueado!",
   "admin.acl.users.realtime.user.blocked_description": "O seu utilizador foi bloqueado por { adminName }, e neste momento estamos a retirar todas as suas permissões nesse momento. Entre em contacto caso tenha sido engano!",
   "admin.acl.users.realtime.user.updated": "🚶🏽‍♀️ Passando para avisar que o seu utilizador foi actualizado.",
-  "admin.shared.user.inactive": "🛑 [ Utilizador Bloqueado ] - Não pode realizar essa operação, reactive-o primeiro!"
+  "admin.shared.user.inactive": "🛑 [ Utilizador Bloqueado ] - Não pode realizar essa operação, reactive-o primeiro!",
+  "menu.acl.view-users": "Utilizadores",
+  "menu.admin.setting.acl.users": "Gestão de utilizadores",
+  "menu.admin.setting.acl.users-description": "Descrição do utilizador",
+  "shared.user.first_name":"Nome",
+  "shared.user.last_name":"Sobrenome",
+  "shared.users.email":"E-mail",
+  "shared.users.role":"Perfil"
+
 }
