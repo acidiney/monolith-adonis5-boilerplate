@@ -62,7 +62,7 @@ const onEditUser = (user) => {
 }
 
 const canSelect = (row) => {
-  return !(row.roleSlug === 'root') && !disableOnSelf(row.slug)
+  return !(row.roleSlug === 'root') || !disableOnSelf(row.slug)
 }
 </script>
 
