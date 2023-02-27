@@ -13,7 +13,7 @@ export class ListRolesDropdownUseCaseImpl implements ListRolesDropdownUseCase {
 
   public async perform (input: ListRolesDropdownUseCaseInput): Promise<ListRolesDropdownUseCaseOutput> {
     return this.listAllRolesRepository.findAll(input)
-      .then((data) => data.map(r => ({
+      .then((data) => data.filter((r) => r.slug !== 'root').map(r => ({
         name: r.name,
         id: r.id.toString(),
         slug: r.slug,

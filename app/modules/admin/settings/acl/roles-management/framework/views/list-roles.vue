@@ -38,6 +38,10 @@ const handleDeleteRole = (roleSlug, isInternal) => {
   apiService.deleteRole(roleSlug)
 }
 
+const canSelect = (row) => {
+  return (row.isInternal && !isRoot.value)
+}
+
 onMounted(() => {
   state.perPage = usePage().props.query.perPage
   state.page = usePage().props.query.pages
@@ -108,7 +112,9 @@ onMounted(() => {
           cell-class-name="bg-body text-color"
           :data="content.data"
       >
-        <el-table-column type="selection" width="50" />
+        <el-table-column type="selection" width="50"
+        :selectable="canSelect"
+        />
         <el-table-column prop="name" :label="$t('acl.roles.role_name')">
           <template #default="scope">
 

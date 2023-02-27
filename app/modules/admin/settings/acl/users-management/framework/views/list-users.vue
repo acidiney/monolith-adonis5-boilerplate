@@ -60,6 +60,10 @@ const onEditUser = (user) => {
 
   dialogVisible.value = true
 }
+
+const canSelect = (row) => {
+  return !(row.roleSlug === 'root') && !disableOnSelf(row.slug)
+}
 </script>
 
 <style scoped>
@@ -123,7 +127,9 @@ const onEditUser = (user) => {
           :data="content.data"
           @sort-change="onSortChange"
       >
-        <el-table-column type="selection" width="50" />
+        <el-table-column type="selection" width="50"
+          :selectable="canSelect"
+        />
         <el-table-column prop="avatar" width="70">
           <template #default="scope">
             <el-avatar :src="scope.row.avatar" :size="35" @error="errorHandler">
@@ -220,7 +226,7 @@ const onEditUser = (user) => {
                         {{ $t('admin.acl.inactivate') }}
                       </template>
                     </el-popconfirm>
-                  
+
                   </el-dropdown-item>
                   <el-dropdown-item
                   :disabled="!checkPermission('admin-acl-active-user') || scope.row.roleSlug === 'root'"
@@ -239,7 +245,7 @@ const onEditUser = (user) => {
                         {{ $t('admin.acl.activate') }}
                       </template>
                     </el-popconfirm>
-                  
+
                   </el-dropdown-item>
                   <!-- el-dropdown-item :disabled="scope.row.roleSlug === 'root'">{{ $t('admin.acl.impersonate') }}</el-dropdown-item -->
                   <el-dropdown-item
@@ -259,7 +265,7 @@ const onEditUser = (user) => {
                         {{ $t('shared.remove') }}
                       </template>
                     </el-popconfirm>
-                  
+
                   </el-dropdown-item>
                 </el-dropdown-menu>
               </template>
