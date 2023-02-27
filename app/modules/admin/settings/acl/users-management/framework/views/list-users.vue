@@ -3,7 +3,7 @@ import {computed, ref, watch, h, reactive} from 'vue'
 
 import { useI18n } from 'vue-i18n'
 import {usePage} from "@inertiajs/vue3"
-import { ElInput, ElMessageBox } from 'element-plus'
+import { ElInput, ElMessageBox, useProp } from 'element-plus'
 
 import AppStatus from '@core/components/app-status.vue'
 import {useHasPermission } from '@core/composables/has-permission'
@@ -26,8 +26,11 @@ const alert = computed(() => usePage().props.alert)
 const selfUsername = computed(() => usePage().props.user.slug)
 const isRoot = computed(() => usePage().props.user.role.isRoot)
 
+
+
 const { t } = useI18n()
 watch(alert, () => {
+  if (!alert.value) return
   if (alert.value.successWithModal && alert.value.payload) {
     ElMessageBox.alert(h('div', null, [
       h('p', null, t('admin.acl.user.password.reseted')),
@@ -41,6 +44,9 @@ watch(alert, () => {
 watch(dialogVisible, (value) => {
   if (value === false) {
     selectUserToUpdate.username = null
+    if (alert.value.successWithModal) {
+      usePage().props.alert = undefined
+    }
   }
 })
 const { checkPermission } = useHasPermission()

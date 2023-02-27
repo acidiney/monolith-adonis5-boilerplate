@@ -13,7 +13,10 @@ const info = computed(() => props.data ?? props.user)
 <template>
   <account-layout :title="info.fullName">
     <template v-slot:header>
-      <app-page-hero :title="$t('menu.user.profile')" :sub-title="$t('menu.user.profile.subtitle')" />
+      <app-page-hero
+          :title="!data ? $t('menu.user.profile') : $t('menu.user.other_profile', { fullName: data.fullName })"
+          :sub-title="$t('menu.user.profile.subtitle')"
+      />
     </template>
     <template v-slot:body>
       <div class="card">

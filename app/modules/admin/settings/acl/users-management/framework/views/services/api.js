@@ -9,7 +9,7 @@ export const apiService = {
   createUser: (form) => {
     return new Promise((resolve) => {
       return router.post("/account/admin/settings/acl/user", form, {
-        onFinish: (data) => {
+        onSuccess: (data) => {
           resolve(data);
         },
       });
