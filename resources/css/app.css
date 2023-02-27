@@ -53,3 +53,9 @@
 .bg-dark .el-collapse-item__wrap {
   border-bottom: unset;
 }
+
+.multi-selected-option {
+  position: fixed;
+  bottom: 5em;
+  right: 1em;
+}
