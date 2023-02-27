@@ -6,5 +6,6 @@
   "menu.user.profile.subtitle": "Informações do utilizador",
   "menu.settings.subtitle": "Configurações da conta",
   "admin.page_hero.common.dasboard.subtitle": "Bem vindo de volta, {name}!",
-  "admin.common.profile_data": "Dados do perfil"
+  "admin.common.profile_data": "Dados do perfil",
+  "menu.user.other_profile": "Perfil de { fullName }"
 }

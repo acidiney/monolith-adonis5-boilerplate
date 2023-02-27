@@ -78,7 +78,7 @@ watch(online, (v) => {
 onBeforeUnmount(() => {
   window.removeEventListener("online", updateOnlineStatus);
   window.removeEventListener("offline", updateOnlineStatus);
-  SocketioService.socket.disconnect();
+  SocketService.socket.disconnect();
 });
 
 defineProps({
