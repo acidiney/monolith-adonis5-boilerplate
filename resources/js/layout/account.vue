@@ -12,7 +12,7 @@ import emitter from '../core/event-bus'
 import AppHeader from "../core/components/app-header.vue";
 import AppFooter from "../core/components/app-footer.vue";
 import AppSidebar from "../core/components/app-sidebar.vue";
-import SocketioService from '../core/services/socket-io-client'
+import SocketService from '../core/services/socket-io-client'
 
 import { ElNotification } from "element-plus";
 import { useI18n } from "vue-i18n";
@@ -37,13 +37,13 @@ onMounted(() => {
       window.initTheme();
     }
 
-    SocketioService.setupSocketConnection()
+    SocketService.setupSocketConnection()
 
-    SocketioService.socket.emit('connected', {
+    SocketService.socket.emit('connected', {
       username: user.value.slug,
     })
-    
-    SocketioService.socket.on('alert', (data) => {
+
+    SocketService.socket.on('alert', (data) => {
       ElNotification({
         title: t(data.title),
         message: t(data.message),
