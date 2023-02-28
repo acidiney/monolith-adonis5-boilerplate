@@ -4,7 +4,7 @@ import { apiService } from "./services/api";
 import { usePage, router } from "@inertiajs/vue3";
 
 import { useHasPermission } from "@core/composables/has-permission";
-import e from "cors";
+
 const { checkPermission } = useHasPermission();
 
 const state = reactive({
@@ -37,6 +37,12 @@ const handleDeleteRole = (roleSlug, isInternal) => {
   apiService.deleteRole(roleSlug);
 };
 
+const handleDeleteBulk = (slugs) => {
+  if (!slugs.length) return;
+
+  apiService.deleteRoleBulk(slugs)
+};
+
 const canSelect = (row) => {
   return !row.isInternal;
 };
@@ -55,6 +61,10 @@ onMounted(() => {
 <style scoped>
 .w-4 {
   width: 4% !important;
+}
+
+.mt-4 {
+  margin-top: 4em !important;
 }
 </style>
 
@@ -106,8 +116,6 @@ onMounted(() => {
       >
         {{ alert.message }}
       </p>
-
-
 
       <el-table
         class="table-theme bg-body"
@@ -243,36 +251,34 @@ onMounted(() => {
       </div>
 
       <div class="mt-4 float-right" v-if="state.selectedRows.length">
-        <el-dropdown
-          split-button
-          trigger="click"
-          :hide-on-click="false"
-          type="danger"
-          :disabled="
-            !checkPermission('admin-acl-delete-role') && state.loadingKey
-          "
-        >
+        <el-dropdown :hide-on-click="false">
           <el-popconfirm
             :width="250"
-            :disabled="
-              !checkPermission('admin-acl-delete-role')
-            "
+            :disabled="!checkPermission('admin-acl-delete-role')"
+            @confirm="handleDeleteBulk(state.selectedRows)"
             confirm-button-type="danger"
             :confirm-button-text="$t('shared.ok_proceed')"
             :cancel-button-text="$t('shared.no_thanks')"
             :title="$t('shared.want_to_delete')"
           >
             <template #reference>
-              {{ $t("shared.remove") }}
+              <el-button
+                type="danger"
+                :disabled="
+                  !checkPermission('admin-acl-delete-role') && state.loadingKey
+                "
+              >
+                {{ $t("shared.remove_multi_options") }}
+              </el-button>
             </template>
           </el-popconfirm>
-          <template #dropdown>
+          <!-- <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item>
-                {{ $t('shared.export_selected_rows') }}
+                {{ $t("shared.export_selected_rows") }}
               </el-dropdown-item>
             </el-dropdown-menu>
-          </template>
+          </template> -->
         </el-dropdown>
       </div>
     </template>

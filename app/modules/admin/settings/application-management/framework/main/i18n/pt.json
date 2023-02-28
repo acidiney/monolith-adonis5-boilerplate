@@ -1,3 +1,5 @@
 {
-  "menu.admin.setting.setup.application": "Configurar aplicação"
+  "menu.admin.setting.setup.application": "Configurar aplicação",
+  "permission.group.admin.setup.application": "Configuração",
+  "permission.setup.application": "Configurar a aplicação"
 }

@@ -88,7 +88,7 @@ const onSubmit = async (formEl, redirect) => {
               :loading="state.loading"
               :disabled="!checkPermission('admin-acl-create-role')"
               @click.prevent="onSubmit(ruleFormRef, false)"
-          > {{ $t('admin.acl.users.create') }} </el-button>
+          > {{ $t('admin.acl.roles.create') }} </el-button>
           <el-button
               native-type="submit"
               :disabled="!checkPermission('admin-acl-create-role')"
@@ -96,7 +96,7 @@ const onSubmit = async (formEl, redirect) => {
               :loading="state.loading"
               type="primary"
           >
-            {{ $t('admin.acl.users.create_and_redirect') }}
+            {{ $t('admin.acl.roles.create_and_redirect') }}
           </el-button>
         </div>
       </el-form>

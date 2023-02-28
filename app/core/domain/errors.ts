@@ -1,4 +1,5 @@
 export interface DomainError {
   message: string
-  error?: any
+  error: string
+  payload?: any
 }

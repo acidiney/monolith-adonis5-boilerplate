@@ -1,10 +1,13 @@
 {
   "menu.admin.setting.setup.addons": "Marketplace",
+  "permission.menu.marketplace": "Marketplace",
   "marketplace.addon.install": "Instalar",
   "markeplace.addon.update": "Actualização disponível",
   "marketplace.addon.installed": "Instalado e actualizado",
-  "admin.acl.users.want_to_deactivate": "Inactivar utilizador",
-  "admin.acl.users.want_to_activate": "Activar utilizador",
-  "admin.acl.users.want_to_reset_password": "Redefinir senha de utilizador"
-
+  "menu.marketplace": "Marketplace",
+  "marketplace.addons.list-addons": "Lista de modulos",
+  "permission.setting.marketplace.install-addon-display": "Instalar módulo",
+  "permission.setting.marketplace.remove-addon-display": "Remover módulo",
+  "permission.setting.marketplace.update-addon-display": "Alterar módulo",
+  "permission.setting.marketplace.view-marketplace-display": "Ver módulo"
 }

@@ -59,3 +59,34 @@
   bottom: 5em;
   right: 1em;
 }
+
+.el-button {
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.el-button  span {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 8px 15px !important;
+}
+
+.el-button.el-dropdown__caret-button {
+  padding: 8px 15px !important;
+}
+.el-dropdown__caret-button span {
+  position: unset !important;
+  display: unset !important;
+  padding: unset !important;
+  width: auto !important;
+}
+
+.el-button.el-button--small span{
+  padding: 5px 11px !important;
+}
+
+.el-button.el-button--small.el-dropdown__caret-button {
+  padding: unset !important;
+}

@@ -26,7 +26,7 @@
   "shared.user.lastname": "Sobrenome",
   "shared.update": "Actualizar",
   "shared.offline": "Ficou sem internet 😢",
-  "shared.back_to_online":"Conexão restaurada 😊",
+  "shared.back_to_online": "Conexão restaurada 😊",
   "shared.remove": "Remover",
   "shared.edit": "Editar",
   "shared.export": "Exportar Dados",
@@ -49,5 +49,12 @@
   "shared.roles.root.description": "Super utilizador, com todas as permissões associadas.",
   "shared.roles.admin.description": "Utilizador com todas permissões de gestão de sistema associadas.",
   "shared.updated_at_with_date": "Ultima actualização: { date }",
-  "shared.please_reload_page": "🌀 Actualize a página para receber as novas actualizações."
+  "shared.please_reload_page": "🌀 Actualize a página para receber as novas actualizações.",
+  "shared.user.first_name": "Nome",
+  "shared.user.last_name": "Sobrenome",
+  "shared.users.email": "E-mail",
+  "shared.users.role": "Perfil",
+  "shared.permissions": "Permissões",
+  "shared.description": "Descrição",
+  "shared.remove_multi_options": "Remover linhas selecionadas"
 }

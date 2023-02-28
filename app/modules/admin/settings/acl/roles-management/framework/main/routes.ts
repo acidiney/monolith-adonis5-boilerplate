@@ -5,11 +5,12 @@ import {
   makeListRolesFactory,
   makeListDropdownRolesFactory,
   makeShowCreateRolePageControllerFactory,
-  makeCreateRoleControllerFactory, makeShowEditRolePageControllerFactory, makeUpdateRoleControllerFactory,
-} from './factories'
-import {
   makeDeleteRoleFactory,
-} from 'app/modules/admin/settings/acl/roles-management/framework/main/factories/make-delete-role-factory'
+  makeCreateRoleControllerFactory,
+  makeShowEditRolePageControllerFactory,
+  makeUpdateRoleControllerFactory,
+  makeDeleteBulkControllerFactory,
+} from './factories'
 
 Route.group(() => {
   Route.get('/', routeAdapter(makeListRolesFactory(), {
@@ -33,6 +34,11 @@ Route.group(() => {
   Route.delete('/delete', routeAdapter(makeDeleteRoleFactory(), {
     operation: 'admin-acl-delete-route',
     description: '[AdminRoute] Delete a role',
+  }))
+
+  Route.delete('/delete/bulk', routeAdapter(makeDeleteBulkControllerFactory(), {
+    operation: 'admin-acl-delete-bulk-routes',
+    description: '[AdminRoute] Delete bulk roles',
   }))
 
   Route.get('/:roleSlug/edit', routeAdapter(makeShowEditRolePageControllerFactory(), {

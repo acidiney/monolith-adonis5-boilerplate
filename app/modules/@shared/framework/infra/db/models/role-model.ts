@@ -4,6 +4,7 @@ import {BaseModel, beforeSave, column, computed, manyToMany, ManyToMany, hasMany
 import { DateTime } from 'luxon'
 import { UserModel } from './user-model'
 import { PermissionModel } from './permission-model'
+import { softDelete } from '../adapters/soft-delete-adapter'
 
 export class RoleModel extends BaseModel {
   public static table = 'core_roles'
@@ -62,5 +63,9 @@ export class RoleModel extends BaseModel {
   @computed()
   public get isRoot (): boolean {
     return this.slug === 'root'
+  }
+
+  public async softDelete () {
+    await softDelete(this)
   }
 }
