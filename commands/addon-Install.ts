@@ -18,9 +18,7 @@ export default class InstallAddon extends BaseCommand {
   public packageName: string
 
   public async run () {
-    const { HttpClientAdapterImpl } =
-        await import('app/modules/@shared/framework/infra/adapters/http-client-adapter-impl')
-    const { AddonServiceImpl } = await import('app/modules/@shared/framework/infra/services/addon-service-impl')
+    const { HttpClientAdapterImpl, AddonServiceImpl } = await import('app/modules/@shared/framework/infra')
 
     const addonServiceImpl = new AddonServiceImpl(new HttpClientAdapterImpl())
 
