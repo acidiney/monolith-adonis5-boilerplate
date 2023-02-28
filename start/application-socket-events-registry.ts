@@ -10,7 +10,10 @@
 
 import Event from '@ioc:Adonis/Core/Event'
 import Logger from '@ioc:Adonis/Core/Logger'
+
+import { resolve } from 'path'
 import { Socket } from 'socket.io'
+import { loadContext as context } from 'app/infra/utils'
 
 export interface Broadcast {
   message: string,
@@ -36,6 +39,15 @@ export class ApplicationSocketEventsRegistry {
     }
 
     Logger.info('Application Socket Events Registered!')
+
+    ;['../app/modules'].forEach(async (path) => {
+      const req = context(resolve(__dirname, path), true, /main\/socket\.(ts|js)$/)
+      for (const filename of req.keys()) {
+        const m = (await require(filename)).default
+        void m(this.socket)
+      }
+    })
+
     Event.on('alert:realtime:broadcast:all', ({ type, message, title, icon, eventName }: Broadcast) => {
       this.socket.emit('alert', {
         title,
