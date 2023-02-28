@@ -18,6 +18,7 @@
   "auth.send_reset_password.send_link_event": "A enviar instruções...",
   "auth.shared.back_login": "Voltar para o login",
   "auth.login.success": "Conectado!",
+  "auth.login_revoked":"Usuario desconectado",
   "auth.user.mismatch": "Username ou senha inválidas!",
   "auth.logout.success": "Desconectado com sucesso!",
   "auth.validation.username.required": "Username é obrigatório!",

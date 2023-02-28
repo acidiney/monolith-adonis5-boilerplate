@@ -24,6 +24,8 @@
   "menu.admin.setting.acl.roles.new_role": "Criar novo perfil",
   "menu.marketplace": "Marketplace",
   "marketplace.addons.list-addons": "Lista de modulos",
+  "shared.alert":"Confirmar",
+  "marketplace.confirm_want_to_install_addon":"Tem certeza que pretende installar este modulo?",
   "menu.admin.setting.acl.roles.new_role_description": "Descrição de perfil",
   "permission.group.acl.manage.users": "Gerir utilizador",
   "permission.acl.active.user": "Activar utilizador",
