@@ -8,11 +8,11 @@ import {
   watch,
 } from "vue";
 import { usePage } from "@inertiajs/vue3";
-import emitter from '../core/event-bus'
+import emitter from "../core/event-bus";
 import AppHeader from "../core/components/app-header.vue";
 import AppFooter from "../core/components/app-footer.vue";
 import AppSidebar from "../core/components/app-sidebar.vue";
-import SocketService from '../core/services/socket-io-client'
+import SocketService from "../core/services/socket-io-client";
 
 import { ElNotification } from "element-plus";
 import { useI18n } from "vue-i18n";
@@ -21,9 +21,10 @@ const animate = ref(false);
 const online = ref(navigator.onLine);
 const showBackOnline = ref(false);
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const alert = computed(() => usePage().props.alertGlobal);
+const inProd = computed(() => usePage().props.inProd);
 
 const user = computed(() => usePage().props.user);
 
@@ -37,26 +38,26 @@ onMounted(() => {
       window.initTheme();
     }
 
-    SocketService.setupSocketConnection()
+    SocketService.setupSocketConnection();
 
-    SocketService.socket.emit('connected', {
+    SocketService.socket.emit("connected", {
       username: user.value.slug,
-    })
+    });
 
-    SocketService.socket.on('alert', (data) => {
+    SocketService.socket.on("alert", (data) => {
       ElNotification({
         title: t(data.title),
         message: t(data.message),
         type: data.type,
         icon: data.icon,
-        position: 'bottom-right',
+        position: "bottom-right",
         duration: 0,
-      })
+      });
 
-      if (data.eventName === 'USER_BLOCKED') {
-        emitter.emit('logout')
+      if (data.eventName === "USER_BLOCKED") {
+        emitter.emit("logout");
       }
-    })
+    });
   });
 });
 
@@ -88,6 +89,13 @@ defineProps({
 
 <template>
   <app-head :title="title" />
+  <div
+    class="alert fade show mb-0 alert-warning"
+    v-if="!inProd"
+    role="alert"
+  >
+    {{ $t('shared.inDevelopment') }}
+  </div>
 
   <div
     :class="[
@@ -98,7 +106,6 @@ defineProps({
       },
     ]"
     v-if="alert"
-
     role="alert"
   >
     {{ alert.message }}

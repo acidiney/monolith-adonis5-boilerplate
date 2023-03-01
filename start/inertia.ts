@@ -1,6 +1,8 @@
+import Application from '@ioc:Adonis/Core/Application'
 import { DateTime } from 'luxon'
 
 import Inertia from '@ioc:EidelLev/Inertia'
+
 import {UserModel} from 'app/modules/@shared/framework/infra/db/models'
 import { DateAdapterImpl } from 'app/modules/@shared/framework/infra/adapters/date-adapter-impl'
 const pkg = require('../package.json')
@@ -43,4 +45,5 @@ Inertia.share({
   headers: (ctx) => ctx.session.get('header'),
   version: pkg.version,
   copyright: DateTime.now().get('year'),
+  inProd: Application.inProduction,
 })

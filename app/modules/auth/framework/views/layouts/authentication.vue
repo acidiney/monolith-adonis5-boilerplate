@@ -1,12 +1,12 @@
 <script setup>
-import { computed } from 'vue'
-import { usePage } from '@inertiajs/vue3'
-import { Head } from '@inertiajs/vue3'
-import AppFooter from '@core/components/app-footer.vue'
+import { computed } from "vue";
+import { usePage } from "@inertiajs/vue3";
+import { Head } from "@inertiajs/vue3";
+import AppFooter from "@core/components/app-footer.vue";
 
-const headers = computed(() => usePage().props.headers)
-const alert = computed(() => usePage().props.alertGlobal)
-
+const headers = computed(() => usePage().props.headers);
+const alert = computed(() => usePage().props.alertGlobal);
+const inProd = computed(() => usePage().props.inProd);
 </script>
 
 <style scoped>
@@ -39,7 +39,7 @@ main {
 
 <style>
 .no-required-exclamation label::before {
-  content: '' !important;
+  content: "" !important;
 }
 
 .el-form-item__label {
@@ -48,8 +48,11 @@ main {
 </style>
 
 <template>
-  <Head :title="$page.props.headers.appName"/>
-  <div class="auth d-flex  justify-content-center">
+  <Head :title="$page.props.headers.appName" />
+  <div class="alert fade show mb-0 alert-warning" v-if="!inProd" role="alert">
+    {{ $t("shared.inDevelopment") }}
+  </div>
+  <div class="auth d-flex justify-content-center">
     <div class="card p-4 py-5">
       <div class="card-body h-100">
         <h1 class="title mb-1 text-highlight">{{ headers.appName }}</h1>
@@ -60,13 +63,13 @@ main {
           <div
             v-if="alert"
             :class="[
-                'alert fade show',
-                {
-                  'alert-danger': !alert.success
-                },
-                {
-                  'alert-success': alert.success
-                }
+              'alert fade show',
+              {
+                'alert-danger': !alert.success,
+              },
+              {
+                'alert-success': alert.success,
+              },
             ]"
             role="alert"
           >
@@ -79,4 +82,3 @@ main {
     </div>
   </div>
 </template>
-
