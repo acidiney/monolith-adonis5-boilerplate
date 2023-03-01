@@ -38,7 +38,7 @@ export class UnblockUserController implements Controller<HttpContextContract> {
 
     session.flash('alert', {
       success: true,
-      message: i18n.formatMessage('admin.acl.users.blocked'),
+      message: i18n.formatMessage('admin.acl.users.unblocked'),
     })
 
     return response.redirect().back()
