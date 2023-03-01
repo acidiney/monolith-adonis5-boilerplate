@@ -110,7 +110,8 @@ const canSelect = (row) => {
     </template>
 
     <template v-slot:body>
-      <p
+      <div
+      role="alert"
           v-if="alert && !alert.successWithModal"
           :class="[
             'alert',
@@ -122,7 +123,8 @@ const canSelect = (row) => {
             }
         ]">
         {{ alert.message }}
-      </p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
 
       <el-table
           class="table-theme bg-body"
