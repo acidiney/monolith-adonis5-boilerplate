@@ -10,6 +10,21 @@ export default class AppProvider {
 
   public async boot () {
     // IoC container is ready
+    const HealthCheck = this.app.container.use('Adonis/Core/HealthCheck')
+    const Bull = await import('@ioc:Rocketseat/Bull')
+
+    HealthCheck.addChecker('queues', async () => {
+      return {
+        displayName: 'Queues',
+        health: {
+          healthy: true,
+          message: 'Everything works fine',
+        },
+        meta: {
+          names: Object.keys(Bull.default.queues),
+        },
+      }
+    })
   }
 
   public async ready () {

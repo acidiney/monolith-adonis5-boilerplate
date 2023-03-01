@@ -57,7 +57,6 @@ const databaseConfig: DatabaseConfig = {
       pool: {
         min: 3,
         max: 20,
-        acquireTimeoutMillis: 9999999,
       },
       migrations: {
         naturalSort: true,
@@ -72,7 +71,6 @@ const databaseConfig: DatabaseConfig = {
         ],
       },
       healthCheck: true,
-      debug: Application.inDev,
     },
 
     sqlite: {

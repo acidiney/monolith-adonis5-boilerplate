@@ -1,8 +1,10 @@
 import 'module-alias/register'
+import { resolve } from 'path'
 import Route from '@ioc:Adonis/Core/Route'
+import HealthCheck from '@ioc:Adonis/Core/HealthCheck'
+
 import { loadContext as context } from 'app/infra/utils'
 import { routeMemory, RouteMemoryAction } from './state'
-import { resolve } from 'path'
 
 const loadFiles = (path: string, pattern: any) => {
   const req = context(path, true, pattern)
@@ -20,6 +22,14 @@ const loadFiles = (path: string, pattern: any) => {
 ;['../app/modules', './routes'].forEach((path) => {
   loadFiles(resolve(__dirname, path), /main\/events\.(ts|js)$/)
   loadFiles(resolve(__dirname, path), /main\/routes\.(ts|js)$/)
+})
+
+Route.get('health', async ({ response }) => {
+  const report = await HealthCheck.getReport()
+
+  return report.healthy
+    ? response.ok(report)
+    : response.badRequest(report)
 })
 
 Route.get('/', ({ auth, response }) => {
