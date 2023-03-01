@@ -1,4 +1,4 @@
-import Application from '@ioc:Adonis/Core/Application'
+import Env from '@ioc:Adonis/Core/Env'
 import { DateTime } from 'luxon'
 
 import Inertia from '@ioc:EidelLev/Inertia'
@@ -45,5 +45,5 @@ Inertia.share({
   headers: (ctx) => ctx.session.get('header'),
   version: pkg.version,
   copyright: DateTime.now().get('year'),
-  inProd: Application.inProduction,
+  inProd: Env.get('IN_STAGGING', false),
 })

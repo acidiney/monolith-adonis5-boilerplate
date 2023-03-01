@@ -91,10 +91,10 @@ defineProps({
   <app-head :title="title" />
   <div
     class="alert fade show mb-0 alert-warning"
-    v-if="!inProd"
+    v-if="inProd"
     role="alert"
-  >
-    {{ $t('shared.inDevelopment') }}
+    >
+      {{ $t('shared.inDevelopment') }}
   </div>
 
   <div

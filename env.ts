@@ -40,4 +40,5 @@ export default Env.rules({
   SMTP_PASSWORD: Env.schema.string(),
   MAIL_FROM: Env.schema.string(),
   DB_CONNECTION: Env.schema.string(),
+  IN_STAGGING: Env.schema.boolean.optional(),
 })

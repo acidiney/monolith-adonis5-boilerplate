@@ -49,7 +49,7 @@ main {
 
 <template>
   <Head :title="$page.props.headers.appName" />
-  <div class="alert fade show mb-0 alert-warning" v-if="!inProd" role="alert">
+  <div class="alert fade show mb-0 alert-warning" v-if="inProd" role="alert">
     {{ $t("shared.inDevelopment") }}
   </div>
   <div class="auth d-flex justify-content-center">
