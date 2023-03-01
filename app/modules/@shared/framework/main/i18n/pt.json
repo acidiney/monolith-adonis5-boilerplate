@@ -29,6 +29,7 @@
   "shared.back_to_online": "Conexão restaurada 😊",
   "shared.remove": "Remover",
   "shared.edit": "Editar",
+  "shared.inDevelopment": "Ambiente de Testes",
   "shared.export": "Exportar Dados",
   "shared.version": "Versão",
   "shared.roles.admin": "Administrador do sistema",
