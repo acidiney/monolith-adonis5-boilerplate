@@ -167,7 +167,7 @@ onMounted(() => {
       :title="$t('admin.acl.users.register')"
       width="35%"
     >
-      <p
+      <div
         v-if="alert && alert.successWithModal"
         :class="[
           'alert',
@@ -178,9 +178,11 @@ onMounted(() => {
             'alert-danger': !alert.success,
           },
         ]"
+        role="alert"
       >
         {{ alert.message }}
-      </p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
 
       <p class="text-muted">
         {{ $t("admin.acl.users.register.description") }}
