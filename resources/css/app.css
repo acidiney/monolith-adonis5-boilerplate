@@ -83,6 +83,17 @@
   width: auto !important;
 }
 
+.el-button.is-loading {
+  padding: 8px 15px !important;
+}
+
+.el-button.is-loading span {
+  position: unset !important;
+  display: unset !important;
+  padding: unset !important;
+  width: auto !important;
+}
+
 .el-button.el-button--small span{
   padding: 5px 11px !important;
 }

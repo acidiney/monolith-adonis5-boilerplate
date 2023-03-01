@@ -16,8 +16,8 @@ export const useRoleForm = () => {
     })
 
     const state = reactive({
-        loading: false
-    })
+      loading: false,
+    });
 
     const rules = reactive({
         name: [
