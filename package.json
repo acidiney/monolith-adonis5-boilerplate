@@ -5,13 +5,14 @@
     "email": "acidiney.dias@ideiasdinamicas.com",
     "name": "Acidiney Dias"
   },
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "prepare": "husky install",
     "dev": "node ace serve --watch",
     "dev:global": "node ace serve --watch  --encore-args='--host 0.0.0.0'",
     "build": "node ace build --production --ignore-ts-errors",
+    "release": "npx standard-version",
     "start": "node server.js",
     "lint": "eslint . --ext=.ts --fix",
     "test": "jest --runInBand --silent --passWithNoTests",
