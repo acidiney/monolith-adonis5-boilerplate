@@ -12,6 +12,7 @@
     "dev": "node ace serve --watch",
     "dev:global": "node ace serve --watch  --encore-args='--host 0.0.0.0'",
     "build": "node ace build --production --ignore-ts-errors",
+    "release": "npx standard-version",
     "start": "node server.js",
     "lint": "eslint . --ext=.ts --fix",
     "test": "jest --runInBand --silent --passWithNoTests",
