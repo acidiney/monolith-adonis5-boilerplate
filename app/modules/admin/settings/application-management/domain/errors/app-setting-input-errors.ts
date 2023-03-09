@@ -28,4 +28,13 @@ export namespace AppSettingInputErrors {
       })
     }
   }
+
+  export class HexadecimalValidad extends Result<DomainError> {
+    constructor () {
+      super(false, {
+        message: 'admin.settings.application-management.app_color.hexadecimal.not_valid',
+        error: AppDescRequiredError.name,
+      })
+    }
+  }
 }

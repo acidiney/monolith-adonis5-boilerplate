@@ -1,18 +1,19 @@
 import { Either, Entity, left, Options, right, UniqueEntityID } from 'app/core/domain'
 import { AppSettingInputErrors } from '../errors/app-setting-input-errors'
+import { Color } from '../value-objects/colors'
 
 interface ApplicationSettingsProps{
   appName:string;
   appDesc:string;
-  appColorPrimary:string;
-  appColorSecondary:string;
-  appBackgroundPrimaryColor:string;
-  appBackgroundSecondaryColor:string;
-
+  appColorPrimary:Color;
+  appColorSecondary:Color;
+  appBackgroundPrimaryColor:Color;
+  appBackgroundSecondaryColor:Color;
 }
 
 type AppSettingEntityError = AppSettingInputErrors.AppColorRequiredError
-| AppSettingInputErrors.AppNameRequiredError | AppSettingInputErrors.AppDescRequiredError
+| AppSettingInputErrors.AppNameRequiredError | AppSettingInputErrors.AppDescRequiredError |
+AppSettingInputErrors.HexadecimalValidad
 
 export class ApplicationSettingsEntity extends Entity<ApplicationSettingsProps>{
   public get appName ():string{
@@ -24,18 +25,18 @@ export class ApplicationSettingsEntity extends Entity<ApplicationSettingsProps>{
   }
 
   public get appColorPrimary ():string{
-    return this.props.appColorPrimary
+    return this.props.appColorPrimary.value
   }
 
   public get appColorSecondary ():string{
-    return this.props.appColorSecondary
+    return this.props.appColorSecondary.value
   }
   public get appBackgroundPrimaryColor ():string{
-    return this.props.appBackgroundPrimaryColor
+    return this.props.appBackgroundPrimaryColor.value
   }
 
   public get appBackgroundSecondaryColor ():string{
-    return this.props.appBackgroundSecondaryColor
+    return this.props.appBackgroundSecondaryColor.value
   }
   public changeAppName (name:string):void{
     this.props.appName = name
@@ -45,24 +46,29 @@ export class ApplicationSettingsEntity extends Entity<ApplicationSettingsProps>{
     this.props.appDesc = description
   }
 
-  public changeAppColorPrimary (primaryColor:string):void{
+  public changeAppColorPrimary (primaryColor:Color):void{
     this.props.appColorPrimary = primaryColor
   }
 
-  public changeAppColorSecondary (secondColor:string):void{
+  public changeAppColorSecondary (secondColor:Color):void{
     this.props.appColorSecondary = secondColor
   }
 
-  public changeAppBackgroundPrimaryColor (backgroundPrimaryColor:string):void{
+  public changeAppBackgroundPrimaryColor (backgroundPrimaryColor:Color):void{
     this.props.appBackgroundPrimaryColor = backgroundPrimaryColor
   }
 
-  public changeAppBackgroundSecondaryColor (backgroundSecondaryColor:string):void{
+  public changeAppBackgroundSecondaryColor (backgroundSecondaryColor:Color):void{
     this.props.appBackgroundSecondaryColor = backgroundSecondaryColor
   }
 
   public delete (): void {
     this._deletedAt= new Date()
+  }
+
+  public validateHexadecimalInput (input) {
+    var hexRegex = /^[0-9A-Fa-f]+$/
+    return hexRegex.test(input)
   }
 
   public validate (): Either<AppSettingEntityError, boolean>{
@@ -77,6 +83,33 @@ export class ApplicationSettingsEntity extends Entity<ApplicationSettingsProps>{
     }
 
     return right(true)
+  }
+
+  public static create (appName:string,
+    appDesc:string,
+    appColorPrimary:Color,
+    appColorSecondary:Color,
+    appBackgroundPrimaryColor:Color,
+    appBackgroundSecondaryColor:Color,): Either<AppSettingInputErrors.AppNameRequiredError,
+    ApplicationSettingsEntity>{
+    if (appName.trim().length === 0) {
+      return left(new AppSettingInputErrors.AppNameRequiredError())
+    }
+
+    if (appDesc.trim().length === 0) {
+      return left(new AppSettingInputErrors.AppDescRequiredError())
+    }
+
+    const appSetting = new ApplicationSettingsEntity({
+      appName,
+      appDesc,
+      appColorPrimary,
+      appColorSecondary,
+      appBackgroundPrimaryColor,
+      appBackgroundSecondaryColor,
+    })
+
+    return right(appSetting)
   }
 
   public static hydrate (id: UniqueEntityID, props: ApplicationSettingsProps,
