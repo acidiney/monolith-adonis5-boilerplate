@@ -89,39 +89,27 @@ defineProps({
 
 <template>
   <app-head :title="title" />
-  <div
-    class="alert fade show mb-0 alert-warning"
-    v-if="inProd"
-    role="alert"
-    >
-      {{ $t('shared.inDevelopment') }}
+  <div class="alert fade show mb-0 alert-warning" v-if="inProd" role="alert">
+    {{ $t('shared.inDevelopment') }}
   </div>
 
-  <div
-    :class="[
-      'alert fade show mb-0',
-      {
-        'alert-danger': !alert.success,
-        'alert-success': alert.success,
-      },
-    ]"
-    v-if="alert"
-    role="alert"
-  >
+  <div :class="[
+    'alert fade show mb-0',
+    {
+      'alert-danger': !alert.success,
+      'alert-success': alert.success,
+    },
+  ]" v-if="alert" role="alert">
     {{ alert.message }}
   </div>
 
-  <div
-    :class="[
-      'alert fade show mb-0',
-      {
-        'alert-danger': !online,
-        'alert-success': showBackOnline,
-      },
-    ]"
-    v-if="showBackOnline || !online"
-    role="alert"
-  >
+  <div :class="[
+    'alert fade show mb-0',
+    {
+      'alert-danger': !online,
+      'alert-success': showBackOnline,
+    },
+  ]" v-if="showBackOnline || !online" role="alert">
     {{ showBackOnline ? $t("shared.back_to_online") : $t("shared.offline") }}
   </div>
   <div class="layout-row">
