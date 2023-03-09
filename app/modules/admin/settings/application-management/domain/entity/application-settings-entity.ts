@@ -62,7 +62,7 @@ export class ApplicationSettingsEntity extends Entity<ApplicationSettingsProps>{
     this.props.appBackgroundSecondaryColor = backgroundSecondaryColor
   }
 
-  public delete (): void {
+  public delete (): void |undefined {
     this._deletedAt= new Date()
   }
 

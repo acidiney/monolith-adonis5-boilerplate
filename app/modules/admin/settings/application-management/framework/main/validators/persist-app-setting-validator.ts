@@ -8,9 +8,9 @@ export class PersistAppSettindValidator{
     appName:schema.string({ trim: true }, [ rules.required(), rules.minLength(8) ]),
     appDesc:schema.string({ trim: true }, [ rules.required(), rules.minLength(8) ]),
     appColorPrimary:schema.string({ trim: true }, [ rules.required() ]),
-    appColorSecundary:schema.string({ trim: true }, [ rules.required() ]),
+    appColorSecondary:schema.string({ trim: true }, [ rules.required() ]),
     appBackgroundPrimaryColor:schema.string({ trim: true }, [ rules.required() ]),
-    appBackgroundSecundaryColor:schema.string({ trim: true }, [ rules.required()]),
+    appBackgroundSecondaryColor:schema.string({ trim: true }, [ rules.required()]),
   })
   public readonly message={}
 }

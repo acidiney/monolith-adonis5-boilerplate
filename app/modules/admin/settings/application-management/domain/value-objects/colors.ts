@@ -7,7 +7,7 @@ interface AppColorsProp{
 }
 
 export class Color extends ValueObject<AppColorsProp>{
-  constructor (
+  protected constructor (
     protected readonly prop:AppColorsProp
   ) {
     super(prop)

@@ -25,9 +25,9 @@ export class PersistAppSettingController implements Controller<HttpContextContra
       appName: validations.appName,
       appDesc: validations.appDesc,
       appColorPrimary: validations.appColorPrimary,
-      appColorSecundary: validations.appColorSecundary,
+      appColorSecondary: validations.appColorSecondary,
       appBackgroundPrimaryColor: validations.appBackgroundPrimaryColor,
-      appBackgroundSecundaryColor:validations.appBackgroundSecundaryColor,
+      appBackgroundSecondaryColor:validations.appBackgroundSecondaryColor,
     })
 
     if (output.isLeft()) {

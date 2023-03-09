@@ -4,7 +4,7 @@ export interface PersistAppSettingUseCaseInput{
   appName:string;
   appDesc:string;
   appColorPrimary:string;
-  appColorSecundary:string;
+  appColorSecondary:string;
   appBackgroundPrimaryColor:string;
-  appBackgroundSecundaryColor:string;
+  appBackgroundSecondaryColor:string;
 }

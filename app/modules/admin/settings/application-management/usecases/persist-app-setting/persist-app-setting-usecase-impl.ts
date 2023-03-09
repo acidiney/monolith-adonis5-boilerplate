@@ -13,9 +13,9 @@ export class PersistAppSettingUseCaseImpl implements PersistAppSettingUseCase{
   ) { }
   public async perform (input: PersistAppSettingUseCaseInput): Promise<CreatedAppSettingResult> {
     const appColorPrimaryOrError = Color.create({ value: input.appColorPrimary })
-    const appColorSecundaryOrError = Color.create({ value: input.appColorSecundary })
+    const appColorSecundaryOrError = Color.create({ value: input.appColorSecondary })
     const appBackgroundColorPrimaryOrError = Color.create({ value: input.appBackgroundPrimaryColor })
-    const appBackgroundColorSecundaryOrError = Color.create({ value: input.appBackgroundSecundaryColor })
+    const appBackgroundColorSecundaryOrError = Color.create({ value: input.appBackgroundSecondaryColor })
 
     if (appColorPrimaryOrError.isLeft() || appColorSecundaryOrError.isLeft() ||
         appBackgroundColorPrimaryOrError.isLeft() || appBackgroundColorSecundaryOrError.isLeft()) {
