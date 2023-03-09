@@ -1,8 +1,10 @@
+import { Color } from '../../value-objects/colors'
+
 export interface PersistAppSettingUseCaseInput{
   appName:string;
   appDesc:string;
   appColorPrimary:string;
-  appColorSecondary:string;
+  appColorSecundary:string;
   appBackgroundPrimaryColor:string;
-  appBackgroundSecondaryColor:string;
+  appBackgroundSecundaryColor:string;
 }

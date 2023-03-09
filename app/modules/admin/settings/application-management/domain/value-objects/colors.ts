@@ -29,7 +29,7 @@ export class Color extends ValueObject<AppColorsProp>{
     const color = new Color(props)
 
     if (!color.validate()) {
-      return left(new AppSettingInputErrors.AppColorRequiredError())
+      return left(new AppSettingInputErrors.HexadecimalIsNotValid())
     }
 
     return right(color)

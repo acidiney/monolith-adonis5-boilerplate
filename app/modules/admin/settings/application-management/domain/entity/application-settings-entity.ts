@@ -13,7 +13,7 @@ interface ApplicationSettingsProps{
 
 type AppSettingEntityError = AppSettingInputErrors.AppColorRequiredError
 | AppSettingInputErrors.AppNameRequiredError | AppSettingInputErrors.AppDescRequiredError |
-AppSettingInputErrors.HexadecimalValidad
+AppSettingInputErrors.HexadecimalIsNotValid
 
 export class ApplicationSettingsEntity extends Entity<ApplicationSettingsProps>{
   public get appName ():string{

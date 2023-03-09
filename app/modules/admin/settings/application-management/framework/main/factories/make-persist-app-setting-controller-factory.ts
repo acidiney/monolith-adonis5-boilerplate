@@ -4,7 +4,7 @@ import { PersistAppSettingController } from '../controllers/persist-app-setting/
 
 export const makePersistAppSettingContollerFactory = (): PersistAppSettingController => {
   return new PersistAppSettingController(
-    new PersistAppSettingUseCaseImpl(t,
+    new PersistAppSettingUseCaseImpl(
       EventDispatcher.getInstance()
     )
   )
