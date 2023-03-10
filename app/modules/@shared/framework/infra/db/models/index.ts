@@ -1,5 +1,5 @@
 export * from './core-db-sync-model'
-export * from './status-model-model'
+export * from './core-status-model'
 export * from './core-permission-model'
 export * from './core-role-model'
 export * from './core-role-permission-model'

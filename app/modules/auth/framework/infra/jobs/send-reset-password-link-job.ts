@@ -10,7 +10,7 @@ import { Job, JobContract } from '@ioc:Rocketseat/Bull'
 import { SendResetPasswordLinkInput } from 'app/modules/auth/usecases'
 
 export default class SendResetPasswordLinkJob implements JobContract {
-  public key = 'SendResetPasswordLinkJob'
+  public key = SendResetPasswordLinkJob.name
 
   public options: JobsOptions = {
     removeOnComplete: true,

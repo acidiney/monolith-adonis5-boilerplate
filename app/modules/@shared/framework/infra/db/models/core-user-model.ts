@@ -4,7 +4,7 @@ import { BaseModel, BelongsTo, beforeSave, belongsTo, column, computed, HasOne, 
   from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import { CoreRoleModel } from './core-role-model'
-import { StatusModel } from './status-model-model'
+import { CoreStatusModel } from './core-status-model'
 import {slugify} from '@ioc:Adonis/Addons/LucidSlugify'
 import {StatusType} from 'app/modules/@shared/domain/types'
 import { CoreNotificationModel } from './core-notification-model'
@@ -50,8 +50,8 @@ export class CoreUserModel extends BaseModel {
   @column({ columnName: 'status_id' })
   public statusId: StatusType
 
-  @hasOne(() => StatusModel)
-  public status: HasOne<typeof StatusModel>
+  @hasOne(() => CoreStatusModel)
+  public status: HasOne<typeof CoreStatusModel>
 
   @column.dateTime({ columnName: 'last_login' })
   public lastLoginAt?: DateTime

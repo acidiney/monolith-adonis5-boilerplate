@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export class StatusModel extends BaseModel {
+export class CoreStatusModel extends BaseModel {
   public static table = 'core_statuses'
   public static selfAssignPrimaryKey = true
 
