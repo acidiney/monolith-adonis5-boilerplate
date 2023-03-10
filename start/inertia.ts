@@ -3,7 +3,7 @@ import { DateTime } from 'luxon'
 
 import Inertia from '@ioc:EidelLev/Inertia'
 
-import {UserModel} from 'app/modules/@shared/framework/infra/db/models'
+import {CoreUserModel} from 'app/modules/@shared/framework/infra/db/models'
 import { DateAdapterImpl } from 'app/modules/@shared/framework/infra/adapters/date-adapter-impl'
 const pkg = require('../package.json')
 
@@ -12,7 +12,7 @@ Inertia.share({
   alertGlobal: (ctx) => ctx.session.flashMessages.get('alertGlobal'),
   user: async (ctx) => {
     if (ctx.auth.user) {
-      const user = await UserModel.query()
+      const user = await CoreUserModel.query()
         .preload('role', (builder) => {
           builder.preload('permissions')
         })

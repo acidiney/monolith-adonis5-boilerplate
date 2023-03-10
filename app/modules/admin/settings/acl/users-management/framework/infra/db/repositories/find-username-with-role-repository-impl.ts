@@ -1,6 +1,6 @@
 import { UserRoleAggregate } from 'app/modules/@shared/domain/aggregates/user-role-aggregate'
 import { UserRoleMapper } from 'app/modules/@shared/framework/infra/db/mappers'
-import { UserModel } from 'app/modules/@shared/framework/infra/db/models'
+import { CoreUserModel } from 'app/modules/@shared/framework/infra/db/models'
 import { FindUsernameWithRoleRepository } from '../../../../usecases'
 
 export class FindUsernameWithRoleRepositoryImpl implements FindUsernameWithRoleRepository {
@@ -9,7 +9,7 @@ export class FindUsernameWithRoleRepositoryImpl implements FindUsernameWithRoleR
   ) {}
 
   public async findUsername (username: string): Promise<UserRoleAggregate | undefined> {
-    const user = await UserModel
+    const user = await CoreUserModel
       .query()
       .preload('role', (builder) => {
         builder.preload('permissions')

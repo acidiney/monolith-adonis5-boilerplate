@@ -3,13 +3,13 @@ import Hash from '@ioc:Adonis/Core/Hash'
 import { BaseModel, BelongsTo, beforeSave, belongsTo, column, computed, HasOne, hasOne, ManyToMany, manyToMany }
   from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
-import { RoleModel } from './role-model'
+import { CoreRoleModel } from './core-role-model'
 import { StatusModel } from './status-model-model'
 import {slugify} from '@ioc:Adonis/Addons/LucidSlugify'
 import {StatusType} from 'app/modules/@shared/domain/types'
-import { NotificationModel } from './notification-model'
+import { CoreNotificationModel } from './core-notification-model'
 
-export class UserModel extends BaseModel {
+export class CoreUserModel extends BaseModel {
   public static table = 'core_users'
   public static selfAssignPrimaryKey = true
 
@@ -65,19 +65,19 @@ export class UserModel extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @belongsTo(() => RoleModel, {
+  @belongsTo(() => CoreRoleModel, {
     foreignKey: 'roleId',
   })
-  public role: BelongsTo<typeof RoleModel>
+  public role: BelongsTo<typeof CoreRoleModel>
 
-  @manyToMany(() => NotificationModel, {
+  @manyToMany(() => CoreNotificationModel, {
     pivotTable: 'core_notifications_users',
     localKey: 'id',
     pivotForeignKey: 'user_id',
     relatedKey: 'id',
     pivotRelatedForeignKey: 'notification_id',
   })
-  public notifications: ManyToMany<typeof NotificationModel>
+  public notifications: ManyToMany<typeof CoreNotificationModel>
 
   @computed()
   public get fullName () {
@@ -85,16 +85,16 @@ export class UserModel extends BaseModel {
   }
 
   @beforeSave()
-  public static async setId (user: UserModel) {
+  public static async setId (user: CoreUserModel) {
     user.id = user.id || cuid()
   }
 
   @beforeSave()
-  public static async hashPassword (user: UserModel) {
+  public static async hashPassword (user: CoreUserModel) {
     if (user.$dirty.password) {
       user.password = await Hash.make(user.password)
     }
   }
 }
 
-export default UserModel
+export default CoreUserModel

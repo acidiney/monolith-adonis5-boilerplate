@@ -1,5 +1,5 @@
 import { BaseModel, column, HasOne, hasOne } from '@ioc:Adonis/Lucid/Orm'
-import { UserModel } from 'app/modules/@shared/framework/infra/db/models'
+import { CoreUserModel } from 'app/modules/@shared/framework/infra/db/models'
 import { DateTime } from 'luxon'
 
 export class InstalledAddonModel extends BaseModel {
@@ -17,8 +17,8 @@ export class InstalledAddonModel extends BaseModel {
   @column()
   public userId: string
 
-  @hasOne(() => UserModel)
-  public user: HasOne<typeof UserModel>
+  @hasOne(() => CoreUserModel)
+  public user: HasOne<typeof CoreUserModel>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

@@ -5,7 +5,7 @@
  * file.
  */
 
-import { UserModel } from 'app/modules/@shared/framework/infra/db/models/user-model'
+import { CoreUserModel } from 'app/modules/@shared/framework/infra/db/models/core-user-model'
 
 declare module '@ioc:Adonis/Addons/Auth' {
   /*
@@ -34,8 +34,8 @@ declare module '@ioc:Adonis/Addons/Auth' {
     |
     */
     user: {
-      implementation: LucidProviderContract<typeof UserModel>
-      config: LucidProviderConfig<typeof UserModel>
+      implementation: LucidProviderContract<typeof CoreUserModel>
+      config: LucidProviderConfig<typeof CoreUserModel>
     }
   }
 

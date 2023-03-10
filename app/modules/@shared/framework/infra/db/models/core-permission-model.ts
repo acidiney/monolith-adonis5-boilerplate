@@ -1,7 +1,7 @@
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 
-export class PermissionModel extends BaseModel {
+export class CorePermissionModel extends BaseModel {
   public static table = 'core_permissions'
 
   @column({ isPrimary: true })

@@ -1,4 +1,4 @@
-import {UserModel} from 'app/modules/@shared/framework/infra/db/models'
+import {CoreUserModel} from 'app/modules/@shared/framework/infra/db/models'
 import {Mapper, UniqueEntityID} from 'app/core/domain'
 import {UserEntity} from 'app/modules/@shared/domain/entities/user-entity'
 import {Email} from 'app/modules/@shared/domain/value-objects/email'
@@ -6,14 +6,14 @@ import {StatusEnum} from 'app/modules/@shared/domain/types'
 import {DateAdapter} from 'app/modules/@shared/domain/ports'
 import {DateAdapterImpl} from 'app/modules/@shared/framework/infra/adapters/date-adapter-impl'
 
-export class UserMapper extends Mapper<UserEntity, UserModel> {
+export class UserMapper extends Mapper<UserEntity, CoreUserModel> {
   constructor (
     private readonly dateAdapter: DateAdapter = new DateAdapterImpl()
   ) {
     super()
   }
 
-  public toDomain (userModel: UserModel):UserEntity {
+  public toDomain (userModel: CoreUserModel):UserEntity {
     const emailOrError = Email.create(userModel.email)
 
     if (emailOrError.isLeft()) {
@@ -42,11 +42,11 @@ export class UserMapper extends Mapper<UserEntity, UserModel> {
     return userEntity.value
   }
 
-  public async toPersistence (userEntity: UserEntity): Promise<UserModel> {
-    let userModel: UserModel = new UserModel()
+  public async toPersistence (userEntity: UserEntity): Promise<CoreUserModel> {
+    let userModel: CoreUserModel = new CoreUserModel()
     userModel.id = userEntity.id.toString()
 
-    const user = await UserModel.findBy('id', userEntity.id.toString())
+    const user = await CoreUserModel.findBy('id', userEntity.id.toString())
 
     if (user) {
       userModel = user

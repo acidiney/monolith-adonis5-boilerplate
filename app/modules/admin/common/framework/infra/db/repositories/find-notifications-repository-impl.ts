@@ -1,6 +1,6 @@
 import Database from '@ioc:Adonis/Lucid/Database'
 import { UniqueEntityID } from 'app/core/domain'
-import { NotificationModel } from 'app/modules/@shared/framework/infra/db/models/notification-model'
+import { CoreNotificationModel } from 'app/modules/@shared/framework/infra/db/models/core-notification-model'
 import { NotificationEntity } from 'app/modules/admin/common/domain'
 import { FindNotificationsRepository } from 'app/modules/admin/common/usecases'
 import { NotificationMapper } from '../mappers'
@@ -29,7 +29,7 @@ export class FindNotificationsRepositoryImpl implements FindNotificationsReposit
   }
 
   public async findAll (): Promise<NotificationEntity[]> {
-    const notifications = await NotificationModel
+    const notifications = await CoreNotificationModel
       .query()
       .whereNull('deleted_at')
       .exec()

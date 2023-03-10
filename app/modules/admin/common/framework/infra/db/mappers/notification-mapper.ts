@@ -1,14 +1,15 @@
 import { Mapper, UniqueEntityID } from 'app/core/domain'
-import { NotificationModel } from 'app/modules/@shared/framework/infra/db/models/notification-model'
+import { CoreNotificationModel } from 'app/modules/@shared/framework/infra/db/models/core-notification-model'
 import { NotificationEntity } from 'app/modules/admin/common/domain'
 
-export class NotificationMapper implements Mapper<NotificationEntity, NotificationModel> {
-  public toDomain (notificationModel: NotificationModel): NotificationEntity {
+export class NotificationMapper implements Mapper<NotificationEntity, CoreNotificationModel> {
+  public toDomain (notificationModel: CoreNotificationModel): NotificationEntity {
     return NotificationEntity.hydrate(new UniqueEntityID(notificationModel.id), {
       name: notificationModel.notificationKey,
     })
   }
-  public toPersistence (_notificationEntity: NotificationEntity): NotificationModel | Promise<NotificationModel> {
+  public toPersistence (_notificationEntity: NotificationEntity):
+  CoreNotificationModel | Promise<CoreNotificationModel> {
     throw new Error('(toPersistence) Method not implemented.')
   }
 }

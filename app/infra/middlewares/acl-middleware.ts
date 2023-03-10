@@ -4,7 +4,7 @@
  */
 
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import {RolePermissionModel} from 'app/modules/@shared/framework/infra/db/models'
+import {CoreRolePermissionModel} from 'app/modules/@shared/framework/infra/db/models'
 
 export default class AclMiddleware {
   public async handle (
@@ -21,7 +21,7 @@ export default class AclMiddleware {
       return response.redirect().back()
     }
 
-    const permissions = await RolePermissionModel
+    const permissions = await CoreRolePermissionModel
       .query()
       .where('role_id', auth.user.roleId)
 

@@ -2,10 +2,10 @@ import { cuid } from '@ioc:Adonis/Core/Helpers'
 import { BaseModel, beforeCreate, column, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 
-import { PermissionModel } from './permission-model'
-import { RoleModel } from './role-model'
+import { CorePermissionModel } from './core-permission-model'
+import { CoreRoleModel } from './core-role-model'
 
-export class RolePermissionModel extends BaseModel {
+export class CoreRolePermissionModel extends BaseModel {
   public static table = 'core_role_permissions'
   public static selfAssignPrimaryKey = true
 
@@ -18,11 +18,11 @@ export class RolePermissionModel extends BaseModel {
   @column({ columnName: 'role_id' })
   public roleId: string
 
-  @hasOne(() => PermissionModel)
-  public permissions: HasOne<typeof PermissionModel>
+  @hasOne(() => CorePermissionModel)
+  public permissions: HasOne<typeof CorePermissionModel>
 
-  @hasOne(() => RoleModel)
-  public roles: HasOne<typeof RoleModel>
+  @hasOne(() => CoreRoleModel)
+  public roles: HasOne<typeof CoreRoleModel>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -31,7 +31,7 @@ export class RolePermissionModel extends BaseModel {
   public updatedAt: DateTime
 
   @beforeCreate()
-  public static async setId (rolePermission: RolePermissionModel) {
+  public static async setId (rolePermission: CoreRolePermissionModel) {
     rolePermission.id = rolePermission.id || cuid()
   }
 }

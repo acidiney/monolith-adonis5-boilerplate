@@ -1,9 +1,9 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-import { PermissionModel } from 'app/modules/@shared/framework/infra/db/models'
+import { CorePermissionModel } from 'app/modules/@shared/framework/infra/db/models'
 
 export default class InsertPermissionSeed extends BaseSeeder {
   public async run () {
-    await PermissionModel
+    await CorePermissionModel
       .createMany([
         {
           id: 'admin-setup-application',

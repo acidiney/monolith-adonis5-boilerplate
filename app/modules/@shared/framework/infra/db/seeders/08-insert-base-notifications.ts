@@ -1,9 +1,9 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-import { NotificationModel } from '../models/notification-model'
+import { CoreNotificationModel } from '../models/core-notification-model'
 
 export default class InsertBaseNotifications extends BaseSeeder {
   public async run () {
-    await NotificationModel.createMany([
+    await CoreNotificationModel.createMany([
       {
         notificationKey: 'notifications.core.auth.login',
       },

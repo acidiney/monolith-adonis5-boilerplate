@@ -1,5 +1,5 @@
 import { Handler } from 'app/infra/listeners/handler'
-import { UserModel } from 'app/modules/@shared/framework/infra/db/models'
+import { CoreUserModel } from 'app/modules/@shared/framework/infra/db/models'
 import { UserUpdatedEvent } from '../../../domain/events/user-updated-event'
 
 import Event from '@ioc:Adonis/Core/Event'
@@ -13,7 +13,7 @@ export class UserUpdatedListener extends Handler<UserUpdatedEvent> {
       return
     }
 
-    const user = await UserModel.findOrFail(event.eventData.userId.toString())
+    const user = await CoreUserModel.findOrFail(event.eventData.userId.toString())
 
     // send a realtime notification
     await Event.emit('alert:realtime:broadcast:only', {

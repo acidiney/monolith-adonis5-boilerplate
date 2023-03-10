@@ -1,4 +1,4 @@
-import {RoleModel} from 'app/modules/@shared/framework/infra/db/models'
+import {CoreRoleModel} from 'app/modules/@shared/framework/infra/db/models'
 import {RoleEntity} from 'app/modules/admin/settings/acl/roles-management/domain/entities/role-entity'
 import {
   ListAllRolesRepository,
@@ -15,7 +15,7 @@ export class ListAllRolesDropdownRepositoryImpl implements ListAllRolesRepositor
   }
 
   public async findAll (input: ListRolesDropdownUseCaseInput): Promise<RoleEntity[]> {
-    const rolesPaginated = await RoleModel
+    const rolesPaginated = await CoreRoleModel
       .query()
       .preload('permissions')
       .whereNull('deleted_at')

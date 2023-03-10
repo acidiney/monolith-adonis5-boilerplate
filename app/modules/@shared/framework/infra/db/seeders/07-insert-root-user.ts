@@ -1,16 +1,16 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-import {RoleModel, UserModel} from 'app/modules/@shared/framework/infra/db/models'
+import {CoreRoleModel, CoreUserModel} from 'app/modules/@shared/framework/infra/db/models'
 import {StatusEnum} from 'app/modules/@shared/domain/types'
 
 export default class InsertRootUser extends BaseSeeder {
   public async run () {
-    const role = await RoleModel.findBy('slug', 'root')
+    const role = await CoreRoleModel.findBy('slug', 'root')
 
     if (!role) {
       throw new Error('Role "root" not found!')
     }
 
-    const rootUser = new UserModel()
+    const rootUser = new CoreUserModel()
 
     rootUser.firstName = 'Root'
     rootUser.lastName = 'User'

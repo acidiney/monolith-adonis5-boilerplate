@@ -1,6 +1,6 @@
 import {ListUsersRepository} from 'app/modules/admin/settings/acl/users-management/usecases/list-users/props'
 import {ListUsersUseCaseInput} from 'app/modules/admin/settings/acl/users-management/domain'
-import {UserModel} from 'app/modules/@shared/framework/infra/db/models'
+import {CoreUserModel} from 'app/modules/@shared/framework/infra/db/models'
 import {Pagination} from 'app/core/ports'
 import {UserRoleMapper} from 'app/modules/@shared/framework/infra/db/mappers'
 import {UserRoleAggregate} from 'app/modules/@shared/domain/aggregates/user-role-aggregate'
@@ -12,7 +12,7 @@ export class ListUsersRepositoryImpl implements ListUsersRepository {
   }
 
   public async findAll (input: ListUsersUseCaseInput): Promise<Pagination<UserRoleAggregate>> {
-    const usersPaginated = await UserModel
+    const usersPaginated = await CoreUserModel
       .query()
       .whereNull('deleted_at')
       .preload('role', (b) => {

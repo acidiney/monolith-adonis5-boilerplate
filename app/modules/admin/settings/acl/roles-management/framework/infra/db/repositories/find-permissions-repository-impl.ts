@@ -5,7 +5,7 @@ import {PermissionEntity} from 'app/modules/admin/settings/acl/roles-management/
 import {
   PermissionMapper,
 } from 'app/modules/admin/settings/acl/roles-management/framework/infra/db/mappers/permission-mapper'
-import {PermissionModel} from 'app/modules/@shared/framework/infra/db/models'
+import {CorePermissionModel} from 'app/modules/@shared/framework/infra/db/models'
 
 export class FindPermissionsRepositoryImpl implements FindPermissionsRepository {
   constructor (
@@ -14,7 +14,7 @@ export class FindPermissionsRepositoryImpl implements FindPermissionsRepository 
   }
 
   public async findAll (isRoot: boolean): Promise<PermissionEntity[]> {
-    const permissions = await PermissionModel
+    const permissions = await CorePermissionModel
       .query()
       .where((q) => {
         if (!isRoot) {

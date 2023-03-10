@@ -1,4 +1,4 @@
-import {RoleModel} from 'app/modules/@shared/framework/infra/db/models'
+import {CoreRoleModel} from 'app/modules/@shared/framework/infra/db/models'
 import {Pagination} from 'app/core/ports'
 import {ListRolesRepository} from 'app/modules/admin/settings/acl/roles-management/usecases/list-roles/props'
 import {ListRolesUseCaseInput} from 'app/modules/admin/settings/acl/roles-management/domain'
@@ -12,7 +12,7 @@ export class ListRolesRepositoryImpl implements ListRolesRepository {
   }
 
   public async findAll (input: ListRolesUseCaseInput): Promise<Pagination<RoleEntity>> {
-    let query = RoleModel
+    let query = CoreRoleModel
       .query()
       .whereNull('deleted_at')
       .andWhere((q) => {

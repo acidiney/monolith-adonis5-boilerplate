@@ -1,7 +1,7 @@
 import { Handler } from 'app/infra/listeners/handler'
 import { UserBlockedEvent } from '../../../../domain/events/user-blocked-event'
 import Event from '@ioc:Adonis/Core/Event'
-import { UserModel } from 'app/modules/@shared/framework/infra/db/models'
+import { CoreUserModel } from 'app/modules/@shared/framework/infra/db/models'
 
 export class EmitRealtimeMessageToBlockedUserListener extends Handler<UserBlockedEvent> {
   public async handle (event: UserBlockedEvent): Promise<void> {
@@ -11,8 +11,8 @@ export class EmitRealtimeMessageToBlockedUserListener extends Handler<UserBlocke
       return
     }
 
-    const user = await UserModel.findOrFail(event.eventData.userId.toString())
-    const adminUser = await UserModel.findOrFail(ctx.auth.user?.id)
+    const user = await CoreUserModel.findOrFail(event.eventData.userId.toString())
+    const adminUser = await CoreUserModel.findOrFail(ctx.auth.user?.id)
 
     await Event.emit('alert:realtime:broadcast:only', {
       users: [

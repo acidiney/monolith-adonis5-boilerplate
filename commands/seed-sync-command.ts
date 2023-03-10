@@ -31,9 +31,9 @@ export default class SeedSyncCommand extends BaseCommand {
 
   public async run () {
     const { loadContext, execCommand } = await import('../app/infra/utils')
-    const { DbSyncModel } = await import('app/modules/@shared/framework/infra')
+    const { CoreDbSyncModel } = await import('app/modules/@shared/framework/infra')
 
-    const executedSeeds = await (await DbSyncModel.all()).map((seed) => seed.seedName)
+    const executedSeeds = await (await CoreDbSyncModel.all()).map((seed) => seed.seedName)
     let difference: string[]
 
     const taskManager = this.ui.tasks()
@@ -81,7 +81,7 @@ export default class SeedSyncCommand extends BaseCommand {
               `--files=${seedName}`,
             ])
               .then(async () => {
-                await DbSyncModel.create({
+                await CoreDbSyncModel.create({
                   seedName,
                 })
               })
@@ -92,7 +92,7 @@ export default class SeedSyncCommand extends BaseCommand {
         } catch (e) {
           console.log(e)
           _.error(e)
-          await DbSyncModel.query()
+          await CoreDbSyncModel.query()
             .where({
               seedName: currentSeed,
             })

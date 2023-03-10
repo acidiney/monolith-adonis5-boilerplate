@@ -1,4 +1,4 @@
-import { UserModel } from 'app/modules/@shared/framework/infra/db/models'
+import { CoreUserModel } from 'app/modules/@shared/framework/infra/db/models'
 import { UserEntity } from 'app/modules/@shared/domain/entities/user-entity'
 import { UserMapper } from '../mappers/user-mapper'
 import {UniqueEntityID} from 'app/core/domain'
@@ -10,7 +10,7 @@ export class FindUserIdRepositoryImpl implements FindUserIdRepository {
   ) {}
 
   public async findUserId (userId: UniqueEntityID): Promise<UserEntity | undefined> {
-    const user = await UserModel
+    const user = await CoreUserModel
       .query()
       .preload('role')
       .where('id', userId.toString())

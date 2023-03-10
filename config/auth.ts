@@ -77,7 +77,7 @@ const authConfig: AuthConfig = {
         | that time.
         |
         */
-        model: () => import('app/modules/@shared/framework/infra/db/models/user-model'),
+        model: () => import('app/modules/@shared/framework/infra/db/models/core-user-model'),
       },
     },
     /*
@@ -161,7 +161,7 @@ const authConfig: AuthConfig = {
         | that time.
         |
         */
-        model: () => import('app/modules/@shared/framework/infra/db/models/user-model'),
+        model: () => import('app/modules/@shared/framework/infra/db/models/core-user-model'),
       },
     },
   },

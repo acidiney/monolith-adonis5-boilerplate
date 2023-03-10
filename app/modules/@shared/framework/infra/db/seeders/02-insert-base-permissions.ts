@@ -1,9 +1,9 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-import { PermissionModel } from 'app/modules/@shared/framework/infra/db/models'
+import { CorePermissionModel } from 'app/modules/@shared/framework/infra/db/models'
 
 export default class InsertBasePermissionsSeed extends BaseSeeder {
   public async run () {
-    await PermissionModel.fetchOrCreateMany('id', [
+    await CorePermissionModel.fetchOrCreateMany('id', [
       {
         id: 'admin-acl-view-users',
         group: 'permission.group.acl.manage.users',

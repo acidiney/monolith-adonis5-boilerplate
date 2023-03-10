@@ -1,4 +1,4 @@
-import { UserModel } from 'app/modules/@shared/framework/infra/db/models'
+import { CoreUserModel } from 'app/modules/@shared/framework/infra/db/models'
 import { UserEntity } from 'app/modules/@shared/domain/entities/user-entity'
 import { FindUsernameRepository } from 'app/modules/auth/usecases'
 import { UserMapper } from 'app/modules/@shared/framework/infra/db/mappers'
@@ -10,7 +10,7 @@ export class FindUserToAuthenticateRepositoryImpl implements FindUsernameReposit
   ) {}
 
   public async findUsername (email: string): Promise<UserEntity | undefined> {
-    const user = await UserModel
+    const user = await CoreUserModel
       .query()
       .preload('role')
       .where({

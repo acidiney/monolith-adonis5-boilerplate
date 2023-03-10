@@ -1,9 +1,9 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-import {ApplicationSettings} from 'app/modules/@shared/framework/infra/db/models'
+import {CoreApplicationSettings} from 'app/modules/@shared/framework/infra/db/models'
 
 export default class SetupApplicationSeeder extends BaseSeeder {
   public async run () {
-    await ApplicationSettings
+    await CoreApplicationSettings
       .create({
         appName: 'Monolith Boilerplate',
         appDesc: 'Unified modular application boilerplate',

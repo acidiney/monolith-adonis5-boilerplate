@@ -1,22 +1,23 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-import { PermissionModel, RoleModel, RolePermissionModel } from 'app/modules/@shared/framework/infra/db/models'
+import { CorePermissionModel, CoreRoleModel, CoreRolePermissionModel }
+  from 'app/modules/@shared/framework/infra/db/models'
 
 export default class AssociateRoleWithPermissionSeed extends BaseSeeder {
   private async associateRootPermissions () {
-    const role = await RoleModel.findBy('slug', 'root')
+    const role = await CoreRoleModel.findBy('slug', 'root')
 
     if (!role) {
       throw new Error('Role "root" not found!')
     }
 
-    await RolePermissionModel
+    await CoreRolePermissionModel
       .query()
       .where({ roleId: role.id })
       .delete()
 
-    const permissions = await PermissionModel.all()
+    const permissions = await CorePermissionModel.all()
 
-    await RolePermissionModel.createMany(
+    await CoreRolePermissionModel.createMany(
       permissions.map(p => ({
         permissionId: p.id,
         roleId: role.id,

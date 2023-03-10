@@ -10,7 +10,7 @@ export interface Menu {
   children?: Menu[]
 }
 
-export class MenuModel extends BaseModel {
+export class CoreMenuModel extends BaseModel {
   public static table = 'core_menus'
 
   @column({ isPrimary: true })
@@ -50,7 +50,7 @@ export class MenuModel extends BaseModel {
   public updatedAt: DateTime
 
   @beforeCreate()
-  public static async setId (menu: MenuModel) {
+  public static async setId (menu: CoreMenuModel) {
     menu.id = menu.id || cuid()
   }
 
@@ -60,7 +60,7 @@ export class MenuModel extends BaseModel {
   }
 
   public static loadMenuBasedInUserPermissions (permissions: string[]) {
-    return MenuModel.query()
+    return CoreMenuModel.query()
       .whereNull('permissionId')
       .orWhereIn('permission_id', permissions)
       .andWhereNull('deleted_at')

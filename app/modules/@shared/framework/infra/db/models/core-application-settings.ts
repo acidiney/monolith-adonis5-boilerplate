@@ -3,7 +3,7 @@ import { DateTime } from 'luxon'
 import { cuid } from '@ioc:Adonis/Core/Helpers'
 import { BaseModel, beforeCreate, column } from '@ioc:Adonis/Lucid/Orm'
 
-export class ApplicationSettings extends BaseModel {
+export class CoreApplicationSettings extends BaseModel {
   public static table = 'core_application_settings'
   public static selfAssignPrimaryKey = true
 
@@ -35,7 +35,7 @@ export class ApplicationSettings extends BaseModel {
   public updatedAt: DateTime
 
   @beforeCreate()
-  public static async setId (applicationSettings: ApplicationSettings) {
+  public static async setId (applicationSettings: CoreApplicationSettings) {
     applicationSettings.id = applicationSettings.id || cuid()
   }
 }

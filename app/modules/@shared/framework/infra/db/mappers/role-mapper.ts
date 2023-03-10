@@ -5,17 +5,17 @@
 
 import {Mapper, UniqueEntityID} from 'app/core/domain'
 import {RoleEntity} from 'app/modules/admin/settings/acl/roles-management/domain/entities/role-entity'
-import {RoleModel} from 'app/modules/@shared/framework/infra/db/models'
+import {CoreRoleModel} from 'app/modules/@shared/framework/infra/db/models'
 import {DateAdapter} from 'app/modules/@shared/domain/ports'
 import {DateAdapterImpl} from 'app/modules/@shared/framework/infra/adapters/date-adapter-impl'
 
-export class RoleMapper implements Mapper<RoleEntity, RoleModel> {
+export class RoleMapper implements Mapper<RoleEntity, CoreRoleModel> {
   constructor (
     private readonly dateAdapter: DateAdapter = new DateAdapterImpl()
   ) {
   }
 
-  public toDomain (roleModel: RoleModel): RoleEntity {
+  public toDomain (roleModel: CoreRoleModel): RoleEntity {
     return RoleEntity.hydrate(new UniqueEntityID(roleModel.id), {
       name: roleModel.name,
       slug: roleModel.slug,
@@ -30,11 +30,11 @@ export class RoleMapper implements Mapper<RoleEntity, RoleModel> {
     })
   }
 
-  public async toPersistence (roleEntity: RoleEntity): Promise<RoleModel> {
-    let roleModel: RoleModel = new RoleModel()
+  public async toPersistence (roleEntity: RoleEntity): Promise<CoreRoleModel> {
+    let roleModel: CoreRoleModel = new CoreRoleModel()
     roleModel.id = roleEntity.id.toString()
 
-    const role = await RoleModel.findBy('id', roleEntity.id.toString())
+    const role = await CoreRoleModel.findBy('id', roleEntity.id.toString())
 
     if (role) {
       roleModel = role

@@ -1,5 +1,5 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-import { RoleModel } from 'app/modules/@shared/framework/infra/db/models'
+import { CoreRoleModel } from 'app/modules/@shared/framework/infra/db/models'
 
 export default class InsertBaseRolesSeed extends BaseSeeder {
   public async run () {
@@ -18,6 +18,6 @@ export default class InsertBaseRolesSeed extends BaseSeeder {
       },
     ]
 
-    await RoleModel.fetchOrCreateMany('slug', roles)
+    await CoreRoleModel.fetchOrCreateMany('slug', roles)
   }
 }

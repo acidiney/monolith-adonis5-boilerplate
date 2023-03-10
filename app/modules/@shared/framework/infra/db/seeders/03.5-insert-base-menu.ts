@@ -1,4 +1,4 @@
-import { MenuModel } from 'app/modules/@shared/framework/infra/db/models/menu-model'
+import { CoreMenuModel } from 'app/modules/@shared/framework/infra/db/models/core-menu-model'
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 
 export default class MenuSeedSeeder extends BaseSeeder {
@@ -125,7 +125,7 @@ export default class MenuSeedSeeder extends BaseSeeder {
     //   // },
     // ]
 
-    await MenuModel.createMany([
+    await CoreMenuModel.createMany([
       {
         display: 'menu.main.dashboard',
         slug: 'main_dashboard',

@@ -1,5 +1,5 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import {ApplicationSettings} from 'app/modules/@shared/framework/infra/db/models'
+import {CoreApplicationSettings} from 'app/modules/@shared/framework/infra/db/models'
 
 export default class MenuMiddleware {
   public async handle (
@@ -7,7 +7,7 @@ export default class MenuMiddleware {
     next: () => Promise<void>
   ) {
     if(!session.get('header')) {
-      const settings = await ApplicationSettings
+      const settings = await CoreApplicationSettings
         .query()
         .whereNull('deleted_at')
         .orderBy('created_at', 'desc')

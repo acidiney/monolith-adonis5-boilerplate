@@ -2,9 +2,9 @@ import { DateTime } from 'luxon'
 import { cuid } from '@ioc:Adonis/Core/Helpers'
 import { BaseModel, beforeCreate, column, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm'
 
-import UserModel from './user-model'
+import CoreUserModel from './core-user-model'
 
-export class NotificationModel extends BaseModel {
+export class CoreNotificationModel extends BaseModel {
   public static table = 'core_notifications'
 
   @column({ isPrimary: true })
@@ -22,17 +22,17 @@ export class NotificationModel extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @manyToMany(() => UserModel, {
+  @manyToMany(() => CoreUserModel, {
     pivotTable: 'core_notifications_users',
     localKey: 'id',
     pivotForeignKey: 'notification_id',
     relatedKey: 'id',
     pivotRelatedForeignKey: 'user_id',
   })
-  public users: ManyToMany<typeof UserModel>
+  public users: ManyToMany<typeof CoreUserModel>
 
   @beforeCreate()
-  public static async setId (notification: NotificationModel) {
+  public static async setId (notification: CoreNotificationModel) {
     notification.id = cuid()
   }
 }
