@@ -1,8 +1,15 @@
-import { Either, IEventDispatcher, left, right, UniqueEntityID } from 'app/core/domain'
 import { TransactionAdapter } from 'app/core/ports'
-import { UpdateRoleUseCase, UpdateRoleUseCaseInput } from '../../domain'
-import { NonRootCannotModifyError, RoleNotFoundError } from '../../domain/errors'
-import { RoleUpdatedEvent, RoleUpdatedProps } from '../../domain/events'
+import { Either, IEventDispatcher, left, right, UniqueEntityID } from 'app/core/domain'
+
+import {
+  UpdateRoleUseCase,
+  UpdateRoleUseCaseInput,
+  RoleUpdatedEvent,
+  RoleUpdatedProps,
+  NonRootCannotModifyError,
+  RoleNotFoundError,
+} from '../../domain'
+
 import { FindRoleBySlugRepository, UpdateRoleWithTransactionRepository } from './ports'
 
 export class UpdateRoleUseCaseImpl implements UpdateRoleUseCase {
