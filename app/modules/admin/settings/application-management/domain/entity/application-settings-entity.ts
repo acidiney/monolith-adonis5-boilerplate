@@ -114,7 +114,7 @@ export class ApplicationSettingsEntity extends Entity<ApplicationSettingsProps>{
 
   public static hydrate (id: UniqueEntityID, props: ApplicationSettingsProps,
     options?: Options): Either<AppSettingEntityError,
-        ApplicationSettingsEntity>{
+      ApplicationSettingsEntity>{
     const applicationSettingEntity = new ApplicationSettingsEntity(props, id, options)
 
     const validation = applicationSettingEntity.validate()

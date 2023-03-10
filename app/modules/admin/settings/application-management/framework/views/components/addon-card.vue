@@ -32,7 +32,7 @@ const { t } = useI18n()
           <img :src="image" />
         </div>
         <div class="meta ml-2">
-          <h3 class="mb-0">Teste</h3>
+          <h3 class="mb-0"></h3>
 
         </div>
       </div>

@@ -14,7 +14,7 @@ export class Color extends ValueObject<AppColorsProp>{
   }
 
   private validate () {
-    var hexRegex = /^[0-9A-Fa-f]+$/
+    var hexRegex = /^(#([0-9a-fA-F]{3}){1,2}|rgba?\(\s*\d+%?\s*,\s*\d+%?\s*,\s*\d+%?\s*(,\s*[01]?\.?\d+)\s*\))$/
     return hexRegex.test(this.props.value)
   }
 
@@ -28,7 +28,7 @@ export class Color extends ValueObject<AppColorsProp>{
 
     const color = new Color(props)
 
-    if (!color.validate()) {
+    if (color.validate()) {
       return left(new AppSettingInputErrors.HexadecimalIsNotValid())
     }
 
