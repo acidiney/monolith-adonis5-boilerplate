@@ -6,7 +6,6 @@ export default class extends BaseSchema {
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.string('id').notNullable().primary().unique()
-      table.string('module')
       table.string('route')
       table.json('payload')
       table.boolean('sent').defaultTo(false)
