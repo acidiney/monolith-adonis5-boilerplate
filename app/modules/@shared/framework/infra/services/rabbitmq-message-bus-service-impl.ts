@@ -25,6 +25,7 @@ export class RabbitmqMessageBusServiceImpl implements MessageBus {
       throw new Error('Channel is not initialized')
     }
 
+    console.log(routingKey)
     this.channel.publish(this.exchangeName, routingKey, Buffer.from(message))
   }
 
@@ -59,9 +60,9 @@ export class RabbitmqMessageBusServiceImpl implements MessageBus {
     }
   }
 
-  public static getInstance (url: string): RabbitmqMessageBusServiceImpl {
+  public static getInstance (url?: string): RabbitmqMessageBusServiceImpl {
     if (!this.instance) {
-      this.instance = new RabbitmqMessageBusServiceImpl(url)
+      this.instance = new RabbitmqMessageBusServiceImpl(url as string)
     }
 
     return this.instance
