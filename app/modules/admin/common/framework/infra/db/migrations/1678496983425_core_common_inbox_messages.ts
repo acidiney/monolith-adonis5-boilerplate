@@ -1,7 +1,7 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'core_outbox_messages'
+  protected tableName = 'core_common_inbox_messages'
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
@@ -9,7 +9,10 @@ export default class extends BaseSchema {
       table.string('type')
       table.json('payload')
       table.boolean('sent').defaultTo(false)
-      table.timestamp('sent_at')
+      table.string('outbox_id')
+        .notNullable()
+        .references('id')
+        .inTable('core_outbox_messages')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

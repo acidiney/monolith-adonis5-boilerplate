@@ -11,7 +11,7 @@ export class CoreOutboxMessageModel extends BaseModel {
   public id: string
 
   @column()
-  public route: string
+  public type: string
 
   @column()
   public payload: string

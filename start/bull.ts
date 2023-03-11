@@ -12,12 +12,10 @@ import getPort from 'get-port'
 import Bull from '@ioc:Rocketseat/Bull'
 import Application from '@ioc:Adonis/Core/Application'
 
-if (process.env.NODE_ENV?.toLowerCase() !== 'seeding') {
+if (Application.environment === 'web') {
   getPort({ port: 9999 }).then((port) => {
     Bull.process()
 
-    if (Application.inDev) {
-      Bull.ui(port)
-    }
+    Bull.ui(port)
   })
 }

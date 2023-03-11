@@ -31,7 +31,7 @@ export default class OutboxProcessorJob implements JobContract {
         .limit(100)
 
       for (const message of messages) {
-        this.messageBus.publish(message.route, JSON.stringify(message.payload))
+        this.messageBus.publish(message.type, JSON.stringify(message.payload))
         await CoreOutboxMessageModel
           .query({ client: trx })
           .where({ id: message.id })
