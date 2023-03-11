@@ -25,7 +25,6 @@ export class RabbitmqMessageBusServiceImpl implements MessageBus {
       throw new Error('Channel is not initialized')
     }
 
-    console.log(routingKey)
     this.channel.publish(this.exchangeName, routingKey, Buffer.from(message))
   }
 
