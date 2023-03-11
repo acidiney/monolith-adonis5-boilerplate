@@ -17,7 +17,7 @@ export class RabbitmqMessageBusServiceImpl implements MessageBus {
     Logger.info('[MessageBus]: RabbitMQ Connected')
 
     this.channel = await this.connection.createChannel()
-    await this.channel.assertExchange(this.exchangeName, 'topic', { durable: false })
+    await this.channel.assertExchange(this.exchangeName, 'topic', { durable: true })
   }
 
   public async publish (routingKey: string, message: string): Promise<void> {
@@ -29,21 +29,21 @@ export class RabbitmqMessageBusServiceImpl implements MessageBus {
   }
 
   public async consume (bindingKey: string,
-    onMessage: (message: string, ack?: (msg: any) => void) => void)
+    onMessage: (message: string, ack: () => void) => void)
     : Promise<void> {
     if (!this.channel) {
       throw new Error('Channel is not initialized')
     }
 
     const queueName = `queue_${bindingKey}`
-    await this.channel.assertQueue(queueName, { durable: false })
+    await this.channel.assertQueue(queueName, { durable: true })
     await this.channel.bindQueue(queueName, this.exchangeName, bindingKey)
     await this.channel.consume(
       queueName,
-      (msg) => {
+      async (msg) => {
         if (msg) {
           const message = msg.content.toString()
-          onMessage(message, this.channel?.ack)
+          await onMessage(message, () => this.channel?.ack(msg))
         }
       },
       { noAck: false }

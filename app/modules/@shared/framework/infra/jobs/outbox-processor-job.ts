@@ -16,6 +16,8 @@ export default class OutboxProcessorJob implements JobContract {
   ) {
   }
 
+  public concurrency: number = 10
+
   public options: JobsOptions = {
     removeOnComplete: true,
   }
@@ -24,24 +26,26 @@ export default class OutboxProcessorJob implements JobContract {
     const trx = await Database.transaction()
 
     try {
-      const messages = await CoreOutboxMessageModel
+      const message = await CoreOutboxMessageModel
         .query({ client: trx })
-        .where('sent', false)
         .andWhereNull('sentAt')
-        .limit(100)
+        .orderBy('created_at', 'desc')
+        .first()
 
-      for (const message of messages) {
-        this.messageBus.publish(message.type, JSON.stringify(message.payload))
-        await CoreOutboxMessageModel
-          .query({ client: trx })
-          .where({ id: message.id })
-          .update({
-            sent: true,
-            sentAt: new Date(),
-          })
+      if (!message) {
+        await trx.commit()
+        return
       }
 
+      await CoreOutboxMessageModel
+        .query({ client: trx })
+        .where({ id: message.id })
+        .update({
+          sentAt: new Date(),
+        })
+
       await trx.commit()
+      this.messageBus.publish(message.type, JSON.stringify({ payload: message.payload, outboxId: message.id }))
     } catch (e) {
       await trx.rollback()
       throw e

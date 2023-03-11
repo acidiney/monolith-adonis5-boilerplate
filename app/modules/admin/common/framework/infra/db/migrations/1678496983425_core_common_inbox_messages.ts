@@ -8,7 +8,7 @@ export default class extends BaseSchema {
       table.string('id').notNullable().primary().unique()
       table.string('type')
       table.json('payload')
-      table.boolean('sent').defaultTo(false)
+      table.boolean('complete').defaultTo(false)
       table.string('outbox_id')
         .notNullable()
         .references('id')

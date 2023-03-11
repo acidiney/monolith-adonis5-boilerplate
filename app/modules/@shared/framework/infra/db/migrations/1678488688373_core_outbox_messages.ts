@@ -8,7 +8,6 @@ export default class extends BaseSchema {
       table.string('id').notNullable().primary().unique()
       table.string('type')
       table.json('payload')
-      table.boolean('sent').defaultTo(false)
       table.timestamp('sent_at')
 
       /**
