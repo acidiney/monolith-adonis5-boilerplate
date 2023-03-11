@@ -41,4 +41,5 @@ export default Env.rules({
   MAIL_FROM: Env.schema.string(),
   DB_CONNECTION: Env.schema.string(),
   IN_STAGGING: Env.schema.boolean.optional(),
+  MESSAGE_BUS_URL: Env.schema.string(),
 })

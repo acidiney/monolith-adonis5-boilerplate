@@ -41,7 +41,8 @@
     "./start/bull"
   ],
   "providers": [
-    "./providers/AppProvider",
+    "./providers/app-provider",
+    "./providers/message-bus-provider",
     "@adonisjs/core",
     "@adonisjs/session",
     "@adonisjs/view",
