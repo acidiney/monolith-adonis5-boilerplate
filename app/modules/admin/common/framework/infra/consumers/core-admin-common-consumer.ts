@@ -33,7 +33,7 @@ class CoreAdminCommonConsumer {
         .firstOrCreate({ outboxId: messageObject.outboxId }, {
           type: type,
           payload: JSON.stringify(payloadObject),
-        })
+        }, trx)
 
       await trx.commit()
 

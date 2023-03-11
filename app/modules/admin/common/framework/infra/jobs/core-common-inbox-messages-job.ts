@@ -10,6 +10,7 @@ export default class CoreCommonInboxMessagesJob implements JobContract {
   }
 
   public async handle () : Promise<void> {
-    console.log(CoreCommonInboxMessagesJob.name, new Date())
+    // Todo: need to implement a strategy to do processing and after that notify both
+    //  commonInboxMessage and broker that was delivered
   }
 }
