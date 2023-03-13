@@ -70,7 +70,7 @@
     },
     {
       "pattern": "app/modules/**/*.(json|yaml)",
-      "reloadServer": true
+      "reloadServer": false
     },
     {
       "pattern": "resources/lang/**/*.(json|yaml)",
