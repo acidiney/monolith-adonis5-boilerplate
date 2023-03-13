@@ -51,16 +51,16 @@ onMounted(() => {
         appSettingForm.appBackgroundSecondaryColor = appSettings.value.internal ? t(appSettings.value.appBackgroundSecondaryColor) : appSettings.value.appBackgroundSecondaryColor
 
     }
-    console.log('este', appSettings);
+
 })
 
 </script>
 
 <template>
-    <account-layout :title="$t('menu.admin.setting.acl.roles.edit_role')">
+    <account-layout :title="$t('menu.admin.setting.application-management.setting.edit_setting')">
         <template v-slot:header>
-            <app-page-hero :title="$t('menu.admin.setting.acl.roles.edit_role')"
-                :sub-title="$t('menu.admin.setting.acl.roles.edit_role_description')" />
+            <app-page-hero :title="$t('menu.admin.setting.application-management.setting.edit_setting')"
+                :sub-title="$t('menu.admin.setting.application-management.setting.edit_setting.description')" />
         </template>
 
         <template v-slot:body>
@@ -69,7 +69,7 @@ onMounted(() => {
                 'alert',
                 'alert-warning'
             ]">
-                {{ $t('admin.acl.role.edit', { name: appSettings.appName }) }}
+                {{ $t('menu.admin.setting.application-management.setting.edit_setting', { name: appSettings.appName }) }}
             </p>
 
             <p v-if="alert" :class="[
@@ -87,22 +87,37 @@ onMounted(() => {
             </p>
 
             <p class="text-muted">
-                {{ $t("admin.acl.roles.edit.description") }}
+                {{ $t("menu.admin.setting.application-management.setting.edit_setting.description") }}
             </p>
             <el-form ref="appSettingFormRef" :appSetting="appSetting" :model="appSettingForm" label-position="top"
                 label-width="120px" status-icon>
-                <!-- create role head -->
-                <el-form-item :label="$t('acl.role.name')" prop="name">
-                    <el-input :disabled="role.internal" v-model="appSettingForm.appName" />
+                <!-- create setting head -->
+                <el-form-item :label="$t('application-management.setting.edit_setting.appName')" prop="appName">
+                    <el-input v-model="appSettingForm.appName" />
+                </el-form-item>
+                <el-form-item :label="$t('application-management.setting.edit_setting.appDesc')" prop="appDesc">
+                    <el-input v-model="appSettingForm.appDesc" />
+                </el-form-item>
+                <el-form-item :label="$t('application-management.setting.edit_setting.appColorPrimary')"
+                    prop="appColorPrimary">
+                    <el-input v-model="appSettingForm.appColorPrimary" />
+                </el-form-item>
+                <el-form-item :label="$t('application-management.setting.edit_setting.appColorSecondary')"
+                    prop="appColorSecondary">
+                    <el-input v-model="appSettingForm.appColorSecondary" />
+                </el-form-item>
+                <el-form-item :label="$t('application-management.setting.edit_setting.appBackgroundPrimaryColor')"
+                    prop="appBackgroundPrimaryColor">
+                    <el-input v-model="appSettingForm.appBackgroundPrimaryColor" />
+                </el-form-item>
+                <el-form-item :label="$t('application-management.setting.edit_setting.appBackgroundSecondaryColor')"
+                    prop="appBackgroundSecondaryColor">
+                    <el-input v-model="appSettingForm.appBackgroundSecondaryColor" />
                 </el-form-item>
 
-                <el-form-item :label="$t('shared.description')" prop="description">
-                    <el-input :disabled="role.internal" v-model="appSettingForm.appDesc" type="textarea" />
-                </el-form-item>
 
 
 
             </el-form>
         </template>
-    </account-layout>
-</template>
+</account-layout></template>

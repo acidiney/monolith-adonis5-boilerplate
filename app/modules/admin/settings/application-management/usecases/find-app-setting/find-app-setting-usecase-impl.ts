@@ -17,7 +17,6 @@ export class FindAppSettingColorUseCaseImpl implements FindAppSettingUseCase{
           appBackgroundSecondaryColor:a?.appBackgroundSecondaryColor,
         }
       })
-    console.log(appSetting)
 
     return {appSetting}
   }
