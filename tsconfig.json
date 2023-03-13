@@ -22,9 +22,7 @@
       "app/*": [
         "./app/*"
       ],
-      "@core/*": [
-        "./resources/js/core/*"
-      ]
+      "@core/*": ["./resources/js/core/*"]
     },
     "types": [
       "jest",

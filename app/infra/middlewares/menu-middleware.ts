@@ -19,7 +19,10 @@ export default class MenuMiddleware {
       }
 
       if (!permissions) {
-        session.flash('errors', i18n.formatMessage('menu.error.cannot_load_menu'))
+        session.flash('alertGlobal', {
+          success: false,
+          message: i18n.formatMessage('menu.error.cannot_load_menu'),
+        })
       }
     }
 
