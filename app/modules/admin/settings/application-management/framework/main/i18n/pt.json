@@ -1,5 +1,13 @@
 {
   "menu.admin.setting.setup.application": "Configurar aplicação",
   "permission.group.admin.setup.application": "Configuração",
-  "permission.setup.application": "Configurar a aplicação"
+  "permission.setup.application": "Configurar a aplicação",
+  "menu.admin.setting.application-management.setting.edit_setting": "Configuração da aplicação",
+  "menu.admin.setting.application-management.setting.edit_setting.description": "Descrição",
+  "application-management.setting.edit_setting.appName": "Nome",
+  "application-management.setting.edit_setting.appDesc": "Descrição da aplicação",
+  "application-management.setting.edit_setting.appColorPrimary": "Cor primaria",
+  "application-management.setting.edit_setting.appColorSecondary": "Cor secundaria",
+  "application-management.setting.edit_setting.appBackgroundPrimaryColor": "Cor do fundo primaria",
+  "application-management.setting.edit_setting.appBackgroundSecondaryColor": "Cor do fundo secundaria"
 }

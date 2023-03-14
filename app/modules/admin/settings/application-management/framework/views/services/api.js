@@ -3,7 +3,7 @@ import { router } from '@inertiajs/vue3'
 
 export const apiService = {
 
-  createUser: (form) => {
+  createAppSetting: (form) => {
     return new Promise((resolve) => {
       return router.post("/account/admin/settings/acl/appSettings", form, {
         onSuccess: (data) => {

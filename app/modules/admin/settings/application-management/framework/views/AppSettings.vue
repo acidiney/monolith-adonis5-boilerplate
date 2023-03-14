@@ -49,7 +49,7 @@ onMounted(() => {
         appSettingForm.appColorSecondary = appSettings.value.internal ? t(appSettings.value.appColorSecondary) : appSettings.value.appColorSecondary
         appSettingForm.appBackgroundPrimaryColor = appSettings.value.internal ? t(appSettings.value.appBackgroundPrimaryColor) : appSettings.value.appBackgroundPrimaryColor
         appSettingForm.appBackgroundSecondaryColor = appSettings.value.internal ? t(appSettings.value.appBackgroundSecondaryColor) : appSettings.value.appBackgroundSecondaryColor
-
+        console.log(appSettingForm.appColorSecondary)
     }
 
 })
@@ -86,9 +86,7 @@ onMounted(() => {
                         aria-hidden="true">&times;</span></button>
             </p>
 
-            <p class="text-muted">
-                {{ $t("menu.admin.setting.application-management.setting.edit_setting.description") }}
-            </p>
+
             <el-form ref="appSettingFormRef" :appSetting="appSetting" :model="appSettingForm" label-position="top"
                 label-width="120px" status-icon>
                 <!-- create setting head -->
@@ -100,24 +98,23 @@ onMounted(() => {
                 </el-form-item>
                 <el-form-item :label="$t('application-management.setting.edit_setting.appColorPrimary')"
                     prop="appColorPrimary">
-                    <el-input v-model="appSettingForm.appColorPrimary" />
+                    <el-color-picker v-model="appSettingForm.appColorPrimary" />
                 </el-form-item>
                 <el-form-item :label="$t('application-management.setting.edit_setting.appColorSecondary')"
                     prop="appColorSecondary">
-                    <el-input v-model="appSettingForm.appColorSecondary" />
+                    <el-color-picker v-model="appSettingForm.appColorSecondary" />
                 </el-form-item>
                 <el-form-item :label="$t('application-management.setting.edit_setting.appBackgroundPrimaryColor')"
                     prop="appBackgroundPrimaryColor">
-                    <el-input v-model="appSettingForm.appBackgroundPrimaryColor" />
+                    <el-color-picker v-model="appSettingForm.appBackgroundPrimaryColor" />
                 </el-form-item>
                 <el-form-item :label="$t('application-management.setting.edit_setting.appBackgroundSecondaryColor')"
                     prop="appBackgroundSecondaryColor">
-                    <el-input v-model="appSettingForm.appBackgroundSecondaryColor" />
+                    <el-color-picker v-model="appSettingForm.appBackgroundSecondaryColor" />
                 </el-form-item>
-
-
-
-
+                <el-button> {{
+                    $t('admin.acl.role.update') }} </el-button>
             </el-form>
         </template>
-</account-layout></template>
+    </account-layout>
+</template>
