@@ -54,6 +54,7 @@ export class AppSettingColorMapper extends Mapper<ApplicationSettingsEntity, App
   public async toPersistence (_applicationSettingsEntity: ApplicationSettingsEntity):
   | Promise<AppSettingModel> {
     let appSettingModel: AppSettingModel = new AppSettingModel()
+    appSettingModel.id=_applicationSettingsEntity.id.toString()
     appSettingModel.appName = _applicationSettingsEntity.appName
     appSettingModel.appDesc = _applicationSettingsEntity.appDesc
     appSettingModel.appColorPrimary = _applicationSettingsEntity.appColorPrimary

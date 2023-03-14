@@ -14,7 +14,7 @@ export class PersistAppSettingController implements Controller<HttpContextContra
 
     const validations= await request.validate(PersistAppSettindValidator).catch((data
     ) => {
-      console.log(data)
+
     })
 
     if (!validations) {
@@ -42,7 +42,8 @@ export class PersistAppSettingController implements Controller<HttpContextContra
 
       return response.redirect().back()
     }
-    console.log(output)
+
+    session.forget('header')
 
     session.flash('alert', {
       success: true,

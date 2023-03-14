@@ -5,7 +5,7 @@ export class PersistAppSettindValidator{
   constructor (protected readonly ctx:HttpContextContract) { }
 
   public readonly schema = schema.create({
-    appName:schema.string({ trim: true }, [ rules.required(), rules.minLength(8) ]),
+    appName:schema.string({ trim: true }, [ rules.required(), rules.minLength(2) ]),
     appDesc:schema.string({ trim: true }, [ rules.required(), rules.minLength(8) ]),
     appColorPrimary:schema.string({ trim: true }),
     appColorSecondary:schema.string({ trim: true }),

@@ -11,5 +11,6 @@
   "application-management.setting.edit_setting.appBackgroundPrimaryColor": "Cor do fundo primaria",
   "application-management.setting.edit_setting.appBackgroundSecondaryColor": "Cor do fundo secundaria",
   "admin.settings.app.error": "Erro ao configurar aplicação",
-  "admin.settings.app.update": "Editar"
+  "admin.settings.app.update": "Editar",
+  "admin.settings.app.sucess": "Sucesso!"
 }

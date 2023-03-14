@@ -7,7 +7,7 @@ export const apiService = {
     return new Promise((resolve) => {
       return router.put("/admin/settings/appSettings", form, {       
         onSuccess: (data) => {
-          console.log(form);
+        
           resolve(data);
         },
       });

@@ -16,6 +16,8 @@ const { appSettingFormRef,
 //const { checkPermission } = useHasPermission()
 
 const appSettings = computed(() => usePage().props.appSetting)
+const alert = computed(() => usePage().props.alert)
+
 
 
 
@@ -26,13 +28,9 @@ const onSubmit = async (formEl) => {
     await formEl.validate((valid) => {
         if (valid) {
             state.loading = true;
-            apiService.updateAppSetting({
-
+            apiService.updateAppSetting(
                 appSettingForm
-            })
-                .then(() => {
-                    formEl.resetFields()
-                })
+            )
                 .finally(() => {
                     state.loading = false;
                 })

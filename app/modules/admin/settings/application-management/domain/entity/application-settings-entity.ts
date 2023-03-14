@@ -16,7 +16,7 @@ type AppSettingEntityError = AppSettingInputErrors.AppColorRequiredError
 AppSettingInputErrors.HexadecimalIsNotValid
 
 export class ApplicationSettingsEntity extends Entity<ApplicationSettingsProps>{
-  public get appName ():string{
+  public get appName (): string{
     return this.props.appName
   }
 
