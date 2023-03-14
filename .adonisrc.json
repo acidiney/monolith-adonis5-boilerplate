@@ -43,6 +43,7 @@
   "providers": [
     "./providers/app-provider",
     "./providers/message-bus-provider",
+    "./providers/MongoDbProvider/index",
     "@adonisjs/core",
     "@adonisjs/session",
     "@adonisjs/view",
@@ -70,7 +71,7 @@
     },
     {
       "pattern": "app/modules/**/*.(json|yaml)",
-      "reloadServer": true
+      "reloadServer": false
     },
     {
       "pattern": "resources/lang/**/*.(json|yaml)",

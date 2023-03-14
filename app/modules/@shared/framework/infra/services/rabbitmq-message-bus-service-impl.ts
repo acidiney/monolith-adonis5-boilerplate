@@ -1,5 +1,5 @@
 import amqp from 'amqplib'
-import { MessageBus } from 'app/modules/@shared/domain/ports/message-bus'
+import {Message, MessageBus} from 'app/modules/@shared/domain/ports/message-bus'
 import Logger from '@ioc:Adonis/Core/Logger'
 
 export class RabbitmqMessageBusServiceImpl implements MessageBus {
@@ -20,29 +20,29 @@ export class RabbitmqMessageBusServiceImpl implements MessageBus {
     await this.channel.assertExchange(this.exchangeName, 'topic', { durable: true })
   }
 
-  public async publish (routingKey: string, message: string): Promise<void> {
+  public async publish (routingKey: string, message: Message): Promise<void> {
     if (!this.channel) {
       throw new Error('Channel is not initialized')
     }
 
-    this.channel.publish(this.exchangeName, routingKey, Buffer.from(message))
+    this.channel.publish(this.exchangeName, routingKey, Buffer.from(JSON.stringify(message)))
   }
 
   public async consume (bindingKey: string,
-    onMessage: (message: string, ack: () => void) => void)
+    onMessage: (message: Message, ack: () => void) => void)
     : Promise<void> {
     if (!this.channel) {
       throw new Error('Channel is not initialized')
     }
 
-    const queueName = `queue_${bindingKey}`
+    const queueName = bindingKey
     await this.channel.assertQueue(queueName, { durable: true })
     await this.channel.bindQueue(queueName, this.exchangeName, bindingKey)
     await this.channel.consume(
       queueName,
       async (msg) => {
         if (msg) {
-          const message = msg.content.toString()
+          const message = JSON.parse(msg.content.toString())
           await onMessage(message, () => this.channel?.ack(msg))
         }
       },

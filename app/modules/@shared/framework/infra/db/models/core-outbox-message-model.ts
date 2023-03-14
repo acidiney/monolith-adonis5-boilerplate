@@ -1,35 +1,17 @@
-import {BaseModel, beforeCreate, column} from '@ioc:Adonis/Lucid/Orm'
-import {DateTime} from 'luxon'
-import {cuid} from '@ioc:Adonis/Core/Helpers'
+import {CoreOutboxDatabase} from 'app/modules/@shared/framework/infra/db/models/core-outbox-database'
 
-export class CoreOutboxMessageModel extends BaseModel {
-  public static table = 'core_outbox_messages'
-
-  public static selfAssignPrimaryKey = true
-
-  @column({ isPrimary: true })
-  public id: string
-
-  @column()
-  public type: string
-
-  @column()
-  public payload: string
-
-  @column()
-  public sent: boolean
-
-  @column()
-  public sentAt: DateTime
-
-  @column.dateTime({ autoCreate: true })
-  public createdAt: DateTime
-
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  public updatedAt: DateTime
-
-  @beforeCreate()
-  public static async setId (outboxMessageModel: CoreOutboxMessageModel) {
-    outboxMessageModel.id = cuid()
+export interface CoreOutboxMessageSchema {
+  routingKey: string
+  payload: {
+    type: string,
+    [key: string]: any
   }
+  meta: {
+    userId: string
+  },
+  sentAt: Date | null
+  createdAt: Date
 }
+
+export const CoreOutboxMessageModel = CoreOutboxDatabase
+  .collection<CoreOutboxMessageSchema>('OutboxMessages')

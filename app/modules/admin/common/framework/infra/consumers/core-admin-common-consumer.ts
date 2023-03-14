@@ -1,10 +1,10 @@
 import {
   RabbitmqMessageBusServiceImpl,
 } from 'app/modules/@shared/framework/infra/services/rabbitmq-message-bus-service-impl'
-import Database from '@ioc:Adonis/Lucid/Database'
 import {
   CoreCommonInboxMessagesModel,
 } from 'app/modules/admin/common/framework/infra/db/models/core-common-inbox-messages-model'
+import {Message} from 'app/modules/@shared/domain/ports/message-bus'
 
 class CoreAdminCommonConsumer {
   public key = 'core.admin.common'
@@ -15,31 +15,29 @@ class CoreAdminCommonConsumer {
     void this.messageBusService.consume(this.key, this.handle)
   }
 
-  public async handle (message: string, ack: () => void) : Promise<void> {
-    const trx = await Database.transaction()
-
+  public async handle (message: Message, ack: () => void) : Promise<void> {
     try {
-      const messageObject = JSON.parse(message) as {
-        payload: {
-          userId: string[],
-          type: string
-        }
-        outboxId: string
+      const { type, ...payloadObject } = message.payload
+
+      const messageInbox = await CoreCommonInboxMessagesModel
+        .findOne({ outboxId: message.$meta.outboxId })
+
+      if (!messageInbox) {
+        await ack()
+        return
       }
 
-      const { type, ...payloadObject } = messageObject.payload
-
       await CoreCommonInboxMessagesModel
-        .firstOrCreate({ outboxId: messageObject.outboxId }, {
+        .insertOne({
           type: type,
-          payload: JSON.stringify(payloadObject),
-        }, trx)
-
-      await trx.commit()
+          payload: payloadObject,
+          meta: message.$meta,
+          complete: false,
+          createdAt: new Date(),
+        })
 
       await ack()
     } catch (e) {
-      await trx.rollback()
       throw e
     }
   }

@@ -42,4 +42,5 @@ export default Env.rules({
   DB_CONNECTION: Env.schema.string(),
   IN_STAGGING: Env.schema.boolean.optional(),
   MESSAGE_BUS_URL: Env.schema.string(),
+  MONGODB_URL: Env.schema.string(),
 })
