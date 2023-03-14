@@ -1,12 +1,13 @@
-import axios from 'axios'
 import { router } from '@inertiajs/vue3'
 
 export const apiService = {
 
-  createAppSetting: (form) => {
+  updateAppSetting: (form) => {
+    
     return new Promise((resolve) => {
-      return router.post("/account/admin/settings/acl/appSettings", form, {
+      return router.put("/admin/settings/appSettings", form, {       
         onSuccess: (data) => {
+          console.log(form);
           resolve(data);
         },
       });

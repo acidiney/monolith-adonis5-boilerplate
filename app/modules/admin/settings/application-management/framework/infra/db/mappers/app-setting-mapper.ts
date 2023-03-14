@@ -49,7 +49,6 @@ export class AppSettingColorMapper extends Mapper<ApplicationSettingsEntity, App
     if (appSettingColors.isLeft()) {
       throw new Error(appSettingColors.value.errorMessage)
     }
-    console.log(appBackgroundPrimaryOrError.value)
     return appSettingColors.value
   }
   public async toPersistence (_applicationSettingsEntity: ApplicationSettingsEntity):

@@ -14,7 +14,7 @@ Route.group(() => {
     operation: 'account-view-settings-color-page',
     description: 'View  Setting Color Page',
   }))
-  Route.post('/appSettings', routeAdapter(makePersistAppSettingControllerFactory(), {
+  Route.put('/appSettings', routeAdapter(makePersistAppSettingControllerFactory(), {
     operation: 'admin-acl-create-app-settings',
     description: '[AdminRoute] Create a app settings',
   }, false))

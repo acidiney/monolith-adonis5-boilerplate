@@ -2,11 +2,11 @@
 import { computed, onMounted } from "vue"
 import { usePage } from "@inertiajs/vue3"
 
-//import { apiService } from "./services/api"
+import { apiService } from "./services/api"
 import AppAccordion from "@core/components/app-accordion.vue";
 
 import { useAppSettingForm } from './composable/app-settingse-form'
-import { useHasPermission } from '@core/composables/has-permission'
+//import { useHasPermission } from '@core/composables/has-permission'
 
 const { appSettingFormRef,
     appSettingForm,
@@ -21,14 +21,14 @@ const appSettings = computed(() => usePage().props.appSetting)
 
 
 
-/* const onSubmit = async (formEl) => {
+const onSubmit = async (formEl) => {
     if (!formEl) return
     await formEl.validate((valid) => {
         if (valid) {
             state.loading = true;
-            apiService.updateRole({
-                roleSlug: role.value.slug,
-                ...ruleForm
+            apiService.updateAppSetting({
+
+                appSettingForm
             })
                 .then(() => {
                     formEl.resetFields()
@@ -38,7 +38,7 @@ const appSettings = computed(() => usePage().props.appSetting)
                 })
         }
     })
-} */
+}
 
 onMounted(() => {
 
@@ -49,7 +49,7 @@ onMounted(() => {
         appSettingForm.appColorSecondary = appSettings.value.internal ? t(appSettings.value.appColorSecondary) : appSettings.value.appColorSecondary
         appSettingForm.appBackgroundPrimaryColor = appSettings.value.internal ? t(appSettings.value.appBackgroundPrimaryColor) : appSettings.value.appBackgroundPrimaryColor
         appSettingForm.appBackgroundSecondaryColor = appSettings.value.internal ? t(appSettings.value.appBackgroundSecondaryColor) : appSettings.value.appBackgroundSecondaryColor
-        console.log(appSettingForm.appColorSecondary)
+
     }
 
 })
@@ -112,9 +112,14 @@ onMounted(() => {
                     prop="appBackgroundSecondaryColor">
                     <el-color-picker v-model="appSettingForm.appBackgroundSecondaryColor" />
                 </el-form-item>
-                <el-button> {{
-                    $t('admin.acl.role.update') }} </el-button>
+                <el-button type="primary" @click.prevent="onSubmit(appSettingFormRef)"> {{
+                    $t('admin.settings.app.update') }} </el-button>
             </el-form>
         </template>
     </account-layout>
 </template>
+<style scoped>
+.el-button {
+    float: right;
+}
+</style>
