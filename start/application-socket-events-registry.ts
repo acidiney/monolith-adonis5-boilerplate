@@ -12,7 +12,7 @@ import Event from '@ioc:Adonis/Core/Event'
 import Logger from '@ioc:Adonis/Core/Logger'
 
 import { resolve } from 'path'
-import { Socket } from 'socket.io'
+import { Socket, Server } from 'socket.io'
 import { loadContext as context } from 'app/infra/utils'
 
 export interface Broadcast {
@@ -31,7 +31,10 @@ export class ApplicationSocketEventsRegistry {
   private static instance: ApplicationSocketEventsRegistry
   private eventsRegistered: boolean = false
 
-  private constructor (private readonly socket: Socket) {}
+  private constructor (
+    private readonly socket: Socket,
+    private readonly sockets: any
+  ) {}
 
   public registerGlobalEvents (): void {
     if (this.eventsRegistered) {
@@ -49,7 +52,7 @@ export class ApplicationSocketEventsRegistry {
     })
 
     Event.on('alert:realtime:broadcast:all', ({ type, message, title, icon, eventName }: Broadcast) => {
-      this.socket.emit('alert', {
+      this.sockets.emit('alert', {
         title,
         message,
         type,
@@ -74,9 +77,9 @@ export class ApplicationSocketEventsRegistry {
     this.eventsRegistered = true
   }
 
-  public static getInstance (socket: Socket): ApplicationSocketEventsRegistry {
+  public static getInstance (socket: Socket, sockets: any): ApplicationSocketEventsRegistry {
     if (!this.instance) {
-      this.instance = new ApplicationSocketEventsRegistry(socket)
+      this.instance = new ApplicationSocketEventsRegistry(socket, sockets)
     }
 
     return this.instance

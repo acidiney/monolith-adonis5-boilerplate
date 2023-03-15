@@ -10,7 +10,7 @@ ws.io.on('connection', (socket) => {
     socket.join(user.username)
   })
 
-  const socketEventsRegistry = ApplicationSocketEventsRegistry.getInstance(socket)
+  const socketEventsRegistry = ApplicationSocketEventsRegistry.getInstance(socket, ws.io.sockets)
   void socketEventsRegistry.registerGlobalEvents()
 })
 
