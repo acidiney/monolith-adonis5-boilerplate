@@ -12,7 +12,7 @@ import Event from '@ioc:Adonis/Core/Event'
 import Logger from '@ioc:Adonis/Core/Logger'
 
 import { resolve } from 'path'
-import { Socket, Server } from 'socket.io'
+import { Socket } from 'socket.io'
 import { loadContext as context } from 'app/infra/utils'
 
 export interface Broadcast {
