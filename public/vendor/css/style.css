@@ -2,6 +2,10 @@
 Custom css
 */
 
+:root {
+  --bg-primary: #04344F;
+}
+
 .el-table, .el-table td.el-table__cell, .el-table th.el-table__cell.is-leaf {
   border: 0 !important;
 }
@@ -22,10 +26,22 @@ Custom css
 }
 
 .el-table__body {
-   border-collapse: separate !important;
+  border-collapse: separate !important;
   border-spacing: 0 10px !important;
  }
 
 .el-pager li, .el-pagination button {
   background: unset !important;
+}
+
+#aside a {
+  color: #fff !important;
+}
+
+#aside li a {
+  color: #ffffff77 !important;
+}
+
+#aside li a.text-primary {
+  color: #fff !important;
 }
