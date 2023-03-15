@@ -2,7 +2,7 @@ import { IEventDispatcher, left,right } from 'app/core/domain'
 import { PersistAppSettingUseCase, PersistAppSettingUseCaseInput } from '../../domain/usecases/persist-app-setting'
 import { PersistAppSettingRepository } from './ports'
 import { ApplicationSettingsEntity } from '../../domain/entity/application-settings-entity'
-import { AppSettingCreated } from '../../domain/events/app-setting-created'
+import { AppSettingModifiedEvent } from '../../domain/events/app-setting-modified'
 import { CreatedAppSettingResult } from '../../domain/usecases/persist-app-setting/persist-app-setting-usecase'
 import { Color } from '../../domain/value-objects/colors'
 import { AppSettingInputErrors } from '../../domain/errors/app-setting-input-errors'
@@ -38,13 +38,9 @@ export class PersistAppSettingUseCaseImpl implements PersistAppSettingUseCase{
     await this.persistAppSettingRepository.persist(createAppSettingOrError.value)
 
     this.eventDispatcher.publish(
-      new AppSettingCreated({
-        appName: createAppSettingOrError.value.appName,
-        appDesc: createAppSettingOrError.value.appDesc,
-        appColorPrimary: createAppSettingOrError.value.appColorPrimary,
-        appColorSecondary: createAppSettingOrError.value.appColorSecondary,
-        appBackgroundPrimaryColor: createAppSettingOrError.value.appBackgroundPrimaryColor,
-        appBackgroundSecondaryColor: createAppSettingOrError.value.appBackgroundSecondaryColor,
+      new AppSettingModifiedEvent({
+        lastId: createAppSettingOrError.value.id,
+        currentId:createAppSettingOrError.value.id,
       })
     )
 
