@@ -6,9 +6,12 @@ import { AppSettingModifiedEvent } from '../../domain/events/app-setting-modifie
 import { CreatedAppSettingResult } from '../../domain/usecases/persist-app-setting/persist-app-setting-usecase'
 import { Color } from '../../domain/value-objects/colors'
 import { AppSettingInputErrors } from '../../domain/errors/app-setting-input-errors'
+import { FindAppSettingRepository } from '../find-app-setting/ports/find-app-setting-repository'
 
 export class PersistAppSettingUseCaseImpl implements PersistAppSettingUseCase{
-  constructor (private readonly persistAppSettingRepository: PersistAppSettingRepository,
+  constructor (
+    private readonly findAppSettingRepository: FindAppSettingRepository,
+    private readonly persistAppSettingRepository: PersistAppSettingRepository,
     private readonly eventDispatcher: IEventDispatcher
   ) { }
   public async perform (input: PersistAppSettingUseCaseInput): Promise<CreatedAppSettingResult> {
@@ -34,12 +37,13 @@ export class PersistAppSettingUseCaseImpl implements PersistAppSettingUseCase{
     if (createAppSettingOrError.isLeft()) {
       return left(createAppSettingOrError.value)
     }
+    const lastId = await this.findAppSettingRepository.findAppSetting()
 
     await this.persistAppSettingRepository.persist(createAppSettingOrError.value)
 
     this.eventDispatcher.publish(
       new AppSettingModifiedEvent({
-        lastId: createAppSettingOrError.value.id,
+        lastId: lastId.id,
         currentId:createAppSettingOrError.value.id,
       })
     )

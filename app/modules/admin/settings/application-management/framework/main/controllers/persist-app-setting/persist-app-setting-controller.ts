@@ -12,7 +12,7 @@ export class PersistAppSettingController implements Controller<HttpContextContra
       return response.redirect().back()
     }
 
-    const validations= await request.validate(PersistAppSettindValidator).catch((data
+    const validations= await request.validate(PersistAppSettindValidator).catch((
     ) => {
 
     })
