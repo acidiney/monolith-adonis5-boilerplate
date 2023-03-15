@@ -12,5 +12,7 @@
   "application-management.setting.edit_setting.appBackgroundSecondaryColor": "Cor do fundo secundaria",
   "admin.settings.app.error": "Erro ao configurar aplicação",
   "admin.settings.app.update": "Editar",
-  "admin.settings.app.sucess": "Sucesso!"
+  "admin.settings.app.sucess": "Sucesso!",
+  "admin.application.settings.updated": "As configurações da aplicação foram Alteradas",
+  "admin.application.settings.description": "As configurações da aplicação foram alteradas actualize a pagina para ver as alterações"
 }
