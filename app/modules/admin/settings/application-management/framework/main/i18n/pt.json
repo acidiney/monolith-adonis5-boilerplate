@@ -1,6 +1,12 @@
 {
   "menu.admin.setting.setup.application": "Configurar aplicação",
   "permission.group.admin.setup.application": "Configuração",
+  "admin.acl.roles.name.required": "O nome é obrigatório",
+  "admin.acl.roles.desc.required": "A descrição é obrigatória",
+  "admin.acl.roles.appColorPrimary.required": "A cor primaria é obrigatória",
+  "admin.acl.roles.appColorSecondary.required": "A cor secundaria é obrigatória",
+  "admin.acl.roles.appBackgroundPrimaryColor.required": "A cor do fundo primaria é obrigatória",
+  "admin.acl.roles.appBackgroundSecondaryColor.required": "A cor do fundo secundaria é obrigatória",
   "permission.setup.application": "Configurar a aplicação",
   "menu.admin.setting.application-management.setting.edit_setting": "Configuração da aplicação",
   "menu.admin.setting.application-management.setting.edit_setting.description": "Descrição",

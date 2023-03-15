@@ -13,6 +13,7 @@
   "admin.acl.users.validation.email.required": "E-mail obrigatório",
   "admin.acl.users.register": "Adicionar novo utilizador",
   "admin.acl.user.already_exist": "Utilizador já existe",
+  "admin.acl.users.user_updated": "As configurações do usuario foram alteradas",
   "admin.acl.user.new": "Novo utilizador criado",
   "admin.acl.users.register.description": "Dados do utilizador",
   "admin.acl.inactivate": "Bloquear",
