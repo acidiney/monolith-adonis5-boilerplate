@@ -6,26 +6,26 @@ export default class MenuMiddleware {
     { session }: HttpContextContract,
     next: () => Promise<void>
   ) {
-    if(!session.get('header')) {
-      const settings = await CoreApplicationSettings
-        .query()
-        .whereNull('deleted_at')
-        .orderBy('created_at', 'desc')
-        .first()
+    //    if(!session.get('header')) {
+    const settings = await CoreApplicationSettings
+      .query()
+      .whereNull('deleted_at')
+      .orderBy('created_at', 'desc')
+      .first()
 
-      if (!settings) {
-        throw new Error('Application need to be have at least, one global configuration')
-      }
-
-      session.put('header', {
-        appName: settings.appName,
-        appDescription: settings.appDesc,
-        appColorPrimary: settings.appColorPrimary,
-        appColorSecondary: settings.appColorSecondary,
-        appBackgroundColorPrimary: settings.appBackgroundPrimaryColor,
-        appBackgroundColorSecondary: settings.appBackgroundSecondaryColor,
-      })
+    if (!settings) {
+      throw new Error('Application need to be have at least, one global configuration')
     }
+
+    session.put('header', {
+      appName: settings.appName,
+      appDescription: settings.appDesc,
+      appColorPrimary: settings.appColorPrimary,
+      appColorSecondary: settings.appColorSecondary,
+      appBackgroundColorPrimary: settings.appBackgroundPrimaryColor,
+      appBackgroundColorSecondary: settings.appBackgroundSecondaryColor,
+    })
+    // }
 
     await next()
   }
