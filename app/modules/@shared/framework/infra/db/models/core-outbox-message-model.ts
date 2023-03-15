@@ -8,7 +8,7 @@ export interface CoreOutboxMessageSchema {
   }
   meta: {
     userId: string
-  },
+  }
   sentAt: Date | null
   createdAt: Date
 }
