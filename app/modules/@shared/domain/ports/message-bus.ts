@@ -14,5 +14,5 @@ export interface MessageBus {
 
   stop (): void
   publish(queue: string, message: Message): void
-  consume(queue: string, onMessage: (message: Message, ack: () => void) => void): void
+  consume(queue: string, onMessage: (message: Message, ack: () => void) => Promise<void>): void
 }

@@ -1,19 +1,3 @@
-import {CoreOutboxDatabase} from 'app/modules/@shared/framework/infra/db/models/core-outbox-database'
+import { CoreGenerateInboxMessageModel } from 'app/modules/@shared/framework/infra'
 
-interface CoreCommonInboxMessagesSchema {
-  type: string
-  payload: {
-    [key: string]: any
-  }
-  meta: {
-    userId: string
-    outboxId: string
-  },
-
-  complete: boolean
-  createdAt: Date
-}
-
-export const CoreCommonInboxMessagesModel = CoreOutboxDatabase
-  .collection<CoreCommonInboxMessagesSchema>('CoreCommonInboxMessages')
-
+export const CoreCommonInboxMessagesModel = CoreGenerateInboxMessageModel('CoreCommonInboxMessages')

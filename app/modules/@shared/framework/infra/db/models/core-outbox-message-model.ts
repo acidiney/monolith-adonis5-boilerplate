@@ -14,4 +14,4 @@ export interface CoreOutboxMessageSchema {
 }
 
 export const CoreOutboxMessageModel =
-  CoreOutboxDatabase.collection<CoreOutboxMessageSchema>('outbox_messages')
+  CoreOutboxDatabase.collection<CoreOutboxMessageSchema>('OutboxMessages')

@@ -6,7 +6,7 @@ export interface BroadcastMessage {
   }
 
   meta: {
-    userId: string
+    userId: string | null
   }
 }
 
