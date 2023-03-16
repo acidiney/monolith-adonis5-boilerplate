@@ -6,6 +6,7 @@ import { FindUserToAuthenticateRepositoryImpl, PersistResetPasswordTokenReposito
 import { SendResetPasswordServiceImpl } from '../../infra/services'
 import { SendResetPasswordController } from '../controllers/send-reset-password-controller'
 import {EventDispatcher} from 'app/core/domain'
+import { BroadcastMessageRepositoryImpl } from 'app/modules/@shared/framework/infra'
 
 export const makeSendResetPasswordController = (): SendResetPasswordController =>
   new SendResetPasswordController(
@@ -13,7 +14,9 @@ export const makeSendResetPasswordController = (): SendResetPasswordController =
       new FindUserToAuthenticateRepositoryImpl(),
       new HashDriverAdapterImpl(),
       new PersistResetPasswordTokenRepositoryImpl(),
-      new SendResetPasswordServiceImpl(),
+      new SendResetPasswordServiceImpl(
+        new BroadcastMessageRepositoryImpl()
+      ),
       EventDispatcher.getInstance()
     )
   )
