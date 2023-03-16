@@ -8,8 +8,8 @@ import {
 } from 'app/modules/@shared/framework/infra/services/rabbitmq-message-bus-service-impl'
 import {CoreOutboxMessageModel} from 'app/modules/@shared/framework/infra/db/models/core-outbox-message-model'
 
-export default class OutboxProcessorJob implements JobContract {
-  public key = OutboxProcessorJob.name
+export default class CoreOutboxProcessorJob implements JobContract {
+  public key = CoreOutboxProcessorJob.name
 
   constructor (
     private readonly messageBus: MessageBus = RabbitmqMessageBusServiceImpl.getInstance()
