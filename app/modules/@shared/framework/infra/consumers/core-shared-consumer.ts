@@ -1,11 +1,9 @@
-import {
-  CoreCommonInboxMessagesModel,
-} from 'app/modules/admin/common/framework/infra/db/models/core-common-inbox-messages-model'
+import { CoreSharedInboxMessagesModel } from '../db/models/core-shared-inbox-messages-model'
 import { CoreBaseConsumer } from './core-base-consumer'
 
 class CoreAdminCommonConsumer extends CoreBaseConsumer {
   constructor () {
-    super('core.shared', CoreCommonInboxMessagesModel)
+    super('core.shared', CoreSharedInboxMessagesModel)
   }
 }
 
