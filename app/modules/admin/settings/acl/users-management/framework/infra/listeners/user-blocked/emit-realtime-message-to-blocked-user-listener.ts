@@ -1,7 +1,8 @@
-import { Handler } from 'app/infra/listeners/handler'
-import { UserBlockedEvent } from '../../../../domain/events/user-blocked-event'
 import Event from '@ioc:Adonis/Core/Event'
+
+import { Handler } from 'app/infra/listeners/handler'
 import { CoreUserModel } from 'app/modules/@shared/framework/infra/db/models'
+import { UserBlockedEvent } from '../../../../domain/events/user-blocked-event'
 
 export class EmitRealtimeMessageToBlockedUserListener extends Handler<UserBlockedEvent> {
   public async handle (event: UserBlockedEvent): Promise<void> {

@@ -29,7 +29,7 @@ export class RabbitmqMessageBusServiceImpl implements MessageBus {
   }
 
   public async consume (bindingKey: string,
-    onMessage: (message: Message, ack: () => void) => void)
+    onMessage: (message: Message, ack: () => void) => Promise<void>)
     : Promise<void> {
     if (!this.channel) {
       throw new Error('Channel is not initialized')

@@ -4,7 +4,7 @@ import { HashAdapter } from 'app/modules/auth/usecases'
 export class HashDriverAdapterImpl implements HashAdapter {
   public async generate (secret: string, payload: string): Promise<string> {
     const hmac = await crypto.createHmac('sha256', secret)
-    hmac.update(payload)
+    hmac.update(`${payload}${new Date().getTime()}`)
 
     return hmac.digest('hex')
   }
