@@ -7,7 +7,7 @@ export interface CoreOutboxMessageSchema {
     [key: string]: any
   }
   meta: {
-    userId: string
+    userId: string | null
   }
   sentAt: Date | null
   createdAt: Date

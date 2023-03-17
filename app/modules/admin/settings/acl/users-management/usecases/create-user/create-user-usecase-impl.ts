@@ -39,6 +39,7 @@ export class CreateUserUseCaseImpl implements CreateUserUseCase {
       lastName: input.lastName,
       email: emailOrError.value,
       status: StatusEnum.ACTIVE,
+      defaultLang: 'pt',
       roleId: new UniqueEntityID(input.role),
       password: 'first_password',
     })

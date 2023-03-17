@@ -19,6 +19,7 @@ export const makeFindUsernameRepositoryStub = (): FindUsernameRepository => {
         firstName: 'valid',
         lastName: 'user',
         status: StatusEnum.ACTIVE,
+        defaultLang: 'pt',
         roleId: new UniqueEntityID('valid_role_id'),
       })
 
