@@ -14,7 +14,7 @@ defineProps({
     <div class="padding d-flex">
       <div class="page-title">
         <h2 class="text-md text-highlight">{{ title }}</h2>
-        <small class="text-muted">{{ subTitle }}</small>
+        <small class="text-muted" v-html="subTitle"></small>
       </div>
       <slot />
     </div>
