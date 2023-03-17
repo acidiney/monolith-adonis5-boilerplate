@@ -5,7 +5,7 @@ export interface Message {
   },
   $meta: {
     outboxId: string,
-    userId: string
+    userId: string | null
   }
 }
 
