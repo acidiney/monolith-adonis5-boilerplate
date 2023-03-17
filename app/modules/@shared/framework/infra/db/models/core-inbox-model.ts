@@ -1,10 +1,8 @@
 import { CoreOutboxDatabase } from './core-outbox-database'
 
-export interface CoreInboxSchema {
+export interface CoreInboxSchema<T> {
   type: string
-  payload: {
-    [key: string]: any
-  }
+  payload: T
   meta: {
     userId: string | null
     outboxId: string
@@ -14,5 +12,5 @@ export interface CoreInboxSchema {
   createdAt: Date
 }
 
-export const CoreGenerateInboxMessageModel = (modelName: string) =>CoreOutboxDatabase
-  .collection<CoreInboxSchema>(modelName)
+export const CoreGenerateInboxMessageModel = <T>(modelName: string) =>CoreOutboxDatabase
+  .collection<CoreInboxSchema<T>>(modelName)

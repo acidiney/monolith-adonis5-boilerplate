@@ -6,7 +6,7 @@ import { JobsOptions } from 'bullmq'
 import { Job, JobContract } from '@ioc:Rocketseat/Bull'
 import HttpContext from '@ioc:Adonis/Core/HttpContext'
 
-interface SendEmailProps {
+export interface SendEmailProps {
   to: string
   subject: string
   cc?: string
