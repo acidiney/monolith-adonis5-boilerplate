@@ -20,7 +20,7 @@ export class SendResetPasswordServiceImpl implements SendResetPasswordLinkServic
 
     const html = await edge.render('pt/send-reset-password-link',
       {
-        user: input.fullName,
+        ...input,
         plataform: appName,
         link: resetPasswordLink,
         hash: Encryption.encrypt(Env.get('APP_KEY')),
