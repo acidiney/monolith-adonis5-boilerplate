@@ -9,6 +9,7 @@ interface UserProps {
   firstName: string,
   lastName: string,
   email: Email
+  defaultLang: string
   password: string
   roleId: UniqueEntityID
   status?: StatusType
@@ -41,6 +42,10 @@ export class UserEntity extends Entity<UserProps> {
 
   public get lastLoginAt (): Date | undefined {
     return this.props.lastLoginAt
+  }
+
+  public get defaultLang (): string {
+    return this.props.defaultLang
   }
 
   public get avatar (): string | undefined {

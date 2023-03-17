@@ -9,7 +9,7 @@ import {
 export class CoreBaseConsumer {
   constructor (
     private readonly key: string,
-    private readonly inboxModel: Collection<CoreInboxSchema>,
+    private readonly inboxModel: Collection<CoreInboxSchema<any>>,
     private readonly messageBusService = RabbitmqMessageBusServiceImpl.getInstance()
   ) {
     this.messageBusService.consume(this.key, this.handle.bind(this))
@@ -34,6 +34,7 @@ export class CoreBaseConsumer {
           meta: message.$meta,
           complete: false,
           createdAt: new Date(),
+          status: 'PENDING',
         })
 
       await ack()

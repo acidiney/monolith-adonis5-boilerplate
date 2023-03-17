@@ -2,6 +2,7 @@ import {join} from 'path'
 import {Edge} from 'edge.js'
 
 import Env from '@ioc:Adonis/Core/Env'
+import I18n from '@ioc:Adonis/Addons/I18n'
 import Encryption from '@ioc:Adonis/Core/Encryption'
 import { BroadcastMessageContract } from 'app/modules/@shared/domain/ports'
 import { SendResetPasswordLinkInput, SendResetPasswordLinkService } from 'app/modules/auth/usecases'
@@ -18,9 +19,9 @@ export class SendResetPasswordServiceImpl implements SendResetPasswordLinkServic
 
     edge.mount(join(__dirname, '..', './resources'))
 
-    const html = await edge.render('pt/send-reset-password-link',
+    const html = await edge.render(`${input.userLang}/send-reset-password-link`,
       {
-        ...input,
+        user: input,
         plataform: appName,
         link: resetPasswordLink,
         hash: Encryption.encrypt(Env.get('APP_KEY')),
@@ -30,7 +31,7 @@ export class SendResetPasswordServiceImpl implements SendResetPasswordLinkServic
       message: {
         type: 'send_email',
         content: html,
-        subject: 'auth.request_password.request',
+        subject: I18n.locale(input.userLang).formatMessage('auth.request_password.request'),
         to: input.username,
       },
       meta: {

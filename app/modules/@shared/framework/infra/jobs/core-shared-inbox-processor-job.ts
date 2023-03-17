@@ -23,34 +23,34 @@ export default class CoreSharedInboxProcessor implements JobContract {
   }
 
   public async handle () : Promise<void> {
-    const message = await CoreSharedInboxMessagesModel
-      .findOne({
+    const message =
+      await CoreSharedInboxMessagesModel.findOneAndUpdate({
         complete: false,
-      })
+        status: 'PENDING',
+      }, { $set: { status: 'STARTED' } })
 
-    if (!message) {
+    if (!message.value) {
       return
     }
 
     try {
-      // TODO: should update status of message to processing
-
-      const contract = this.contracts[message.type.toUpperCase()]
+      const contract = this.contracts[message.value.type.toUpperCase()]
 
       if (!contract) {
-        throw new Error(`Contract ${message.type} not implemented!`)
+        throw new Error(`Contract ${message.value.type} not implemented!`)
       }
 
-      await contract.perform(message.payload)
+      await contract.perform(message.value.payload)
 
       await CoreOutboxMessageModel
-        .findOneAndDelete({ _id: new ObjectId(message.meta.outboxId) }),
+        .findOneAndDelete({ _id: new ObjectId(message.value.meta.outboxId) }),
 
       await CoreSharedInboxMessagesModel
         .findOneAndDelete({
-          _id: message._id,
+          _id: message.value._id,
         })
     } catch (e) {
+      await CoreSharedInboxMessagesModel.findOneAndUpdate({ _id: message.value._id }, { $set: { status: 'PENDING' } })
       throw e
     }
   }

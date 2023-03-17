@@ -28,6 +28,7 @@ export class UserMapper extends Mapper<UserEntity, CoreUserModel> {
       lastLoginAt: userModel.lastLoginAt?.toJSDate(),
       status: userModel.statusId,
       avatar: userModel.avatar,
+      defaultLang: userModel.defaultLang,
       roleId: new UniqueEntityID(userModel.roleId),
       slug: userModel.slug,
     }, {

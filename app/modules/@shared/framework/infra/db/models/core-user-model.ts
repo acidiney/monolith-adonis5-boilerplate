@@ -45,6 +45,9 @@ export class CoreUserModel extends BaseModel {
   public password: string
 
   @column()
+  public defaultLang: string
+
+  @column()
   public rememberMeToken?: string
 
   @column({ columnName: 'status_id' })

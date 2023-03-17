@@ -1,5 +1,6 @@
 export interface SendResetPasswordLinkInput {
   username: string,
+  userLang: string,
   fullName: string,
   token: string
 }

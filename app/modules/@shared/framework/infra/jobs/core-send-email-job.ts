@@ -4,7 +4,6 @@ import Encryption from '@ioc:Adonis/Core/Encryption'
 
 import { JobsOptions } from 'bullmq'
 import { Job, JobContract } from '@ioc:Rocketseat/Bull'
-import HttpContext from '@ioc:Adonis/Core/HttpContext'
 
 export interface SendEmailProps {
   to: string
@@ -13,6 +12,7 @@ export interface SendEmailProps {
   bcc?: string
   attach?: string,
   content: string
+  lang: string
 }
 
 export default class CoreSendEmailJob implements JobContract {
@@ -27,15 +27,13 @@ export default class CoreSendEmailJob implements JobContract {
 
     const appName = Env.get('APP_NAME')
 
-    const ctx = await HttpContext.get()
-
     const { to, cc, bcc, content, subject, attach } = data
 
     await Mail.send((message) => {
       message
         .from(Env.get('MAIL_FROM'))
         .to(to)
-        .subject(`${appName} - ${ctx?.i18n.formatMessage(subject)}`)
+        .subject(`${appName} - ${subject}`)
         .header('x-sign-token', Encryption.encrypt(appName))
 
       if (bcc) {

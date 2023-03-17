@@ -8,6 +8,7 @@ export interface CoreInboxSchema<T> {
     outboxId: string
   },
 
+  status: 'PENDING' | 'STARTED',
   complete: boolean
   createdAt: Date
 }

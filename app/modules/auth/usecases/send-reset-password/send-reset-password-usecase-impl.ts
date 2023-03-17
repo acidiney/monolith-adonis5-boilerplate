@@ -31,6 +31,7 @@ export class SendResetPasswordUseCaseImpl implements SendResetPasswordUseCase {
     await this.sendResetPasswordLinkService.send({
       username: user.email,
       fullName: user.fullName,
+      userLang: user.defaultLang,
       token,
     })
 
