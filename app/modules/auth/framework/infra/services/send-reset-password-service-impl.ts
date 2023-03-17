@@ -30,7 +30,7 @@ export class SendResetPasswordServiceImpl implements SendResetPasswordLinkServic
       message: {
         type: 'send_email',
         content: html,
-        subject: 'Pedido de alteração de senha',
+        subject: 'auth.request_password.request',
         to: input.username,
       },
       meta: {
