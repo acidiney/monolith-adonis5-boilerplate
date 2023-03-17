@@ -1,5 +1,18 @@
+<script setup>
+import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { locale, availableLocales } = useI18n()
+
+const defaultLanguage = ref(locale.value)
+
+watch(defaultLanguage, () => {
+  console.error('CHANGE LANGUAGE NOT IMPLEMENTED!')
+})
+
+</script>
+
 <template>
-  <!-- ############ Setting START-->
   <div class="dropdown-menu dropdown-menu-center mt-3 w-md animate fadeIn">
     <div class="setting px-3">
       <div class="mb-2 text-muted">
@@ -16,16 +29,11 @@
         <strong>{{ $t('shared.translations')}}</strong>
       </div>
       <div class="mb-2 d-flex" id="languageSettings">
-        <label class="ui-check ui-check-rounded d-block">
-          <input type="checkbox" :checked="defaultLanguage === 'pt'" />
+        <label v-for="lang of availableLocales" class="ui-check text-uppercase mr-2 ui-check-rounded d-block">
+          <input type="radio" :value="lang" v-model="defaultLanguage"/>
           <i></i>
-          <small>PT</small>
+          <small>{{ lang }}</small>
         </label>
-        <!-- <label class="ui-check ui-check-rounded d-block">
-          <input type="checkbox" :checked="defaultLanguage === 'fr'" />
-          <i></i>
-          <small>FR</small>
-        </label> -->
       </div>
       <div class="mb-2 text-muted">
         <strong>{{ $t('shared.background.color')}}</strong>
@@ -43,19 +51,3 @@
     </div>
   </div>
 </template>
-
-<script>
-  export default {
-    name: 'AppCustomApplicationSettings',
-    methods: {
-      setLocale (locale) {
-        this.$i18n.setLocale(locale)
-      }
-    },
-    computed: {
-      defaultLanguage() {
-        return this.$i18n.locale
-      }
-    }
-  }
-</script>

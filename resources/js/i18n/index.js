@@ -4,7 +4,7 @@ const keys = r.keys()
   .map((k) => k.replace('./', '').replace('.json', ''))
 
 
-const i18n = {}
+const i18n = {};
 
 
 keys.forEach((p) => {
