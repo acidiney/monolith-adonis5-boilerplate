@@ -20,9 +20,7 @@
   "preloads": [
     {
       "file": "./start/i18n",
-      "environment": [
-        "web"
-      ]
+      "environment": ["web"]
     },
     {
       "file": "./start/sentry",

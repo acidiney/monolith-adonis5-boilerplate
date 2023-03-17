@@ -1,5 +1,8 @@
 import type { ApplicationContract } from '@ioc:Adonis/Core/Application'
 
+import { resolve } from 'path'
+import { loadModulesInternationalization } from '../start/utils/i18n-modules-loader'
+
 export default class AppProvider {
   constructor (protected app: ApplicationContract) {
   }
@@ -25,6 +28,12 @@ export default class AppProvider {
         },
       }
     })
+
+    const paths = ['../app/modules']
+
+    for (const path of paths) {
+      await loadModulesInternationalization(resolve(__dirname, path), 'lang', /main\/i18n\/.*\.json$/)
+    }
   }
 
   public async ready () {
