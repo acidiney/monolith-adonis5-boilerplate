@@ -5,7 +5,7 @@ import Event from '@ioc:Adonis/Core/Event'
 //import { AppSettingModel } from '../db'
 
 export class NotifyAllUsersThatSettingWasChangedInRealtimeListener extends Handler<AppSettingModifiedEvent> {
-  public async handle (event: AppSettingModifiedEvent): Promise<void> {
+  public async handle (): Promise<void> {
   /*   const role = await AppSettingModel
       .query()
       .firstOrFail() */
