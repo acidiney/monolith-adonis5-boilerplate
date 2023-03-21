@@ -1,11 +1,14 @@
+import {EventType} from 'app/modules/@shared/domain/entities/notification-entity'
+
 export interface RetrieveNewestNotificationsUseCaseOutput {
   message?: string,
   title: string
 
-  eventType: 'success' | 'error' | 'warning' | 'info',
+  eventType: EventType
 
   routePath?: string
   icon?: string
   createdAtText: string
   createdAt: string
+  hash: string
 }

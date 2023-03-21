@@ -1,6 +1,7 @@
 import { CoreOutboxDatabase } from './core-outbox-database'
 
 export interface CoreNotificationEventSchema {
+  hash: string
   message: string | null
   title: string
   eventType: 'success' | 'error' | 'warning' | 'info'

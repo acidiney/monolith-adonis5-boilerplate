@@ -4,5 +4,6 @@ export interface RetrieveNewestNotificationsUseCaseInput {
   perPage: number
   orderDirection: 'asc' | 'desc'
   hideOpenedNotifications: boolean
+  withPagination: boolean
 }
 
