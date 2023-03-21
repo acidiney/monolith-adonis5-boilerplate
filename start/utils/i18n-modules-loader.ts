@@ -1,5 +1,4 @@
 import { resolve } from 'path'
-import Application from '@ioc:Adonis/Core/Application'
 import { loadContext as context } from '../../app/infra/utils/context'
 
 import { writeFile } from 'fs/promises'
@@ -31,7 +30,6 @@ export const loadModulesInternationalization = async (path: string, destine: str
   }
 
   for (const lang in languaguesData) {
-    const resource = Application.resourcesPath(destine)
-    await writeFile(resolve(resource, `${lang}.json`), JSON.stringify(languaguesData[lang]))
+    await writeFile(resolve(destine, `${lang}.json`), JSON.stringify(languaguesData[lang]))
   }
 }
