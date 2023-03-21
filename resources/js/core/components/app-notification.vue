@@ -1,4 +1,4 @@
-<script setup lang="ts" id="app-notifications">
+<script setup id="app-notifications">
 import { onMounted, ref } from 'vue'
 import { apiService } from '../services/api-service'
 
