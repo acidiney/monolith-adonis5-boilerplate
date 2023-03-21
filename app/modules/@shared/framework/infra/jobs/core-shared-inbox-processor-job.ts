@@ -6,6 +6,7 @@ import { SendEmailProcessor } from '../inbox-processor/send-email-processor'
 import { InboxProcessorContract } from 'app/modules/@shared/domain/ports'
 import { CoreOutboxMessageModel } from '../db'
 import { ObjectId } from 'mongodb'
+import { CoreBroadcastEnum } from 'app/modules/@shared/domain/types'
 
 interface ProcessorContract {
   [key: string]: InboxProcessorContract<any>
@@ -15,7 +16,7 @@ export default class CoreSharedInboxProcessor implements JobContract {
   public key: string = CoreSharedInboxProcessor.name
 
   private readonly contracts: ProcessorContract = {
-    SEND_EMAIL: new SendEmailProcessor(),
+    [CoreBroadcastEnum.SEND_EMAIL]: new SendEmailProcessor(),
   }
 
   public options: JobsOptions = {

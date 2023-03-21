@@ -17,8 +17,6 @@ export class CoreBaseConsumer {
 
   private async handle (message: Message, ack: () => void) : Promise<void> {
     try {
-      const { type, ...payloadObject } = message.payload
-
       const messageInbox = await this.inboxModel
         .findOne({ 'meta.outboxId': message.$meta.outboxId })
 
@@ -29,8 +27,8 @@ export class CoreBaseConsumer {
 
       await this.inboxModel
         .insertOne({
-          type: type,
-          payload: payloadObject,
+          type: message.type,
+          payload: message.payload,
           meta: message.$meta,
           complete: false,
           createdAt: new Date(),

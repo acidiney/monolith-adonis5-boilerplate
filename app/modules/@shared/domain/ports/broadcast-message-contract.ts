@@ -1,15 +1,11 @@
-
-export interface BroadcastMessage {
-  message: {
-    type: string,
-    [key: string]: any
-  }
-
+export interface BroadcastMessage<T> {
+  type: string
+  message: T
   meta: {
     userId: string | null
   }
 }
 
 export interface BroadcastMessageContract {
-  publish: (routeName: string, message: BroadcastMessage) => Promise<void>
+  publish: <T>(routeName: string, message: BroadcastMessage<T>) => Promise<void>
 }

@@ -70,7 +70,7 @@ describe('SendResetPasswordUseCase', () => {
     expect(sendResetPasswordLinkServiceSpy).toBeCalledTimes(1)
     expect(sendResetPasswordLinkServiceSpy)
       .toBeCalledWith(
-        {'fullName': 'valid user', 'token': 'valid_token', 'username': 'valid@email.com'}
+        {'fullName': 'valid user', 'userLang': 'pt', 'token': 'valid_token', 'username': 'valid@email.com'}
       )
   })
 

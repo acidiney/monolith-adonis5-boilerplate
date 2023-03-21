@@ -34,6 +34,7 @@ export default class CoreOutboxProcessorJob implements JobContract {
       this.messageBus.publish(
         message.routingKey,
         {
+          type: message.type,
           payload: message.payload,
           $meta: {
             outboxId: message._id.toString(),

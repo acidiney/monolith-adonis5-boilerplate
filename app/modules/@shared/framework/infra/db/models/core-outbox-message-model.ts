@@ -2,8 +2,8 @@ import {CoreOutboxDatabase} from 'app/modules/@shared/framework/infra/db/models/
 
 export interface CoreOutboxMessageSchema {
   routingKey: string
+  type: string,
   payload: {
-    type: string,
     [key: string]: any
   }
   meta: {

@@ -6,6 +6,7 @@ import I18n from '@ioc:Adonis/Addons/I18n'
 import Encryption from '@ioc:Adonis/Core/Encryption'
 import { BroadcastMessageContract } from 'app/modules/@shared/domain/ports'
 import { SendResetPasswordLinkInput, SendResetPasswordLinkService } from 'app/modules/auth/usecases'
+import { CoreBroadcastEnum } from 'app/modules/@shared/domain/types'
 
 export class SendResetPasswordServiceImpl implements SendResetPasswordLinkService {
   constructor (
@@ -28,8 +29,8 @@ export class SendResetPasswordServiceImpl implements SendResetPasswordLinkServic
       })
 
     await this.broadcastMessage.publish('core.shared', {
+      type: CoreBroadcastEnum.SEND_EMAIL,
       message: {
-        type: 'send_email',
         content: html,
         subject: I18n.locale(input.userLang).formatMessage('auth.request_password.request'),
         to: input.username,
