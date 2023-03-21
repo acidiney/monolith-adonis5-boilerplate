@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/compare/v1.1.0...v1.2.0) (2023-03-21)
+
+
+### Features
+
+* **core:** [api] add retrieve newest user notifications via api ([ba77d3c](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/ba77d3c26888e3ed6c7c0861a1df4f545d8ffa75))
+* **core:** add domain use cases for retrive notifications ([0409071](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/040907199819b080a82f8bd4cbc89cde1090d6cc))
+* **core:** implement rabbitmq with outbox exchange ([b095efc](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/b095efc0f5fae568c723a0e4862dbe9fdf6854e8))
+* **core:** implement rabbitmq with outbox exchange ([eaa85b3](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/eaa85b310c04839f41f3164386a53c7c44fb8d79))
+* **core:** when block a user send email ([6269d58](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/6269d5853f3df31fc586074c7be02dfb16b0dd44))
+* retrieve notifications in frontend ([917e52d](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/917e52ddd93a7443204747606bf12aa2a01b00b3))
+* retrive notifications in frontend ([8f97220](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/8f9722044a499e2e6b3393d3a8798cdf742b35fe))
+
+
+### Bug Fixes
+
+* **admin:** when receives an message should use transaction in inbox pattern ([08fec3c](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/08fec3cfa625599e98e1b9f403961eb6202c428f))
+* **auth:** add broadcastMessageRepository when do send reset password ([80c4daf](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/80c4daff39da992891d331f0ecb67510e41eb8b2))
+* **consumer:** abstract consumer and re-use same base consumer implementation ([04fadfd](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/04fadfd81b9c9578eb619f5e557b9f8f0d8740ab))
+* **global:** move loader of i18n files to a AppProvider ([e9c5ce6](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/e9c5ce6bd267fa5d4a04920dd2fe7823ec88a948))
+* **global:** restore notificatio type entity ([332ac20](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/332ac2011137e83530c878d23df695a7c1f69cc2))
+* **hash-driver:** when generate a new hash add timestamp into payload, to not duplicate ([ad76839](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/ad76839e06cc578a40d60d60e6374e1a2c7823f9))
+* **i18n:** correct i18n dashboard subtitle ([0ecaa15](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/0ecaa1586f31c2615f58292e4c91d1abca06dad1))
+* **i18n:** uses user default lang to send e-mail ([b7ee6b1](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/b7ee6b13ea466c87cd398dd10387acb72c69cb07))
+* **outbox:** save send_email into coreSharedInboxModel ([f5b28f4](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/f5b28f414ceb9759d627fdd1e5708b709605a6f0))
+* remote on changelog ([25d9068](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/25d9068e00f2ff2e5ace3bec67c7e419648bc568))
+* **socket:** broadcast all should use io.sockets instead of current socket ([d6f5f36](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/d6f5f36c1c528863ca37f78a81fd9e3e8249399c))
+
 ## 1.1.0 (2023-03-06)
 
 
