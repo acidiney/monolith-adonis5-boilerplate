@@ -1,4 +1,4 @@
-import {Entity, UniqueEntityID} from 'app/core/domain'
+import {Entity, Options, UniqueEntityID} from 'app/core/domain'
 
 export type EventType = 'success' | 'error' | 'warning' | 'info'
 
@@ -7,6 +7,8 @@ interface NotificationProps {
   userId: UniqueEntityID
   subject: string
   message: string | null
+
+  event: string,
 
   routePath?: string
   eventType: EventType
@@ -30,6 +32,10 @@ export class NotificationEntity extends Entity<NotificationProps> {
     return this.props.message ?? ''
   }
 
+  public get event (): string {
+    return this.props.event
+  }
+
   public get routePath (): string | undefined {
     return this.props.routePath
   }
@@ -37,7 +43,7 @@ export class NotificationEntity extends Entity<NotificationProps> {
     return this.props.eventType
   }
 
-  public static hydrate (id: UniqueEntityID, props: NotificationProps) {
-    return new NotificationEntity(props, id)
+  public static hydrate (id: UniqueEntityID, props: NotificationProps, options?: Options) {
+    return new NotificationEntity(props, id, options)
   }
 }

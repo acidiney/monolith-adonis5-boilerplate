@@ -57,5 +57,7 @@
   "shared.users.role": "Perfil",
   "shared.permissions": "Permissões",
   "shared.description": "Descrição",
-  "shared.remove_multi_options": "Remover linhas selecionadas"
+  "shared.remove_multi_options": "Remover linhas selecionadas",
+  "shared.see_more": "Carregar mais",
+  "shared.empty": "Sem informações para mostrar!"
 }

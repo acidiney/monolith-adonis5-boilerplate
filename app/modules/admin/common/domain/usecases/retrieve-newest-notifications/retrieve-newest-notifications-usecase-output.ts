@@ -11,4 +11,5 @@ export interface RetrieveNewestNotificationsUseCaseOutput {
   createdAtText: string
   createdAt: string
   hash: string
+  event: string
 }

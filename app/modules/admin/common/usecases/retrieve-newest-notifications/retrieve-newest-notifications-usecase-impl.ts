@@ -4,9 +4,10 @@ import {
 } from 'app/modules/admin/common/domain'
 import {
   RetrieveUserNotificationsRepository,
-} from './ports/retrieve-user-notifications-repository'
+} from 'app/modules/admin/common/usecases'
 import {UniqueEntityID} from 'app/core/domain'
 import {DateAdapter} from 'app/modules/@shared/domain/ports'
+import {NotificationEntity} from 'app/modules/@shared/domain/entities/notification-entity'
 
 export class RetrieveNewestNotificationsUseCaseImpl implements RetrieveNewestNotificationsUseCase {
   constructor (
@@ -25,13 +26,14 @@ export class RetrieveNewestNotificationsUseCaseImpl implements RetrieveNewestNot
       orderDirection: input.orderDirection,
     })
 
-    return userNotifications.map((uN) => ({
+    return (userNotifications as NotificationEntity[]).map((uN: NotificationEntity) => ({
       routePath: uN.routePath,
       title: uN.subject,
       message: uN.message,
       icon: uN.icon,
       eventType: uN.eventType,
-      hash: uN.hash,
+      hash: uN.id.toString(),
+      event: uN.event,
       createdAt: this.dateAdapter.format(uN.createdAt),
       createdAtText: this.dateAdapter.toRelative(uN.createdAt),
     }))

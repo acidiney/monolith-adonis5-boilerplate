@@ -12,6 +12,10 @@ export class UserNotificationMapper implements Mapper<NotificationEntity, CoreNo
       routePath: data.routePath,
       message: data.message,
       eventType: data.eventType,
+      event: data.event,
+    }, {
+      createdAt: data.createdAt,
+      updatedAt: data.updatedAt,
     })
   }
 
