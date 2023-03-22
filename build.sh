@@ -14,9 +14,9 @@ echo "****************************************";
 echo "Version: $PACKAGE_VERSION"
 echo "Date: $(date)"
 
-echo "** 1. BUNDLING APPLICATION AND GENERATE ARTIFACTS **"
-npm run build
+# echo "** 1. BUNDLING APPLICATION AND GENERATE ARTIFACTS **"
+# npm run build
 
-echo "** 2. CREATE A NEW DOCKER IMAGE WITH VERSION $PACKAGE_VERSION **"
+echo "** 1. CREATE A NEW DOCKER IMAGE WITH VERSION $PACKAGE_VERSION **"
 docker build . -t $DOCKER_IMAGE_NAME:latest
 docker build . -t $DOCKER_IMAGE_NAME:$PACKAGE_VERSION
