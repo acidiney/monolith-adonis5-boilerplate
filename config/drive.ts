@@ -12,7 +12,7 @@ import Application from '@ioc:Adonis/Core/Application'
 import { userInfo } from 'node:os'
 import { existsSync, mkdirSync } from 'node:fs'
 
-const applicationInSystemRootDir = Application.inDev ? userInfo().homedir : '/var'
+const applicationInSystemRootDir = Application.inDev ? userInfo().homedir : '/home'
 
 const appName = Env.get('APP_NAME')
 const rootDir = join(applicationInSystemRootDir, appName)
