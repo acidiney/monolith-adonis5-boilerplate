@@ -8,6 +8,7 @@ import {InboxProcessorContract} from 'app/modules/@shared/domain/ports'
 import {EventType} from 'app/modules/@shared/domain/entities/notification-entity'
 import { HashDriverAdapterImpl } from 'app/modules/auth/framework/infra/adapters'
 import { SendEmailProcessor } from './send-email-processor'
+import I18n from '@ioc:Adonis/Addons/I18n'
 
 export interface SaveNotificationProps {
   title: string
@@ -78,11 +79,17 @@ export class SaveNotificationProcessor implements InboxProcessorContract<Notific
       return
     }
 
+    const i18n = I18n.locale(user.defaultLang)
+
     for(const platform of notifyViaPlatform.platforms) {
       const contract = this.contract[platform.type]
 
       if (contract) {
-        void contract(input, user)
+        void contract({
+          ...input,
+          title: i18n.formatMessage(input.title),
+          message: i18n.formatMessage(input.message),
+        }, user)
       }
     }
   }
