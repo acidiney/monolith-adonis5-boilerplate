@@ -5,7 +5,7 @@ import {FindUserIdRepository} from 'app/modules/@shared/usecases/ports/find-user
 import {CoreUserModel} from 'app/modules/@shared/framework/infra/db/models'
 import { Handler } from 'app/infra/listeners/handler'
 
-export class UserLoggedListener extends Handler<UserLoggedEvent> {
+export class SetUserLatestLoginListener extends Handler<UserLoggedEvent> {
   constructor (
     private readonly findUserIdRepository: FindUserIdRepository,
   ) {
