@@ -21,6 +21,10 @@ onMounted(() => {
 .time {
   font-size: .8em;
 }
+
+.w-md {
+  width: 330px;
+}
 </style>
 
 <template>
@@ -32,19 +36,14 @@ onMounted(() => {
     </a>
     <!-- dropdown -->
     <div class="dropdown-menu dropdown-menu-right mt-3 w-md animate fadeIn p-0">
-      <div class="scrollable hover" style="max-height: 250px">
+      <div class="scrollable hover" style="max-height: 300px">
         <div class="list list-row">
           <template v-for="notification of notifications">
             <div class="list-item pointer border-bottom">
-            <!-- div>
-                <span :class="['w-28 avatar',
-                  {
-                    'gd-danger': notification.eventType === 'danger',
-                    'gd-success': notification.eventType === 'success',
-                  }
-                ]">
+            <div>
+                <span :class="['w-28 avatar gd-danger']">
                 </span>
-            </div-->
+            </div>
             <div class="flex flex-column">
               <p class="m-0 font-weight-bold">{{ $t(notification.title) }}</p>
               <p class="m-0"> {{ $t(notification.message) }}</p>
