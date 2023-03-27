@@ -1,6 +1,7 @@
+import { CoreBroadcastEnum } from '../types'
 
 export interface Message {
-  type: string,
+  type: CoreBroadcastEnum,
   payload: {
     [key: string]: any
   },
