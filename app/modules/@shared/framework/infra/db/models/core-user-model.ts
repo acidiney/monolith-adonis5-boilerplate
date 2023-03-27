@@ -80,7 +80,7 @@ export class CoreUserModel extends BaseModel {
     relatedKey: 'id',
     pivotRelatedForeignKey: 'notification_id',
     onQuery: (query) => {
-      query.preload('plataforms')
+      query.preload('platforms')
     },
   })
   public notifications: ManyToMany<typeof CoreNotificationModel>

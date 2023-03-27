@@ -37,7 +37,7 @@ export class CoreNotificationModel extends BaseModel {
     localKey: 'id',
     foreignKey: 'notificationId',
   })
-  public plataforms: HasMany<typeof CoreNotificationUserModel>
+  public platforms: HasMany<typeof CoreNotificationUserModel>
 
   @beforeCreate()
   public static async setId (notification: CoreNotificationModel) {

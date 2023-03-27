@@ -72,14 +72,14 @@ export class SaveNotificationProcessor implements InboxProcessorContract<Notific
 
     await user.load('notifications')
 
-    const notifyViaPlataform = await user.notifications.find((n) => n.notificationKey === input.notificationType)
+    const notifyViaPlatform = await user.notifications.find((n) => n.notificationKey === input.notificationType)
 
-    if (!notifyViaPlataform) {
+    if (!notifyViaPlatform) {
       return
     }
 
-    for(const plataform of notifyViaPlataform.plataforms) {
-      const contract = this.contract[plataform.type]
+    for(const platform of notifyViaPlatform.platforms) {
+      const contract = this.contract[platform.type]
 
       if (contract) {
         void contract(input, user)
