@@ -11,21 +11,15 @@ export class SendUserLoggedNotificationListener extends Handler<UserLoggedEvent>
     super()
   }
   public async handle (event: UserLoggedEvent): Promise<void> {
-    const ctx = this.ctx()
-
-    if (!ctx) {
-      throw new Error('Context does not exists!')
-    }
-
     await this.broadcastMessage.publish<SaveNotificationProps>('core.shared', {
       type: CoreBroadcastEnum.NOTIFY,
       message: {
-        title: ctx.i18n.formatMessage('auth.new_user_login'),
-        message: ctx.i18n.formatMessage('auth.new_user_login_description',
-          { ip: ctx.request.ip }),
+        title: 'auth.new_user_login',
+        message:'auth.new_user_login_description',
         routePath: '',
         event: 'USER_LOGGED',
         eventType: 'success',
+        notificationType: 'notifications.core.auth.login',
       },
       meta: {
         userId: event.eventData.userId.toString(),

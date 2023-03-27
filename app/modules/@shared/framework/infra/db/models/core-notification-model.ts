@@ -1,6 +1,8 @@
+import { CoreNotificationUserModel } from './core-notification-user-model'
 import { DateTime } from 'luxon'
 import { cuid } from '@ioc:Adonis/Core/Helpers'
-import { BaseModel, beforeCreate, column, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, beforeCreate, column, HasMany, hasMany, manyToMany, ManyToMany }
+  from '@ioc:Adonis/Lucid/Orm'
 
 import CoreUserModel from './core-user-model'
 
@@ -30,6 +32,12 @@ export class CoreNotificationModel extends BaseModel {
     pivotRelatedForeignKey: 'user_id',
   })
   public users: ManyToMany<typeof CoreUserModel>
+
+  @hasMany(() => CoreNotificationUserModel, {
+    localKey: 'id',
+    foreignKey: 'notificationId',
+  })
+  public plataforms: HasMany<typeof CoreNotificationUserModel>
 
   @beforeCreate()
   public static async setId (notification: CoreNotificationModel) {
