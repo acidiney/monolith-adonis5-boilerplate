@@ -1,5 +1,7 @@
+import {CoreBroadcastEnum} from 'app/modules/@shared/domain/types'
+
 export interface BroadcastMessage<T> {
-  type: string
+  type: CoreBroadcastEnum
   message: T
   meta: {
     userId: string | null

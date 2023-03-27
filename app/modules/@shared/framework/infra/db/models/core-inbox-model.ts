@@ -1,7 +1,8 @@
+import { CoreBroadcastEnum } from 'app/modules/@shared/domain/types'
 import { CoreOutboxDatabase } from './core-outbox-database'
 
 export interface CoreInboxSchema<T> {
-  type: string
+  type: CoreBroadcastEnum
   payload: T
   meta: {
     userId: string | null

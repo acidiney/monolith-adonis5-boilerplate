@@ -35,7 +35,7 @@ export default class CoreSharedInboxProcessor implements JobContract {
     }
 
     try {
-      const contract = this.contracts[message.value.type.toUpperCase()]
+      const contract = this.contracts[message.value.type]
 
       if (!contract) {
         throw new Error(`Contract ${message.value.type} not implemented!`)
