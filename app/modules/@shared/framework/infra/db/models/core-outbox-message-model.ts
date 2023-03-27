@@ -1,8 +1,9 @@
+import { CoreBroadcastEnum } from 'app/modules/@shared/domain/types'
 import {CoreOutboxDatabase} from 'app/modules/@shared/framework/infra/db/models/core-outbox-database'
 
 export interface CoreOutboxMessageSchema {
   routingKey: string
-  type: string,
+  type: CoreBroadcastEnum,
   payload: {
     [key: string]: any
   }

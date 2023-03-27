@@ -8,3 +8,5 @@ export * from './core-application-settings'
 export * from './core-inbox-model'
 export * from './core-outbox-database'
 export * from './core-outbox-message-model'
+export * from './core-notification-event-model'
+

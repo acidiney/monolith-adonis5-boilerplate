@@ -7,6 +7,9 @@ import { InboxProcessorContract } from 'app/modules/@shared/domain/ports'
 import { CoreOutboxMessageModel } from '../db'
 import { ObjectId } from 'mongodb'
 import { CoreBroadcastEnum } from 'app/modules/@shared/domain/types'
+import {
+  SaveNotificationProcessor,
+} from 'app/modules/@shared/framework/infra/inbox-processor/save-notification-processor'
 
 interface ProcessorContract {
   [key: string]: InboxProcessorContract<any>
@@ -17,6 +20,7 @@ export default class CoreSharedInboxProcessor implements JobContract {
 
   private readonly contracts: ProcessorContract = {
     [CoreBroadcastEnum.SEND_EMAIL]: new SendEmailProcessor(),
+    [CoreBroadcastEnum.NOTIFY]: new SaveNotificationProcessor(),
   }
 
   public options: JobsOptions = {
@@ -41,7 +45,7 @@ export default class CoreSharedInboxProcessor implements JobContract {
         throw new Error(`Contract ${message.value.type} not implemented!`)
       }
 
-      await contract.perform(message.value.payload)
+      await contract.perform({ ...message.value.payload, userId: message.value.meta.userId })
 
       await CoreOutboxMessageModel
         .findOneAndDelete({ _id: new ObjectId(message.value.meta.outboxId) }),

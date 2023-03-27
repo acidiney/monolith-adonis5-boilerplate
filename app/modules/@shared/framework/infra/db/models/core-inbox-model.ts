@@ -1,7 +1,7 @@
 import { CoreBroadcastEnum } from 'app/modules/@shared/domain/types'
 import { CoreOutboxDatabase } from './core-outbox-database'
 
-export interface CoreInboxSchema<T> {
+export interface CoreInboxSchema<T extends Object> {
   type: CoreBroadcastEnum
   payload: T
   meta: {
@@ -14,5 +14,5 @@ export interface CoreInboxSchema<T> {
   createdAt: Date
 }
 
-export const CoreGenerateInboxMessageModel = <T>(modelName: string) =>CoreOutboxDatabase
+export const CoreGenerateInboxMessageModel = <T extends Object>(modelName: string) =>CoreOutboxDatabase
   .collection<CoreInboxSchema<T>>(modelName)
