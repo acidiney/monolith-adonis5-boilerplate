@@ -4,7 +4,7 @@ describe('Color unit test', () => {
   it('should not create a color if it empty', () => {
     const sut = Color.create({ value: '' })
 
-    expect(sut.isLeft()).toBeTruthy
+    expect(sut.isLeft()).toBeTruthy()
   })
 
   it('should not create a color is not a hexadecimal pattern', () => {
