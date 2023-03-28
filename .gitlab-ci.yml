@@ -13,28 +13,42 @@ default:
   before_script:
     - npm install
 
+unit_test:
+  stage: test
+  script:
+    - echo "Running unit tests"
+    - npm run test
+  only:
+    refs:
+      - merge_requests
+      - main
+
+e2e_test:
+  stage: test
+  dependencies:
+    - unit_test
+  script:
+    - echo "Running e2e tests"
+  only:
+    refs:
+      - merge_requests
+      - main
+
 test_build:
   stage: test
+  dependencies:
+    - unit_test
   script:
     - npm run build
   only:
     refs:
       - merge_requests
 
-unit_test:
-  stage: test
-
-  script:
-    - echo "Running unit tests"
-    - npm run test
-
-e2e_test:
-  stage: test
-  script:
-    - echo "Running e2e tests"
-
 build:
   stage: build
+  dependencies:
+    - unit_test
+    - e2e_test
   artifacts:
     name: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
     paths:
@@ -44,12 +58,16 @@ build:
   script:
     - npm run build
   only:
-    - main
+    refs:
+      - main
 
 deploy_docker_image:
   stage: deploy
+  dependencies:
+    - build
   script:
     - sh ./build.sh
     - echo "Need to setup docker registry and deploy"
   only:
-    - main
+    refs:
+      - main
