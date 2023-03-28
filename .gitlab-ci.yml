@@ -15,9 +15,10 @@ default:
 
 unit_test:
   stage: test
+  coverage: '/coverage: All files[^|]*\|[^|]*\s+([\d\.]+)/'
   script:
     - echo "Running unit tests"
-    - npm run test
+    - npm run test:coverage
   only:
     refs:
       - merge_requests
