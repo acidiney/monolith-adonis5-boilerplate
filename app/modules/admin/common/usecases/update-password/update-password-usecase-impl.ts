@@ -49,7 +49,6 @@ export class UpdatePasswordUseCaseImpl implements UpdatePasswordUseCase {
     this.eventDispatcher.publish(
       new PasswordChangedEvent({
         userId: userEntity.id,
-        success: true,
       })
     )
 

@@ -12,7 +12,6 @@ import {
 } from 'app/modules/auth/domain/errors'
 import {TokenEntity} from 'app/modules/auth/domain'
 import {PasswordChangedEvent} from 'app/modules/@shared/domain/events/password-changed-event'
-import {TokenRevokedEvent} from 'app/modules/auth/domain/events/token-revoked-event'
 
 export class ResetPasswordUseCaseImpl implements ResetPasswordUseCase {
   constructor (
@@ -58,12 +57,6 @@ export class ResetPasswordUseCaseImpl implements ResetPasswordUseCase {
     const passwordUpdated = user.changePassword(input.password, input.confirmPassword)
 
     if (passwordUpdated.isLeft()) {
-      this.eventEmitter.publish(new PasswordChangedEvent({
-        userId: user.id,
-        success: false,
-        error: passwordUpdated.value.errorName,
-      }))
-
       return left(passwordUpdated.value)
     }
 
@@ -74,13 +67,6 @@ export class ResetPasswordUseCaseImpl implements ResetPasswordUseCase {
 
     this.eventEmitter.publish(new PasswordChangedEvent({
       userId: user.id,
-      success: true,
-    }))
-
-    this.eventEmitter.publish(new TokenRevokedEvent({
-      userId: user.id,
-      token: token.token,
-      tokenType: token.tokenType,
     }))
 
     return right(true)
