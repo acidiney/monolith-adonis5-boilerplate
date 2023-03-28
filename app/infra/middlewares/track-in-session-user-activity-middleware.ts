@@ -48,6 +48,7 @@ export default class TrackInSessionUserActivityMiddleware {
         sessionId: session.sessionId,
         success,
         createdAt: new Date(),
+        method: request.method(),
       },
       meta: {
         userId: auth.user?.id ?? null,

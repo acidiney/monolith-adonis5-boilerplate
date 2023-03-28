@@ -6,6 +6,7 @@ import {HashAdapter} from 'app/modules/auth/usecases'
 export interface ActivityProps {
   operation: string
   sessionId: string
+  method?: string
   ip: string
   success: boolean
   error?: string
@@ -22,6 +23,21 @@ export class SaveActivityProcessor implements InboxProcessorContract<ActivityUse
   ) {
   }
   public async perform (input: ActivityUserProps): Promise<void> {
+    const lastActivityInThisSession = await CoreUserActivity.find({
+      sessionId: input.sessionId,
+    })
+      .sort('createdAt', 1)
+      .limit(1)
+      .toArray()
+
+    const isSameOperation = lastActivityInThisSession.length && (
+      lastActivityInThisSession[0].operation === input.operation && input.method === 'GET'
+    )
+
+    if (isSameOperation) {
+      return
+    }
+
     await CoreUserActivity.insertOne({
       ...input,
       userId: input.userId?.toString() ?? null,
