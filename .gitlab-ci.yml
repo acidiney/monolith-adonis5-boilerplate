@@ -24,6 +24,8 @@ unit_test:
       coverage_report:
         coverage_format: cobertura
         path: coverage/clover.xml
+      junit:
+        - junit.xml
   script:
     - echo "Running unit tests"
     - npm run test:coverage

@@ -11,3 +11,4 @@ resources/lang/*.json
 resources/js/i18n/*.json
 public/assets/*
 resources/storage
+junit.xml
