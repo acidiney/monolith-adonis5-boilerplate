@@ -36,6 +36,10 @@ export default class TrackInSessionUserActivityMiddleware {
 
     const operationName = response.getHeader('x-operation-name')
 
+    if (!operationName) {
+      return
+    }
+
     await this.broadcastMessage.publish<ActivityProps>('core.shared', {
       type: CoreBroadcastEnum.TRACK_ACTIVITY,
       message: {

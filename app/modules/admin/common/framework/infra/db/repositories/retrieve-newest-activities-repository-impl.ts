@@ -6,30 +6,36 @@ import {CoreUserActivity} from 'app/modules/@shared/framework/infra'
 export class RetrieveNewestActivitiesRepositoryImpl implements RetrieveLatestActivitiesRepository {
   private readonly collection = CoreUserActivity
   public async find (userId: UniqueEntityID): Promise<ActivityProps[]> {
-    const latestUserActivity = await this.collection.find({
-      userId: userId.toString(),
-    })
-      .limit(1)
-      .sort('createdAt', 'desc')
-      .toArray()
+    const latestUserActivity = await this.collection.aggregate([
+      {
+        '$sort': {
+          'createdAt': 1,
+        },
+      }, {
+        '$match': {
+          'userId': userId.toString(),
+        },
+      }, {
+        '$group': {
+          '_id': '$sessionId',
+        },
+      }, {
+        '$limit': 10,
+      },
+    ]).toArray()
 
     if (!latestUserActivity.length) {
       return []
     }
 
-    const { sessionId } = latestUserActivity[0]
+    const sessionIds = latestUserActivity.map((uActivity) => uActivity._id)
 
     return this.collection.find({
-      $or: [
-        {
-          userId: userId.toString(),
-        },
-        {
-          sessionId,
-        },
-      ],
+      sessionId: {
+        $in: sessionIds,
+      },
     })
-      .limit(6)
+      .limit(8)
       .sort('createdAt', 'desc')
       .toArray()
   }
