@@ -77,7 +77,7 @@ deploy_docker_image:
   dependencies:
     - build
   script:
-    - sh ./build.sh
+    # - sh ./build.sh
     - echo "Need to setup docker registry and deploy"
   only:
     refs:
