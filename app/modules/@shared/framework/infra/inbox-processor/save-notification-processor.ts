@@ -13,6 +13,7 @@ import I18n from '@ioc:Adonis/Addons/I18n'
 export interface SaveNotificationProps {
   title: string
   message: string
+  content: string
   routePath: string
   event: string
   eventType: EventType,
@@ -63,7 +64,7 @@ export class SaveNotificationProcessor implements InboxProcessorContract<Notific
     void this.sendEmailProcessor.perform({
       subject: input.title,
       to: user.email,
-      content: input.message,
+      content: input.content,
       lang: user.defaultLang,
     })
   }
