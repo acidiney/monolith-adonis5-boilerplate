@@ -126,8 +126,7 @@ describe('ResetPasswordUseCaseImpl', function () {
   })
 
   it('should return password mismatch', async () => {
-    const { sut, eventDispatcher } = makeSut()
-    const eventDispatcherSpy = jest.spyOn(eventDispatcher, 'publish')
+    const { sut } = makeSut()
 
     const output = await sut.perform({
       token: 'valid_token',
@@ -137,11 +136,6 @@ describe('ResetPasswordUseCaseImpl', function () {
 
     expect(output.isLeft()).toBeTruthy()
     expect(output.value).toBeInstanceOf(PasswordMismatchError)
-    expect(eventDispatcherSpy).toBeCalledWith(new PasswordChangedEvent({
-      userId: new UniqueEntityID('valid_user_id'),
-      success: false,
-      error: PasswordMismatchError.name,
-    }))
   })
 
   it('should return success', async () => {
@@ -158,7 +152,6 @@ describe('ResetPasswordUseCaseImpl', function () {
     expect(output.isRight()).toBeTruthy()
     expect(eventDispatcherSpy).toBeCalledWith(new PasswordChangedEvent({
       userId: new UniqueEntityID('valid_user_id'),
-      success: true,
     }))
   })
 })
