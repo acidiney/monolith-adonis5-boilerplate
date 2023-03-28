@@ -1,15 +1,18 @@
 
+import { ObjectId } from 'mongodb'
 import {JobsOptions} from 'bullmq'
 import { JobContract } from '@ioc:Rocketseat/Bull'
-import { CoreSharedInboxMessagesModel } from '../db/models/core-shared-inbox-messages-model'
-import { SendEmailProcessor } from '../inbox-processor/send-email-processor'
-import { InboxProcessorContract } from 'app/modules/@shared/domain/ports'
+
 import { CoreOutboxMessageModel } from '../db'
-import { ObjectId } from 'mongodb'
-import { CoreBroadcastEnum } from 'app/modules/@shared/domain/types'
 import {
+  SaveActivityProcessor,
   SaveNotificationProcessor,
-} from 'app/modules/@shared/framework/infra/inbox-processor/save-notification-processor'
+  SendEmailProcessor,
+} from 'app/modules/@shared/framework/infra/inbox-processor'
+import { CoreBroadcastEnum } from 'app/modules/@shared/domain/types'
+import { InboxProcessorContract } from 'app/modules/@shared/domain/ports'
+import { CoreSharedInboxMessagesModel } from '../db/models/core-shared-inbox-messages-model'
+import {HashDriverAdapterImpl} from 'app/modules/auth/framework/infra/adapters'
 
 interface ProcessorContract {
   [key: string]: InboxProcessorContract<any>
@@ -21,6 +24,7 @@ export default class CoreSharedInboxProcessor implements JobContract {
   private readonly contracts: ProcessorContract = {
     [CoreBroadcastEnum.SEND_EMAIL]: new SendEmailProcessor(),
     [CoreBroadcastEnum.NOTIFY]: new SaveNotificationProcessor(),
+    [CoreBroadcastEnum.TRACK_ACTIVITY]: new SaveActivityProcessor(new HashDriverAdapterImpl()),
   }
 
   public options: JobsOptions = {
@@ -48,7 +52,7 @@ export default class CoreSharedInboxProcessor implements JobContract {
       await contract.perform({ ...message.value.payload, userId: message.value.meta.userId })
 
       await CoreOutboxMessageModel
-        .findOneAndDelete({ _id: new ObjectId(message.value.meta.outboxId) }),
+        .findOneAndDelete({ _id: new ObjectId(message.value.meta.outboxId) })
 
       await CoreSharedInboxMessagesModel
         .findOneAndDelete({
