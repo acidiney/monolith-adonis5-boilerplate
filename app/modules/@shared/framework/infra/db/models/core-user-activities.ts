@@ -8,9 +8,18 @@ export interface CoreUserActivitySchema {
   sessionId: string
   ip: string
   operation: string
-  description: string
   createdAt: Date
 }
 
-export const CoreUserActivity = CoreOutboxDatabase
+const CoreUserActivity = CoreOutboxDatabase
   .collection<CoreUserActivitySchema>('CoreUserActivities')
+
+const installIndexesOnCoreUserActivity = async () => {
+  await CoreUserActivity.createIndex({ userId: 1, createdAt: -1 })
+  await CoreUserActivity.createIndex({ sessionId: 1, createdAt: -1 })
+}
+
+export {
+  CoreUserActivity,
+  installIndexesOnCoreUserActivity,
+}

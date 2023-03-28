@@ -15,8 +15,23 @@ Route.group(() => {
     return response.redirect('/account/dashboard')
   })
 
-  Route.inertia('/dashboard', 'admin/common/framework/views/dashboard')
-  Route.inertia('/profile', 'admin/common/framework/views/profile')
+  Route.get('/dashboard', routeAdapter({
+    perform: async ({ inertia }) => {
+      return inertia.render('admin/common/framework/views/dashboard')
+    },
+  }, {
+    operation: 'view-dashboard-page',
+    description: 'View dashboard page',
+  }))
+
+  Route.get('/profile', routeAdapter({
+    perform: async ({ inertia }) => {
+      return inertia.render('admin/common/framework/views/profile')
+    },
+  }, {
+    operation: 'view-user-profile-page',
+    description: 'View user profile page',
+  }))
 
   Route.get('/settings', routeAdapter(makeShowSettingsPageControllerFactory(), {
     operation: 'account-view-settings-page',

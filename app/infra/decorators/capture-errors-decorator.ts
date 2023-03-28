@@ -54,6 +54,7 @@ export class CaptureErrorDecorator implements Controller<HttpContextContract> {
         message: input.i18n.formatMessage('shared.errors.internal_server_error'),
       }, 500)
     } finally {
+      input.response.header('x-operation-name', this.meta.operation)
       transaction.finish()
     }
   }

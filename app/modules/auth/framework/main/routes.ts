@@ -9,8 +9,23 @@ Route.group(() => {
     response.redirect('/auth/login')
   })
 
-  Route.inertia('/login', 'auth/framework/views/login')
-  Route.inertia('/reset/password', 'auth/framework/views/send-reset-password-link')
+  Route.get('/login', routeAdapter({
+    perform: async ({ inertia }) => {
+      return inertia.render('auth/framework/views/login')
+    },
+  }, {
+    operation: 'view-login-page',
+    description: 'View login page',
+  }))
+
+  Route.get('/reset/password', routeAdapter({
+    perform: async ({ inertia }) => {
+      return inertia.render('auth/framework/views/send-reset-password-link')
+    },
+  }, {
+    operation: 'view-reset-password-notification-page',
+    description: 'View send reset password notification page',
+  }))
 
   Route.get('/reset/password/:token', ({ params, inertia }) => {
     const { token } = params

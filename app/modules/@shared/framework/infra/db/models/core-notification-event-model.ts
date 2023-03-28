@@ -14,5 +14,14 @@ export interface CoreNotificationEventSchema {
   updatedAt: Date
 }
 
-export const CoreNotificationEventModel = CoreOutboxDatabase
+const CoreNotificationEventModel = CoreOutboxDatabase
   .collection<CoreNotificationEventSchema>('CoreNotifications')
+
+const installIndexOnCoreNotificationEventModel = async () => {
+  await CoreNotificationEventModel.createIndex({ userId: 1, createdAt: -1 })
+}
+
+export {
+  CoreNotificationEventModel,
+  installIndexOnCoreNotificationEventModel,
+}

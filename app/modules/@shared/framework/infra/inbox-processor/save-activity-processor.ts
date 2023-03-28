@@ -4,21 +4,23 @@ import {CoreUserActivity} from 'app/modules/@shared/framework/infra/db'
 import {HashAdapter} from 'app/modules/auth/usecases'
 
 export interface ActivityProps {
-  userId?: UniqueEntityID,
   operation: string
-  description: string
   sessionId: string
   ip: string
   success: boolean
   error?: string
 }
 
-export class SaveActivityProcessor implements InboxProcessorContract<ActivityProps> {
+interface ActivityUserProps extends ActivityProps {
+  userId?: UniqueEntityID,
+}
+
+export class SaveActivityProcessor implements InboxProcessorContract<ActivityUserProps> {
   constructor (
     private readonly hashAdapter: HashAdapter
   ) {
   }
-  public async perform (input: ActivityProps): Promise<void> {
+  public async perform (input: ActivityUserProps): Promise<void> {
     await CoreUserActivity.insertOne({
       ...input,
       userId: input.userId?.toString() ?? null,

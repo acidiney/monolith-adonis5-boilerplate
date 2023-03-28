@@ -26,6 +26,7 @@ Server.middleware.register([
   () => import('app/infra/middlewares/detect-user-locale'),
   () => import('app/infra/middlewares/application-middleware'),
   () => import('app/infra/middlewares/menu-middleware'),
+  () => import('app/infra/middlewares/track-in-session-user-activity-middleware'),
   () => import('@ioc:EidelLev/Inertia/Middleware'),
 ])
 

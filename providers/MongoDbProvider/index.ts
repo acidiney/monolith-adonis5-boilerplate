@@ -23,6 +23,19 @@ export default class MongodbProvider {
       })
   }
 
+  public async ready () {
+    // create some core collections indexes
+    const { installIndexesOnCoreUserActivity, installIndexOnCoreNotificationEventModel }
+      = await import('app/modules/@shared/framework/infra/db')
+
+    try {
+      await installIndexesOnCoreUserActivity()
+      await installIndexOnCoreNotificationEventModel()
+    } finally {
+      // do nothing
+    }
+  }
+
   public async shutdown () {
     const database = this.app.container.use('App/Database/Mongodb')
 

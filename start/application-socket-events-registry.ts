@@ -47,7 +47,7 @@ export class ApplicationSocketEventsRegistry {
       const req = context(resolve(__dirname, path), true, /main\/socket\.(ts|js)$/)
       for (const filename of req.keys()) {
         const m = (await require(filename)).default
-        void m(this.socket)
+        void m(this.sockets)
       }
     })
 
