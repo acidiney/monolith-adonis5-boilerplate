@@ -7,14 +7,11 @@ Route.group(() => {
     return response.redirect('/account/dashboard')
   })
 
-  Route.inertia('/dashboard', 'admin/common/framework/views/dashboard')
-  Route.inertia('/profile', 'admin/common/framework/views/profile')
-
   Route.get('/application', routeAdapter(makeShowAppSettingFactory(), {
     operation: 'account-view-settings-color-page',
     description: 'View  Setting Color Page',
   }))
-  Route.put('/appSettings', routeAdapter(makePersistAppSettingControllerFactory(), {
+  Route.put('/app-settings', routeAdapter(makePersistAppSettingControllerFactory(), {
     operation: 'admin-acl-create-app-settings',
     description: '[AdminRoute] Create a app settings',
   }, false))
