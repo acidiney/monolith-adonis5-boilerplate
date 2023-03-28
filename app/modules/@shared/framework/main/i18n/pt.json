@@ -2,6 +2,7 @@
   "shared.notifications.email": "Notificações por email",
   "shared.notifications": "Notificações",
   "notifications.core.auth.login": "Autenticação do utilizador",
+  
   "notifications.core.user.updated": "Actualização do utilizador",
   "notifications.core.user.password_changed": "Actualização da palavra passe",
   "notifications.core.auth.sent_reset_password_link": "Redifinição da palavra passe",
