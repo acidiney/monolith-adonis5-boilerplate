@@ -1,0 +1,55 @@
+image: node:18.13.0-alpine
+
+stages:
+  - test
+  - build
+  - deploy
+
+default:
+  cache:
+    key: "$CI_BUILD_NAME"
+    paths:
+      - node_modules
+  before_script:
+    - npm install
+
+test_build:
+  stage: test
+  script:
+    - npm run build
+  only:
+    refs:
+      - merge_requests
+
+unit_test:
+  stage: test
+
+  script:
+    - echo "Running unit tests"
+    - npm run test
+
+e2e_test:
+  stage: test
+  script:
+    - echo "Running e2e tests"
+
+build:
+  stage: build
+  artifacts:
+    name: "$CI_JOB_STAGE-$CI_COMMIT_REF_NAME"
+    paths:
+      - build/
+    when: on_success
+    expire_in: "24 hours"
+  script:
+    - npm run build
+  only:
+    - main
+
+deploy_docker_image:
+  stage: deploy
+  script:
+    - sh ./build.sh
+    - echo "Need to setup docker registry and deploy"
+  only:
+    - main
