@@ -15,7 +15,7 @@ default:
 
 unit_test:
   stage: test
-  coverage: '/coverage: [^|]*\|[^|]*\s+([\d\.]+)/'
+  coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
   artifacts:
     expire_in: "1 week"
     paths:
