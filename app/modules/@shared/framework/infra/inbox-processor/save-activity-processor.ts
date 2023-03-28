@@ -9,6 +9,7 @@ export interface ActivityProps {
   ip: string
   success: boolean
   error?: string
+  createdAt: Date
 }
 
 interface ActivityUserProps extends ActivityProps {
@@ -25,7 +26,7 @@ export class SaveActivityProcessor implements InboxProcessorContract<ActivityUse
       ...input,
       userId: input.userId?.toString() ?? null,
       hash: await this.hashAdapter.generate(input.sessionId, 'track_user_activity'),
-      createdAt: new Date(),
+      createdAt: new Date(input.createdAt),
     })
   }
 }

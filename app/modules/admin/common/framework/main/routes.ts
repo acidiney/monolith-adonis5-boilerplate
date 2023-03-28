@@ -9,6 +9,9 @@ import { makeUpdateUserInfoControllerFactory } from './factories/make-update-use
 import {
   makeRetrieveNewestNotificationsControllerFactory,
 } from 'app/modules/admin/common/framework/main/factories/make-retrieve-newest-notifications-controller-factory'
+import {
+  makeRetrieveUserActivitiesControllerFactory,
+} from 'app/modules/admin/common/framework/main/factories/make-retrieve-user-activities-controller-factory'
 
 Route.group(() => {
   Route.get('/', ({ response }) => {
@@ -60,6 +63,11 @@ Route.group(() => {
   Route.get('/me/notifications', routeAdapter(makeRetrieveNewestNotificationsControllerFactory(), {
     operation: 'retrieve-user-latest-unread-notifications',
     description: '[Api] Retrieve the newest unread user notifications',
+  }))
+
+  Route.get('/:userId/activities', routeAdapter(makeRetrieveUserActivitiesControllerFactory(), {
+    operation: 'retrieve-top-recent-user-activities',
+    description: '[Api] Retrieve most recent user activity',
   }))
 })
   .prefix('api/account')

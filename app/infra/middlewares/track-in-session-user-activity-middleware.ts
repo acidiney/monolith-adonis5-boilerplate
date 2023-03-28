@@ -16,6 +16,10 @@ export default class TrackInSessionUserActivityMiddleware {
     logger.info(`${request.method()} ${request.url()} ${request.ip()}`)
     await next()
 
+    if (request.method() === 'GET' && request.url().includes('api')) {
+      return
+    }
+
     let success = true
 
     if (response.getStatus() === 500) {
@@ -35,10 +39,11 @@ export default class TrackInSessionUserActivityMiddleware {
     await this.broadcastMessage.publish<ActivityProps>('core.shared', {
       type: CoreBroadcastEnum.TRACK_ACTIVITY,
       message: {
-        operation: operationName as string,
+        operation: `operation.${operationName}`,
         ip: request.ip(),
         sessionId: session.sessionId,
         success,
+        createdAt: new Date(),
       },
       meta: {
         userId: auth.user?.id ?? null,

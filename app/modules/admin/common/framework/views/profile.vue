@@ -1,13 +1,26 @@
 <script setup id="app-profile">
-import { computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import AppStatus from '@core/components/app-status.vue'
+import {apiService} from "./services/api";
 
 const props = defineProps({
   user: Object,
   data: Object
 })
 
+const isLoading = ref(true)
+const userActivities = ref([])
 const info = computed(() => props.data ?? props.user)
+
+onMounted(() => {
+    apiService.retrieveActivities(info.value.slug)
+        .then(({data}) => {
+          userActivities.value = data
+        })
+        .finally(() => {
+          isLoading.value = false
+        })
+})
 </script>
 
 <template>
@@ -108,30 +121,30 @@ const info = computed(() => props.data ?? props.user)
         <div class="col-sm-5 col-lg-4">
           <div class="card sticky p-4">
             <div class="timeline animates animates-fadeInUp">
-              <div class="tl-item active">
-                <div class="tl-dot"></div>
-                <div class="tl-content">
-                  <div class="">Added to <a href="#">@TUT</a> team</div>
-                  <div class="tl-date text-muted mt-1">2 days ago</div>
-                </div>
-              </div>
-              <div class="tl-item">
-                <div class="tl-dot"></div>
-                <div class="tl-content">
-                  <div class=""><a href="#">@Netflix</a> hackathon</div>
-                  <div class="tl-date text-muted mt-1">25/12 18</div>
-                </div>
-              </div>
-              <div class="tl-item">
-                <div class="tl-dot"></div>
-                <div class="tl-content">
-                  <div class="">
-                    Just saw this on the <a href="#">@eBay</a> dashboard,
-                    dude is an absolute unit.
+              <template v-for="activity in userActivities">
+                <div :class="['tl-item', {
+                  'active': activity.last
+                }]">
+                  <div class="tl-dot"></div>
+                  <div class="tl-content">
+                    <div class="">{{ $t(activity.operation) }}</div>
+                    <el-popover
+                        placement="top-start"
+                        :width="220"
+                        trigger="hover"
+                        :content="activity.recordAt"
+                    >
+                      <template #reference>
+                        <div class="tl-date text-muted mt-1">{{ activity.recordAtText }}</div>
+                      </template>
+                    </el-popover>
                   </div>
-                  <div class="tl-date text-muted mt-1">1 Week ago</div>
                 </div>
-              </div>
+              </template>
+
+              <p class="text-center" v-if="isLoading">
+                {{ $t('shared.loading') }}
+              </p>
             </div>
           </div>
         </div>

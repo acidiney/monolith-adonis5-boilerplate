@@ -23,5 +23,8 @@ export const apiService = {
                 },
             })
         })
+    },
+    retrieveActivities: async (userId) => {
+        return axios.get(`/api/account/${userId}/activities`)
     }
 }
