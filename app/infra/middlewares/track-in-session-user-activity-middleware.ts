@@ -26,12 +26,15 @@ export default class TrackInSessionUserActivityMiddleware {
       success = false
     }
 
-    const alert = session.get('alert')
+    const alert = session.flashMessages.get('alert')
+    const alertGlobal = session.flashMessages.get('alertGlobal')
 
     if (alert) {
       success = alert.success
+    }
 
-      session.flash('alert', alert)
+    if (alertGlobal) {
+      success = alertGlobal.success
     }
 
     const operationName = response.getHeader('x-operation-name')
