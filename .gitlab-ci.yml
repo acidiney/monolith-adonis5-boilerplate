@@ -15,7 +15,15 @@ default:
 
 unit_test:
   stage: test
-  coverage: '/coverage: All files[^|]*\|[^|]*\s+([\d\.]+)/'
+  coverage: '/coverage: [^|]*\|[^|]*\s+([\d\.]+)/'
+  artifacts:
+    expire_in: "1 week"
+    paths:
+      - coverage/lcov.info
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/clover.xml
   script:
     - echo "Running unit tests"
     - npm run test:coverage
