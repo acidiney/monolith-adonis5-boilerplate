@@ -30,5 +30,8 @@
   "auth.reset_password.token.not_found": "Token de recuperação de senha não encontrado!",
   "auth.reset_password.description": "Por favor, use o formulário abaixo para poder alterar a sua senha!",
   "auth.request_password.request": "Pedido de alteração de senha",
-  "auth.reset_password.mail_sent": "Email de recuperação de senha enviado!"
+  "auth.reset_password.mail_sent": "Email de recuperação de senha enviado!",
+  "auth.new_user_login":"Novo usuario",
+  "auth.new_user_login_description":"Nova autenticação foi feita"
+
 }

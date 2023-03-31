@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, watch, h, reactive } from 'vue'
+import { computed, ref, watch, h, reactive, onMounted } from 'vue'
 
 import { useI18n } from 'vue-i18n'
 import { usePage } from "@inertiajs/vue3"
@@ -70,6 +70,30 @@ const onEditUser = (user) => {
 const canSelect = (row) => {
   return !(row.roleSlug === 'root') || !disableOnSelf(row.slug)
 }
+
+const searchQuery = ref('')
+
+/* 
+Its will be used when we apply a custom search query
+const filterDataBy = computed(() => {
+  return Object.keys(content.value.data[1])
+}) */
+
+const filterTableData = computed(() => {
+  if (searchQuery.value === "") {
+    return content.value.data;
+  }
+  return content.value.data.filter(users => {
+    return Object.values(users).some(word =>
+      String(word)
+        .toLowerCase()
+        .includes(searchQuery.value.toLowerCase())
+    );
+  });
+}
+)
+
+const select=ref("")
 </script>
 
 <style scoped>
@@ -117,17 +141,38 @@ const canSelect = (row) => {
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
             aria-hidden="true">&times;</span></button>
       </div>
-
+       <div class="mt-4">
+      <el-input
+      class="search"
+        v-model="searchQuery"
+        placeholder="Pesquisar"
+       
+      >
+    
+ 
+      </el-input>
+    </div>
+      
+    
+      
+    
       <el-table class="table-theme bg-body" header-cell-class-name="bg-body text-muted text-uppercase " size="large"
-        stripe cell-class-name="bg-body text-color" :data="content.data" @sort-change="onSortChange">
+        stripe cell-class-name="bg-body text-color" :data="filterTableData" @sort-change="onSortChange">
         <el-table-column type="selection" width="50" :selectable="canSelect" />
+     
         <el-table-column prop="avatar" width="70">
+          
           <template #default="scope">
             <el-avatar :src="scope.row.avatar" :size="35" @error="errorHandler">
               {{ scope.row.fullName[0] }}
             </el-avatar>
           </template>
         </el-table-column>
+        
+     
+         
+     
+     
         <el-table-column prop="fullName" :min-width="180" sortable :label="$t('acl.users.list-users.full_name')">
           <template #default="scope">
             <router-link :href="`/account/admin/settings/acl/users/${scope.row.slug}`">{{ scope.row.fullName
@@ -161,7 +206,7 @@ const canSelect = (row) => {
           <template #default="scope">
             <el-popover effect="light" trigger="hover" placement="top" width="auto">
               <template #default>
-                <div>{{ scope.row.updatedAt }}</div>
+                <div>{{ scope.row.updatedAt }} </div>
               </template>
               <template #reference>
                 {{ scope.row.updatedAtText }}
@@ -249,6 +294,18 @@ const canSelect = (row) => {
 
       <app-create-user-dialog v-if="dialogVisible" v-model:dialog-visible="dialogVisible"
         :selected-user="selectUserToUpdate" />
+       
     </template>
+   
   </account-layout>
 </template>
+<style scoped>
+.search{
+  max-width: 300px !important;
+
+ margin-bottom: 20px;
+ margin-left: 15px;
+ border: none;
+}
+
+</style>
