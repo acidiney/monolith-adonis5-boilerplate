@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/compare/v1.2.0...v2.0.0) (2023-03-31)
+
+
+### ⚠ BREAKING CHANGES
+
+* **outbox-inbox:** Mongodb Transaction is only avaliable on mongodb replica, so, will be necessary to
+convert the standalone instalation to replica mode
+
+### Features
+
+* **core:** add a single point of notification ([845b7b4](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/845b7b45d10b57526945c7a9a2a80effc83106cc))
+* **core:** add NOTIFY contract on outbox ([f1dc0ee](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/f1dc0ee57884fbb565f878ad58066ad72046fe06))
+* **core:** track all user activities ([54a7cee](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/54a7ceeb42a009f5e5a1ce9199815b57e8600d56))
+* **outbox-inbox:** update outbox and inbox to use mongodb transaction ([b7bfae2](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/b7bfae2e73b86d8cbbaa722653c91f93692cf13e))
+* **profile:** add latest user activity ([c7cc17e](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/c7cc17e411f9c2411ff6b010669c54dbb6641a4e))
+
+
+### Bug Fixes
+
+* get success from session when exists ([7d500a8](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/7d500a88fda3d89675bb5824df3a0996d0e945af))
+* use aggragate to mount mongodb query ([a9ec1f8](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/a9ec1f85f12fb634cb56dc4f6462880d3841b7cb))
+
 ## [1.2.0](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/compare/v1.1.0...v1.2.0) (2023-03-21)
 
 
