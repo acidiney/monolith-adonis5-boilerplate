@@ -1,27 +1,28 @@
 import { Collection } from 'mongodb'
 
 import { CoreInboxSchema } from '../db/models'
+import { TransactionAdapter } from 'app/core/ports'
 import {Message} from 'app/modules/@shared/domain/ports/message-bus'
-import {
-  RabbitmqMessageBusServiceImpl,
-} from 'app/modules/@shared/framework/infra/services/rabbitmq-message-bus-service-impl'
+import { RabbitmqMessageBusServiceImpl }
+  from 'app/modules/@shared/framework/infra/services/rabbitmq-message-bus-service-impl'
+import { MongodbTransactionAdapterImpl } from 'app/infra/db/adapters/mongodb-transaction-adapter-impl'
 
 export class CoreBaseConsumer {
   constructor (
     private readonly key: string,
     private readonly inboxModel: Collection<CoreInboxSchema<any>>,
-    private readonly messageBusService = RabbitmqMessageBusServiceImpl.getInstance()
+    private readonly transactionAdapter: TransactionAdapter = new MongodbTransactionAdapterImpl(),
+    private readonly messageBusService = RabbitmqMessageBusServiceImpl.getInstance(),
   ) {
     this.messageBusService.consume(this.key, this.handle.bind(this))
   }
 
   private async handle (message: Message, ack: () => void) : Promise<void> {
-    try {
+    await this.transactionAdapter.useTransaction(async (session) => {
       const messageInbox = await this.inboxModel
-        .findOne({ 'meta.outboxId': message.$meta.outboxId })
+        .findOne({ 'meta.outboxId': message.$meta.outboxId }, { session })
 
       if (messageInbox) {
-        await ack()
         return
       }
 
@@ -33,11 +34,9 @@ export class CoreBaseConsumer {
           complete: false,
           createdAt: new Date(),
           status: 'PENDING',
-        })
+        }, { session })
+    })
 
-      await ack()
-    } catch (e) {
-      throw e
-    }
+    await ack()
   }
 }

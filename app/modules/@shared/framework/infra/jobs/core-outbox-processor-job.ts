@@ -1,3 +1,5 @@
+import { MongodbTransactionAdapterImpl } from 'app/infra/db/adapters/mongodb-transaction-adapter-impl'
+import { TransactionAdapter } from 'app/core/ports'
 import { JobsOptions } from 'bullmq'
 
 import { JobContract } from '@ioc:Rocketseat/Bull'
@@ -12,7 +14,8 @@ export default class CoreOutboxProcessorJob implements JobContract {
   public key = CoreOutboxProcessorJob.name
 
   constructor (
-    private readonly messageBus: MessageBus = RabbitmqMessageBusServiceImpl.getInstance()
+    private readonly messageBus: MessageBus = RabbitmqMessageBusServiceImpl.getInstance(),
+    private readonly transactionAdapter: TransactionAdapter = new MongodbTransactionAdapterImpl()
   ) {
   }
 
@@ -21,17 +24,17 @@ export default class CoreOutboxProcessorJob implements JobContract {
   }
 
   public async handle () {
-    try {
+    await this.transactionAdapter.useTransaction(async (session) => {
       const message = await CoreOutboxMessageModel
         .findOne({
           sentAt: null,
-        })
+        }, { session })
 
       if (!message) {
         return
       }
 
-      this.messageBus.publish(
+      await this.messageBus.publish(
         message.routingKey,
         {
           type: message.type,
@@ -50,9 +53,7 @@ export default class CoreOutboxProcessorJob implements JobContract {
           $set: {
             sentAt: new Date(),
           },
-        })
-    } catch (e) {
-      throw e
-    }
+        }, { session })
+    })
   }
 }
