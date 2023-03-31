@@ -20,7 +20,7 @@ unit_test:
     expire_in: "1 week"
     paths:
       - coverage/lcov.info
-      - coverage
+      - coverage/lcov-report
     reports:
       coverage_report:
         coverage_format: cobertura
@@ -78,7 +78,7 @@ pages:
   dependencies:
     - unit_test
   script:
-    - mv coverage/ public/
+    - mv coverage/lcov-report public/
   artifacts:
     paths:
       - public
