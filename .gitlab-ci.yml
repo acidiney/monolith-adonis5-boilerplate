@@ -20,6 +20,7 @@ unit_test:
     expire_in: "1 week"
     paths:
       - coverage/lcov.info
+      - coverage
     reports:
       coverage_report:
         coverage_format: cobertura
@@ -71,6 +72,19 @@ build:
   only:
     refs:
       - main
+
+pages:
+  stage: deploy
+  dependencies:
+    - unit_test
+  script:
+    - mv coverage/ public/
+  artifacts:
+    paths:
+      - public
+    expire_in: 30 days
+  only:
+    - main
 
 deploy_docker_image:
   stage: deploy
