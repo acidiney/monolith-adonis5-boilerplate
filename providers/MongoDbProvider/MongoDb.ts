@@ -1,4 +1,4 @@
-import {Db, MongoClient} from 'mongodb'
+import {ClientSession, Db, MongoClient} from 'mongodb'
 import {Exception} from '@poppinss/utils'
 
 export class MongoDb {
@@ -33,5 +33,9 @@ export class MongoDb {
     }
 
     await this.client.close()
+  }
+
+  public async startSession (): Promise<ClientSession> {
+    return this.client.startSession()
   }
 }

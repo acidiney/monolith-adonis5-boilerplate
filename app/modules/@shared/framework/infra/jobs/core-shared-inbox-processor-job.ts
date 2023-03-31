@@ -1,3 +1,4 @@
+import { TransactionAdapter } from 'app/core/ports'
 
 import { ObjectId } from 'mongodb'
 import {JobsOptions} from 'bullmq'
@@ -13,6 +14,7 @@ import { CoreBroadcastEnum } from 'app/modules/@shared/domain/types'
 import { InboxProcessorContract } from 'app/modules/@shared/domain/ports'
 import { CoreSharedInboxMessagesModel } from '../db/models/core-shared-inbox-messages-model'
 import {HashDriverAdapterImpl} from 'app/modules/auth/framework/infra/adapters'
+import { MongodbTransactionAdapterImpl } from 'app/infra/db/adapters/mongodb-transaction-adapter-impl'
 
 interface ProcessorContract {
   [key: string]: InboxProcessorContract<any>
@@ -31,18 +33,21 @@ export default class CoreSharedInboxProcessor implements JobContract {
     removeOnComplete: true,
   }
 
+  constructor (
+    private readonly transactionAdapter: TransactionAdapter = new MongodbTransactionAdapterImpl()
+  ) {}
+
   public async handle () : Promise<void> {
-    const message =
-      await CoreSharedInboxMessagesModel.findOneAndUpdate({
+    await this.transactionAdapter.useTransaction(async (session) => {
+      const message = await CoreSharedInboxMessagesModel.findOneAndUpdate({
         complete: false,
         status: 'PENDING',
-      }, { $set: { status: 'STARTED' } })
+      }, { $set: { status: 'STARTED' } }, { session })
 
-    if (!message.value) {
-      return
-    }
+      if (!message.value) {
+        return
+      }
 
-    try {
       const contract = this.contracts[message.value.type]
 
       if (!contract) {
@@ -52,15 +57,12 @@ export default class CoreSharedInboxProcessor implements JobContract {
       await contract.perform({ ...message.value.payload, userId: message.value.meta.userId })
 
       await CoreOutboxMessageModel
-        .findOneAndDelete({ _id: new ObjectId(message.value.meta.outboxId) })
+        .findOneAndDelete({ _id: new ObjectId(message.value.meta.outboxId) }, { session })
 
       await CoreSharedInboxMessagesModel
         .findOneAndDelete({
           _id: message.value._id,
-        })
-    } catch (e) {
-      await CoreSharedInboxMessagesModel.findOneAndUpdate({ _id: message.value._id }, { $set: { status: 'PENDING' } })
-      throw e
-    }
+        }, { session })
+    })
   }
 }

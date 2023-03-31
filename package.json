@@ -8,6 +8,7 @@
   "version": "1.2.0",
   "private": true,
   "scripts": {
+    "commit": "cz",
     "prepare": "husky install",
     "dev": "node ace serve --watch",
     "dev:global": "node ace serve --watch  --encore-args='--host 0.0.0.0'",
@@ -49,8 +50,10 @@
     "@types/proxy-addr": "2.0.0",
     "@types/source-map-support": "0.5.6",
     "adonis-preset-ts": "2.1.0",
+    "commitizen": "^4.3.0",
     "concurrently": "7.6.0",
     "cypress": "12.5.0",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "8.32.0",
     "eslint-plugin-adonis": "2.1.1",
     "fork-ts-checker-webpack-plugin": "7.0.0",
@@ -120,5 +123,10 @@
   "_moduleAliases": {
     "app": "./app",
     "@core": "./resources/js/core"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
