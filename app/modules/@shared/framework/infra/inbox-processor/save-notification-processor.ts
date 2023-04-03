@@ -61,8 +61,10 @@ export class SaveNotificationProcessor implements InboxProcessorContract<Notific
   }
 
   private async notifyViaEmail (input: NotificationProps, user: CoreUserModel): Promise<void> {
+    const i18n = I18n.locale(user.defaultLang)
+
     void this.sendEmailProcessor.perform({
-      subject: input.title,
+      subject: i18n.formatMessage(input.title),
       to: user.email,
       content: input.content,
       lang: user.defaultLang,
@@ -80,17 +82,11 @@ export class SaveNotificationProcessor implements InboxProcessorContract<Notific
       return
     }
 
-    const i18n = I18n.locale(user.defaultLang)
-
     for(const platform of notifyViaPlatform.platforms) {
       const contract = this.contract[platform.type]
 
       if (contract) {
-        void contract({
-          ...input,
-          title: i18n.formatMessage(input.title),
-          message: i18n.formatMessage(input.message),
-        }, user)
+        void contract(input, user)
       }
     }
   }
