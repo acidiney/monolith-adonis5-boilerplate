@@ -1,14 +1,14 @@
 import Env from '@ioc:Adonis/Core/Env'
+import I18n from '@ioc:Adonis/Addons/I18n'
 import Event from '@ioc:Adonis/Core/Event'
 
 import {UniqueEntityID} from 'app/core/domain'
 import {HashAdapter} from 'app/modules/auth/usecases'
-import {CoreUserModel, CoreNotificationEventModel} from 'app/modules/@shared/framework/infra/db'
-import {InboxProcessorContract} from 'app/modules/@shared/domain/ports'
-import {EventType} from 'app/modules/@shared/domain/entities/notification-entity'
-import { HashDriverAdapterImpl } from 'app/modules/auth/framework/infra/adapters'
 import { SendEmailProcessor } from './send-email-processor'
-import I18n from '@ioc:Adonis/Addons/I18n'
+import {InboxProcessorContract} from 'app/modules/@shared/domain/ports'
+import { HashDriverAdapterImpl } from 'app/modules/auth/framework/infra/adapters'
+import {EventType} from 'app/modules/@shared/domain/entities/notification-entity'
+import {CoreUserModel, CoreNotificationEventModel} from 'app/modules/@shared/framework/infra/db'
 
 export interface SaveNotificationProps {
   title: string
