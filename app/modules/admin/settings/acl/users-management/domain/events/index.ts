@@ -1,0 +1,6 @@
+export * from './user-blocked-event'
+export * from './user-created-event'
+export * from './user-deleted-event'
+export * from './user-password-restored-event'
+export * from './user-restored-event'
+export * from './user-updated-event'

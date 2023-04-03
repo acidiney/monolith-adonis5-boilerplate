@@ -2,14 +2,9 @@ import { Handler } from 'app/infra/listeners/handler'
 import { AppSettingModifiedEvent } from '../../../domain/events'
 
 import Event from '@ioc:Adonis/Core/Event'
-//import { AppSettingModel } from '../db'
 
 export class NotifyAllUsersThatSettingWasChangedInRealtimeListener extends Handler<AppSettingModifiedEvent> {
   public async handle (): Promise<void> {
-  /*   const role = await AppSettingModel
-      .query()
-      .firstOrFail() */
-
     const ctx = super.ctx()
 
     if (!ctx) {

@@ -1,3 +1,4 @@
+import Env from '@ioc:Adonis/Core/Env'
 import { AddonServiceImpl } from 'app/modules/@shared/framework/infra/services/addon-service-impl'
 import { HttpClientAdapterImpl } from 'app/modules/@shared/framework/infra/adapters/http-client-adapter-impl'
 
@@ -11,7 +12,7 @@ export const makeListAddonsControllerFactory = (): ListAddonsController => {
     new ListAddonsUseCaseImpl(
       new RetrieveAddonsServiceImpl(
         new AddonServiceImpl(
-          new HttpClientAdapterImpl()
+          new HttpClientAdapterImpl(Env.get('GITLAB_URL'))
         )
       ),
       new CompareAddonsRepositoryImpl()
