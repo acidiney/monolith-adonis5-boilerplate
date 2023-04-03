@@ -26,5 +26,21 @@ export const apiService = {
     },
     retrieveActivities: async (userId) => {
         return axios.get(`/api/account/${userId}/activities`)
+    },
+    retrieveDashboardSettings: async () => {
+      return [
+        {
+          display: "NoDashboard",
+          id: "default",
+          default: true,
+          options: []
+        },
+      ];
+    },
+    retrieveDashboardRefreshOptions: async () => {
+      return {
+        options: ["5sec", "5min", "10min", " 30min", "1h"],
+        default: '5sec'
+      }
     }
 }

@@ -7,5 +7,6 @@
   "menu.settings.subtitle": "Configurações da conta",
   "admin.page_hero.common.dashboard.subtitle": "<b>Olá { name }</b>, bem vindo de volta!",
   "admin.common.profile_data": "Dados do perfil",
-  "menu.user.other_profile": "Perfil de { fullName }"
+  "menu.user.other_profile": "Perfil de { fullName }",
+  "admin.common.create_a_new_dashboard": "Essa funcionalidade será disponiblizada em breve!"
 }
