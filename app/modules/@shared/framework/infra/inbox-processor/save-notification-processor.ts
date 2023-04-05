@@ -86,7 +86,7 @@ export class SaveNotificationProcessor implements InboxProcessorContract<Notific
       const contract = this.contract[platform.type]
 
       if (contract) {
-        void contract(input, user)
+        await contract(input, user)
       }
     }
   }
