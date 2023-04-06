@@ -1,4 +1,3 @@
-import Env from '@ioc:Adonis/Core/Env'
 import {StatusEnum, StatusType} from 'app/modules/@shared/domain/types'
 import {PasswordMismatchError} from 'app/modules/auth/domain'
 import {UserNameErrors} from 'app/modules/@shared/domain/errors'
@@ -79,7 +78,7 @@ export class UserEntity extends Entity<UserProps> {
   }
 
   public get isRoot (): boolean {
-    return this.props.email.value === Env.get('ORION_ROOT_USER_EMAIL', 'root@itgest.co.ao')
+    return this.props.email.value === (process.env.ORION_ROOT_USER_EMAIL ?? 'root@itgest.co.ao')
   }
 
   public userLogged (loggedAt: Date): void {
