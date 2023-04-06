@@ -1,3 +1,4 @@
+import Env from '@ioc:Adonis/Core/Env'
 import Database from '@ioc:Adonis/Lucid/Database'
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import { UniqueEntityID } from 'app/core/domain'
@@ -7,7 +8,7 @@ import { CoreNotificationModel } from '../models/core-notification-model'
 export default class InsertBaseNotifications extends BaseSeeder {
   public async run () {
     const notifications = (await CoreNotificationModel.all()).map(n => n.id)
-    const rootUser = await CoreUserModel.findBy('email', 'root@itgest.co.ao')
+    const rootUser = await CoreUserModel.findBy('email', Env.get('ORION_ROOT_USER_EMAIL', 'root@itgest.co.ao'))
 
     if (!rootUser) {
       throw new Error('"RootUser" doesn\'t exists!')
