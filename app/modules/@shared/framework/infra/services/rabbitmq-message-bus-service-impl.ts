@@ -32,7 +32,8 @@ export class RabbitmqMessageBusServiceImpl implements MessageBus {
     onMessage: (message: Message, ack: () => void) => Promise<void>)
     : Promise<void> {
     if (!this.channel) {
-      throw new Error('Channel is not initialized')
+      // console.error(Error('Channel is not initialized'))
+      return
     }
 
     const queueName = bindingKey
