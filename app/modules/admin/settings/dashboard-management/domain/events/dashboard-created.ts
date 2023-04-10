@@ -4,4 +4,4 @@ interface DashboardCreatedProps {
   id: UniqueEntityID
 }
 
-export class DasboardCreatedEvent extends DomainEvent<DashboardCreatedProps> {}
+export class DashboardCreatedEvent extends DomainEvent<DashboardCreatedProps> {}

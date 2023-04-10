@@ -3,7 +3,7 @@ import {
   Dashboard,
   CreateDashboardUseCase,
   CreateDashboardUseCaseInput,
-  DasboardCreatedEvent,
+  DashboardCreatedEvent,
 } from '../../domain'
 import { CreateDashboardRepository } from './ports'
 import { Either, left, right, IEventDispatcher } from 'app/core/domain'
@@ -30,7 +30,7 @@ export class CreateDashboardUseCaseImpl implements CreateDashboardUseCase {
     await this.createDashboardRepository.persist(dashboardOrError.value)
 
     this.eventDispatcher.publish(
-      new DasboardCreatedEvent({
+      new DashboardCreatedEvent({
         id: dashboardOrError.value.id,
       })
     )
