@@ -82,8 +82,8 @@ export class SaveNotificationProcessor implements InboxProcessorContract<Notific
       return
     }
 
-    for(const platform of notifyViaPlatform.platforms) {
-      const contract = this.contract[platform.type]
+    for(const { type } of notifyViaPlatform.platforms) {
+      const contract = this.contract[type]
 
       if (contract) {
         await contract(input, user)
