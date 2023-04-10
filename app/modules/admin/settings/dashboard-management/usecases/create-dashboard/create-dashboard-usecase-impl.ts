@@ -1,11 +1,40 @@
-import { Either, left } from 'app/core/domain'
-import { CreateDashboardUseCase } from '../../domain/usecases/create-dashboard/create-dashboard-usecase'
-import { CreateDashboardUseCaseInput } from '../../domain/usecases/create-dashboard/create-dashboard-usecase-input'
-import { DashboardErrors } from '../../domain/errors/dashboard-errors'
+import {
+  DashboardErrors,
+  Dashboard,
+  CreateDashboardUseCase,
+  CreateDashboardUseCaseInput,
+  DasboardCreatedEvent,
+} from '../../domain'
+import { CreateDashboardRepository } from './ports'
+import { Either, left, right, IEventDispatcher } from 'app/core/domain'
 
 export class CreateDashboardUseCaseImpl implements CreateDashboardUseCase {
-  public async perform (_input: CreateDashboardUseCaseInput):
-  Promise<Either<DashboardErrors.InvalidDashboardName, boolean>> {
-    return left(new DashboardErrors.InvalidDashboardName())
+  constructor (
+    private readonly createDashboardRepository: CreateDashboardRepository,
+    private readonly eventDispatcher: IEventDispatcher
+  ) {}
+
+  public async perform (
+    input: CreateDashboardUseCaseInput
+  ): Promise<Either<DashboardErrors.InvalidDashboardName, boolean>> {
+    const dashboardOrError = Dashboard.create({
+      name: input.name,
+      description: input.description,
+      items: [],
+    })
+
+    if (dashboardOrError.isLeft()) {
+      return left(dashboardOrError.value)
+    }
+
+    await this.createDashboardRepository.persist(dashboardOrError.value)
+
+    this.eventDispatcher.publish(
+      new DasboardCreatedEvent({
+        id: dashboardOrError.value.id,
+      })
+    )
+
+    return right(true)
   }
 }
