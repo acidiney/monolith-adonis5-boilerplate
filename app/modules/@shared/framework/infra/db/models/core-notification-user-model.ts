@@ -1,4 +1,4 @@
-import { cuid } from '@ioc:Adonis/Core/Helpers'
+import { randomUUID } from 'node:crypto'
 import { BaseModel, beforeCreate, column} from '@ioc:Adonis/Lucid/Orm'
 
 export class CoreNotificationUserModel extends BaseModel {
@@ -18,6 +18,6 @@ export class CoreNotificationUserModel extends BaseModel {
 
   @beforeCreate()
   public static async setId (notification: CoreNotificationUserModel) {
-    notification.id = cuid()
+    notification.id = randomUUID()
   }
 }

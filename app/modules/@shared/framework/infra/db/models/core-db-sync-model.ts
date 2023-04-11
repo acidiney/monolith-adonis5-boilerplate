@@ -1,6 +1,6 @@
+import { randomUUID } from 'node:crypto'
 import { DateTime } from 'luxon'
 
-import { cuid } from '@ioc:Adonis/Core/Helpers'
 import { BaseModel, beforeCreate, column } from '@ioc:Adonis/Lucid/Orm'
 
 export class CoreDbSyncModel extends BaseModel {
@@ -21,6 +21,6 @@ export class CoreDbSyncModel extends BaseModel {
 
   @beforeCreate()
   public static async setId (dbSyncModel: CoreDbSyncModel) {
-    dbSyncModel.id = dbSyncModel.id || cuid()
+    dbSyncModel.id = dbSyncModel.id || randomUUID()
   }
 }

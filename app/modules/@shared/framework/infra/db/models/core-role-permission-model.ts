@@ -1,4 +1,4 @@
-import { cuid } from '@ioc:Adonis/Core/Helpers'
+import { randomUUID } from 'node:crypto'
 import { BaseModel, beforeCreate, column, hasOne, HasOne } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 
@@ -32,6 +32,6 @@ export class CoreRolePermissionModel extends BaseModel {
 
   @beforeCreate()
   public static async setId (rolePermission: CoreRolePermissionModel) {
-    rolePermission.id = rolePermission.id || cuid()
+    rolePermission.id = rolePermission.id || randomUUID()
   }
 }

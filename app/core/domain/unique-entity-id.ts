@@ -1,5 +1,6 @@
 import { Identifier } from './identifier'
-import cuid from 'cuid'
+
+import { randomUUID } from 'node:crypto'
 
 /**
  * @param id is optional as string.
@@ -7,6 +8,6 @@ import cuid from 'cuid'
  */
 export class UniqueEntityID extends Identifier<string | number> {
   constructor (id?: string | number) {
-    super(id || cuid())
+    super(id || randomUUID())
   }
 }

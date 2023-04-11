@@ -1,4 +1,4 @@
-import { cuid } from '@ioc:Adonis/Core/Helpers'
+import { randomUUID } from 'node:crypto'
 import Hash from '@ioc:Adonis/Core/Hash'
 import { BaseModel, BelongsTo, beforeSave, belongsTo, column, computed, HasOne, hasOne, ManyToMany, manyToMany }
   from '@ioc:Adonis/Lucid/Orm'
@@ -92,7 +92,7 @@ export class CoreUserModel extends BaseModel {
 
   @beforeSave()
   public static async setId (user: CoreUserModel) {
-    user.id = user.id || cuid()
+    user.id = user.id || randomUUID()
   }
 
   @beforeSave()

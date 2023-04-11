@@ -1,4 +1,4 @@
-import { cuid } from '@ioc:Adonis/Core/Helpers'
+import { randomUUID } from 'node:crypto'
 import { slugify } from '@ioc:Adonis/Addons/LucidSlugify'
 import {BaseModel, beforeSave, column, computed, manyToMany, ManyToMany, hasMany, HasMany} from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
@@ -57,7 +57,7 @@ export class CoreRoleModel extends BaseModel {
 
   @beforeSave()
   public static async setId (role: CoreRoleModel) {
-    role.id = role.id || cuid()
+    role.id = role.id || randomUUID()
   }
 
   @computed()
