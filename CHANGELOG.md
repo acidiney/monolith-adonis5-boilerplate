@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/compare/v2.0.0...v2.1.0) (2023-04-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* Database will show a difference in id generation
+
+### Features
+
+* **settings:** add create dashboard flow ([850c403](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/850c4039b5a4ab46af6c01999bfcf495257c2c60))
+
+
+### Bug Fixes
+
+* do not use Env in domain, use process.env.ORION_ROOT_USER_EMAIL instead ([c739bc1](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/c739bc1219b7b5266b8a2fb537aa13270de0fa4d))
+* **frontend:** remove util javascript file ([3e5afb6](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/3e5afb6e7dfb5598fe4dadb3ffb64147a64860c0))
+* **notifications:** save only once, when notification is platform ([cf3989a](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/cf3989aa51933af595e26976e5fe266ae0597336))
+* routes fix ([4774eec](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/4774eec9c7bf1ecfeeab390911da3dfc0516c3d0))
+
+
+* replace cuid with randomUUID from node ([47b9bb3](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/commit/47b9bb33ccf2fc257c11808606812783a1fbb198))
+
 ## [2.0.0](https://gitlab.itgest.pt/itgest-ao-dev/umape/next-lotus-ao/compare/v1.2.0...v2.0.0) (2023-03-31)
 
 
