@@ -1,7 +1,7 @@
+import { randomUUID } from 'node:crypto'
 import { DateTime } from 'luxon'
 
 import {TokenType} from 'app/modules/auth/domain'
-import { cuid } from '@ioc:Adonis/Core/Helpers'
 import { BaseModel, beforeCreate, column } from '@ioc:Adonis/Lucid/Orm'
 
 export class TokenModel extends BaseModel {
@@ -31,6 +31,6 @@ export class TokenModel extends BaseModel {
 
   @beforeCreate()
   public static async setId (model: TokenModel) {
-    model.id = model.id || cuid()
+    model.id = model.id || randomUUID()
   }
 }

@@ -1,8 +1,7 @@
 import { PersistAppSettingRepository } from '../../../../usecases/persist-app-setting'
 import { AppSettingColorMapper } from '../mappers'
 import { ApplicationSettingsEntity } from '../../../../domain/entity/application-settings-entity'
-import { AppSettingModel } from '../models/app-setting-model'
-import { DateTime } from 'luxon'
+import { CoreApplicationSettings } from 'app/modules/@shared/framework/infra'
 
 export class PersistAppSettingRepositoryImpl implements
     PersistAppSettingRepository {
@@ -12,11 +11,11 @@ export class PersistAppSettingRepositoryImpl implements
   ) { }
 
   public async persist (appSetting: ApplicationSettingsEntity): Promise<void> {
-    const lastId= await AppSettingModel.query()
+    const lastId= await CoreApplicationSettings.query()
       .whereNull('deleted_at')
       .firstOrFail()
 
-    lastId.deletedAt = DateTime.now()
+    lastId.delete()
     lastId.save()
     const appSettingColor = await this.appSettingMapper.toPersistence(appSetting)
 

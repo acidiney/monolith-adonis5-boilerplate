@@ -1,6 +1,6 @@
+import { randomUUID } from 'node:crypto'
 import { CoreNotificationUserModel } from './core-notification-user-model'
 import { DateTime } from 'luxon'
-import { cuid } from '@ioc:Adonis/Core/Helpers'
 import { BaseModel, beforeCreate, column, HasMany, hasMany, manyToMany, ManyToMany }
   from '@ioc:Adonis/Lucid/Orm'
 
@@ -41,6 +41,6 @@ export class CoreNotificationModel extends BaseModel {
 
   @beforeCreate()
   public static async setId (notification: CoreNotificationModel) {
-    notification.id = cuid()
+    notification.id = randomUUID()
   }
 }

@@ -1,4 +1,3 @@
-import {cuid} from '@ioc:Adonis/Core/Helpers'
 import {BaseModel, beforeCreate, beforeFetch, column} from '@ioc:Adonis/Lucid/Orm'
 import {DateTime} from 'luxon'
 
@@ -51,7 +50,7 @@ export class CoreMenuModel extends BaseModel {
 
   @beforeCreate()
   public static async setId (menu: CoreMenuModel) {
-    menu.id = menu.id || cuid()
+    menu.id = menu.id || randomUUID()
   }
 
   @beforeFetch()
@@ -117,3 +116,7 @@ export class CoreMenuModel extends BaseModel {
     return three
   }
 }
+function randomUUID (): string {
+  throw new Error('Function not implemented.')
+}
+

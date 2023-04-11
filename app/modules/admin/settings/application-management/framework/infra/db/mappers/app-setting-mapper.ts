@@ -1,19 +1,17 @@
 import { Mapper, UniqueEntityID } from 'app/core/domain'
 import { DateAdapter } from 'app/modules/@shared/domain/ports'
-import { DateAdapterImpl } from 'app/modules/@shared/framework/infra'
+import { CoreApplicationSettings, DateAdapterImpl } from 'app/modules/@shared/framework/infra'
 import { ApplicationSettingsEntity } from '../../../../domain/entity/application-settings-entity'
 import { Color } from '../../../../domain/value-objects/colors'
 
-import { AppSettingModel } from '../models/app-setting-model'
-
-export class AppSettingColorMapper extends Mapper<ApplicationSettingsEntity, AppSettingModel> {
+export class AppSettingColorMapper extends Mapper<ApplicationSettingsEntity, CoreApplicationSettings> {
   constructor (
     private readonly dateAdapter: DateAdapter = new DateAdapterImpl()
   ) {
     super()
   }
 
-  public toDomain (appSettingModel: AppSettingModel): ApplicationSettingsEntity {
+  public toDomain (appSettingModel: CoreApplicationSettings): ApplicationSettingsEntity {
     const appColorPrimaryOrError = Color.create({ value: appSettingModel.appColorPrimary })
 
     if (appColorPrimaryOrError.isLeft()) {
@@ -52,8 +50,8 @@ export class AppSettingColorMapper extends Mapper<ApplicationSettingsEntity, App
     return appSettingColors.value
   }
   public async toPersistence (_applicationSettingsEntity: ApplicationSettingsEntity):
-  | Promise<AppSettingModel> {
-    let appSettingModel: AppSettingModel = new AppSettingModel()
+  | Promise<CoreApplicationSettings> {
+    let appSettingModel: CoreApplicationSettings = new CoreApplicationSettings()
     appSettingModel.id=_applicationSettingsEntity.id.toString()
     appSettingModel.appName = _applicationSettingsEntity.appName
     appSettingModel.appDesc = _applicationSettingsEntity.appDesc
@@ -61,7 +59,6 @@ export class AppSettingColorMapper extends Mapper<ApplicationSettingsEntity, App
     appSettingModel.appColorSecondary = _applicationSettingsEntity.appColorSecondary
     appSettingModel.appBackgroundPrimaryColor = _applicationSettingsEntity.appBackgroundPrimaryColor
     appSettingModel.appBackgroundSecondaryColor = _applicationSettingsEntity.appBackgroundSecondaryColor
-    appSettingModel.deletedAt = this.dateAdapter.toDatePersistence(_applicationSettingsEntity.deletedAt)
 
     return appSettingModel
   }
