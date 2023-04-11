@@ -1,16 +1,9 @@
 import { Mapper, UniqueEntityID } from 'app/core/domain'
-import { DateAdapter } from 'app/modules/@shared/domain/ports'
-import { CoreApplicationSettings, DateAdapterImpl } from 'app/modules/@shared/framework/infra'
+import { CoreApplicationSettings } from 'app/modules/@shared/framework/infra'
 import { ApplicationSettingsEntity } from '../../../../domain/entity/application-settings-entity'
 import { Color } from '../../../../domain/value-objects/colors'
 
 export class AppSettingColorMapper extends Mapper<ApplicationSettingsEntity, CoreApplicationSettings> {
-  constructor (
-    private readonly dateAdapter: DateAdapter = new DateAdapterImpl()
-  ) {
-    super()
-  }
-
   public toDomain (appSettingModel: CoreApplicationSettings): ApplicationSettingsEntity {
     const appColorPrimaryOrError = Color.create({ value: appSettingModel.appColorPrimary })
 
