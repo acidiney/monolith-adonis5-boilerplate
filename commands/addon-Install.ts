@@ -19,7 +19,7 @@ export default class InstallAddon extends BaseCommand {
 
   public async run () {
     const { default: Env } = await import('@ioc:Adonis/Core/Env')
-    const { HttpClientAdapterImpl, AddonServiceImpl } = await import('app/modules/@shared/framework/infra')
+    const { HttpClientAdapterImpl, AddonServiceImpl } = await import('../app/modules/@shared/framework/infra')
 
     const addonServiceImpl = new AddonServiceImpl(new HttpClientAdapterImpl(Env.get('GITLAB_URL')))
 

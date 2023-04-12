@@ -31,7 +31,7 @@ export default class SeedSyncCommand extends BaseCommand {
 
   public async run () {
     const { loadContext, execCommand } = await import('../app/infra/utils')
-    const { CoreDbSyncModel } = await import('app/modules/@shared/framework/infra')
+    const { CoreDbSyncModel } = await import('../app/modules/@shared/framework/infra')
 
     const executedSeeds = await (await CoreDbSyncModel.all()).map((seed) => seed.seedName)
     let difference: string[]
