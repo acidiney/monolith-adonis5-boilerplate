@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto'
 import {BaseModel, beforeCreate, beforeFetch, column} from '@ioc:Adonis/Lucid/Orm'
 import {DateTime} from 'luxon'
 
@@ -115,8 +116,5 @@ export class CoreMenuModel extends BaseModel {
 
     return three
   }
-}
-function randomUUID (): string {
-  throw new Error('Function not implemented.')
 }
 
