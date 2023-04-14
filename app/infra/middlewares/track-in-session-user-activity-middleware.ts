@@ -13,9 +13,8 @@ export default class TrackInSessionUserActivityMiddleware {
   public async handle (
     { session, auth, request, response, logger }: HttpContextContract,
     next: () => Promise<void>): Promise<any> {
-    logger.info(`(${auth.user?.fullName ?? 'GUEST'}) ${request.method()} ${request.url()} ${request.ip()}`)
     await next()
-
+    logger.info(`(${auth.user?.fullName ?? 'GUEST'}) ${request.method()} ${request.ip()} ${request.url()} ${response.getStatus()}`)
     if (request.method() === 'GET' && request.url().includes('api')) {
       return
     }

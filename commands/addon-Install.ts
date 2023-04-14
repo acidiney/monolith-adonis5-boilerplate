@@ -41,7 +41,7 @@ export default class InstallAddon extends BaseCommand {
           .then(async () => {
             await task.complete('Package cloned!')
           })
-          .catch(async () => {
+          .catch(async (e) => {
             await task.fail('Error while clonning!')
           })
       })
