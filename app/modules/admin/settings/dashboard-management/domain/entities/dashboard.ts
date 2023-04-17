@@ -1,12 +1,12 @@
 import { Either, Entity, left, right } from 'app/core/domain'
-import { DashboardItem } from '../values-objects/dashboard-item'
 import { DashboardErrors } from '../errors/dashboard-errors'
+import { Indicator } from '../values-objects'
 
 interface DashboardProp {
   name: string
   slug?: string
   description?: string
-  items: DashboardItem[]
+  items: Indicator[]
 }
 
 const MINIMUN_DASHBOARD_NAME_CHARS = 3

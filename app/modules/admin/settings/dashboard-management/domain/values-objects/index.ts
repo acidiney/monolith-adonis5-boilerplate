@@ -1,1 +1,1 @@
-export * from './dashboard-item'
+export * from './indicator'
