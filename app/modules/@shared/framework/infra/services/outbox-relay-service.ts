@@ -4,6 +4,6 @@ import Bull from '@ioc:Rocketseat/Bull'
 Bull.add(CoreOutboxProcessorJob.name, {}, {
   repeat: {
     immediately: true,
-    every: 10_000,
+    every: 5_000,
   },
 })
