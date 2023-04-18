@@ -4,6 +4,6 @@ import CoreSharedInboxProcessor from '../jobs/core-shared-inbox-processor-job'
 Bull.add(CoreSharedInboxProcessor.name, {}, {
   repeat: {
     immediately: true,
-    every: 10_000,
+    every: 3_000,
   },
 })
