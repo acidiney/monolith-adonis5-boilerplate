@@ -40,6 +40,8 @@ export default class CoreSharedInboxProcessor implements JobContract {
     await this.transactionAdapter.useTransaction(async (trx) => {
       const message = await CoreInboxMessagesModel.query()
         .useTransaction(trx)
+        .forUpdate()
+        .skipLocked()
         .where({
           responsable: 'CORE_SHARED',
           complete: false,

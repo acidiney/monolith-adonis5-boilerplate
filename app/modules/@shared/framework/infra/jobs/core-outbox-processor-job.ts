@@ -28,7 +28,10 @@ export default class CoreOutboxProcessorJob implements JobContract {
       const message = await CoreOutboxMessageModel
         .query()
         .useTransaction(trx)
-        .whereNotNull('sentAt')
+        .whereNull('sentAt')
+        .orderBy('createdAt')
+        .forUpdate()
+        .skipLocked()
         .first()
 
       if (!message) {
