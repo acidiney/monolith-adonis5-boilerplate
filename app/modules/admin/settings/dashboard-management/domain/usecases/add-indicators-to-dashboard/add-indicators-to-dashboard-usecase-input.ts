@@ -4,8 +4,8 @@ export type IndicatorSize = 'small' | 'medium' | 'large'
 
 export interface Indicator {
   id: UniqueEntityID,
-  label?: string,
-  description?: string,
+  label?: string | null,
+  description?: string | null,
   size: IndicatorSize,
   order: number
 

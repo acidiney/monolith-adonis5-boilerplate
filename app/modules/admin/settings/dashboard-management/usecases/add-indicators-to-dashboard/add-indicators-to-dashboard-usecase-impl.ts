@@ -3,6 +3,7 @@ import {
   AddIndicatorsToDashboard,
   AddIndicatorsToDashboardUseCase,
   AddIndicatorsToDashboardUseCaseInput,
+  AddedIndicatorsToDashbordEvent,
   DashboardErrors,
 } from '../../domain'
 import { FindDashboardRepository, PersistIndicatorsIntoDashboardWithTransactionRepository } from './ports'
@@ -53,6 +54,11 @@ implements AddIndicatorsToDashboardUseCase {
     if (!output) {
       return left(new AddIndicatorsToDashboard.IndicatorNotFoundError())
     }
+
+    await this.eventDispatcher.publish(new AddedIndicatorsToDashbordEvent({
+      dashboard: input.dashboardId,
+      indicators: input.indicators.map((i) => i.id),
+    }))
 
     return right(true)
   }
