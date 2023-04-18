@@ -4,12 +4,11 @@ import {CoreOutboxMessageModel} from 'app/modules/@shared/framework/infra/db/mod
 export class BroadcastMessageRepositoryImpl implements BroadcastMessageContract {
   public async publish (routeName: string, info: BroadcastMessage<any>): Promise<void> {
     await CoreOutboxMessageModel
-      .insertOne({
+      .create({
         routingKey: routeName,
         type: info.type,
         payload: info.message,
-        meta: info.meta,
-        createdAt: new Date(),
+        metaUserId: info.meta.userId,
         sentAt: null,
       })
   }

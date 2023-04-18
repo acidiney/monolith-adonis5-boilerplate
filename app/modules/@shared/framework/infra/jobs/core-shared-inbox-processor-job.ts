@@ -1,6 +1,5 @@
 import { TransactionAdapter } from 'app/core/ports'
 
-import { ObjectId } from 'mongodb'
 import {JobsOptions} from 'bullmq'
 import { JobContract } from '@ioc:Rocketseat/Bull'
 
@@ -12,9 +11,9 @@ import {
 } from 'app/modules/@shared/framework/infra/inbox-processor'
 import { CoreBroadcastEnum } from 'app/modules/@shared/domain/types'
 import { InboxProcessorContract } from 'app/modules/@shared/domain/ports'
-import { CoreSharedInboxMessagesModel } from '../db/models/core-shared-inbox-messages-model'
 import {HashDriverAdapterImpl} from 'app/modules/auth/framework/infra/adapters'
-import { MongodbTransactionAdapterImpl } from 'app/infra/db/adapters/mongodb-transaction-adapter-impl'
+import { CoreInboxMessagesModel } from '../db/models/core-inbox-messages-model'
+import { TransactionAdapterImpl } from 'app/infra/db/adapters/transaction-adapter-impl'
 
 interface ProcessorContract {
   [key: string]: InboxProcessorContract<any>
@@ -34,35 +33,46 @@ export default class CoreSharedInboxProcessor implements JobContract {
   }
 
   constructor (
-    private readonly transactionAdapter: TransactionAdapter = new MongodbTransactionAdapterImpl()
+    private readonly transactionAdapter: TransactionAdapter = new TransactionAdapterImpl()
   ) {}
 
   public async handle () : Promise<void> {
-    await this.transactionAdapter.useTransaction(async (session) => {
-      const message = await CoreSharedInboxMessagesModel.findOneAndUpdate({
-        complete: false,
-        status: 'PENDING',
-      }, { $set: { status: 'STARTED' } }, { session })
+    await this.transactionAdapter.useTransaction(async (trx) => {
+      const message = await CoreInboxMessagesModel.query()
+        .useTransaction(trx)
+        .where({
+          responsable: 'CORE_SHARED',
+          complete: false,
+          status: 'PENDING',
+        }).first()
 
-      if (!message.value) {
+      if (!message) {
         return
       }
 
-      const contract = this.contracts[message.value.type]
+      const contract = this.contracts[message.type]
 
       if (!contract) {
-        throw new Error(`Contract ${message.value.type} not implemented!`)
+        throw new Error(`Contract ${message.type} not implemented!`)
       }
 
-      await contract.perform({ ...message.value.payload, userId: message.value.meta.userId })
+      await contract.perform({ ...message.payload, userId: message.metaUserId })
 
       await CoreOutboxMessageModel
-        .findOneAndDelete({ _id: new ObjectId(message.value.meta.outboxId) }, { session })
+        .query()
+        .useTransaction(trx)
+        .where({
+          id: message.metaOutboxId,
+        })
+        .delete()
 
-      await CoreSharedInboxMessagesModel
-        .findOneAndDelete({
-          _id: message.value._id,
-        }, { session })
+      await CoreInboxMessagesModel
+        .query()
+        .useTransaction(trx)
+        .where({
+          id: message.id,
+        })
+        .delete()
     })
   }
 }

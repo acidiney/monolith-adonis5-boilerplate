@@ -1,9 +1,8 @@
-import { CoreSharedInboxMessagesModel } from '../db/models/core-shared-inbox-messages-model'
 import { CoreBaseConsumer } from './core-base-consumer'
 
 class CoreSharedCommonConsumer extends CoreBaseConsumer {
   constructor () {
-    super('core.shared', CoreSharedInboxMessagesModel)
+    super('core.shared', 'CORE_SHARED')
   }
 }
 

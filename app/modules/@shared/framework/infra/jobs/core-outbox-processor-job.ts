@@ -1,4 +1,3 @@
-import { MongodbTransactionAdapterImpl } from 'app/infra/db/adapters/mongodb-transaction-adapter-impl'
 import { TransactionAdapter } from 'app/core/ports'
 import { JobsOptions } from 'bullmq'
 
@@ -9,13 +8,14 @@ import {
   RabbitmqMessageBusServiceImpl,
 } from 'app/modules/@shared/framework/infra/services/rabbitmq-message-bus-service-impl'
 import {CoreOutboxMessageModel} from 'app/modules/@shared/framework/infra/db/models/core-outbox-message-model'
+import { TransactionAdapterImpl } from 'app/infra/db/adapters/transaction-adapter-impl'
 
 export default class CoreOutboxProcessorJob implements JobContract {
   public key = CoreOutboxProcessorJob.name
 
   constructor (
     private readonly messageBus: MessageBus = RabbitmqMessageBusServiceImpl.getInstance(),
-    private readonly transactionAdapter: TransactionAdapter = new MongodbTransactionAdapterImpl()
+    private readonly transactionAdapter: TransactionAdapter = new TransactionAdapterImpl()
   ) {
   }
 
@@ -24,11 +24,12 @@ export default class CoreOutboxProcessorJob implements JobContract {
   }
 
   public async handle () {
-    await this.transactionAdapter.useTransaction(async (session) => {
+    await this.transactionAdapter.useTransaction(async (trx) => {
       const message = await CoreOutboxMessageModel
-        .findOne({
-          sentAt: null,
-        }, { session })
+        .query()
+        .useTransaction(trx)
+        .whereNotNull('sentAt')
+        .first()
 
       if (!message) {
         return
@@ -40,20 +41,20 @@ export default class CoreOutboxProcessorJob implements JobContract {
           type: message.type,
           payload: message.payload,
           $meta: {
-            outboxId: message._id.toString(),
-            userId: message.meta.userId,
+            outboxId: message.id,
+            userId: message.metaUserId,
           },
         }
       )
 
       await CoreOutboxMessageModel
-        .findOneAndUpdate({
-          _id: message._id,
-        }, {
-          $set: {
-            sentAt: new Date(),
-          },
-        }, { session })
+        .query()
+        .useTransaction(trx)
+        .where({
+          id: message.id,
+        }).update({
+          sentAt: new Date(),
+        })
     })
   }
 }

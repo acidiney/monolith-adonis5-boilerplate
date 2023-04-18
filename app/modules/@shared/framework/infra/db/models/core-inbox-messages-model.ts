@@ -1,31 +1,34 @@
 import { randomUUID } from 'node:crypto'
 import { BaseModel, beforeCreate, column } from '@ioc:Adonis/Lucid/Orm'
-import { CoreBroadcastEnum } from 'app/modules/@shared/domain/types'
 import { DateTime } from 'luxon'
 
-export class CoreOutboxMessageModel extends BaseModel {
-  public static table = 'core_outbox_messages'
+export class CoreInboxMessagesModel extends BaseModel {
+  public static table = 'core_inbox_messages'
   public static selfAssignPrimaryKey = true
 
   @column({ isPrimary: true })
   public id: string
 
   @column()
-  public routingKey: string
+  public responsable: string
 
   @column()
-  public type: CoreBroadcastEnum
+  public type: string
 
   @column()
-  public payload: {
-    [key: string]: any
-  }
+  public payload: any
 
   @column()
   public metaUserId: string | null
 
-  @column.dateTime()
-  public sentAt: DateTime | null
+  @column()
+  public metaOutboxId: string
+
+  @column()
+  public status: 'PENDING' | 'STARTED'
+
+  @column()
+  public complete: boolean
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -34,7 +37,7 @@ export class CoreOutboxMessageModel extends BaseModel {
   public updatedAt: DateTime
 
   @beforeCreate()
-  public static async setId (outboxMessage: CoreOutboxMessageModel) {
-    outboxMessage.id = outboxMessage.id || randomUUID()
+  public static async setId (inboxMessage: CoreInboxMessagesModel) {
+    inboxMessage.id = inboxMessage.id || randomUUID()
   }
 }
