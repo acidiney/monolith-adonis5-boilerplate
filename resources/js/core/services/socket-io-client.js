@@ -1,19 +1,18 @@
-import { io } from "socket.io-client";
-
+import { io } from 'socket.io-client'
 
 class SocketioService {
-  socket;
-  constructor() {}
+  socket
+  constructor () {}
 
-  setupSocketConnection() {
-    this.socket = io();
+  setupSocketConnection () {
+    this.socket = io()
   }
 
-  disconnect() {
+  disconnect () {
     if (this.socket) {
-      this.socket.disconnect();
+      this.socket.disconnect()
     }
   }
 }
 
-export default new SocketioService();
+export default new SocketioService()

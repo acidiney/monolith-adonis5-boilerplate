@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from 'axios'
 export const apiService = {
-    notifications () {
-        return axios.get('/api/account/me/notifications')
-    }
+  notifications () {
+    return axios.get('/api/account/me/notifications')
+  },
 }

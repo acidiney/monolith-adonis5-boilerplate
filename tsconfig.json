@@ -1,10 +1,6 @@
 {
   "extends": "adonis-preset-ts/tsconfig.json",
-  "include": [
-    "**/*.ts",
-    "app/*.js",
-    "resources/js/**/*.ts"
-  ],
+  "include": ["**/*.ts", "app/**/*.js", "resources/js/**/*.ts", "resources/js/**/*.js"],
   "exclude": [
     "cypress",
     "node_modules",
@@ -19,9 +15,7 @@
     "sourceMap": true,
     "allowJs": true,
     "paths": {
-      "app/*": [
-        "./app/*"
-      ],
+      "app/*": ["./app/*"],
       "@core/*": ["./resources/js/core/*"]
     },
     "types": [
