@@ -1,4 +1,4 @@
-import { CoreOutboxDatabase } from './core-outbox-database'
+import { CoreAlternativeDatabase } from './core-alternative-database'
 
 export interface CoreNotificationEventSchema {
   hash: string
@@ -14,7 +14,7 @@ export interface CoreNotificationEventSchema {
   updatedAt: Date
 }
 
-const CoreNotificationEventModel = CoreOutboxDatabase
+const CoreNotificationEventModel = CoreAlternativeDatabase
   .collection<CoreNotificationEventSchema>('CoreNotifications')
 
 const installIndexOnCoreNotificationEventModel = async () => {

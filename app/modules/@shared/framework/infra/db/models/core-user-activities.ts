@@ -1,4 +1,4 @@
-import { CoreOutboxDatabase } from './core-outbox-database'
+import { CoreAlternativeDatabase } from './core-alternative-database'
 
 export interface CoreUserActivitySchema {
   hash: string
@@ -11,7 +11,7 @@ export interface CoreUserActivitySchema {
   createdAt: Date
 }
 
-const CoreUserActivity = CoreOutboxDatabase
+const CoreUserActivity = CoreAlternativeDatabase
   .collection<CoreUserActivitySchema>('CoreUserActivities')
 
 const installIndexesOnCoreUserActivity = async () => {
