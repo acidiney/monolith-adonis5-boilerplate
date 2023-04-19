@@ -13,6 +13,7 @@ import AppHeader from "../core/components/app-header.vue";
 import AppFooter from "../core/components/app-footer.vue";
 import AppSidebar from "../core/components/app-sidebar.vue";
 import SocketService from "../core/services/socket-io-client";
+import { BrowserNotificationService } from "../core/services/browser-notification-service";
 
 import { ElNotification } from "element-plus";
 import { useI18n } from "vue-i18n";
@@ -32,6 +33,8 @@ onMounted(() => {
   animate.value = true;
   window.addEventListener("online", updateOnlineStatus);
   window.addEventListener("offline", updateOnlineStatus);
+
+  BrowserNotificationService.requestNotificationPermission();
 
   nextTick(() => {
     if (window.initTheme) {
@@ -57,7 +60,12 @@ onMounted(() => {
       if (data.eventName === "USER_BLOCKED") {
         emitter.emit("logout");
       }
+
+      BrowserNotificationService.notify(t(data.title), { body: t(data.message), icon: data.icon })
     });
+
+      // BrowserNotificationService.notify('title', { body: 'isso' })
+
   });
 });
 
@@ -90,26 +98,34 @@ defineProps({
 <template>
   <app-head :title="title" />
   <div class="alert fade show mb-0 alert-warning" v-if="inProd" role="alert">
-    {{ $t('shared.inDevelopment') }}
+    {{ $t("shared.inDevelopment") }}
   </div>
 
-  <div :class="[
-    'alert fade show mb-0',
-    {
-      'alert-danger': !alert.success,
-      'alert-success': alert.success,
-    },
-  ]" v-if="alert" role="alert">
+  <div
+    :class="[
+      'alert fade show mb-0',
+      {
+        'alert-danger': !alert.success,
+        'alert-success': alert.success,
+      },
+    ]"
+    v-if="alert"
+    role="alert"
+  >
     {{ alert.message }}
   </div>
 
-  <div :class="[
-    'alert fade show mb-0',
-    {
-      'alert-danger': !online,
-      'alert-success': showBackOnline,
-    },
-  ]" v-if="showBackOnline || !online" role="alert">
+  <div
+    :class="[
+      'alert fade show mb-0',
+      {
+        'alert-danger': !online,
+        'alert-success': showBackOnline,
+      },
+    ]"
+    v-if="showBackOnline || !online"
+    role="alert"
+  >
     {{ showBackOnline ? $t("shared.back_to_online") : $t("shared.offline") }}
   </div>
   <div class="layout-row">

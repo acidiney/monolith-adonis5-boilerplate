@@ -18,8 +18,8 @@ export class CompareAddonsRepositoryImpl implements CompareAddonsRepository {
 
       return {
         ...a,
-        update: a.version > foundAddon.version,
-        canInstall: a.version > foundAddon.version,
+        update: Number(a.version) > foundAddon.version,
+        canInstall: Number(a.version) > foundAddon.version,
       }
     })
   }
