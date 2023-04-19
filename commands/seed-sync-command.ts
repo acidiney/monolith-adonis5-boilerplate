@@ -20,7 +20,7 @@ export default class SeedSyncCommand extends BaseCommand {
      * Set the following value to true, if you want to load the application
      * before running the command
      */
-    loadApp: false,
+    loadApp: true,
 
     /**
      * Set the following value to true, if you want this command to keep running until
@@ -31,7 +31,7 @@ export default class SeedSyncCommand extends BaseCommand {
 
   public async run () {
     const { loadContext, execCommand } = await import('../app/infra/utils')
-    const { CoreDbSyncModel } = await import('../app/modules/@shared/framework/infra')
+    const { CoreDbSyncModel } = await import('app/modules/@shared/framework/infra/db/models')
 
     const executedSeeds = await (await CoreDbSyncModel.all()).map((seed) => seed.seedName)
     let difference: string[]
@@ -42,7 +42,7 @@ export default class SeedSyncCommand extends BaseCommand {
       .add('Comparing seeds', async (_, task) => {
         try {
           const modulesSeeders = await loadContext(resolve(Application.appRoot, './app/modules'),
-            true, /infra\/db\/seeders\/.*\.ts$/)
+            true, /infra\/db\/seeders\/.*\.(ts|js)$/)
 
           const seedNames =
           modulesSeeders.keys()
