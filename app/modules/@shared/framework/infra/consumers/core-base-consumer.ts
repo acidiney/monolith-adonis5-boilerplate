@@ -18,7 +18,7 @@ export class CoreBaseConsumer {
     this.messageBusService.consume(this.key, this.handle.bind(this))
   }
 
-  private async handle (message: Message, ack: () => void) : Promise<void> {
+  protected async handle (message: Message, ack: () => void) : Promise<void> {
     await this.transactionAdapter.useTransaction(async (trx) => {
       const messageInbox = await this.inboxModel
         .query()

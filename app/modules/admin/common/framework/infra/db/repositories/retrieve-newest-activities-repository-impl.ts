@@ -9,7 +9,7 @@ export class RetrieveNewestActivitiesRepositoryImpl implements RetrieveLatestAct
     const latestUserActivity = await this.collection.aggregate([
       {
         '$sort': {
-          'createdAt': 1,
+          'createdAt': -1,
         },
       }, {
         '$match': {
@@ -28,7 +28,7 @@ export class RetrieveNewestActivitiesRepositoryImpl implements RetrieveLatestAct
       return []
     }
 
-    const sessionIds = latestUserActivity.map((uActivity) => uActivity._id)
+    const sessionIds = latestUserActivity.map((uActivity) => String(uActivity._id))
 
     return this.collection.find({
       sessionId: {
@@ -36,7 +36,7 @@ export class RetrieveNewestActivitiesRepositoryImpl implements RetrieveLatestAct
       },
     })
       .limit(8)
-      .sort('createdAt', 'desc')
+      .sort('createdAt', -1)
       .toArray()
   }
 }

@@ -5,5 +5,4 @@ class CoreSharedCommonConsumer extends CoreBaseConsumer {
     super('core.shared', 'CORE_SHARED')
   }
 }
-
 export default new CoreSharedCommonConsumer()
