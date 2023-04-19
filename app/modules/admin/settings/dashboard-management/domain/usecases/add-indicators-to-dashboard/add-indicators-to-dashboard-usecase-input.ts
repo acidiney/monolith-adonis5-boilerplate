@@ -2,7 +2,7 @@ import { UniqueEntityID } from 'app/core/domain'
 
 export type IndicatorSize = 'small' | 'medium' | 'large'
 
-export interface Indicator {
+interface Indicator {
   id: UniqueEntityID,
   label?: string | null,
   description?: string | null,

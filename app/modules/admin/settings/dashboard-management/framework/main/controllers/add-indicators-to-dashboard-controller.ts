@@ -13,7 +13,7 @@ export class AddIndicatorsToDashboardController implements Controller<HttpContex
     const { dashboardId } = params
 
     const validation = await request.validate(AddIndicatorsToDashboardValidator)
-      .catch(e => {
+      .catch(_e => {
         // TODO: put error in session
       })
 
