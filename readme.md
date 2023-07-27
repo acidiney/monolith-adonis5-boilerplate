@@ -239,4 +239,5 @@ If you encounter any issues or have suggestions for improvements to the boilerpl
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
 Updated on July 7, 2023
+
 Acidiney Dias
